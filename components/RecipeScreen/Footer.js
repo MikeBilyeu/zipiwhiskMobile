@@ -31,7 +31,7 @@ const Footer = (props) => {
         >
           <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
           <Image
-            source={require("../../assets/likes.png")}
+            source={require("../../assets/redLike.png")}
             style={styles.footerBtnIcon}
           />
         </TouchableOpacity>

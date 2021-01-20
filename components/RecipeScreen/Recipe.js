@@ -10,15 +10,17 @@ import {
   Dimensions,
 } from "react-native";
 
+import Ingredients from "./Ingredients";
+import Instructions from "./Instructions";
+
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
 const Recipe = (props) => {
-  const [servings, setServings] = useState(4);
   return (
     <ScrollView style={styles.RecipeScrollView}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>{props.title}</Text>
+        <Text style={styles.titleText}>{props.Data.title}</Text>
         <Image
           source={require("../../assets/whiteArrow.png")}
           style={{
@@ -44,27 +46,9 @@ const Recipe = (props) => {
           <Text style={styles.timeText}>1Hr 30Min</Text>
         </View>
 
-        <View style={styles.servingsContainer}>
-          <TextInput
-            style={styles.servingsInput}
-            onChangeText={(text) => setServings(text)}
-            value={servings}
-            selectionColor="#464646"
-            returnKeyType="done"
-            keyboardType="numeric"
-          />
-          <Text pointerEvents="none" style={styles.servingsText}>
-            Servings
-          </Text>
-        </View>
+        <Ingredients Data={props.Data} />
 
-        <View>
-          <Text>Ingredients</Text>
-        </View>
-
-        <View>
-          <Text>Instructions</Text>
-        </View>
+        <Instructions Data={props.Data} />
 
         <View>
           <Text>Calories</Text>
@@ -107,8 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderTopLeftRadius: 35,
     borderTopRightRadius: 35,
-    height: 700,
-    paddingTop: 50,
+    paddingVertical: 50,
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",
@@ -121,34 +104,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 50,
     justifyContent: "space-between",
+    marginVertical: 25,
   },
 
-  timeText: { fontSize: 18, fontFamily: "AvenirNextRegular", color: "#313131" },
-  servingsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FAFAFA",
-    borderRadius: 100,
-    width: 200,
-    height: 50,
-    margin: 5,
-  },
-  servingsInput: {
-    fontSize: 30,
-    color: "#0172C4",
-    width: "100%",
-    height: 50,
-    paddingRight: 135,
-    position: "absolute",
-    fontFamily: "AvenirNextDemiBold",
-    textAlign: "right",
-  },
-  servingsText: {
+  timeText: {
     fontSize: 18,
     fontFamily: "AvenirNextRegular",
     color: "#313131",
-    marginLeft: 20,
   },
 });
 
