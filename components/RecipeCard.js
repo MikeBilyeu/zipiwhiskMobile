@@ -1,33 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, ImageBackground, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+} from "react-native";
 
-function RecipeCard() {
-  const Data = {
-    title: "Peanut Butter Banana Smoothie",
-    user: { image: "../assets/userImage.png", username: "zipiwhisk" },
-    recipeImage: "../assets/recipeImage.jpg",
-    numLikes: 1500,
-    numComments: 35,
-    numCalories: 275,
-  };
+import { parseNum } from "./utils";
 
-  const parseNum = (num) => {
-    return num > 1000000
-      ? parseFloat((num / 1000000).toFixed(1)) + "m"
-      : num > 1000
-      ? parseFloat((num / 1000).toFixed(1)) + "k"
-      : num > 0
-      ? num
-      : "";
-  };
-
+function RecipeCard({ Data }) {
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/recipeImage.jpg")}
-        style={styles.image}
-      >
+    <TouchableOpacity onPress={null} activeOpacity={1} style={styles.container}>
+      <ImageBackground source={Data.recipeImage} style={styles.image}>
         <View style={styles.recipeCardDarken}>
           <Text style={styles.title}>{Data.title}</Text>
           <View style={styles.infoContainer}>
@@ -73,34 +60,35 @@ function RecipeCard() {
           </View>
         </View>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.85,
+    height: 475,
   },
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center",
-    padding: 10,
+    justifyContent: "flex-end",
+    padding: 7.5,
   },
   recipeCardDarken: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,.2)",
+    backgroundColor: "rgba(0,0,0,.15)",
     borderRadius: 25,
     justifyContent: "flex-end",
     alignContent: "center",
     paddingHorizontal: 15,
     paddingVertical: 5,
+    flex: 1,
   },
   title: {
     color: "white",
-    fontSize: 40,
+    fontSize: 38,
+    fontFamily: "AvenirNextBold",
     textAlign: "left",
-    lineHeight: 40,
+    lineHeight: 38,
     fontWeight: "bold",
   },
   infoContainer: {
@@ -112,6 +100,7 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 14,
     color: "#FFF",
+    fontFamily: "AvenirNextDemiBold",
   },
   icon: {
     marginLeft: 5,
@@ -143,7 +132,7 @@ const styles = StyleSheet.create({
   userInfoText: {
     fontSize: 16,
     color: "#FFF",
-    fontWeight: "600",
+    fontFamily: "AvenirNextDemiBold",
   },
 });
 
