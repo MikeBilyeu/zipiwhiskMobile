@@ -12,15 +12,17 @@ import {
 
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
+import NutritionFacts from "./NutritionFacts";
+import Comments from "./Comments";
 
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
-const Recipe = (props) => {
+const Recipe = ({ Data }) => {
   return (
     <ScrollView style={styles.RecipeScrollView}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>{props.Data.title}</Text>
+        <Text style={styles.titleText}>{Data.title}</Text>
         <Image
           source={require("../../assets/whiteArrow.png")}
           style={{
@@ -46,17 +48,13 @@ const Recipe = (props) => {
           <Text style={styles.timeText}>1Hr 30Min</Text>
         </View>
 
-        <Ingredients Data={props.Data} />
+        <Ingredients Data={Data} />
 
-        <Instructions Data={props.Data} />
+        <Instructions Data={Data} />
 
-        <View>
-          <Text>Calories</Text>
-        </View>
+        <NutritionFacts Data={Data} />
 
-        <View>
-          <Text>Comments</Text>
-        </View>
+        <Comments Data={Data} />
       </View>
     </ScrollView>
   );

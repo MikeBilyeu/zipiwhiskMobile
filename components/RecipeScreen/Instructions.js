@@ -1,14 +1,31 @@
 import React from "react";
-import { StyleSheet, ScrollView, Text, View } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  Text,
+  View,
+  Dimensions,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
+
+const screenWidth = Dimensions.get("screen").width;
+const screenHeight = Dimensions.get("screen").height;
 
 const renderList = (list) => {
   return list.map((step, index) => (
     <View key={index} style={styles.cardContainer}>
-      {index === 0 && <Text style={styles.cardTitle}>Instructions</Text>}
-
-      <Text style={styles.cardText}>{step}</Text>
-
-      <Text style={styles.cardNum}>step {index + 1}</Text>
+      <Text style={styles.cardTitle}>Instructions</Text>
+      <View>
+        <ScrollView
+          bounces="false"
+          nestedScrollEnabled={true}
+          style={styles.cardScroll}
+        >
+          <Text style={styles.cardText}>{step}</Text>
+        </ScrollView>
+      </View>
+      <Text style={styles.cardNum}>Step {index + 1}</Text>
     </View>
   ));
 };
@@ -17,9 +34,7 @@ const Instructions = (props) => {
   return (
     <ScrollView
       horizontal={true}
-      decelerationRate={"fast"}
-      snapToInterval={375} //your element width
-      snapToAlignment={"center"}
+      pagingEnabled
       showsHorizontalScrollIndicator={false}
       style={styles.container}
     >
@@ -31,12 +46,11 @@ const Instructions = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 700,
-    width: "100%",
-    paddingVertical: 50,
+    height: screenHeight,
+    paddingVertical: 40,
   },
   cardContainer: {
-    width: 355,
+    width: screenWidth - 20,
     justifyContent: "center",
     marginHorizontal: 10,
     borderRadius: 25,
@@ -51,25 +65,28 @@ const styles = StyleSheet.create({
   cardTitle: {
     textAlign: "center",
     color: "#B7B7B7",
-    fontSize: 15,
+    fontSize: 12,
     fontFamily: "AvenirNextRegular",
     position: "absolute",
     top: 20,
-    width: 355,
+    width: screenWidth - 20,
   },
+  cardScroll: {},
   cardText: {
     fontSize: 30,
+    lineHeight: 35,
     fontFamily: "AvenirNextRegular",
     textAlign: "center",
+    color: "#313131",
   },
   cardNum: {
     textAlign: "center",
     color: "#B7B7B7",
-    fontSize: 15,
+    fontSize: 12,
     fontFamily: "AvenirNextRegular",
     position: "absolute",
     bottom: 20,
-    width: 355,
+    width: screenWidth - 20,
   },
 });
 

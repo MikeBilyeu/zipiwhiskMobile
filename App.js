@@ -15,6 +15,7 @@ import { useFonts } from "expo-font";
 import Auth from "./components/Auth";
 import Home from "./components/Home";
 import RecipeScreen from "./components/RecipeScreen/RecipeScreen";
+import Comments from "./components/RecipeScreen/Comments";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
   if (!loaded) {
     return null;
   }
+
   return <RecipeScreen />;
 }
 

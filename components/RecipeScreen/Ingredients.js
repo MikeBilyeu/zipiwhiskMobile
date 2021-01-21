@@ -7,7 +7,10 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
+
+const screenWidth = Dimensions.get("screen").width;
 
 const renderList = (list) => {
   return list.map((i) => (
