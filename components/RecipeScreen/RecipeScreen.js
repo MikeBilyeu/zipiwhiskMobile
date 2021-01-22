@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useRef } from "react";
+import React from "react";
 import { StyleSheet, View, ImageBackground, Animated } from "react-native";
 import Data from "../data";
 
@@ -8,14 +8,11 @@ import Footer from "./Footer";
 import Recipe from "./Recipe";
 
 function RecipeScreen() {
-  const offset = useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.container}>
       <StatusBar hidden />
       <ImageBackground source={Data.recipeImage} style={styles.image}>
-        <Header />
-        <Footer numLikes={Data.numLikes} numComments={Data.numComments} />
-        <Recipe animatedValue={offset} Data={Data} />
+        <Recipe Data={Data} />
       </ImageBackground>
     </View>
   );

@@ -1,80 +1,92 @@
 import React from "react";
-import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  View,
+  Text,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { parseNum } from "../utils";
 
+const screenHeight = Dimensions.get("screen").height;
+
 const Footer = (props) => {
   return (
-    <LinearGradient
-      colors={["rgba(0,0,0,.2)", "transparent"]}
-      start={[0, 1]}
-      end={[0, 0]}
-      style={styles.footerConatiner}
-    >
-      <View style={styles.footerBtnContainer}>
-        <TouchableOpacity
-          onPress={null}
-          activeOpacity={0.4}
-          style={[styles.footerBtn, { paddingHorizontal: 5 }]}
-        >
-          <Image
-            source={require("../../assets/userImage.png")}
-            style={styles.userIcon}
-          />
-        </TouchableOpacity>
+    <Animated.View style={[styles.footerConatiner, props.styles]}>
+      <LinearGradient
+        colors={["rgba(0,0,0,.5)", "transparent"]}
+        start={[0, 1]}
+        end={[0, 0]}
+        style={styles.gradientWrapper}
+      >
+        <View style={styles.footerBtnContainer}>
+          <TouchableOpacity
+            onPress={null}
+            activeOpacity={0.4}
+            style={[styles.footerBtn, { paddingHorizontal: 5 }]}
+          >
+            <Image
+              source={require("../../assets/userImage.png")}
+              style={styles.userIcon}
+            />
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={null}
-          activeOpacity={0.4}
-          style={styles.footerBtn}
-        >
-          <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
-          <Image
-            source={require("../../assets/redLike.png")}
-            style={styles.footerBtnIcon}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={null}
+            activeOpacity={0.4}
+            style={styles.footerBtn}
+          >
+            <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
+            <Image
+              source={require("../../assets/redLike.png")}
+              style={styles.footerBtnIcon}
+            />
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={null}
-          activeOpacity={0.4}
-          style={styles.footerBtn}
-        >
-          <Text style={styles.footerBtnText}>
-            {parseNum(props.numComments)}
-          </Text>
-          <Image
-            source={require("../../assets/comments.png")}
-            style={styles.footerBtnIcon}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={null}
+            activeOpacity={0.4}
+            style={styles.footerBtn}
+          >
+            <Text style={styles.footerBtnText}>
+              {parseNum(props.numComments)}
+            </Text>
+            <Image
+              source={require("../../assets/comments.png")}
+              style={styles.footerBtnIcon}
+            />
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={null}
-          activeOpacity={0.4}
-          style={styles.footerBtn}
-        >
-          <Image
-            source={require("../../assets/bookmark.png")}
-            style={{ width: 20, height: 28 }}
-          />
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            onPress={null}
+            activeOpacity={0.4}
+            style={styles.footerBtn}
+          >
+            <Image
+              source={require("../../assets/bookmark.png")}
+              style={{ width: 20, height: 28 }}
+            />
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.footerBtnContainer}>
-        <TouchableOpacity
-          onPress={null}
-          activeOpacity={0.4}
-          style={[styles.footerBtn, { flex: 0.25 }]}
-        >
-          <Image
-            source={require("../../assets/edit.png")}
-            style={styles.footerBtnIcon}
-          />
-        </TouchableOpacity>
-      </View>
-    </LinearGradient>
+        <View style={styles.footerBtnContainer}>
+          <TouchableOpacity
+            onPress={null}
+            activeOpacity={0.4}
+            style={[styles.footerBtn, { flex: 0.25 }]}
+          >
+            <Image
+              source={require("../../assets/edit.png")}
+              style={styles.footerBtnIcon}
+            />
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
+    </Animated.View>
   );
 };
 
@@ -84,11 +96,17 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
     height: 260,
-    paddingBottom: 25,
+    marginTop: screenHeight - 260,
+    width: "100%",
     position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
+  },
+  gradientWrapper: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    flex: 1,
+    paddingBottom: 25,
+    width: "100%",
   },
 
   footerBtnContainer: {

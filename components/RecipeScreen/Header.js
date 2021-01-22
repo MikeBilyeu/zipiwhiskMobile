@@ -1,44 +1,51 @@
 import React from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Image, TouchableOpacity, Animated } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Header = () => {
+const Header = (props) => {
   return (
-    <LinearGradient
-      colors={["rgba(0,0,0,.2)", "transparent"]}
-      start={[0, 0]}
-      end={[0, 1]}
-      style={styles.headerConatiner}
-    >
-      <TouchableOpacity
-        onPress={null}
-        activeOpacity={0.4}
-        style={styles.headerBtn}
+    <Animated.View style={[styles.headerConatiner, props.styles]}>
+      <LinearGradient
+        colors={["rgba(0,0,0,.2)", "transparent"]}
+        start={[0, 0]}
+        end={[0, 1]}
+        style={[styles.gradient]}
       >
-        <Image
-          source={require("../../assets/whiteArrow.png")}
-          style={{ width: 20, height: 20 }}
-        />
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={null}
+          activeOpacity={0.4}
+          style={styles.headerBtn}
+        >
+          <Image
+            source={require("../../assets/whiteArrow.png")}
+            style={{ width: 20, height: 20 }}
+          />
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={null}
-        activeOpacity={0.4}
-        style={styles.headerBtn}
-      >
-        <Image
-          source={require("../../assets/share.png")}
-          style={styles.headerBtnIcon}
-        />
-      </TouchableOpacity>
-    </LinearGradient>
+        <TouchableOpacity
+          onPress={null}
+          activeOpacity={0.4}
+          style={styles.headerBtn}
+        >
+          <Image
+            source={require("../../assets/share.png")}
+            style={styles.headerBtnIcon}
+          />
+        </TouchableOpacity>
+      </LinearGradient>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   headerConatiner: {
     height: 150,
-    paddingTop: 15,
+    width: "100%",
+    position: "absolute",
+  },
+  gradient: {
+    height: 150,
+    paddingTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
   },

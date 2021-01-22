@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   StyleSheet,
   Text,
   View,
   Image,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
   Dimensions,
+  Animated,
 } from "react-native";
 
+import Header from "./Header";
+import Footer from "./Footer";
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 import NutritionFacts from "./NutritionFacts";
@@ -19,9 +19,49 @@ const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
 const Recipe = ({ Data }) => {
+  const yValue = useRef(new Animated.Value(0)).current;
+
+  let scrollInterpolate = yValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+
+  let headerOpacityInterpolate = yValue.interpolate({
+    inputRange: [screenHeight - 100, screenHeight - 50],
+    outputRange: [1, 0],
+  });
+
+  let footerOpacityInterpolate = yValue.interpolate({
+    inputRange: [175, 250],
+    outputRange: [1, 0],
+  });
+  const animatedFooterStyle = {
+    transform: [{ translateY: scrollInterpolate }],
+    opacity: footerOpacityInterpolate,
+  };
+  const animatedHeaderStyle = {
+    transform: [{ translateY: scrollInterpolate }],
+    opacity: headerOpacityInterpolate,
+  };
+
   return (
-    <ScrollView style={styles.RecipeScrollView}>
-      <View style={styles.titleContainer}>
+    <Animated.ScrollView
+      onScroll={Animated.event(
+        [{ nativeEvent: { contentOffset: { y: yValue } } }],
+        {
+          useNativeDriver: true,
+        }
+      )}
+      style={[styles.RecipeScrollView]}
+    >
+      <Header styles={animatedHeaderStyle} />
+      <Footer
+        numLikes={Data.numLikes}
+        numComments={Data.numComments}
+        styles={animatedFooterStyle}
+      />
+
+      <View pointerEvents="none" style={[styles.titleContainer]}>
         <Text style={styles.titleText}>{Data.title}</Text>
         <Image
           source={require("../../assets/whiteArrow.png")}
@@ -32,7 +72,7 @@ const Recipe = ({ Data }) => {
           }}
         />
       </View>
-      <View style={styles.recipeScrollConatiner}>
+      <View style={[styles.recipeScrollConatiner]}>
         <Image
           source={require("../../assets/line.png")}
           style={{ width: 60, height: 4, position: "absolute", top: 30 }}
@@ -56,7 +96,7 @@ const Recipe = ({ Data }) => {
 
         <Comments Data={Data} />
       </View>
-    </ScrollView>
+    </Animated.ScrollView>
   );
 };
 
@@ -73,12 +113,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-end",
-    height: screenHeight,
     paddingBottom: 15,
+    height: 90,
+    marginTop: screenHeight - 90,
+    marginBottom: 15,
   },
   titleText: {
     color: "#FFF",
-    fontSize: 20,
+    fontSize: 25,
     fontFamily: "AvenirNextDemiBold",
     textAlign: "center",
     fontWeight: "bold",
