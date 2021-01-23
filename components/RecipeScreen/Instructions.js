@@ -38,7 +38,7 @@ const Instructions = (props) => {
       showsHorizontalScrollIndicator={false}
       style={styles.container}
     >
-      {renderList(props.Data.instructions)}
+      {renderList(props.data.instructions)}
     </ScrollView>
   );
 };

@@ -18,7 +18,7 @@ import Comments from "./Comments";
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
-const Recipe = ({ Data }) => {
+const Recipe = ({ data }) => {
   const yValue = useRef(new Animated.Value(0)).current;
 
   let scrollInterpolate = yValue.interpolate({
@@ -56,13 +56,13 @@ const Recipe = ({ Data }) => {
     >
       <Header styles={animatedHeaderStyle} />
       <Footer
-        numLikes={Data.numLikes}
-        numComments={Data.numComments}
+        numLikes={data.numLikes}
+        numComments={data.numComments}
         styles={animatedFooterStyle}
       />
 
       <View pointerEvents="none" style={[styles.titleContainer]}>
-        <Text style={styles.titleText}>{Data.title}</Text>
+        <Text style={styles.titleText}>{data.title}</Text>
         <Image
           source={require("../../assets/whiteArrow.png")}
           style={{
@@ -88,13 +88,13 @@ const Recipe = ({ Data }) => {
           <Text style={styles.timeText}>1Hr 30Min</Text>
         </View>
 
-        <Ingredients Data={Data} />
+        <Ingredients data={data} />
 
-        <Instructions Data={Data} />
+        <Instructions data={data} />
 
-        <NutritionFacts Data={Data} />
+        <NutritionFacts data={data} />
 
-        <Comments Data={Data} />
+        <Comments data={data} />
       </View>
     </Animated.ScrollView>
   );

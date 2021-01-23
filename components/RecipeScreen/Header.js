@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, Image, TouchableOpacity, Animated } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const Header = (props) => {
+  const navigation = useNavigation();
   return (
     <Animated.View style={[styles.headerConatiner, props.styles]}>
       <LinearGradient
@@ -12,7 +14,7 @@ const Header = (props) => {
         style={[styles.gradient]}
       >
         <TouchableOpacity
-          onPress={null}
+          onPress={() => navigation.goBack()}
           activeOpacity={0.4}
           style={styles.headerBtn}
         >

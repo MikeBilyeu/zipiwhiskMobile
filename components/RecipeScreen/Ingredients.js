@@ -25,7 +25,7 @@ const renderList = (list) => {
 };
 
 const Ingredients = (props) => {
-  const [servings, setServings] = useState(props.Data.recipeYield.toString());
+  const [servings, setServings] = useState(props.data.recipeYield.toString());
 
   return (
     <View style={styles.container}>
@@ -51,7 +51,7 @@ const Ingredients = (props) => {
       </TouchableOpacity>
 
       <View style={styles.listContainer}>
-        {renderList(props.Data.ingredientList)}
+        {renderList(props.data.ingredientList)}
       </View>
     </View>
   );

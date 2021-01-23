@@ -1,18 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View, ImageBackground, Animated } from "react-native";
-import Data from "../data";
 
 import Header from "./Header";
 import Footer from "./Footer";
 import Recipe from "./Recipe";
 
-function RecipeScreen() {
+function RecipeScreen({
+  route: {
+    params: { data },
+  },
+}) {
   return (
     <View style={styles.container}>
       <StatusBar hidden />
-      <ImageBackground source={Data.recipeImage} style={styles.image}>
-        <Recipe Data={Data} />
+      <ImageBackground source={{ uri: data.recipeImage }} style={styles.image}>
+        <Recipe data={data} />
       </ImageBackground>
     </View>
   );

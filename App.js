@@ -9,15 +9,15 @@ import {
   Button,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import { useFonts } from "expo-font";
 
 import Auth from "./components/Auth";
 import Home from "./components/Home";
 import RecipeScreen from "./components/RecipeScreen/RecipeScreen";
-import Comments from "./components/RecipeScreen/Comments";
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
   const [loaded] = useFonts({
@@ -30,39 +30,22 @@ export default function App() {
   if (!loaded) {
     return null;
   }
-
-  return <RecipeScreen />;
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="auto" />
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Recipe" component={RecipeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
+  );
 }
-
-// export default function App() {
-//   const [loaded] = useFonts({
-//     AvenirNextRegular: require("./assets/fonts/AvenirNext-Regular.otf"),
-//     AvenirNextItalic: require("./assets/fonts/AvenirNext-Italic.otf"),
-//     AvenirNextDemiBold: require("./assets/fonts/AvenirNext-DemiBold.otf"),
-//     AvenirNextBold: require("./assets/fonts/AvenirNext-Bold.otf"),
-//   });
-
-//   if (!loaded) {
-//     return null;
-//   }
-//   return (
-//     <SafeAreaView style={styles.container}>
-//       <StatusBar barStyle="auto" />
-//       <NavigationContainer>
-//         <Tab.Navigator
-//           tabBarOptions={{
-//             activeTintColor: "#0172C4",
-//             inactiveTintColor: "#464646",
-//           }}
-//           initialRouteName="Home"
-//         >
-//           <Tab.Screen name="Home" component={Home} />
-//           <Tab.Screen name="Profile" component={Auth} />
-//         </Tab.Navigator>
-//       </NavigationContainer>
-//     </SafeAreaView>
-//   );
-// }
 
 const styles = StyleSheet.create({
   container: {

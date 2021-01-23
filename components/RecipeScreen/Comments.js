@@ -17,7 +17,7 @@ const screenWidth = Dimensions.get("screen").width;
 const renderList = (list) => {
   return list.map((c) => (
     <View
-      key={c.id}
+      key={c.id.toString()}
       style={[
         styles.userCommentContainer,
         c.parent_comment_id && styles.userCommentContainerChild,
@@ -78,7 +78,7 @@ const renderList = (list) => {
   ));
 };
 
-const Comments = ({ Data }) => {
+const Comments = ({ data }) => {
   const [text, setText] = useState("");
   return (
     <View style={styles.container}>
@@ -101,7 +101,7 @@ const Comments = ({ Data }) => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.commentsContainer}>{renderList(Data.comments)}</View>
+      <View style={styles.commentsContainer}>{renderList(data.comments)}</View>
     </View>
   );
 };

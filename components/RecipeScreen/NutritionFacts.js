@@ -2,10 +2,9 @@ import React from "react";
 import { StyleSheet, View, Text, Dimensions, Image } from "react-native";
 
 const screenHeight = Dimensions.get("screen").height;
-
 const screenWidth = Dimensions.get("screen").width;
 
-const NutritionFacts = (props) => {
+const NutritionFacts = ({ data }) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleConatainer}>
@@ -14,9 +13,7 @@ const NutritionFacts = (props) => {
       </View>
 
       <View style={styles.caloriesContainer}>
-        <Text style={styles.caloriesNum}>
-          {props.Data.nutritionFacts.calories}
-        </Text>
+        <Text style={styles.caloriesNum}>{data.nutrition.calories}</Text>
         <Text style={styles.caloriesText}>Calories</Text>
       </View>
 
@@ -24,19 +21,17 @@ const NutritionFacts = (props) => {
         <View style={styles.macroWrapper}>
           <View style={[styles.colorKey, styles.protienColor]}></View>
           <Text style={styles.macroText}>Protiens</Text>
-          <Text style={styles.macroNum}>
-            {props.Data.nutritionFacts.protiens}
-          </Text>
+          <Text style={styles.macroNum}>{data.nutrition.protiens}</Text>
         </View>
         <View style={styles.macroWrapper}>
           <View style={[styles.colorKey, styles.fatColor]}></View>
           <Text style={styles.macroText}>Fats</Text>
-          <Text style={styles.macroNum}>{props.Data.nutritionFacts.fats}</Text>
+          <Text style={styles.macroNum}>{data.nutrition.fats}</Text>
         </View>
         <View style={styles.macroWrapper}>
           <View style={[styles.colorKey, styles.carbColor]}></View>
           <Text style={styles.macroText}>Carbs</Text>
-          <Text style={styles.macroNum}>{props.Data.nutritionFacts.carbs}</Text>
+          <Text style={styles.macroNum}>{data.nutrition.carbs}</Text>
         </View>
       </View>
     </View>

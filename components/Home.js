@@ -3,51 +3,14 @@ import {
   StyleSheet,
   Text,
   View,
+  SafeAreaView,
   FlatList,
   Image,
   TouchableOpacity,
 } from "react-native";
 
 import RecipeCard from "./RecipeCard";
-
-const Data = [
-  {
-    id: "49802390484",
-    title: "Peanut Butter Banana Smoothie",
-    user: { image: "../assets/userImage.png", username: "zipiwhisk" },
-    recipeImage: {
-      uri:
-        "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140916/Recipes/lp4ypoiaoqkvvzkp7qk5.jpg",
-    },
-    numLikes: 1500,
-    numComments: 35,
-    numCalories: 275,
-  },
-  {
-    id: "2384983484800",
-    title: "Cranberry Sauce",
-    user: { image: "../assets/userImage.png", username: "zipiwhisk" },
-    recipeImage: {
-      uri:
-        "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140674/Recipes/atlhfcivnnrdwprukcfd.jpg",
-    },
-    numLikes: 2000,
-    numComments: 45,
-    numCalories: 150,
-  },
-  {
-    id: "2384340084800",
-    title: "Black Bean Veggie Burgers",
-    user: { image: "../assets/userImage.png", username: "zipiwhisk" },
-    recipeImage: {
-      uri:
-        "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1593983807/Recipes/s0odyvjiko4yuisb8iwm.jpg",
-    },
-    numLikes: 2800,
-    numComments: 74,
-    numCalories: 150,
-  },
-];
+import data from "../data";
 
 function Header() {
   return (
@@ -75,18 +38,18 @@ function Header() {
   );
 }
 function Home() {
-  const renderItem = ({ item }) => <RecipeCard Data={item} />;
+  const renderItem = ({ item }) => <RecipeCard data={item} />;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header />
       <FlatList
         style={styles.list}
-        data={Data}
+        data={data}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

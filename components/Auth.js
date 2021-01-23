@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Login from "./Login";
@@ -8,14 +9,10 @@ const Stack = createStackNavigator();
 
 function Auth() {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <View>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
-    </Stack.Navigator>
+    </View>
   );
 }
 

@@ -8,19 +8,26 @@ import {
   ImageBackground,
   Image,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { parseNum } from "./utils";
 
-function RecipeCard({ Data }) {
+function RecipeCard({ data }) {
+  console.log(data);
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={null} activeOpacity={1} style={styles.container}>
-      <ImageBackground source={Data.recipeImage} style={styles.image}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Recipe", { data: data })}
+      activeOpacity={1}
+      style={styles.container}
+    >
+      <ImageBackground source={{ uri: data.recipeImage }} style={styles.image}>
         <View style={styles.recipeCardDarken}>
-          <Text style={styles.title}>{Data.title}</Text>
+          <Text style={styles.title}>{data.title}</Text>
           <View style={styles.infoContainer}>
             <Text style={styles.infoText}>{"Calories"}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.infoText}>{Data.numCalories}</Text>
+              <Text style={styles.infoText}>{data.nutrition.calories}</Text>
               <Image
                 source={require("../assets/calories.png")}
                 style={styles.icon}
@@ -33,7 +40,7 @@ function RecipeCard({ Data }) {
           <View style={styles.infoContainer}>
             <Text style={styles.infoText}>{"Likes"}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.infoText}>{parseNum(Data.numLikes)}</Text>
+              <Text style={styles.infoText}>{parseNum(data.numLikes)}</Text>
               <Image
                 source={require("../assets/likes.png")}
                 style={styles.icon}
@@ -43,7 +50,7 @@ function RecipeCard({ Data }) {
           <View style={styles.infoContainer}>
             <Text style={styles.infoText}>{"Comments"}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.infoText}>{parseNum(Data.numComments)}</Text>
+              <Text style={styles.infoText}>{parseNum(data.numComments)}</Text>
               <Image
                 source={require("../assets/comments.png")}
                 style={styles.icon}
@@ -52,11 +59,8 @@ function RecipeCard({ Data }) {
           </View>
 
           <View style={styles.userInfoContainer}>
-            <Image
-              source={require("../assets/userImage.png")}
-              style={styles.userIcon}
-            />
-            <Text style={styles.userInfoText}>{Data.user.username}</Text>
+            <Image source={{ uri: data.user.image }} style={styles.userIcon} />
+            <Text style={styles.userInfoText}>{data.user.username}</Text>
           </View>
         </View>
       </ImageBackground>
