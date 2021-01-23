@@ -6,6 +6,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./Home";
 import Bookmarks from "./Bookmarks";
 import Groceries from "./Groceries";
+import Activity from "./Activity";
+import Profile from "./Profile";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,6 +23,8 @@ const Nav = () => {
       <Tab.Screen name="Groceries" component={Groceries} />
       <Tab.Screen name="Bookmarks" component={Bookmarks} />
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Activity" component={Activity} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 };
