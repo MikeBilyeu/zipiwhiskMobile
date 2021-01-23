@@ -1,23 +1,17 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  View,
-  Image,
-  Button,
-} from "react-native";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { useFonts } from "expo-font";
 
 import Auth from "./components/Auth";
-import Home from "./components/Home";
+import Nav from "./components/Nav";
 import RecipeScreen from "./components/RecipeScreen/RecipeScreen";
 
 const Stack = createStackNavigator();
+const userToken = true;
 
 export default function App() {
   const [loaded] = useFonts({
@@ -34,14 +28,18 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar barStyle="auto" />
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Recipe" component={RecipeScreen} />
-        </Stack.Navigator>
+        {!userToken ? (
+          <Auth />
+        ) : (
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="Home" component={Nav} />
+            <Stack.Screen name="Recipe" component={RecipeScreen} />
+          </Stack.Navigator>
+        )}
       </NavigationContainer>
     </View>
   );

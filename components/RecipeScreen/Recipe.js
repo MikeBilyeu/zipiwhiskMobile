@@ -58,6 +58,7 @@ const Recipe = ({ data }) => {
       <Footer
         numLikes={data.numLikes}
         numComments={data.numComments}
+        userImage={data.user.image}
         styles={animatedFooterStyle}
       />
 

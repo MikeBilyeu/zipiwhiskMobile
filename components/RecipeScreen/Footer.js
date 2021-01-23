@@ -29,10 +29,7 @@ const Footer = (props) => {
             activeOpacity={0.4}
             style={[styles.footerBtn, { paddingHorizontal: 5 }]}
           >
-            <Image
-              source={require("../../assets/userImage.png")}
-              style={styles.userIcon}
-            />
+            <Image source={{ uri: props.userImage }} style={styles.userIcon} />
           </TouchableOpacity>
 
           <TouchableOpacity

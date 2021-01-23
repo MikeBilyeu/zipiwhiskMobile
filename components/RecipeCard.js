@@ -7,13 +7,15 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { parseNum } from "./utils";
 
+const screenHeight = Dimensions.get("screen").height;
+
 function RecipeCard({ data }) {
-  console.log(data);
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -70,7 +72,7 @@ function RecipeCard({ data }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 475,
+    height: screenHeight / 2,
   },
   image: {
     flex: 1,

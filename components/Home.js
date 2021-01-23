@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 
   searchBtnText: {
     textAlign: "center",
-    fontWeight: "600",
+    fontFamily: "AvenirNextDemiBold",
     fontSize: 30,
     color: "#313131",
     marginHorizontal: 10,
