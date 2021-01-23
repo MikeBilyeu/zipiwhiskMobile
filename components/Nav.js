@@ -3,8 +3,9 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Auth from "./Auth";
 import Home from "./Home";
+import Bookmarks from "./Bookmarks";
+import Groceries from "./Groceries";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,8 +18,9 @@ const Nav = () => {
       }}
       initialRouteName="Home"
     >
+      <Tab.Screen name="Groceries" component={Groceries} />
+      <Tab.Screen name="Bookmarks" component={Bookmarks} />
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Auth} />
     </Tab.Navigator>
   );
 };

@@ -72,7 +72,7 @@ function RecipeCard({ data }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: screenHeight / 2,
+    height: screenHeight - 189,
   },
   image: {
     flex: 1,
