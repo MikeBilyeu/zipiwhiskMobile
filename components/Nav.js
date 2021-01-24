@@ -18,8 +18,9 @@ const Nav = () => {
         activeTintColor: "#101010",
         inactiveTintColor: "#464646",
         showLabel: false,
+        labelPosition: "below-icon",
       }}
-      initialRouteName="Groceries"
+      initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -37,7 +38,14 @@ const Nav = () => {
           }
 
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={23} color={color} />;
+          return (
+            <Ionicons
+              name={iconName}
+              size={23}
+              color={color}
+              style={{ marginTop: 5 }}
+            />
+          );
         },
       })}
     >

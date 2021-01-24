@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   ingredientImage: {
     width: 45,
     height: 45,
+    marginLeft: 10,
     borderRadius: 10,
   },
   ingredientWrapper: {
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
   },
   ingredientName: {
     marginTop: 10,
-    fontSize: 23,
+    fontSize: 22,
     fontFamily: "AvenirNextRegular",
     color: "#313131",
   },

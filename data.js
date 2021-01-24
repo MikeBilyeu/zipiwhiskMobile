@@ -13,33 +13,38 @@ const data = [
     recipeYield: 4,
     ingredientList: [
       {
-        amount: "¼ cup",
-        ingredient: "All-purpose flour",
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrmaF1M32DN3r7ciBu7pGxbv_jGrBq-6vlfc8F_JZlyJY8lfcFK59_LaCp0Ac_p52crRxruIi5&usqp=CAc",
-      },
-      {
-        amount: "1 Tbsp + 2 tsp",
-        ingredient: "Vegatable oil ",
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3WIIweap2Y7yXbnNS8qTVs5kI_HRDX9WlpzYTy8M12YBFwR20vfVL2zpRwc4&usqp=CAc",
-      },
-      {
-        amount: "1 cup",
-        ingredient: "Red wine",
-        image: "https://images.heb.com/is/image/HEBGrocery/000538201",
-      },
-      {
         amount: "2",
-        ingredient: "Bay leaves",
+        ingredient: "Bananas, broken into chunks",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/3/37/Indian_bay_leaf_-_tejpatta_-_indisches_Lorbeerblatt.jpg",
+          "https://images.albertsons-media.com/is/image/ABS/184060007?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "2 cups",
+        ingredient: "Milk",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/136010121?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "½ cup",
+        ingredient: "Peanut butter",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/204100025?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "2 Tbsp",
+        ingredient: "Honey, to taste",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "2 cups",
+        ingredient: "Ice cubes",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960049453?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
       },
     ],
     instructions: [
-      `Combine the flour and pepper in a bowl, add the beef and toss to coat well. `,
-      `Heat 3 teaspoons of the oil in a large pot. Add the beef a few pieces at a time; do not overcrowd. Cook, turning the pieces until beef is browned on all sides, about 5 minutes per batch; add more oil as needed between batches.`,
-      `Remove the beef from the pot and add the vinegar and wine. Cook over medium-high heat, scraping the pan with a wooden spoon to loosen any browned bits. Add the beef, beef broth and bay leaves. Bring to a boil, then reduce to a slow simmer.`,
+      `Place bananas, milk, peanut butter, honey, and ice cubes in a blender; blend until smooth, about 30 seconds.`,
     ],
     nutrition: {
       calories: 275,
