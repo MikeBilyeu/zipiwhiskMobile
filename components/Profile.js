@@ -152,9 +152,9 @@ export default Profile;
 const userData = {
   user: {
     id: 480348487,
-    username: "mikebilyeu512",
-    fullName: "Mike Bilyeu",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
+    username: "mr_smith512",
+    fullName: "Bob Smith",
+    image: "https://randomuser.me/api/portraits/men/17.jpg",
     email: "mikebilyeu500@gmail.com",
     recipeUnit: "US",
     restriction: null,

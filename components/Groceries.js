@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,9 +6,14 @@ import {
   SafeAreaView,
   ScrollView,
   Image,
+  TouchableOpacity,
+  TextInput,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
-
-import data from "../data";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 function Header() {
   return (
@@ -24,25 +29,64 @@ function Header() {
   );
 }
 const Groceries = () => {
+  const [inputText, setInputText] = useState("");
+  const [list, setList] = useState(groceryData.groceries);
+  const inputField = useRef(null);
+
   const renderList = (list) => {
-    return list.map((i) => (
-      <View key={i.ingredient} style={styles.ingredientContainer}>
+    return list.map((i, index) => (
+      <View key={uuidv4()} style={styles.ingredientContainer}>
         <View style={styles.ingredientWrapper}>
           <Text style={styles.ingredientName}>{i.ingredient}</Text>
           <Text style={styles.ingredientAmount}>{i.amount}</Text>
         </View>
-        <Image source={i.image} style={styles.ingredientImage} />
+        <Image source={{ uri: i.image }} style={styles.ingredientImage} />
       </View>
     ));
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <KeyboardAvoidingView
+        style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
+        behavior="padding"
+        keyboardVerticalOffset={10}
+      >
+        <Header />
+        <ScrollView style={styles.listContainer}>
+          {renderList(list)}
 
-      <ScrollView style={styles.listContainer}>
-        {renderList(data[0].ingredientList)}
-      </ScrollView>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputText}
+              onChangeText={(text) => setInputText(text)}
+              value={inputText}
+              ref={inputField}
+              returnKeyType="done"
+              //blurOnSubmit={false}
+              onBlur={() => {
+                inputText &&
+                  setList(
+                    [
+                      ...list,
+                      {
+                        amount: null,
+                        ingredient: inputText,
+                        image: null,
+                      },
+                    ],
+                    setInputText("")
+                  );
+              }}
+            />
+          </View>
+
+          <TouchableOpacity
+            style={styles.addItemBtn}
+            onPress={() => inputField.current.focus()}
+          ></TouchableOpacity>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -50,7 +94,7 @@ const Groceries = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: "#fff",
   },
   headerContainer: {
     paddingTop: 2,
@@ -97,16 +141,59 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   ingredientName: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: "AvenirNextBold",
     color: "#313131",
   },
   ingredientAmount: {
     marginTop: 5,
-    fontSize: 18,
+    fontSize: 14,
+    fontFamily: "AvenirNextRegular",
+    color: "#707070",
+  },
+
+  inputContainer: {
+    paddingHorizontal: 15,
+  },
+  inputText: {
+    height: 50,
+    fontSize: 20,
     fontFamily: "AvenirNextRegular",
     color: "#313131",
+  },
+
+  addItemBtn: {
+    height: "100%",
+    minHeight: 300,
   },
 });
 
 export default Groceries;
+
+const groceryData = {
+  groceries: [
+    {
+      amount: "¼ cup",
+      ingredient: "All-purpose flour",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrmaF1M32DN3r7ciBu7pGxbv_jGrBq-6vlfc8F_JZlyJY8lfcFK59_LaCp0Ac_p52crRxruIi5&usqp=CAc",
+    },
+    {
+      amount: "1 Tbsp + 2 tsp",
+      ingredient: "Vegatable oil ",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3WIIweap2Y7yXbnNS8qTVs5kI_HRDX9WlpzYTy8M12YBFwR20vfVL2zpRwc4&usqp=CAc",
+    },
+    {
+      amount: "1 cup",
+      ingredient: "Red wine",
+      image: "https://images.heb.com/is/image/HEBGrocery/000538201",
+    },
+    {
+      amount: "2",
+      ingredient: "Bay leaves",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/3/37/Indian_bay_leaf_-_tejpatta_-_indisches_Lorbeerblatt.jpg",
+    },
+  ],
+};

@@ -19,7 +19,7 @@ const renderList = (list) => {
         <Text style={styles.ingredientAmount}>{i.amount}</Text>
         <Text style={styles.ingredientName}>{i.ingredient}</Text>
       </View>
-      <Image source={i.image} style={styles.ingredientImage} />
+      <Image source={{ uri: i.image }} style={styles.ingredientImage} />
     </View>
   ));
 };

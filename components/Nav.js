@@ -18,7 +18,7 @@ const Nav = () => {
         activeTintColor: "#0172C4",
         inactiveTintColor: "#464646",
       }}
-      initialRouteName="Home"
+      initialRouteName="Groceries"
     >
       <Tab.Screen name="Groceries" component={Groceries} />
       <Tab.Screen name="Bookmarks" component={Bookmarks} />
