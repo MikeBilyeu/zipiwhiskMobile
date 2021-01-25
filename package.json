@@ -27,7 +27,8 @@
     "react-native-screens": "~2.15.0",
     "react-native-web": "~0.13.12",
     "uuid": "^8.3.2",
-    "expo-blur": "~8.2.2"
+    "expo-blur": "~8.2.2",
+    "expo-keep-awake": "~8.4.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

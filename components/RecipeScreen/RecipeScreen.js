@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View, ImageBackground, Animated } from "react-native";
+import { useKeepAwake } from "expo-keep-awake";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -11,6 +12,7 @@ function RecipeScreen({
     params: { data },
   },
 }) {
+  useKeepAwake();
   return (
     <View style={styles.container}>
       <StatusBar hidden />

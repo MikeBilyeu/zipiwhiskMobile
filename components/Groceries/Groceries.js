@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+import { useKeepAwake } from "expo-keep-awake";
 
 import Header from "./Header";
 import RenderList from "./RenderList";
@@ -19,6 +20,7 @@ import RenderList from "./RenderList";
 import groceryData from "./gorceryData";
 
 const Groceries = () => {
+  useKeepAwake();
   const [list, setList] = useState(groceryData.groceries);
   const [inputText, setInputText] = useState("");
   const inputField = useRef(null);
@@ -79,7 +81,7 @@ const Groceries = () => {
 
           <TouchableOpacity
             style={styles.addItemBtn}
-            onPress={() => inputField.current.focus()}
+            onPress={inputField.current?.focus}
           ></TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextRegular",
     color: "#313131",
     paddingHorizontal: 15,
-    paddingTop: 10,
+    paddingTop: 30,
     paddingBottom: 10,
     maxHeight: 1000,
   },
