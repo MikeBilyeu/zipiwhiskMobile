@@ -26,7 +26,7 @@ const Groceries = () => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
-        style={{ flex: 1, justifyContent: "center" }}
+        style={{ flex: 1 }}
         behavior="padding"
         keyboardVerticalOffset={10}
       >
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
   },
 
   listContainer: {
+    flex: 1,
     width: "100%",
-    marginVertical: 10,
     paddingTop: 65,
   },
 

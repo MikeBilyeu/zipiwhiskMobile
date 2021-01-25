@@ -7,6 +7,7 @@ import {
   Image,
   Text,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Header = ({ inputField }) => {
   const [keyboardOpen, setKeyboardOpen] = useState(false);
@@ -23,7 +24,12 @@ const Header = ({ inputField }) => {
   }, []);
 
   return (
-    <View style={styles.headerContainer}>
+    <LinearGradient
+      colors={["#fff", "rgba(255, 255, 255, .9)"]}
+      start={[0, 0]}
+      end={[0, 1]}
+      style={[styles.headerContainer]}
+    >
       <Image
         source={require("../../assets/zipiwhisk.png")}
         style={{ width: 70, height: 15 }}
@@ -42,7 +48,7 @@ const Header = ({ inputField }) => {
           </TouchableOpacity>
         )}
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -50,15 +56,11 @@ const styles = StyleSheet.create({
   headerContainer: {
     paddingTop: 2,
     position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 2,
+    zIndex: 1,
     height: 65,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "rgba(255, 255, 255, .95)",
   },
   titleWrapper: {
     flex: 1,

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 import RecipeCard from "./RecipeCard";
 import data from "../data";
@@ -16,7 +17,12 @@ import data from "../data";
 function Header({ data }) {
   const navigation = useNavigation();
   return (
-    <View style={styles.headerContainer}>
+    <LinearGradient
+      colors={["#fff", "rgba(255, 255, 255, .9)"]}
+      start={[0, 0]}
+      end={[0, 1]}
+      style={[styles.headerContainer]}
+    >
       <Image
         source={require("../assets/zipiwhisk.png")}
         style={{ width: 70, height: 15 }}
@@ -62,7 +68,7 @@ function Header({ data }) {
           style={{ width: 20, height: 20 }}
         />
       </TouchableOpacity>
-    </View>
+    </LinearGradient>
   );
 }
 function Profile() {
@@ -70,13 +76,15 @@ function Profile() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header data={userData} />
-      <FlatList
-        style={styles.list}
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
+      <View style={{ flex: 1 }}>
+        <Header data={userData} />
+        <FlatList
+          style={styles.listContainer}
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -88,9 +96,12 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     paddingTop: 2,
+    height: 130,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
+    position: "absolute",
+    zIndex: 1,
   },
 
   userInfoContainer: {
@@ -142,8 +153,10 @@ const styles = StyleSheet.create({
     color: "#313131",
     marginHorizontal: 10,
   },
-  list: {
+  listContainer: {
     flex: 1,
+    width: "100%",
+    paddingTop: 130,
   },
 });
 
