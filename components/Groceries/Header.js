@@ -6,10 +6,33 @@ import {
   Keyboard,
   Image,
   Text,
+  Share,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-const Header = ({ inputFocused, setInputFocused }) => {
+const Header = ({ inputFocused, setInputFocused, list }) => {
+  const onShare = async (data) => {
+    try {
+      const result = await Share.share({
+        message:
+          "ZipiWhisk | Groceries \n" + list.map((i) => i.ingredient).join("\n"),
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <LinearGradient
       colors={["#fff", "rgba(255, 255, 255, .9)"]}
@@ -23,7 +46,7 @@ const Header = ({ inputFocused, setInputFocused }) => {
       />
       <View style={styles.titleWrapper}>
         <Text style={styles.titleText}>{"Groceries"}</Text>
-        {inputFocused && (
+        {inputFocused ? (
           <TouchableOpacity
             style={styles.doneBtn}
             onPress={() => {
@@ -32,6 +55,10 @@ const Header = ({ inputFocused, setInputFocused }) => {
             }}
           >
             <Text style={styles.doneBtnText}>Done</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.doneBtn} onPress={onShare}>
+            <Ionicons name="paper-plane-outline" size={25} color="#0172C4" />
           </TouchableOpacity>
         )}
       </View>

@@ -6,61 +6,92 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const RenderList = (list, setList, inputFocused, setInputFocused) =>
-  list.map((i, index) => (
-    <TouchableOpacity activeOpacity={0.8} key={index} style={{ width: "100%" }}>
-      <View style={styles.ingredientContainer}>
-        <View style={styles.ingredientWrapper}>
-          <TextInput
-            key={i.id}
-            style={styles.ingredientName}
-            onFocus={() => setInputFocused(true)}
-            onChangeText={(text) => {
-              let newList = [...list];
-              newList[index].ingredient = text;
-              setList(newList);
-            }}
-            onBlur={() => {
-              setInputFocused(false);
-              !i.ingredient && setList(list.filter((item, i) => i != index));
-            }}
-            value={i.ingredient}
-            returnKeyType="done"
-          />
-          {/* <Text style={styles.ingredientName}>{i.ingredient}</Text>
+  list.map((i, index) => {
+    const onSubmit = () => {
+      setInputFocused(false);
+      //this will remove empty textinput
+      !i.ingredient && setList(list.filter((item, i) => i != index));
+    };
+
+    onRadioPress = () => {
+      let newList = [...list];
+      newList[index].completed = !newList[index].completed;
+      setList(newList);
+    };
+
+    return (
+      <View activeOpacity={0.8} key={i.id} style={{ width: "100%" }}>
+        <View style={styles.ingredientContainer}>
+          <TouchableOpacity style={styles.radioBtn} onPress={onRadioPress}>
+            <Ionicons
+              name={
+                i.completed ? "ios-radio-button-on" : "ios-radio-button-off"
+              }
+              size={25}
+              color="#0172C4"
+            />
+          </TouchableOpacity>
+          <View style={styles.ingredientWrapper}>
+            <TextInput
+              multiline
+              scrollEnabled={false}
+              style={styles.ingredientName}
+              onFocus={() => setInputFocused(true)}
+              onChangeText={(text) => {
+                let newList = [...list];
+                newList[index].ingredient = text;
+                setList(newList);
+              }}
+              blurOnSubmit={true}
+              onSubmitEditing={onSubmit}
+              onBlur={onSubmit}
+              value={i.ingredient}
+              returnKeyType="done"
+            />
+            {/* <Text style={styles.ingredientName}>{i.ingredient}</Text>
       <Text style={styles.ingredientAmount}>{i.amount}</Text> */}
+          </View>
+
+          {/* <Image source={{ uri: i.image }} style={styles.ingredientImage} /> */}
         </View>
-        <Image source={{ uri: i.image }} style={styles.ingredientImage} />
       </View>
-    </TouchableOpacity>
-  ));
+    );
+  });
 const styles = StyleSheet.create({
   ingredientContainer: {
     flexDirection: "row",
-    alignItems: "flex-start",
     justifyContent: "space-between",
-    paddingRight: 15,
-    height: 85,
   },
   ingredientWrapper: {
     justifyContent: "space-between",
-    flex: 0.9,
-    height: 85,
+    flex: 5,
   },
   ingredientImage: {
-    width: 45,
-    height: 45,
+    width: 40,
     borderRadius: 10,
     alignSelf: "center",
+  },
+  radioBtn: {
+    flex: 1,
+    height: "100%",
+    maxHeight: 60,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   ingredientName: {
     fontSize: 18,
-    fontFamily: "AvenirNextBold",
+    fontFamily: "AvenirNextDemiBold",
     color: "#313131",
-    paddingLeft: 15,
-    height: 85,
+    paddingRight: 15,
+    //paddingHorizontal: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
+    maxHeight: 1000,
   },
   ingredientAmount: {
     marginTop: 5,

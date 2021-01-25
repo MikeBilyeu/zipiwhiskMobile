@@ -19,10 +19,28 @@ import RenderList from "./RenderList";
 import groceryData from "./gorceryData";
 
 const Groceries = () => {
-  const [inputText, setInputText] = useState("");
   const [list, setList] = useState(groceryData.groceries);
+  const [inputText, setInputText] = useState("");
   const inputField = useRef(null);
   const [inputFocused, setInputFocused] = useState();
+
+  const onSubmit = () => {
+    setInputFocused(false);
+    inputText &&
+      setList(
+        [
+          ...list,
+          {
+            id: uuidv4(),
+            completed: false,
+            amount: null,
+            ingredient: inputText,
+            image: null,
+          },
+        ],
+        setInputText("")
+      );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -31,49 +49,39 @@ const Groceries = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={10}
       >
-        <Header inputFocused={inputFocused} setInputFocused={setInputFocused} />
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView
-            style={styles.listContainer}
-            keyboardShouldPersistTaps="always"
-          >
-            {RenderList(list, setList, inputFocused, setInputFocused)}
+        <Header
+          inputFocused={inputFocused}
+          setInputFocused={setInputFocused}
+          list={list}
+        />
+        <ScrollView
+          style={styles.listContainer}
+          keyboardShouldPersistTaps="always"
+        >
+          {RenderList(list, setList, inputFocused, setInputFocused)}
 
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.inputText}
-                onChangeText={(text) => setInputText(text)}
-                value={inputText}
-                ref={inputField}
-                onFocus={() => setInputFocused(true)}
-                returnKeyType="done"
-                placeholder="Add Item"
-                //blurOnSubmit={false}
-                onBlur={() => {
-                  setInputFocused(false);
-                  inputText &&
-                    setList(
-                      [
-                        ...list,
-                        {
-                          id: uuidv4(),
-                          amount: null,
-                          ingredient: inputText,
-                          image: null,
-                        },
-                      ],
-                      setInputText("")
-                    );
-                }}
-              />
-            </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputText}
+              multiline
+              scrollEnabled={false}
+              onChangeText={(text) => setInputText(text)}
+              value={inputText}
+              ref={inputField}
+              onFocus={() => setInputFocused(true)}
+              returnKeyType="done"
+              placeholder="Add Item"
+              blurOnSubmit={true}
+              onBlur={onSubmit}
+              onSubmitEditing={onSubmit}
+            />
+          </View>
 
-            <TouchableOpacity
-              style={styles.addItemBtn}
-              onPress={() => inputField.current.focus()}
-            ></TouchableOpacity>
-          </ScrollView>
-        </TouchableWithoutFeedback>
+          <TouchableOpacity
+            style={styles.addItemBtn}
+            onPress={() => inputField.current.focus()}
+          ></TouchableOpacity>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -92,13 +100,16 @@ const styles = StyleSheet.create({
   },
 
   inputContainer: {
-    paddingHorizontal: 15,
+    width: "90%",
   },
   inputText: {
-    height: 50,
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: "AvenirNextRegular",
     color: "#313131",
+    paddingHorizontal: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
+    maxHeight: 1000,
   },
 
   addItemBtn: {

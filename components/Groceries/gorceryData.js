@@ -3,6 +3,7 @@ const groceryData = {
   groceries: [
     {
       id: uuidv4(),
+      completed: false,
       amount: "¼ cup",
       ingredient: "¼ cup All-purpose flour",
       image:
@@ -10,6 +11,7 @@ const groceryData = {
     },
     {
       id: uuidv4(),
+      completed: false,
       amount: "1 Tbsp + 2 tsp",
       ingredient: "1 Tbsp + 2 tsp Vegatable oil ",
       image:
@@ -17,12 +19,14 @@ const groceryData = {
     },
     {
       id: uuidv4(),
+      completed: false,
       amount: "1 cup",
       ingredient: "1 cup Red wine",
       image: "https://images.heb.com/is/image/HEBGrocery/000538201",
     },
     {
       id: uuidv4(),
+      completed: false,
       amount: "2",
       ingredient: "2 Bay leaves",
       image:
