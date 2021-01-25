@@ -16,7 +16,7 @@ import data from "../data";
 function Header() {
   return (
     <LinearGradient
-      colors={["#fff", "rgba(255, 255, 255, .9)"]}
+      colors={["#fff", "rgba(255, 255, 255, .8)"]}
       start={[0, 0]}
       end={[0, 1]}
       style={[styles.headerContainer]}
@@ -34,10 +34,10 @@ function Header() {
           source={require("../assets/search.png")}
           style={{ width: 20, height: 20 }}
         />
-        <Text style={styles.searchBtnText}>{"Search"}</Text>
+        <Text style={styles.searchBtnText}>{"Categories"}</Text>
         <Image
           source={require("../assets/arrow.png")}
-          style={{ width: 20, height: 20 }}
+          style={{ width: 15, height: 15 }}
         />
       </TouchableOpacity>
     </LinearGradient>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     paddingTop: 2,
-    height: 65,
+    height: 75,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     width: "100%",
-    paddingTop: 65,
+    paddingTop: 75,
   },
 });
 

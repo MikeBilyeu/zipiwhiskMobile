@@ -9,26 +9,13 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Header = ({ inputField }) => {
-  const [keyboardOpen, setKeyboardOpen] = useState(false);
-
-  useEffect(() => {
-    Keyboard.addListener("keyboardDidShow", () => {
-      setKeyboardOpen(true);
-    });
-
-    // cleanup function
-    return () => {
-      Keyboard.removeListener("keyboardDidShow");
-    };
-  }, []);
-
+const Header = ({ inputFocused, setInputFocused }) => {
   return (
     <LinearGradient
       colors={["#fff", "rgba(255, 255, 255, .9)"]}
       start={[0, 0]}
       end={[0, 1]}
-      style={[styles.headerContainer]}
+      style={styles.headerContainer}
     >
       <Image
         source={require("../../assets/zipiwhisk.png")}
@@ -36,11 +23,11 @@ const Header = ({ inputField }) => {
       />
       <View style={styles.titleWrapper}>
         <Text style={styles.titleText}>{"Groceries"}</Text>
-        {keyboardOpen && (
+        {inputFocused && (
           <TouchableOpacity
             style={styles.doneBtn}
             onPress={() => {
-              setKeyboardOpen(false);
+              setInputFocused(false);
               Keyboard.dismiss();
             }}
           >
@@ -57,7 +44,7 @@ const styles = StyleSheet.create({
     paddingTop: 2,
     position: "absolute",
     zIndex: 1,
-    height: 65,
+    height: 75,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",

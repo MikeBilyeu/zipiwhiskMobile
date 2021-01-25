@@ -15,7 +15,7 @@ import data from "../data";
 function Header() {
   return (
     <LinearGradient
-      colors={["#fff", "rgba(255, 255, 255, .9)"]}
+      colors={["#fff", "rgba(255, 255, 255, .8)"]}
       start={[0, 0]}
       end={[0, 1]}
       style={[styles.headerContainer]}
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     paddingTop: 2,
-    height: 65,
+    height: 75,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     width: "100%",
-    paddingTop: 65,
+    paddingTop: 75,
   },
 });
 

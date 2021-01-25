@@ -22,21 +22,22 @@ const Groceries = () => {
   const [inputText, setInputText] = useState("");
   const [list, setList] = useState(groceryData.groceries);
   const inputField = useRef(null);
+  const [inputFocused, setInputFocused] = useState();
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior="padding"
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={10}
       >
-        <Header inputField={inputField} />
+        <Header inputFocused={inputFocused} setInputFocused={setInputFocused} />
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView
             style={styles.listContainer}
             keyboardShouldPersistTaps="always"
           >
-            {RenderList(list, setList)}
+            {RenderList(list, setList, inputFocused, setInputFocused)}
 
             <View style={styles.inputContainer}>
               <TextInput
@@ -44,10 +45,12 @@ const Groceries = () => {
                 onChangeText={(text) => setInputText(text)}
                 value={inputText}
                 ref={inputField}
+                onFocus={() => setInputFocused(true)}
                 returnKeyType="done"
                 placeholder="Add Item"
                 //blurOnSubmit={false}
                 onBlur={() => {
+                  setInputFocused(false);
                   inputText &&
                     setList(
                       [
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     width: "100%",
-    paddingTop: 65,
+    paddingTop: 75,
   },
 
   inputContainer: {

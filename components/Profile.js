@@ -18,7 +18,7 @@ function Header({ data }) {
   const navigation = useNavigation();
   return (
     <LinearGradient
-      colors={["#fff", "rgba(255, 255, 255, .9)"]}
+      colors={["#fff", "rgba(255, 255, 255, .8)"]}
       start={[0, 0]}
       end={[0, 1]}
       style={[styles.headerContainer]}
@@ -126,9 +126,9 @@ const styles = StyleSheet.create({
   },
   usernameText: {
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "AvenirNextBold",
-    color: "#464646",
+    color: "#313131",
   },
   fullNameText: {
     textAlign: "center",

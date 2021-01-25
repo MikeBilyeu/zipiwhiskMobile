@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 
-const RenderList = (list, setList) =>
+const RenderList = (list, setList, inputFocused, setInputFocused) =>
   list.map((i, index) => (
     <TouchableOpacity activeOpacity={0.8} key={index} style={{ width: "100%" }}>
       <View style={styles.ingredientContainer}>
@@ -15,12 +15,14 @@ const RenderList = (list, setList) =>
           <TextInput
             key={i.id}
             style={styles.ingredientName}
+            onFocus={() => setInputFocused(true)}
             onChangeText={(text) => {
               let newList = [...list];
               newList[index].ingredient = text;
               setList(newList);
             }}
             onBlur={() => {
+              setInputFocused(false);
               !i.ingredient && setList(list.filter((item, i) => i != index));
             }}
             value={i.ingredient}
@@ -33,7 +35,6 @@ const RenderList = (list, setList) =>
       </View>
     </TouchableOpacity>
   ));
-
 const styles = StyleSheet.create({
   ingredientContainer: {
     flexDirection: "row",
