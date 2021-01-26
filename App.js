@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -13,6 +13,7 @@ import CreateRecipe from "./components/CreateRecipe";
 
 const Stack = createStackNavigator();
 const userToken = true;
+const screenWidth = Dimensions.get("screen").width;
 
 export default function App() {
   const [loaded] = useFonts({
@@ -35,6 +36,9 @@ export default function App() {
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
+              gestureResponseDistance: {
+                horizontal: screenWidth,
+              },
             }}
           >
             <Stack.Screen name="Home" component={Nav} />
