@@ -1,10 +1,62 @@
-import React from "react";
-import { StyleSheet, View, Text, Dimensions, Image } from "react-native";
+import React, { useRef, useEffect } from "react";
 
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  Image,
+  Animated,
+} from "react-native";
+import Svg, { G, Circle } from "react-native-svg";
+
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const screenHeight = Dimensions.get("screen").height;
 const screenWidth = Dimensions.get("screen").width;
 
-const NutritionFacts = ({ data }) => {
+const NutritionFacts = ({
+  data,
+  percentage = 10,
+  radius = (screenWidth - 50) / 2,
+  strokeWidth = 15,
+  duration = 700,
+  delay = 100,
+  textColor,
+  max = 100,
+}) => {
+  const AnimatedValue = useRef(new Animated.Value(0)).current;
+  const circleRef = useRef();
+  const halfCircle = radius + strokeWidth;
+  const circleCircumfrence = 2 * Math.PI * radius;
+
+  const strokeDashoffset = circleCircumfrence - (circleCircumfrence * 22) / 100;
+
+  // const animation = (toValue) => {
+  //   return Animated.timing(AnimatedValue, {
+  //     toValue,
+  //     duration,
+  //     delay,
+  //     useNativeDriver: true,
+  //   }).start(() => {
+  //     animation(toValue === 0 ? percentage : 0);
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   animation(percentage);
+
+  //   AnimatedValue.addListener((v) => {
+  //     if (circleRef?.current) {
+  //       const maxPerc = (100 * v.value) / max;
+  //       const strokeDashoffset =
+  //         circleCircumfrence - (circleCircumfrence * maxPerc) / 100;
+
+  //       circleRef.current.setNativeProps({
+  //         strokeDashoffset,
+  //       });
+  //     }
+  //   });
+  // });
   return (
     <View style={styles.container}>
       <View style={styles.titleConatainer}>
@@ -13,8 +65,71 @@ const NutritionFacts = ({ data }) => {
       </View>
 
       <View style={styles.caloriesContainer}>
-        <Text style={styles.caloriesNum}>{data.nutrition.calories}</Text>
-        <Text style={styles.caloriesText}>Calories</Text>
+        <View style={{ position: "absolute" }}>
+          <Text style={styles.caloriesNum}>{data.nutrition.calories}</Text>
+          <Text style={styles.caloriesText}>Calories</Text>
+        </View>
+
+        <Svg
+          width={radius * 2}
+          height={radius * 2}
+          viewBox={`0 0 ${halfCircle * 2} ${halfCircle * 2}`}
+        >
+          <G rotation="-90" origin={(halfCircle, halfCircle)}>
+            <Circle
+              cx="50%"
+              cy="50%"
+              stroke="#F2F2F2"
+              strokeWidth={strokeWidth}
+              r={radius}
+              fill="transparent"
+            />
+
+            <AnimatedCircle
+              //Carbs
+              ref={circleRef}
+              cx="50%"
+              cy="50%"
+              stroke="#01C481"
+              strokeWidth={strokeWidth}
+              r={radius}
+              fill="transparent"
+              strokeDasharray={circleCircumfrence}
+              strokeDashoffset={0}
+            />
+
+            <AnimatedCircle
+              //Fats
+              ref={circleRef}
+              cx="50%"
+              cy="50%"
+              stroke="#ED8C38"
+              strokeWidth={strokeWidth}
+              r={radius}
+              fill="transparent"
+              strokeDasharray={circleCircumfrence}
+              strokeDashoffset={
+                circleCircumfrence -
+                (circleCircumfrence * (22.72 + 18.18)) / 100
+              }
+            />
+
+            <AnimatedCircle
+              //Protien
+              ref={circleRef}
+              cx="50%"
+              cy="50%"
+              stroke="#3870ED"
+              strokeWidth={strokeWidth}
+              r={radius}
+              fill="transparent"
+              strokeDasharray={circleCircumfrence}
+              strokeDashoffset={
+                circleCircumfrence - (circleCircumfrence * 18.18) / 100
+              }
+            />
+          </G>
+        </Svg>
       </View>
 
       <View style={styles.macrosContainer}>
@@ -62,20 +177,23 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   caloriesContainer: {
-    borderWidth: 12,
-    borderColor: "#3870ED",
-    backgroundColor: "transparent",
-
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
-
-    borderRadius: 300,
-    width: screenWidth - 50,
-    height: screenWidth - 50,
+    //borderWidth: 5,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
+
+    // borderWidth: 12,
+    // borderColor: "#3870ED",
+    // backgroundColor: "transparent",
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 3 },
+    // shadowOpacity: 0.4,
+    // shadowRadius: 5,
+    // borderRadius: 300,
+    // width: screenWidth - 50,
+    // height: screenWidth - 50,
+    // alignItems: "center",
+    // justifyContent: "center",
   },
   caloriesNum: {
     shadowOpacity: 0,
