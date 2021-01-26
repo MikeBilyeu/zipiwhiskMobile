@@ -9,7 +9,7 @@ import { useFonts } from "expo-font";
 import Auth from "./components/Auth";
 import Nav from "./components/Nav";
 import RecipeScreen from "./components/RecipeScreen/RecipeScreen";
-import CreateRecipe from "./components/CreateRecipe";
+import CreateRecipeScreen from "./components/CreateRecipeScreen/CreateRecipeScreen";
 
 const Stack = createStackNavigator();
 const userToken = true;
@@ -43,7 +43,7 @@ export default function App() {
           >
             <Stack.Screen name="Home" component={Nav} />
             <Stack.Screen name="Recipe" component={RecipeScreen} />
-            <Stack.Screen name="CreateRecipe" component={CreateRecipe} />
+            <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
           </Stack.Navigator>
         )}
       </NavigationContainer>

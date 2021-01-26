@@ -1,14 +1,25 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Image,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
+import Input from "./Input";
 
 function Header() {
   const navigation = useNavigation();
   return (
     <View style={styles.headerContainer}>
       <Image
-        source={require("../assets/zipiwhisk.png")}
+        source={require("../../assets/zipiwhisk.png")}
         style={{ width: 70, height: 15 }}
       />
 
@@ -19,7 +30,7 @@ function Header() {
           style={styles.headerBtn}
         >
           <Image
-            source={require("../assets/arrow.png")}
+            source={require("../../assets/arrow.png")}
             style={{ width: 20, height: 20, transform: [{ rotate: "90deg" }] }}
           />
         </TouchableOpacity>
@@ -39,10 +50,41 @@ function Header() {
     </View>
   );
 }
-function CreateRecipe() {
+function CreateRecipeScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={10}
+      >
+        <Header />
+        <ScrollView style={styles.listContainer}>
+          <Input name="Recipe Name" placeholder="Add a recipe name..." />
+          <Input
+            name="Servings"
+            placeholder="Add # servings..."
+            keyboardType="number-pad"
+            returnKeyType="done"
+          />
+          <Input
+            name="Ingredients"
+            placeholder="Add ingredients..."
+            info="(one ingredient per line)"
+          />
+          <Input
+            name="Instructions"
+            placeholder="Add instructions..."
+            info="(one step per paragraph)"
+          />
+          <Input name="Total Time" placeholder="Add total time..." />
+          <Input
+            name="Keywords"
+            placeholder="Add keywords..."
+            info="(separate with comma)"
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -71,9 +113,12 @@ const styles = StyleSheet.create({
     height: 60,
     justifyContent: "center",
     alignItems: "center",
+    flex: 2,
   },
 
-  titleWrapper: {},
+  titleWrapper: {
+    flex: 8,
+  },
 
   titleText: {
     textAlign: "center",
@@ -93,9 +138,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#0172C4",
   },
-  list: {
+  listContainer: {
     flex: 1,
   },
 });
 
-export default CreateRecipe;
+export default CreateRecipeScreen;
