@@ -80,6 +80,7 @@ function Profile() {
         <Header data={userData} />
         <FlatList
           style={styles.listContainer}
+          contentContainerStyle={{ paddingTop: 130 }}
           data={data}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
@@ -156,7 +157,6 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     width: "100%",
-    paddingTop: 130,
   },
 });
 

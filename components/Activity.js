@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     width: "100%",
-    paddingTop: 75,
   },
 });
 

@@ -58,30 +58,30 @@ const Groceries = () => {
         />
         <ScrollView
           style={styles.listContainer}
+          contentContainerStyle={{ paddingTop: 75, flexGrow: 1 }}
           keyboardShouldPersistTaps="always"
         >
           {RenderList(list, setList, inputFocused, setInputFocused)}
 
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.inputText}
-              multiline
-              scrollEnabled={false}
-              onChangeText={(text) => setInputText(text)}
-              value={inputText}
-              ref={inputField}
-              onFocus={() => setInputFocused(true)}
-              returnKeyType="done"
-              placeholder="Add Item"
-              blurOnSubmit={true}
-              onBlur={onSubmit}
-              onSubmitEditing={onSubmit}
-            />
-          </View>
+          <TextInput
+            style={styles.inputText}
+            multiline
+            scrollEnabled={false}
+            onChangeText={(text) => setInputText(text)}
+            value={inputText}
+            ref={inputField}
+            onFocus={() => setInputFocused(true)}
+            returnKeyType="done"
+            placeholder="Add Item"
+            blurOnSubmit={true}
+            onBlur={onSubmit}
+            onSubmitEditing={onSubmit}
+          />
 
           <TouchableOpacity
             style={styles.addItemBtn}
-            onPress={inputField.current?.focus}
+            activeOpacity={1}
+            onPress={() => inputField.current.focus()}
           ></TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -98,12 +98,8 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     width: "100%",
-    paddingTop: 75,
   },
 
-  inputContainer: {
-    width: "90%",
-  },
   inputText: {
     fontSize: 18,
     fontFamily: "AvenirNextRegular",
@@ -115,8 +111,9 @@ const styles = StyleSheet.create({
   },
 
   addItemBtn: {
-    height: "100%",
+    flex: 1,
     minHeight: 300,
+    width: "100%",
   },
 });
 

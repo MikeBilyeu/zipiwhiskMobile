@@ -39,6 +39,7 @@ function Bookmarks() {
         <Header />
         <FlatList
           style={styles.listContainer}
+          contentContainerStyle={{ paddingTop: 75 }}
           data={data}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
@@ -80,7 +81,6 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     width: "100%",
-    paddingTop: 75,
   },
 });
 
