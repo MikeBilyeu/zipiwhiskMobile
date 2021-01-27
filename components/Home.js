@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useSate, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,10 +10,11 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
+import SearchDropDown from "./SearchDropDown";
 import RecipeCard from "./RecipeCard";
 import data from "../data";
 
-function Header() {
+function Header({ dropDownOpen, toggleDropDown }) {
   return (
     <LinearGradient
       colors={["#fff", "rgba(255, 255, 255, .8)"]}
@@ -26,7 +27,7 @@ function Header() {
         style={{ width: 70, height: 15 }}
       />
       <TouchableOpacity
-        onPress={null}
+        onPress={toggleDropDown}
         activeOpacity={0.8}
         style={styles.searchBtn}
       >
@@ -37,19 +38,26 @@ function Header() {
         <Text style={styles.searchBtnText}>{"Categories"}</Text>
         <Image
           source={require("../assets/arrow.png")}
-          style={{ width: 15, height: 15 }}
+          style={[
+            { width: 15, height: 15 },
+            dropDownOpen && { transform: [{ rotate: "180deg" }] },
+          ]}
         />
       </TouchableOpacity>
     </LinearGradient>
   );
 }
 function Home() {
+  const [dropDownOpen, setDropDownOpen] = useState(false);
+  const toggleDropDown = () => setDropDownOpen(!dropDownOpen);
+
   const renderItem = ({ item }) => <RecipeCard data={item} />;
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flex: 1 }}>
-        <Header />
+        <Header toggleDropDown={toggleDropDown} dropDownOpen={dropDownOpen} />
+        {dropDownOpen && <SearchDropDown />}
         <FlatList
           style={styles.listContainer}
           contentContainerStyle={{ paddingTop: 75 }}
@@ -74,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     position: "absolute",
-    zIndex: 1,
+    zIndex: 2,
   },
   searchBtn: {
     width: "100%",

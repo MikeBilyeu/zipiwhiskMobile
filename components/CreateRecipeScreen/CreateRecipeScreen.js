@@ -13,6 +13,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 import Input from "./Input";
+import Categories from "./Categories";
 
 function Header() {
   const navigation = useNavigation();
@@ -83,6 +84,7 @@ function CreateRecipeScreen() {
             placeholder="Add keywords..."
             info="(separate with comma)"
           />
+          <Categories />
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
