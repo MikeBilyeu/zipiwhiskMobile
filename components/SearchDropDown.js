@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Animated,
+  Easing,
 } from "react-native";
 
 const CategoryBtn = ({ name }) => {
@@ -24,6 +25,7 @@ const SearchDropDown = ({ dropDownOpen }) => {
 
   const dropDownValue = useRef(new Animated.Value(-600)).current;
   const opacityValue = useRef(new Animated.Value(0)).current;
+  const backgroudnopacityValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (dropDownOpen && !mount) {
@@ -33,22 +35,34 @@ const SearchDropDown = ({ dropDownOpen }) => {
         friction: 8,
         useNativeDriver: true,
       }).start();
+
       Animated.timing(opacityValue, {
         toValue: 1,
-        duration: 300,
-        delay: 100,
+        duration: 250,
+        delay: 200,
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(backgroudnopacityValue, {
+        toValue: 0.6,
+        duration: 400,
         useNativeDriver: true,
       }).start();
     }
     if (!dropDownOpen && mount) {
       Animated.timing(opacityValue, {
         toValue: 0,
+        duration: 1,
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(backgroudnopacityValue, {
+        toValue: 0,
         duration: 200,
         useNativeDriver: true,
       }).start();
       Animated.timing(dropDownValue, {
         toValue: -600,
-        duration: 300,
+        duration: 200,
+        delay: 100,
         useNativeDriver: true,
       }).start(() => setMount(false));
     }
@@ -60,10 +74,7 @@ const SearchDropDown = ({ dropDownOpen }) => {
 
   const opacityAnimationStyle = { opacity: opacityValue };
   const darkBackgroundAnimationStye = {
-    opacity: opacityValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 0.5],
-    }),
+    opacity: backgroudnopacityValue,
   };
 
   return (
@@ -104,9 +115,9 @@ const SearchDropDown = ({ dropDownOpen }) => {
                   <CategoryBtn name="Beverage" />
                 </View>
               </Animated.View>
-              <Image
+              <Animated.Image
                 source={require("../assets/line.png")}
-                style={{ width: 60, height: 4 }}
+                style={[{ width: 60, height: 4 }, opacityAnimationStyle]}
               />
             </>
           )}
@@ -135,7 +146,7 @@ const styles = StyleSheet.create({
   dropDown: {
     paddingTop: 85,
     paddingBottom: 15,
-    backgroundColor: "#FFF",
+    backgroundColor: "#fff",
     width: "100%",
     height: 500,
     borderBottomRightRadius: 20,

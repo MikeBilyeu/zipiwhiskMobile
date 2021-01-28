@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, View, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useFonts } from "expo-font";
 
@@ -27,7 +28,7 @@ export default function App() {
     return null;
   }
   return (
-    <View style={styles.container}>
+    <SafeAreaProvider style={styles.container}>
       <StatusBar barStyle="auto" />
       <NavigationContainer>
         {!userToken ? (
@@ -47,7 +48,7 @@ export default function App() {
           </Stack.Navigator>
         )}
       </NavigationContainer>
-    </View>
+    </SafeAreaProvider>
   );
 }
 

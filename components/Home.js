@@ -3,11 +3,11 @@ import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
   FlatList,
   Image,
   TouchableOpacity,
   Animated,
+  SafeAreaView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -82,22 +82,19 @@ function Home() {
   const renderItem = ({ item }) => <RecipeCard data={item} />;
 
   return (
-    <>
-      <SafeAreaView style={{ flex: 0, backgroundColor: "#fff", zIndex: 1 }} />
-      <SafeAreaView style={styles.container}>
-        <View style={{ flex: 1 }}>
-          <Header toggleDropDown={toggleDropDown} dropDownOpen={dropDownOpen} />
-          <SearchDropDown dropDownOpen={dropDownOpen} />
-          <FlatList
-            style={styles.listContainer}
-            contentContainerStyle={{ paddingTop: 75 }}
-            data={data}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id.toString()}
-          />
-        </View>
-      </SafeAreaView>
-    </>
+    <SafeAreaView style={styles.container}>
+      <View style={{ flex: 1 }}>
+        <Header toggleDropDown={toggleDropDown} dropDownOpen={dropDownOpen} />
+        <SearchDropDown dropDownOpen={dropDownOpen} />
+        <FlatList
+          style={styles.listContainer}
+          contentContainerStyle={{ paddingTop: 75 }}
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 
