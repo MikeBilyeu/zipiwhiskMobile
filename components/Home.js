@@ -1,4 +1,4 @@
-import React, { useSate, useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,6 +7,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Animated,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -15,6 +16,33 @@ import RecipeCard from "./RecipeCard";
 import data from "../data";
 
 function Header({ dropDownOpen, toggleDropDown }) {
+  const rotateValue = useRef(new Animated.Value(0)).current;
+
+  const rotateAnimation = () => {
+    if (dropDownOpen) {
+      Animated.timing(rotateValue, {
+        toValue: 0,
+        duration: 100,
+        useNativeDriver: true,
+      }).start();
+    } else if (!dropDownOpen) {
+      Animated.timing(rotateValue, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
+
+  const rotateValueInterpolate = rotateValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "180deg"],
+  });
+
+  const rotateAnimationStyle = {
+    transform: [{ rotate: rotateValueInterpolate }],
+  };
+
   return (
     <LinearGradient
       colors={["#fff", "rgba(255, 255, 255, .8)"]}
@@ -27,7 +55,10 @@ function Header({ dropDownOpen, toggleDropDown }) {
         style={{ width: 70, height: 15 }}
       />
       <TouchableOpacity
-        onPress={toggleDropDown}
+        onPress={() => {
+          rotateAnimation();
+          toggleDropDown();
+        }}
         activeOpacity={0.8}
         style={styles.searchBtn}
       >
@@ -35,13 +66,10 @@ function Header({ dropDownOpen, toggleDropDown }) {
           source={require("../assets/search.png")}
           style={{ width: 20, height: 20 }}
         />
-        <Text style={styles.searchBtnText}>{"Categories"}</Text>
-        <Image
+        <Text style={styles.searchBtnText}>{"Search"}</Text>
+        <Animated.Image
           source={require("../assets/arrow.png")}
-          style={[
-            { width: 15, height: 15 },
-            dropDownOpen && { transform: [{ rotate: "180deg" }] },
-          ]}
+          style={[{ width: 15, height: 15 }, rotateAnimationStyle]}
         />
       </TouchableOpacity>
     </LinearGradient>
@@ -54,19 +82,22 @@ function Home() {
   const renderItem = ({ item }) => <RecipeCard data={item} />;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ flex: 1 }}>
-        <Header toggleDropDown={toggleDropDown} dropDownOpen={dropDownOpen} />
-        {dropDownOpen && <SearchDropDown />}
-        <FlatList
-          style={styles.listContainer}
-          contentContainerStyle={{ paddingTop: 75 }}
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      </View>
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={{ flex: 0, backgroundColor: "#fff", zIndex: 1 }} />
+      <SafeAreaView style={styles.container}>
+        <View style={{ flex: 1 }}>
+          <Header toggleDropDown={toggleDropDown} dropDownOpen={dropDownOpen} />
+          <SearchDropDown dropDownOpen={dropDownOpen} />
+          <FlatList
+            style={styles.listContainer}
+            contentContainerStyle={{ paddingTop: 75 }}
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 

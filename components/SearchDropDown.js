@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Animated,
 } from "react-native";
 
 const CategoryBtn = ({ name }) => {
@@ -16,44 +17,102 @@ const CategoryBtn = ({ name }) => {
   );
 };
 
-const SearchDropDown = () => {
+const SearchDropDown = ({ dropDownOpen }) => {
   const [search, setSearch] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
+  const [mount, setMount] = useState(false);
+
+  const dropDownValue = useRef(new Animated.Value(-600)).current;
+  const opacityValue = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (dropDownOpen && !mount) {
+      setMount(true);
+      Animated.spring(dropDownValue, {
+        toValue: -10,
+        friction: 8,
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(opacityValue, {
+        toValue: 1,
+        duration: 300,
+        delay: 100,
+        useNativeDriver: true,
+      }).start();
+    }
+    if (!dropDownOpen && mount) {
+      Animated.timing(opacityValue, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(dropDownValue, {
+        toValue: -600,
+        duration: 300,
+        useNativeDriver: true,
+      }).start(() => setMount(false));
+    }
+  });
+
+  const dropDownAnimationStyle = {
+    transform: [{ translateY: dropDownValue }],
+  };
+
+  const opacityAnimationStyle = { opacity: opacityValue };
+  const darkBackgroundAnimationStye = {
+    opacity: opacityValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 0.5],
+    }),
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.dropDown}>
-        <View style={styles.searchWrapper}>
-          <Image
-            source={require("../assets/search.png")}
-            style={styles.searchIcon}
-          />
-          <TextInput
-            style={styles.searchText}
-            placeholder="Search"
-            returnKeyType="search"
-            defaultValue={search}
-            onChangeText={(text) => setSearch(text)}
-          />
-        </View>
-
-        <View style={styles.categoryContainer}>
-          <TextInput editable={false} style={styles.containerTitle}>
-            Categories
-          </TextInput>
-          <View style={styles.btnContainer}>
-            <CategoryBtn name="Breakfast" />
-            <CategoryBtn name="Lunch" />
-            <CategoryBtn name="Dinner" />
-            <CategoryBtn name="Dessert" />
-            <CategoryBtn name="Beverage" />
-          </View>
-        </View>
-        <Image
-          source={require("../assets/line.png")}
-          style={{ width: 60, height: 4 }}
+    mount && (
+      <View style={styles.container}>
+        <Animated.View
+          style={[styles.darkBackground, darkBackgroundAnimationStye]}
         />
+        <Animated.View style={[styles.dropDown, dropDownAnimationStyle]}>
+          <Animated.View style={[styles.searchWrapper, opacityAnimationStyle]}>
+            <Image
+              source={require("../assets/search.png")}
+              style={[styles.searchIcon]}
+            />
+            <TextInput
+              style={styles.searchText}
+              placeholder="Search"
+              returnKeyType="search"
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              defaultValue={search}
+              onChangeText={(text) => setSearch(text)}
+            />
+          </Animated.View>
+          {!isFocused && (
+            <>
+              <Animated.View
+                style={[styles.categoryContainer, opacityAnimationStyle]}
+              >
+                <TextInput editable={false} style={styles.containerTitle}>
+                  Categories
+                </TextInput>
+                <View style={styles.btnContainer}>
+                  <CategoryBtn name="Breakfast" />
+                  <CategoryBtn name="Lunch" />
+                  <CategoryBtn name="Dinner" />
+                  <CategoryBtn name="Dessert" />
+                  <CategoryBtn name="Beverage" />
+                </View>
+              </Animated.View>
+              <Image
+                source={require("../assets/line.png")}
+                style={{ width: 60, height: 4 }}
+              />
+            </>
+          )}
+        </Animated.View>
       </View>
-    </View>
+    )
   );
 };
 
@@ -62,13 +121,19 @@ const styles = StyleSheet.create({
     flex: 1,
     position: "absolute",
     zIndex: 1,
-    backgroundColor: "rgba(0,0,0,.55)",
     width: "100%",
     height: "100%",
     alignItems: "center",
   },
+  darkBackground: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgb(0,0,0)",
+    opacity: 0.5,
+    position: "absolute",
+  },
   dropDown: {
-    paddingTop: 75,
+    paddingTop: 85,
     paddingBottom: 15,
     backgroundColor: "#FFF",
     width: "100%",
@@ -77,6 +142,10 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     alignItems: "center",
     paddingHorizontal: 10,
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 50 },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 10,
   },
   searchWrapper: {
     width: "100%",

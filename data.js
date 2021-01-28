@@ -6,7 +6,7 @@ const data = [
     title: "Peanut Butter Banana Smoothie",
     user: {
       image: "https://randomuser.me/api/portraits/men/5.jpg",
-      username: "BillyBob",
+      username: "billybob",
     },
     recipeImage:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140916/Recipes/lp4ypoiaoqkvvzkp7qk5.jpg",
