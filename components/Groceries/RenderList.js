@@ -4,17 +4,30 @@ import {
   View,
   TextInput,
   Image,
+  Text,
   StyleSheet,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Swipeable } from "react-native-gesture-handler";
 
+const RightAction = (removeItem) => (
+  <TouchableOpacity
+    activeOpacity={0.6}
+    underlayColor="#DDDDDD"
+    style={styles.rightContainer}
+    onPress={removeItem}
+  >
+    <Text style={styles.rightText}>Remove</Text>
+  </TouchableOpacity>
+);
 const RenderList = (list, setList, inputFocused, setInputFocused) =>
   list.map((i, index) => {
     const onSubmit = () => {
       setInputFocused(false);
       //this will remove empty textinput
-      !i.ingredient && setList(list.filter((item, i) => i != index));
+      !i.ingredient && removeItem();
     };
+    const removeItem = () => setList(list.filter((item, i) => i != index));
 
     onRadioPress = () => {
       let newList = [...list];
@@ -23,7 +36,11 @@ const RenderList = (list, setList, inputFocused, setInputFocused) =>
     };
 
     return (
-      <View activeOpacity={0.8} key={i.id} style={{ width: "100%" }}>
+      <Swipeable
+        renderRightActions={() => RightAction(removeItem)}
+        key={i.id}
+        style={{ width: "100%", borderWdith: 5 }}
+      >
         <View style={styles.ingredientContainer}>
           <TouchableOpacity style={styles.radioBtn} onPress={onRadioPress}>
             <Ionicons
@@ -57,13 +74,14 @@ const RenderList = (list, setList, inputFocused, setInputFocused) =>
 
           {/* <Image source={{ uri: i.image }} style={styles.ingredientImage} /> */}
         </View>
-      </View>
+      </Swipeable>
     );
   });
 const styles = StyleSheet.create({
   ingredientContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    backgroundColor: "#fff",
   },
   ingredientWrapper: {
     justifyContent: "space-between",
@@ -98,6 +116,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "AvenirNextRegular",
     color: "#707070",
+  },
+  rightContainer: {
+    width: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#DE4949",
+    marginHorizontal: 5,
+    marginVertical: 0.5,
+  },
+  rightText: {
+    fontFamily: "AvenirNextDemiBold",
+    fontSize: 18,
+    color: "#fff",
   },
 });
 
