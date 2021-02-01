@@ -3,19 +3,20 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Text,
   TextInput,
   Image,
-  Keyboard,
   Dimensions,
+  SafeAreaView,
+  FlatList,
 } from "react-native";
 import moment from "moment";
+import data from "../data.js";
 
 const screenWidth = Dimensions.get("screen").width;
 
-const renderList = (list) => {
-  return list.map((c) => (
+const Item = ({ c }) => {
+  return (
     <View
       key={c.id.toString()}
       style={[
@@ -59,8 +60,8 @@ const renderList = (list) => {
             <Image
               source={
                 c.liked
-                  ? require("../../assets/redLike.png")
-                  : require("../../assets/greyLike.png")
+                  ? require("../assets/redLike.png")
+                  : require("../assets/greyLike.png")
               }
               style={{ width: 10, height: 10, marginHorizontal: 5 }}
             />
@@ -73,46 +74,63 @@ const renderList = (list) => {
           <Text style={[styles.infoText, styles.replyBtnText]}>Reply</Text>
         </TouchableOpacity>
       </View>
-      {c.childComments && !c.parent_comment_id && renderList(c.childComments)}
+      {c.childComments &&
+        !c.parent_comment_id &&
+        c.childComments.map((item) => <Item c={item} />)}
     </View>
-  ));
+  );
 };
 
-const Comments = ({ data }) => {
-  const [text, setText] = useState("");
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Comments</Text>
-      <View style={styles.inputContainer}>
-        <Image
-          source={{ uri: "https://randomuser.me/api/portraits/men/15.jpg" }}
-          style={styles.icon}
-        />
-        <TextInput
-          style={styles.textInput}
-          onChangeText={(text) => setText(text)}
-          value={text}
-          clearButtonMode="never"
-          selectionColor="#464646"
-          placeholder="Add a Comment..."
-        />
-        <TouchableOpacity style={styles.postBtn}>
-          <Text style={styles.postBtnText}>Post</Text>
-        </TouchableOpacity>
-      </View>
+const renderItem = ({ item }) => {
+  return <Item c={item} />;
+};
 
-      <View style={styles.commentsContainer}>{renderList(data.comments)}</View>
-    </View>
+const Comments = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.wrapper}>
+        <View style={styles.inputContainer}>
+          <Image
+            source={{ uri: "https://randomuser.me/api/portraits/men/15.jpg" }}
+            style={styles.icon}
+          />
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(text) => setText(text)}
+            value={text}
+            clearButtonMode="never"
+            selectionColor="#464646"
+            placeholder="Add a Comment..."
+          />
+          <TouchableOpacity style={styles.postBtn}>
+            <Text style={styles.postBtnText}>Post</Text>
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          data={data[0].comments}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 100,
     paddingHorizontal: 10,
     flex: 1,
     alignItems: "center",
     width: "100%",
+    backgroundColor: "#FFF",
+  },
+  wrapper: {
+    paddingHorizontal: 10,
+    paddingTop: 25,
+    width: "100%",
+    flex: 1,
   },
   title: {
     fontFamily: "AvenirNextDemiBold",

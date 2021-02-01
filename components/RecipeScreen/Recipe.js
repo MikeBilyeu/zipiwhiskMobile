@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   Animated,
+  Share,
 } from "react-native";
 
 import Header from "./Header";
@@ -13,13 +14,33 @@ import Footer from "./Footer";
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 import NutritionFacts from "./NutritionFacts";
-import Comments from "./Comments";
 
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
 const Recipe = ({ data }) => {
   const yValue = useRef(new Animated.Value(0)).current;
+
+  const onShare = async (d) => {
+    try {
+      const result = await Share.share({
+        message: `${data.title} | ZipiWhisk`,
+        url: null,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   let scrollInterpolate = yValue.interpolate({
     inputRange: [0, 1],
@@ -54,7 +75,7 @@ const Recipe = ({ data }) => {
       )}
       style={[styles.RecipeScrollView]}
     >
-      <Header styles={animatedHeaderStyle} />
+      <Header styles={animatedHeaderStyle} onShare={onShare} />
       <Footer
         numLikes={data.numLikes}
         numComments={data.numComments}
@@ -94,8 +115,6 @@ const Recipe = ({ data }) => {
         <Instructions data={data} />
 
         <NutritionFacts data={data} />
-
-        <Comments data={data} />
       </View>
     </Animated.ScrollView>
   );
@@ -132,7 +151,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderTopLeftRadius: 35,
     borderTopRightRadius: 35,
-    paddingVertical: 50,
+    paddingTop: 50,
+    paddingBottom: 10,
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",

@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const Header = (props) => {
   const navigation = useNavigation();
+
   return (
     <Animated.View style={[styles.headerConatiner, props.styles]}>
       <LinearGradient
@@ -25,7 +26,7 @@ const Header = (props) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={null}
+          onPress={props.onShare}
           activeOpacity={0.4}
           style={styles.headerBtn}
         >

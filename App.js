@@ -10,6 +10,7 @@ import { useFonts } from "expo-font";
 import Auth from "./components/Auth";
 import Nav from "./components/Nav";
 import RecipeScreen from "./components/RecipeScreen/RecipeScreen";
+import Comments from "./components/Comments";
 import CreateRecipeScreen from "./components/CreateRecipeScreen/CreateRecipeScreen";
 
 const Stack = createStackNavigator();
@@ -36,15 +37,27 @@ export default function App() {
         ) : (
           <Stack.Navigator
             screenOptions={{
-              headerShown: false,
               gestureResponseDistance: {
                 horizontal: screenWidth,
               },
             }}
           >
-            <Stack.Screen name="Home" component={Nav} />
-            <Stack.Screen name="Recipe" component={RecipeScreen} />
-            <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
+            <Stack.Screen
+              name="Home"
+              options={{ headerShown: false }}
+              component={Nav}
+            />
+            <Stack.Screen
+              name="Recipe"
+              options={{ headerShown: false }}
+              component={RecipeScreen}
+            />
+            <Stack.Screen name="Comments" component={Comments} />
+            <Stack.Screen
+              name="CreateRecipe"
+              options={{ headerShown: false }}
+              component={CreateRecipeScreen}
+            />
           </Stack.Navigator>
         )}
       </NavigationContainer>

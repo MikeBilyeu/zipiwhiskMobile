@@ -9,12 +9,14 @@ import {
   Dimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 import { parseNum } from "../utils";
 
 const screenHeight = Dimensions.get("screen").height;
 
 const Footer = (props) => {
+  const navigation = useNavigation();
   return (
     <Animated.View style={[styles.footerConatiner, props.styles]}>
       <LinearGradient
@@ -45,7 +47,7 @@ const Footer = (props) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={null}
+            onPress={() => navigation.navigate("Comments")}
             activeOpacity={0.4}
             style={styles.footerBtn}
           >
@@ -72,7 +74,7 @@ const Footer = (props) => {
 
         <View style={styles.footerBtnContainer}>
           <TouchableOpacity
-            onPress={null}
+            onPress={() => navigation.navigate("CreateRecipe")}
             activeOpacity={0.4}
             style={[styles.footerBtn, { flex: 0.25 }]}
           >

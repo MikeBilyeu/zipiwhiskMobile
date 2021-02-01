@@ -36,7 +36,7 @@ const Ingredients = (props) => {
           value={servings}
           selectionColor="#464646"
           returnKeyType="done"
-          keyboardType="numeric"
+          keyboardType="number-pad"
         />
         <Text pointerEvents="none" style={styles.servingsText}>
           Servings

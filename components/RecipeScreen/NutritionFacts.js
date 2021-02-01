@@ -90,7 +90,7 @@ const NutritionFacts = ({
               ref={circleRef}
               cx="50%"
               cy="50%"
-              stroke="#01C481"
+              stroke="#3870ED"
               strokeWidth={strokeWidth}
               r={radius}
               fill="transparent"
@@ -103,7 +103,7 @@ const NutritionFacts = ({
               ref={circleRef}
               cx="50%"
               cy="50%"
-              stroke="#ED8C38"
+              stroke="#EF476F"
               strokeWidth={strokeWidth}
               r={radius}
               fill="transparent"
@@ -119,7 +119,7 @@ const NutritionFacts = ({
               ref={circleRef}
               cx="50%"
               cy="50%"
-              stroke="#3870ED"
+              stroke="#06D6A0"
               strokeWidth={strokeWidth}
               r={radius}
               fill="transparent"
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: screenHeight * 0.9,
     //paddingVertical: 50,
-    marginVertical: 50,
+    marginVertical: 25,
   },
   title: {
     fontFamily: "AvenirNextBold",
@@ -226,13 +226,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   protienColor: {
-    backgroundColor: "#3870ED",
+    backgroundColor: "#06D6A0",
   },
   fatColor: {
-    backgroundColor: "#ED8C38",
+    backgroundColor: "#EF476F",
   },
   carbColor: {
-    backgroundColor: "#01C481",
+    backgroundColor: "#3870ED",
   },
   macroText: {
     textAlign: "center",
