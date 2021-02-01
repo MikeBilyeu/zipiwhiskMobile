@@ -72,7 +72,7 @@ const Groceries = () => {
             placeholder="Add Item"
             blurOnSubmit={true}
             onBlur={onSubmit}
-            onSubmitEditing={onSubmit}
+            //onSubmitEditing={onSubmit}
           />
 
           <TouchableOpacity

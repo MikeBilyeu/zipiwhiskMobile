@@ -63,7 +63,7 @@ const RenderList = (list, setList, inputFocused, setInputFocused) =>
                 setList(newList);
               }}
               blurOnSubmit={true}
-              onSubmitEditing={onSubmit}
+              //onSubmitEditing={onSubmit}
               onBlur={onSubmit}
               value={i.ingredient}
               returnKeyType="done"
