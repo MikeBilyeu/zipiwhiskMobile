@@ -10,6 +10,8 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
+
+import ScreenHeader from "./ScreenHeader";
 import moment from "moment";
 import data from "../data.js";
 
@@ -85,11 +87,12 @@ const renderItem = ({ item }) => {
   return <Item c={item} />;
 };
 
-const Comments = () => {
+const Comments = (props) => {
   const [text, setText] = useState("");
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScreenHeader title="Comments" subTitle={props.route.params.title} />
       <View style={styles.wrapper}>
         <View style={styles.inputContainer}>
           <Image
@@ -104,14 +107,14 @@ const Comments = () => {
             selectionColor="#464646"
             placeholder="Add a Comment..."
           />
-          <TouchableOpacity style={styles.postBtn}>
+          {/* <TouchableOpacity style={styles.postBtn}>
             <Text style={styles.postBtnText}>Post</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <FlatList
           data={data[0].comments}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
         />
       </View>
     </SafeAreaView>
@@ -164,7 +167,8 @@ const styles = StyleSheet.create({
     color: "#313131",
     fontFamily: "AvenirNextRegular",
     height: 50,
-    paddingLeft: 55,
+    paddingLeft: 50,
+    paddingRight: 10,
     textAlign: "left",
   },
 

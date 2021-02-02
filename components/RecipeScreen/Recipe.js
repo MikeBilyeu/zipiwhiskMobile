@@ -77,6 +77,7 @@ const Recipe = ({ data }) => {
     >
       <Header styles={animatedHeaderStyle} onShare={onShare} />
       <Footer
+        title={data.title}
         numLikes={data.numLikes}
         numComments={data.numComments}
         userImage={data.user.image}
@@ -146,6 +147,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     width: screenWidth - 100,
     marginBottom: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
   },
   recipeScrollConatiner: {
     backgroundColor: "#FFF",

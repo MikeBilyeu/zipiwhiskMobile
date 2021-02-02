@@ -37,27 +37,16 @@ export default function App() {
         ) : (
           <Stack.Navigator
             screenOptions={{
+              headerShown: false,
               gestureResponseDistance: {
                 horizontal: screenWidth,
               },
             }}
           >
-            <Stack.Screen
-              name="Home"
-              options={{ headerShown: false }}
-              component={Nav}
-            />
-            <Stack.Screen
-              name="Recipe"
-              options={{ headerShown: false }}
-              component={RecipeScreen}
-            />
+            <Stack.Screen name="Home" component={Nav} />
+            <Stack.Screen name="Recipe" component={RecipeScreen} />
             <Stack.Screen name="Comments" component={Comments} />
-            <Stack.Screen
-              name="CreateRecipe"
-              options={{ headerShown: false }}
-              component={CreateRecipeScreen}
-            />
+            <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
           </Stack.Navigator>
         )}
       </NavigationContainer>

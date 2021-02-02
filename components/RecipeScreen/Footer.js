@@ -47,7 +47,9 @@ const Footer = (props) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("Comments")}
+            onPress={() =>
+              navigation.navigate("Comments", { title: props.title })
+            }
             activeOpacity={0.4}
             style={styles.footerBtn}
           >
