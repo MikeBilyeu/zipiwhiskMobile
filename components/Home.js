@@ -85,7 +85,7 @@ function Home() {
     <SafeAreaView style={styles.container}>
       <View style={{ flex: 1 }}>
         <Header toggleDropDown={toggleDropDown} dropDownOpen={dropDownOpen} />
-        <SearchDropDown dropDownOpen={dropDownOpen} />
+        <SearchDropDown dropDownOpen={dropDownOpen} height={75} />
         <FlatList
           style={styles.listContainer}
           contentContainerStyle={{ paddingTop: 75 }}

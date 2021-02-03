@@ -18,7 +18,7 @@ const CategoryBtn = ({ name }) => {
   );
 };
 
-const SearchDropDown = ({ dropDownOpen }) => {
+const SearchDropDown = ({ dropDownOpen, height }) => {
   const [search, setSearch] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [mount, setMount] = useState(false);
@@ -83,7 +83,13 @@ const SearchDropDown = ({ dropDownOpen }) => {
         <Animated.View
           style={[styles.darkBackground, darkBackgroundAnimationStye]}
         />
-        <Animated.View style={[styles.dropDown, dropDownAnimationStyle]}>
+        <Animated.View
+          style={[
+            styles.dropDown,
+            { paddingTop: height + 10, height: height + 425 },
+            dropDownAnimationStyle,
+          ]}
+        >
           <Animated.View style={[styles.searchWrapper, opacityAnimationStyle]}>
             <Image
               source={require("../assets/search.png")}
@@ -144,11 +150,11 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   dropDown: {
-    paddingTop: 85,
+    //paddingTop: 85,
     paddingBottom: 15,
     backgroundColor: "#fff",
     width: "100%",
-    height: 500,
+    //height: 500,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
     alignItems: "center",
