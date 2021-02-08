@@ -12,6 +12,7 @@ import Nav from "./components/Nav";
 import RecipeScreen from "./components/RecipeScreen/RecipeScreen";
 import Comments from "./components/Comments";
 import CreateRecipeScreen from "./components/CreateRecipeScreen/CreateRecipeScreen";
+import CameraScreen from "./components/CreateRecipeScreen/CameraScreen";
 
 const Stack = createStackNavigator();
 const userToken = true;
@@ -47,6 +48,7 @@ export default function App() {
             <Stack.Screen name="Recipe" component={RecipeScreen} />
             <Stack.Screen name="Comments" component={Comments} />
             <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
+            <Stack.Screen name="Camera" component={CameraScreen} />
           </Stack.Navigator>
         )}
       </NavigationContainer>

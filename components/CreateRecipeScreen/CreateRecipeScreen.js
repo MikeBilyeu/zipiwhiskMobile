@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
+  TouchableOpacity,
+  Image,
+  Text,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import ScreenHeader from "../ScreenHeader";
 import Input from "./Input";
 import Categories from "./Categories";
 
-function CreateRecipeScreen() {
+const CreateRecipeScreen = (props) => {
+  let imageUri = props.route.params?.imageUri;
+  const [imagePath, setImagePath] = useState(imageUri);
+  const navigation = useNavigation();
+  useEffect(() => {
+    setImagePath(imageUri);
+  }, [props.route.params]);
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -20,6 +30,14 @@ function CreateRecipeScreen() {
       >
         <ScreenHeader title="Create Recipe" subTitle="Recipe Info" />
         <ScrollView style={styles.listContainer}>
+          <TouchableOpacity
+            style={{ borderBottomWidth: 0.5, borderColor: "#E3E3E3" }}
+            onPress={() =>
+              navigation.navigate("Camera", { imageUri: imagePath })
+            }
+          >
+            <Image source={{ uri: imagePath }} style={styles.image} />
+          </TouchableOpacity>
           <Input name="Recipe Name" placeholder="Add a recipe name..." />
           <Input
             name="Servings"
@@ -48,12 +66,20 @@ function CreateRecipeScreen() {
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
+  },
+  image: {
+    backgroundColor: "#F2F2F2",
+    width: 300,
+    height: 175,
+    borderRadius: 10,
+    margin: 10,
+    alignSelf: "center",
   },
   listContainer: {
     flex: 1,

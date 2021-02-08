@@ -28,7 +28,8 @@
     "react-native-screens": "~2.15.0",
     "react-native-svg": "^12.1.0",
     "react-native-web": "~0.13.12",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "expo-camera": "~9.1.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

@@ -20,7 +20,6 @@ const screenWidth = Dimensions.get("screen").width;
 const Item = ({ c }) => {
   return (
     <View
-      key={c.id.toString()}
       style={[
         styles.userCommentContainer,
         c.parent_comment_id && styles.userCommentContainerChild,
@@ -84,7 +83,7 @@ const Item = ({ c }) => {
 };
 
 const renderItem = ({ item }) => {
-  return <Item c={item} />;
+  return <Item key={item.id.toString()} c={item} />;
 };
 
 const Comments = (props) => {
