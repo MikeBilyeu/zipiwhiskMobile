@@ -10,8 +10,15 @@ import {
 import { Camera, takePictureAsync } from "expo-camera";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import { connect } from "react-redux";
 
-const RenderCamera = ({ setImagePath }) => {
+import { changeImage } from "../../redux/actions/recipeForm";
+
+const mapStateToProps = (state) => ({
+  recipeForm: state.recipeForm,
+});
+
+const RenderCamera = connect(null, { changeImage })((props) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const flashIconName =
@@ -32,6 +39,13 @@ const RenderCamera = ({ setImagePath }) => {
       >
         <View style={styles.buttonContainer}>
           <Ionicons
+            onPress={() => navigation.goBack()}
+            name="ios-close"
+            size={30}
+            color="#FFF"
+            style={[styles.closeBtn, { left: 0 }]}
+          />
+          <Ionicons
             onPress={() => {
               setFlash(
                 flash === Camera.Constants.FlashMode.off
@@ -45,19 +59,12 @@ const RenderCamera = ({ setImagePath }) => {
             style={[styles.closeBtn, { right: null, left: null }]}
           />
 
-          <Ionicons
-            onPress={() => navigation.goBack()}
-            name="ios-close"
-            size={30}
-            color="#FFF"
-            style={[styles.closeBtn, { right: 0, left: null }]}
-          />
           <TouchableOpacity
             style={styles.CaptureBtnOuter}
             onPress={async () => {
               if (cameraRef) {
                 let photo = await cameraRef.current.takePictureAsync();
-                setImagePath(photo.uri);
+                props.changeImage(photo.uri);
               }
             }}
           >
@@ -67,44 +74,39 @@ const RenderCamera = ({ setImagePath }) => {
       </Camera>
     </View>
   );
-};
+});
 
-const RenderPreview = ({ imagePath, setImagePath }) => {
+const RenderPreview = connect(mapStateToProps, { changeImage })((props) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <StatusBar hidden />
-      <ImageBackground source={{ uri: imagePath }} style={styles.imagePreview}>
+      <ImageBackground
+        source={{ uri: props.recipeForm.imagePath }}
+        style={styles.imagePreview}
+      >
         <View style={styles.buttonContainer}>
           <Ionicons
-            onPress={() => setImagePath(null)}
+            onPress={() => props.changeImage(null)}
             name="ios-close"
             size={30}
             color="#FFF"
-            style={[styles.closeBtn, { left: 0 }]}
+            style={[styles.closeBtn, { right: 0 }]}
           />
           <TouchableOpacity
             style={styles.nextBtn}
-            onPress={() =>
-              navigation.navigate("CreateRecipe", { imageUri: imagePath })
-            }
+            onPress={() => navigation.navigate("CreateRecipe")}
           >
-            <Text style={styles.nextBtnText}>Next</Text>
+            <Text style={styles.nextBtnText}>Continue</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
     </View>
   );
-};
+});
 
 const CameraScreen = (props) => {
   const [hasPermission, setHasPermission] = useState(null);
-  let imageUri = props.route.params?.imageUri;
-  const [imagePath, setImagePath] = useState(imageUri);
-  const navigation = useNavigation();
-  useEffect(() => {
-    setImagePath(imageUri);
-  }, [props.route.params]);
 
   useEffect(() => {
     (async () => {
@@ -120,11 +122,7 @@ const CameraScreen = (props) => {
     return <Text>No access to camera</Text>;
   }
 
-  return imagePath ? (
-    <RenderPreview imagePath={imagePath} setImagePath={setImagePath} />
-  ) : (
-    <RenderCamera setImagePath={setImagePath} />
-  );
+  return props.recipeForm.imagePath ? <RenderPreview /> : <RenderCamera />;
 };
 
 const styles = StyleSheet.create({
@@ -185,4 +183,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CameraScreen;
+export default connect(mapStateToProps)(CameraScreen);

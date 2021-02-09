@@ -9,18 +9,15 @@ import {
   Text,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { connect } from "react-redux";
 
 import ScreenHeader from "../ScreenHeader";
 import Input from "./Input";
 import Categories from "./Categories";
 
-const CreateRecipeScreen = (props) => {
-  let imageUri = props.route.params?.imageUri;
-  const [imagePath, setImagePath] = useState(imageUri);
+const CreateRecipeScreen = ({ recipeForm }) => {
   const navigation = useNavigation();
-  useEffect(() => {
-    setImagePath(imageUri);
-  }, [props.route.params]);
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -32,11 +29,12 @@ const CreateRecipeScreen = (props) => {
         <ScrollView style={styles.listContainer}>
           <TouchableOpacity
             style={{ borderBottomWidth: 0.5, borderColor: "#E3E3E3" }}
-            onPress={() =>
-              navigation.navigate("Camera", { imageUri: imagePath })
-            }
+            onPress={() => navigation.navigate("Camera")}
           >
-            <Image source={{ uri: imagePath }} style={styles.image} />
+            <Image
+              source={{ uri: recipeForm.imagePath }}
+              style={styles.image}
+            />
           </TouchableOpacity>
           <Input name="Recipe Name" placeholder="Add a recipe name..." />
           <Input
@@ -86,4 +84,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateRecipeScreen;
+const mapStateToProps = (state) => ({
+  recipeForm: state.recipeForm,
+});
+
+export default connect(mapStateToProps)(CreateRecipeScreen);
