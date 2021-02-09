@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-const RenderCategoryBtns = (categories, setCategories) =>
-  categories.map((curr, i) => {
+const RenderCategoryBtns = (value, setValue) =>
+  value.map((curr, i) => {
     return (
       <TouchableOpacity
-        onPress={() => {
-          let newList = [...categories];
-          newList[i].selected = !newList[i].selected;
-          setCategories(newList);
-        }}
+        onPress={() => setValue(i)}
         style={[
           styles.btnContainer,
           curr.selected && styles.btnContainerSelected,
@@ -24,13 +20,6 @@ const RenderCategoryBtns = (categories, setCategories) =>
   });
 
 const Categories = ({ info, value, setValue }) => {
-  const [categories, setCategories] = useState([
-    { name: "Breakfast", selected: false },
-    { name: "Lunch", selected: false },
-    { name: "Dinner", selected: false },
-    { name: "Dessert", selected: false },
-    { name: "Beverage", selected: false },
-  ]);
   return (
     <View style={styles.container}>
       <View style={styles.nameWrapper}>
@@ -38,7 +27,7 @@ const Categories = ({ info, value, setValue }) => {
         <Text style={styles.infoText}>{info}</Text>
       </View>
       <View style={styles.categoryContainer}>
-        {RenderCategoryBtns(categories, setCategories)}
+        {RenderCategoryBtns(value, setValue)}
       </View>
     </View>
   );

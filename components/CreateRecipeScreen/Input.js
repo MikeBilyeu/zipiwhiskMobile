@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, TextInput, Text } from "react-native";
 
 const Input = ({
@@ -11,7 +11,6 @@ const Input = ({
   keyboardType = "default",
   returnKeyType = "next",
 }) => {
-  const [text, setText] = useState("");
   return (
     <View style={styles.container}>
       <View style={styles.nameWrapper}>
@@ -21,8 +20,8 @@ const Input = ({
 
       <TextInput
         style={styles.textInput}
-        defaultValue={text}
-        onChangeText={(text) => setText(text)}
+        defaultValue={value}
+        onChangeText={(text) => setValue(text)}
         placeholder={placeholder}
         placeholderTextColor="#E2E2E2"
         multiline={multiline}
