@@ -5,10 +5,12 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   TouchableOpacity,
+  View,
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import {
   recipeNameChange,
@@ -40,10 +42,16 @@ const CreateRecipeScreen = (props) => {
             style={{ borderBottomWidth: 0.5, borderColor: "#E3E3E3" }}
             onPress={() => navigation.navigate("Camera")}
           >
-            <Image
-              source={{ uri: props.recipeForm.imagePath }}
-              style={styles.image}
-            />
+            {props.recipeForm.imagePath ? (
+              <Image
+                source={{ uri: props.recipeForm.imagePath }}
+                style={styles.image}
+              />
+            ) : (
+              <View style={styles.cameraIconContainer}>
+                <Ionicons name="camera-outline" size={75} color="#B7B7B7" />
+              </View>
+            )}
           </TouchableOpacity>
           <Input
             name="Recipe Name"
@@ -104,6 +112,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   image: {
+    backgroundColor: "#F2F2F2",
+    width: 300,
+    height: 175,
+    borderRadius: 10,
+    margin: 10,
+    alignSelf: "center",
+  },
+  cameraIconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#F2F2F2",
     width: 300,
     height: 175,
