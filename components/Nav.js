@@ -49,9 +49,10 @@ const Nav = () => {
         },
       })}
     >
-      <Tab.Screen name="Groceries" component={Groceries} />
-      <Tab.Screen name="Bookmarks" component={Bookmarks} />
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Groceries" component={Groceries} />
+      {/* <Tab.Screen name="Bookmarks" component={Bookmarks} /> */}
+
       <Tab.Screen
         name="Activity"
         component={Activity}
