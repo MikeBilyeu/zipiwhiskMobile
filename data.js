@@ -249,8 +249,8 @@ const data = [
     numComments: 1,
     title: "Black Bean Veggie Burgers",
     user: {
-      image: "https://randomuser.me/api/portraits/women/10.jpg",
-      username: "jess",
+      image: "https://randomuser.me/api/portraits/women/19.jpg",
+      username: "alice",
     },
     recipeImage:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1593983807/Recipes/s0odyvjiko4yuisb8iwm.jpg",

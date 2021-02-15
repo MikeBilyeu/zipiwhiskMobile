@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import SearchBtn from "./SearchBtn";
 import SearchDropDown from "./SearchDropDown";
 import RecipeCard from "./RecipeCard";
+import RecipeCardSmall from "./RecipeCardSmall";
 import data from "../data";
 
 function Header({ dropDownOpen, toggleDropDown }) {
@@ -42,6 +43,7 @@ function Home() {
           style={styles.listContainer}
           contentContainerStyle={{ paddingTop: 75 }}
           data={data}
+          numColumns={1}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
         />
