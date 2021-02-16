@@ -60,6 +60,12 @@ function Header({ data, dropDownOpen, toggleDropDown }) {
         toggleDropDown={toggleDropDown}
         BtnText="Likes"
       />
+      <View
+        style={[
+          styles.bottomLine,
+          dropDownOpen ? { opacity: 0 } : { opacity: 1 },
+        ]}
+      />
     </LinearGradient>
   );
 }
@@ -134,6 +140,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "AvenirNextRegular",
     color: "#464646",
+  },
+  bottomLine: {
+    width: "100%",
+    height: 10,
+    borderBottomWidth: 0.25,
+    borderBottomColor: "#E3E3E3",
   },
   listContainer: {
     flex: 1,

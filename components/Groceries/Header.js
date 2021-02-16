@@ -62,6 +62,7 @@ const Header = ({ inputFocused, setInputFocused, list }) => {
           </TouchableOpacity>
         )}
       </View>
+      <View style={styles.bottomLine} />
     </LinearGradient>
   );
 };
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     flex: 3,
   },
+
   doneBtn: {
     height: "100%",
     justifyContent: "center",
@@ -101,6 +103,12 @@ const styles = StyleSheet.create({
     color: "#0172C4",
     fontFamily: "AvenirNextDemiBold",
     fontSize: 18,
+  },
+  bottomLine: {
+    width: "100%",
+    height: 10,
+    borderBottomWidth: 0.25,
+    borderBottomColor: "#E3E3E3",
   },
 });
 

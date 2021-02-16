@@ -25,6 +25,12 @@ function Header({ dropDownOpen, toggleDropDown }) {
         toggleDropDown={toggleDropDown}
         BtnText="Search"
       />
+      <View
+        style={[
+          styles.bottomLine,
+          dropDownOpen ? { opacity: 0 } : { opacity: 1 },
+        ]}
+      />
     </LinearGradient>
   );
 }
@@ -65,6 +71,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     position: "absolute",
     zIndex: 2,
+  },
+  bottomLine: {
+    width: "100%",
+    height: 10,
+    borderBottomWidth: 0.25,
+    borderBottomColor: "#E3E3E3",
   },
   listContainer: {
     flex: 1,

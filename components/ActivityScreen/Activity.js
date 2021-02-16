@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     padding: 5,
+    paddingHorizontal: 10,
   },
   numWrapper: {
     justifyContent: "flex-end",
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
   bottomLine: {
     width: "100%",
     height: 10,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.25,
     borderBottomColor: "#E3E3E3",
   },
   listContainer: {

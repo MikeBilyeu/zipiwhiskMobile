@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: "#E3E3E3",
     position: "relative",
-    padding: 5,
     paddingTop: 20,
     marginBottom: 20,
   },
