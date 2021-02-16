@@ -6,7 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Home from "./Home";
 import Bookmarks from "./Bookmarks";
 import Groceries from "./Groceries/Groceries";
-import Activity from "./Activity";
+import Activity from "./ActivityScreen/Activity";
 import Profile from "./Profile";
 
 const Tab = createBottomTabNavigator();
