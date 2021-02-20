@@ -13,7 +13,7 @@ export const userData = {
 export const data = [
   {
     type: "follow",
-    id: 966754334333,
+    id: 9667556664333,
     user: {
       username: "mikebilyeu512",
       image: "https://randomuser.me/api/portraits/men/17.jpg",

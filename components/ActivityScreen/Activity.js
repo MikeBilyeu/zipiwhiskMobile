@@ -76,7 +76,7 @@ function Activity() {
           data={data}
           numColumns={1}
           renderItem={renderItem}
-          // keyExtractor={(item) => null}
+          keyExtractor={(item) => item.id.toString()}
         />
       </View>
     </SafeAreaView>

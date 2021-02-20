@@ -7,7 +7,7 @@ import Home from "./Home";
 import Bookmarks from "./Bookmarks";
 import Groceries from "./Groceries/Groceries";
 import Activity from "./ActivityScreen/Activity";
-import Profile from "./Profile";
+import ProfileScreen from "./ProfileScreen/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -66,7 +66,7 @@ const Nav = () => {
           },
         }}
       />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 };

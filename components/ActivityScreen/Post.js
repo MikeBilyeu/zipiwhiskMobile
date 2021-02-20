@@ -3,6 +3,7 @@ import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import moment from "moment";
 
 import RecipeCard from "../RecipeCard";
+import UserNameBtn from "../UserNameBtn";
 
 const Post = ({ data }) => {
   return (
@@ -10,11 +11,7 @@ const Post = ({ data }) => {
       <RecipeCard data={data.recipe} />
 
       <View style={styles.contentWrapper}>
-        <TouchableOpacity style={styles.userContainer}>
-          <Image style={styles.userImage} source={{ uri: data.user.image }} />
-          <Text style={styles.username}>{data.user.username}</Text>
-        </TouchableOpacity>
-
+        <UserNameBtn username={data.user.username} image={data.user.image} />
         <Text style={styles.text}>Posted a recipe.</Text>
       </View>
 

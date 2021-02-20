@@ -1,16 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import moment from "moment";
+import UserNameBtn from "../UserNameBtn";
 
 const Like = ({ data }) => {
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
-        <TouchableOpacity style={styles.userContainer}>
-          <Image style={styles.userImage} source={{ uri: data.user.image }} />
-          <Text style={styles.username}>{data.user.username}</Text>
-        </TouchableOpacity>
-
+        <UserNameBtn username={data.user.username} image={data.user.image} />
         <Text style={styles.text}>Liked your recipe.</Text>
         <TouchableOpacity style={styles.imageWrapper}>
           <Image
@@ -39,27 +36,7 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flexDirection: "row",
   },
-  userContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 5,
-    marginBottom: 5,
-  },
-  userImage: {
-    height: 30,
-    width: 30,
-    marginRight: 5,
-    marginLeft: 0,
-    resizeMode: "stretch",
-    borderRadius: 100,
-  },
-  username: {
-    color: "#313131",
-    fontFamily: "AvenirNextDemiBold",
-    fontSize: 15,
-    lineHeight: 18,
-  },
+
   text: {
     color: "#313131",
     fontFamily: "AvenirNextRegular",

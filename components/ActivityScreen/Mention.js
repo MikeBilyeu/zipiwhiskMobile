@@ -1,16 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import moment from "moment";
+import UserNameBtn from "../UserNameBtn";
 
 const Mention = ({ data }) => {
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
-        <TouchableOpacity style={styles.userContainer}>
-          <Image style={styles.userImage} source={{ uri: data.user.image }} />
-          <Text style={styles.username}>{data.user.username}</Text>
-        </TouchableOpacity>
-
+        <UserNameBtn username={data.user.username} image={data.user.image} />
         <Text style={styles.text}>
           Mentioned you in a comment: {data.comment}
         </Text>
