@@ -1,9 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
-const UserInfo = () => {
-  const navigation = useNavigation();
+const UserInfo = (props) => {
   return (
     <View style={styles.userInfoContainer}>
       <TouchableOpacity
@@ -20,16 +18,7 @@ const UserInfo = () => {
         <Text style={styles.usernameText}>{data.user.username}</Text>
         <Text style={styles.fullNameText}>{data.user.fullName}</Text>
       </View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("CreateRecipe")}
-        activeOpacity={0.5}
-        style={styles.createRecipeBtn}
-      >
-        <Image
-          style={{ width: 30, height: 30 }}
-          source={require("../../../assets/createRecipe.png")}
-        />
-      </TouchableOpacity>
+      {props.children}
     </View>
   );
 };
@@ -48,12 +37,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: 35,
     flex: 1,
-  },
-  createRecipeBtn: {
-    height: 65,
-    width: 65,
-    alignItems: "center",
-    justifyContent: "center",
   },
   usernameText: {
     textAlign: "center",

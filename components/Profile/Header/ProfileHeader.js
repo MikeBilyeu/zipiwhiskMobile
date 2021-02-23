@@ -2,6 +2,7 @@ import React from "react";
 
 import Header from "../../Header";
 import ZipiWhiskIcon from "../../Header/ZipiWhiskIcon";
+import CreateRecipeBtn from "./CreateRecipeBtn";
 import UserInfo from "./UserInfo";
 import SearchBtn from "../../SearchBtn";
 
@@ -13,7 +14,9 @@ const ProfileHeader = ({ dropDownOpen, toggleDropDown }) => {
       height={130}
     >
       <ZipiWhiskIcon />
-      <UserInfo />
+      <UserInfo>
+        <CreateRecipeBtn />
+      </UserInfo>
       <SearchBtn
         dropDownOpen={dropDownOpen}
         toggleDropDown={toggleDropDown}

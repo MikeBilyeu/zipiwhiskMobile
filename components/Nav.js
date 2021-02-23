@@ -7,7 +7,7 @@ import Home from "./Home";
 import Bookmarks from "./Bookmarks";
 import Groceries from "./Groceries/Groceries";
 import Activity from "./ActivityScreen/Activity";
-import ProfileScreen from "./ProfileScreen/ProfileScreen";
+import ProfileScreen from "./Profile/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 

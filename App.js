@@ -18,6 +18,7 @@ import RecipeScreen from "./components/RecipeScreen/RecipeScreen";
 import Comments from "./components/Comments";
 import CreateRecipeScreen from "./components/CreateRecipeScreen/CreateRecipeScreen";
 import CameraScreen from "./components/CreateRecipeScreen/CameraScreen";
+import VisitProfileScreen from "./components/Profile/VisitProfileScreen";
 
 const store = configureStore();
 const Stack = createStackNavigator();
@@ -54,6 +55,7 @@ const AppConatiner = connect(mapStateToProps)((props) => {
             }}
           >
             <Stack.Screen name="Home" component={Nav} />
+            <Stack.Screen name="VisitProfile" component={VisitProfileScreen} />
             <Stack.Screen name="Recipe" component={RecipeScreen} />
             <Stack.Screen name="Comments" component={Comments} />
             <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
