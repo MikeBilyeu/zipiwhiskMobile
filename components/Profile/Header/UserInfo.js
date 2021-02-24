@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
+import { userData } from "./data";
+
 const UserInfo = (props) => {
   return (
     <View style={styles.userInfoContainer}>
@@ -11,12 +13,12 @@ const UserInfo = (props) => {
       >
         <Image
           style={{ width: 65, height: 65, borderRadius: 50 }}
-          source={{ uri: data.user.image }}
+          source={{ uri: userData.image }}
         />
       </TouchableOpacity>
       <View style={styles.usernameContainer}>
-        <Text style={styles.usernameText}>{data.user.username}</Text>
-        <Text style={styles.fullNameText}>{data.user.fullName}</Text>
+        <Text style={styles.usernameText}>{userData.username}</Text>
+        <Text style={styles.fullNameText}>{userData.fullName}</Text>
       </View>
       {props.children}
     </View>
@@ -53,15 +55,3 @@ const styles = StyleSheet.create({
 });
 
 export default UserInfo;
-
-const data = {
-  user: {
-    id: 480348487,
-    username: "mr_smith512",
-    fullName: "Bob Smith",
-    image: "https://randomuser.me/api/portraits/men/17.jpg",
-    email: "mikebilyeu500@gmail.com",
-    recipeUnit: "US",
-    restriction: null,
-  },
-};

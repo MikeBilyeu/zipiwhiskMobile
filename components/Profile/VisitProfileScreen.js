@@ -16,8 +16,8 @@ function VisitProfileScreen() {
           toggleDropDown={toggleDropDown}
           dropDownOpen={dropDownOpen}
         />
-        <SearchDropDown dropDownOpen={dropDownOpen} height={145} />
-        <RecipeScroll paddingTop={145} />
+        <SearchDropDown dropDownOpen={dropDownOpen} height={210} />
+        <RecipeScroll paddingTop={210} />
       </View>
     </SafeAreaView>
   );

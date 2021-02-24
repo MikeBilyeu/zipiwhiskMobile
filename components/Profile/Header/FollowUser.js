@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextDemiBold",
     fontSize: 16,
     textAlign: "center",
+    color: "#313131",
   },
   FollowBtnText: {
     fontFamily: "AvenirNextDemiBold",

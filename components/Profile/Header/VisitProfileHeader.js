@@ -5,18 +5,20 @@ import Header from "../../Header";
 import UserInfo from "./UserInfo";
 import SearchBtn from "../../SearchBtn";
 import FollowUser from "./FollowUser";
+import UserFollows from "./UserFollows";
 
 const VisitProfileHeader = ({ dropDownOpen, toggleDropDown }) => {
   return (
     <Header
       dropDownOpen={dropDownOpen}
       toggleDropDown={toggleDropDown}
-      height={145}
+      height={210}
     >
       <FollowUser />
       <UserInfo>
         <View style={{ width: 65 }} />
       </UserInfo>
+      <UserFollows />
       <SearchBtn
         dropDownOpen={dropDownOpen}
         toggleDropDown={toggleDropDown}

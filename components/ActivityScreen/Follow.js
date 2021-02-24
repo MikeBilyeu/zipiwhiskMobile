@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
+
 import moment from "moment";
+import FollowBtn from "../FollowBtn";
 import UserNameBtn from "../UserNameBtn";
 
 const Follow = ({ data }) => {
@@ -11,9 +13,7 @@ const Follow = ({ data }) => {
         <Text style={styles.text}>Started following you.</Text>
       </View>
 
-      <TouchableOpacity style={styles.followBtn} onPress={null}>
-        <Text style={styles.followBtnText}>Follow Back</Text>
-      </TouchableOpacity>
+      <FollowBtn BtnStyles={{ alignSelf: "flex-end" }} />
 
       <Text style={styles.time}>{moment(data.timestamp).fromNow()}</Text>
     </View>
@@ -59,19 +59,6 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextRegular",
     fontSize: 15,
     lineHeight: 30,
-  },
-  followBtn: {
-    alignSelf: "flex-end",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: "#0172C4",
-    borderRadius: 5,
-  },
-  followBtnText: {
-    color: "#FFF",
-    fontFamily: "AvenirNextDemiBold",
-    fontSize: 15,
-    lineHeight: 18,
   },
   time: {
     color: "#B7B7B7",
