@@ -27,7 +27,7 @@ const Footer = (props) => {
       >
         <View style={styles.footerBtnContainer}>
           <TouchableOpacity
-            onPress={null}
+            onPress={() => navigation.navigate("VisitProfile")}
             activeOpacity={0.4}
             style={[styles.footerBtn, { paddingHorizontal: 5 }]}
           >

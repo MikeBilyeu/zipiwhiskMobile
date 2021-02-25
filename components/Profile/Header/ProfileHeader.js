@@ -21,7 +21,7 @@ const ProfileHeader = ({ dropDownOpen, toggleDropDown }) => {
         dropDownOpen={dropDownOpen}
         toggleDropDown={toggleDropDown}
         BtnText="Likes"
-      />
+      ></SearchBtn>
     </Header>
   );
 };

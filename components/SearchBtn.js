@@ -7,7 +7,7 @@ import {
   Animated,
 } from "react-native";
 
-function SearchBtn({ dropDownOpen, toggleDropDown, BtnText }) {
+function SearchBtn({ dropDownOpen, toggleDropDown, BtnText, children }) {
   const rotateValue = useRef(new Animated.Value(0)).current;
 
   const rotateAnimation = () => {
@@ -53,6 +53,7 @@ function SearchBtn({ dropDownOpen, toggleDropDown, BtnText }) {
         source={require("../assets/arrow.png")}
         style={[{ width: 15, height: 15 }, rotateAnimationStyle]}
       />
+      {children}
     </TouchableOpacity>
   );
 }
