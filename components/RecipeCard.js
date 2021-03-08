@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { parseNum } from "./utils";
 
@@ -29,8 +30,10 @@ function RecipeCard({ data }) {
             <Text style={styles.infoText}>{"Calories"}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={styles.infoText}>{data.nutrition.calories}</Text>
-              <Image
-                source={require("../assets/calories.png")}
+              <Ionicons
+                name="fast-food"
+                size={20}
+                color="#FFF"
                 style={styles.icon}
               />
             </View>
@@ -42,8 +45,10 @@ function RecipeCard({ data }) {
             <Text style={styles.infoText}>{"Likes"}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={styles.infoText}>{parseNum(data.numLikes)}</Text>
-              <Image
-                source={require("../assets/likes.png")}
+              <Ionicons
+                name="heart"
+                size={20}
+                color="#FFF"
                 style={styles.icon}
               />
             </View>
@@ -52,8 +57,11 @@ function RecipeCard({ data }) {
             <Text style={styles.infoText}>{"Comments"}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={styles.infoText}>{parseNum(data.numComments)}</Text>
-              <Image
-                source={require("../assets/comments.png")}
+
+              <Ionicons
+                name="chatbubble-ellipses"
+                size={20}
+                color="#FFF"
                 style={styles.icon}
               />
             </View>
@@ -71,7 +79,7 @@ function RecipeCard({ data }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 500,
+    height: 245,
   },
   image: {
     flex: 1,
@@ -109,10 +117,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: 5,
-    height: 18,
-    width: 18,
-    resizeMode: "stretch",
-    alignItems: "center",
   },
   line: {
     borderBottomColor: "#FFF",

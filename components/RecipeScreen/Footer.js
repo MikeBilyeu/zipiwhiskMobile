@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { parseNum } from "../utils";
 
@@ -40,8 +41,10 @@ const Footer = (props) => {
             style={styles.footerBtn}
           >
             <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
-            <Image
-              source={require("../../assets/redLike.png")}
+            <Ionicons
+              name="heart"
+              size={25}
+              color="#FFF"
               style={styles.footerBtnIcon}
             />
           </TouchableOpacity>
@@ -56,8 +59,10 @@ const Footer = (props) => {
             <Text style={styles.footerBtnText}>
               {parseNum(props.numComments)}
             </Text>
-            <Image
-              source={require("../../assets/comments.png")}
+            <Ionicons
+              name="chatbubble-ellipses"
+              size={25}
+              color="#FFF"
               style={styles.footerBtnIcon}
             />
           </TouchableOpacity>
@@ -67,9 +72,11 @@ const Footer = (props) => {
             activeOpacity={0.4}
             style={styles.footerBtn}
           >
-            <Image
-              source={require("../../assets/bookmark.png")}
-              style={{ width: 20, height: 28 }}
+            <Ionicons
+              name="bookmarks"
+              size={25}
+              color="#FFF"
+              style={styles.footerBtnIcon}
             />
           </TouchableOpacity>
         </View>
@@ -80,8 +87,10 @@ const Footer = (props) => {
             activeOpacity={0.4}
             style={[styles.footerBtn, { flex: 0.25 }]}
           >
-            <Image
-              source={require("../../assets/edit.png")}
+            <Ionicons
+              name="pencil"
+              size={25}
+              color="#FFF"
               style={styles.footerBtnIcon}
             />
           </TouchableOpacity>

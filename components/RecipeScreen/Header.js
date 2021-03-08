@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Image, TouchableOpacity, Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Header = (props) => {
   const navigation = useNavigation();
@@ -30,9 +31,11 @@ const Header = (props) => {
           activeOpacity={0.4}
           style={styles.headerBtn}
         >
-          <Image
-            source={require("../../assets/share.png")}
-            style={styles.headerBtnIcon}
+          <Ionicons
+            name="ios-paper-plane"
+            size={25}
+            color="#FFF"
+            style={styles.footerBtnIcon}
           />
         </TouchableOpacity>
       </LinearGradient>
@@ -48,7 +51,7 @@ const styles = StyleSheet.create({
   },
   gradient: {
     height: 150,
-    paddingTop: 20,
+    paddingTop: 35,
     flexDirection: "row",
     justifyContent: "space-between",
   },
