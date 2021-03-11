@@ -8,9 +8,17 @@ import { userData } from "./data";
 const UserFollows = () => {
   return (
     <View style={styles.container}>
-      <NumFollows text="Followers" num={userData.numFollowers} />
+      <NumFollows
+        text="Followers"
+        num={userData.numFollowers}
+        username={userData.username}
+      />
       <FollowBtn />
-      <NumFollows text="Following" num={userData.numFollowing} />
+      <NumFollows
+        text="Following"
+        num={userData.numFollowing}
+        username={userData.username}
+      />
     </View>
   );
 };

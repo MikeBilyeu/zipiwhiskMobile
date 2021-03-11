@@ -1,9 +1,20 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const NumFollows = ({ text, num }) => {
+const NumFollows = ({ text, num, username }) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.numWrapper} onPress={null}>
+    <TouchableOpacity
+      style={styles.numWrapper}
+      onPress={() =>
+        navigation.navigate("Follows", {
+          screen: text,
+          num,
+          username,
+        })
+      }
+    >
       <Text style={styles.num}>{num}</Text>
       <Text style={styles.numText}>{text}</Text>
     </TouchableOpacity>

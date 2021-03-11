@@ -28,7 +28,7 @@ const Nav = () => {
           if (route.name === "Home") {
             iconName = focused ? "ios-home" : "ios-home-outline";
           } else if (route.name === "Groceries") {
-            iconName = focused ? "cart" : "cart-outline";
+            iconName = focused ? "document-text" : "document-text-outline";
           } else if (route.name === "Bookmarks") {
             iconName = focused ? "bookmarks" : "bookmarks-outline";
           } else if (route.name === "Activity") {

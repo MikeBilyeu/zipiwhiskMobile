@@ -12,11 +12,19 @@ function ActivityHeader() {
     <Header>
       <ZipiWhiskIcon />
       <View style={styles.followContainer}>
-        <NumFollows text="Followers" num={userData.numFollowers} />
+        <NumFollows
+          text="Followers"
+          num={userData.numFollowers}
+          username={userData.username}
+        />
         <View style={styles.titleWrapper}>
           <Text style={styles.titleText}>{"Activity"}</Text>
         </View>
-        <NumFollows text="Following" num={userData.numFollowing} />
+        <NumFollows
+          text="Following"
+          num={userData.numFollowing}
+          username={userData.username}
+        />
       </View>
     </Header>
   );

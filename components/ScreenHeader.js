@@ -26,14 +26,7 @@ function ScreenHeader(props) {
           <Text style={styles.titleText}>{props.title}</Text>
           <Text style={styles.subTitleText}>{props.subTitle}</Text>
         </View>
-
-        <TouchableOpacity
-          onPress={null}
-          activeOpacity={0.4}
-          style={styles.headerBtn}
-        >
-          <Text style={styles.postText}>Post</Text>
-        </TouchableOpacity>
+        {props.children || <View style={styles.headerBtn} />}
       </View>
     </View>
   );
@@ -69,17 +62,13 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextDemiBold",
     fontSize: 25,
     color: "#313131",
+    marginBottom: 2,
   },
   subTitleText: {
     textAlign: "center",
     fontFamily: "AvenirNextRegular",
     fontSize: 14,
     color: "#313131",
-  },
-  postText: {
-    fontFamily: "AvenirNextDemiBold",
-    fontSize: 18,
-    color: "#0172C4",
   },
 });
 

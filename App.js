@@ -16,6 +16,7 @@ import Auth from "./components/Auth";
 import Nav from "./components/Nav";
 import RecipeScreen from "./components/RecipeScreen/RecipeScreen";
 import Comments from "./components/Comments";
+import FollowScreen from "./components/FollowScreen";
 import CreateRecipeScreen from "./components/CreateRecipeScreen/CreateRecipeScreen";
 import CameraScreen from "./components/CreateRecipeScreen/CameraScreen";
 import VisitProfileScreen from "./components/Profile/VisitProfileScreen";
@@ -58,6 +59,7 @@ const AppConatiner = connect(mapStateToProps)((props) => {
             <Stack.Screen name="VisitProfile" component={VisitProfileScreen} />
             <Stack.Screen name="Recipe" component={RecipeScreen} />
             <Stack.Screen name="Comments" component={Comments} />
+            <Stack.Screen name="Follows" component={FollowScreen} />
             <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
             <Stack.Screen name="Camera" component={CameraScreen} />
           </Stack.Navigator>

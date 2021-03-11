@@ -29,11 +29,11 @@ const RenderList = (list, setList, inputFocused, setInputFocused) =>
     };
     const removeItem = () => setList(list.filter((item, i) => i != index));
 
-    onRadioPress = () => {
-      let newList = [...list];
-      newList[index].completed = !newList[index].completed;
-      setList(newList);
-    };
+    // onRadioPress = () => {
+    //   let newList = [...list];
+    //   newList[index].completed = !newList[index].completed;
+    //   setList(newList);
+    // };
 
     return (
       <Swipeable
@@ -42,7 +42,7 @@ const RenderList = (list, setList, inputFocused, setInputFocused) =>
         style={{ width: "100%", borderWdith: 5 }}
       >
         <View style={styles.ingredientContainer}>
-          <TouchableOpacity style={styles.radioBtn} onPress={onRadioPress}>
+          {/* <TouchableOpacity style={styles.radioBtn} onPress={onRadioPress}>
             <Ionicons
               name={
                 i.completed ? "ios-radio-button-on" : "ios-radio-button-off"
@@ -50,7 +50,7 @@ const RenderList = (list, setList, inputFocused, setInputFocused) =>
               size={25}
               color="#0172C4"
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={styles.ingredientWrapper}>
             <TextInput
               multiline
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextDemiBold",
     color: "#313131",
     paddingRight: 15,
-    //paddingHorizontal: 15,
+    paddingLeft: 15,
     paddingTop: 10,
     paddingBottom: 10,
     maxHeight: 1000,

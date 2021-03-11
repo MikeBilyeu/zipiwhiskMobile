@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   View,
+  Text,
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -36,7 +37,15 @@ const CreateRecipeScreen = (props) => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={10}
       >
-        <ScreenHeader title="Create Recipe" subTitle="Recipe Info" />
+        <ScreenHeader title="Create Recipe" subTitle="Recipe Info">
+          <TouchableOpacity
+            onPress={null}
+            activeOpacity={0.4}
+            style={styles.headerBtn}
+          >
+            <Text style={styles.postText}>Post</Text>
+          </TouchableOpacity>
+        </ScreenHeader>
         <ScrollView style={styles.listContainer}>
           <TouchableOpacity
             style={{ borderBottomWidth: 0.5, borderColor: "#E3E3E3" }}
@@ -110,6 +119,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
+  },
+  headerBtn: {
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 2,
+  },
+  postText: {
+    fontFamily: "AvenirNextDemiBold",
+    fontSize: 18,
+    color: "#0172C4",
   },
   image: {
     backgroundColor: "#F2F2F2",
