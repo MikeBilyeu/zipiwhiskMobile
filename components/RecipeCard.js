@@ -25,7 +25,7 @@ function RecipeCard({ data }) {
     >
       <ImageBackground source={{ uri: data.recipeImage }} style={styles.image}>
         <View style={styles.recipeCardDarken}>
-          <Text style={styles.title} numberOfLines={2} ellipsizeMode="end">
+          <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
             {data.title}
           </Text>
           <View style={styles.infoContainer}>
