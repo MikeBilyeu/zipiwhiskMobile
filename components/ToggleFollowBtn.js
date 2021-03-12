@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   unfollowBtn: {},
   unfollowBtnText: {},
   followBtn: {
-    minWidth: 150,
+    minWidth: 140,
     paddingHorizontal: 20,
     paddingVertical: 10,
     justifyContent: "center",

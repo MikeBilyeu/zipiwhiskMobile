@@ -25,7 +25,9 @@ function RecipeCard({ data }) {
     >
       <ImageBackground source={{ uri: data.recipeImage }} style={styles.image}>
         <View style={styles.recipeCardDarken}>
-          <Text style={styles.title}>{data.title}</Text>
+          <Text style={styles.title} numberOfLines={2} ellipsizeMode="end">
+            {data.title}
+          </Text>
           <View style={styles.infoContainer}>
             <Text style={styles.infoText}>{"Calories"}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
   line: {
     borderBottomColor: "#FFF",
     opacity: 0.5,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 1,
     width: "100%",
     marginVertical: 5,
   },
