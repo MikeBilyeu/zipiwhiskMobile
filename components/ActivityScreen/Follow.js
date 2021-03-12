@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 
 import moment from "moment";
-import FollowBtn from "../FollowBtn";
+import ToggleFollowBtn from "../ToggleFollowBtn";
 import UserNameBtn from "../UserNameBtn";
 
 const Follow = ({ data }) => {
@@ -13,7 +13,7 @@ const Follow = ({ data }) => {
         <Text style={styles.text}>Started following you.</Text>
       </View>
 
-      <FollowBtn BtnStyles={{ alignSelf: "flex-end" }} />
+      <ToggleFollowBtn BtnStyles={{ alignSelf: "flex-end" }} />
 
       <Text style={styles.time}>{moment(data.timestamp).fromNow()}</Text>
     </View>
@@ -32,27 +32,6 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     flexDirection: "row",
-  },
-  userContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 5,
-    marginBottom: 5,
-  },
-  userImage: {
-    height: 30,
-    width: 30,
-    marginRight: 5,
-    marginLeft: 0,
-    resizeMode: "stretch",
-    borderRadius: 100,
-  },
-  username: {
-    color: "#313131",
-    fontFamily: "AvenirNextDemiBold",
-    fontSize: 15,
-    lineHeight: 18,
   },
   text: {
     color: "#313131",

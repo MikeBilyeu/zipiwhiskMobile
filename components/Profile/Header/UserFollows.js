@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import FollowBtn from "../../FollowBtn";
+import ToggleFollowBtn from "../../ToggleFollowBtn";
 import NumFollows from "../../NumFollows";
 import { userData } from "./data";
 
@@ -13,7 +13,7 @@ const UserFollows = () => {
         num={userData.numFollowers}
         username={userData.username}
       />
-      <FollowBtn />
+      <ToggleFollowBtn />
       <NumFollows
         text="Following"
         num={userData.numFollowing}

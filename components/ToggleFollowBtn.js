@@ -1,7 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const FollowBtn = ({ BtnStyles, textStyles }) => {
+const ToggleFollowBtn = ({ BtnStyles, textStyles, following }) => {
+  if (following) {
+    return (
+      <TouchableOpacity style={[styles.unfollowBtn, BtnStyles]} onPress={null}>
+        <Text style={[styles.unfollowBtnText, textStyles]}>Unfollow</Text>
+      </TouchableOpacity>
+    );
+  }
   return (
     <TouchableOpacity style={[styles.followBtn, BtnStyles]} onPress={null}>
       <Text style={[styles.followBtnText, textStyles]}>Follow</Text>
@@ -10,6 +17,8 @@ const FollowBtn = ({ BtnStyles, textStyles }) => {
 };
 
 const styles = StyleSheet.create({
+  unfollowBtn: {},
+  unfollowBtnText: {},
   followBtn: {
     minWidth: 150,
     paddingHorizontal: 20,
@@ -26,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FollowBtn;
+export default ToggleFollowBtn;
