@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 
@@ -10,16 +11,15 @@ function VisitProfileScreen() {
   const toggleDropDown = () => setDropDownOpen(!dropDownOpen);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ flex: 1 }}>
-        <VisitProfileHeader
-          toggleDropDown={toggleDropDown}
-          dropDownOpen={dropDownOpen}
-        />
-        <SearchDropDown dropDownOpen={dropDownOpen} height={210} />
-        <RecipeScroll paddingTop={210} />
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <StatusBar hidden={false} />
+      <VisitProfileHeader
+        toggleDropDown={toggleDropDown}
+        dropDownOpen={dropDownOpen}
+      />
+      <SearchDropDown dropDownOpen={dropDownOpen} height={210} />
+      <RecipeScroll paddingTop={0} />
+    </View>
   );
 }
 

@@ -1,10 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, View, ImageBackground, Animated } from "react-native";
+import { StyleSheet, View, ImageBackground } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
 
-import Header from "./Header";
-import Footer from "./Footer";
 import Recipe from "./Recipe";
 
 function RecipeScreen({

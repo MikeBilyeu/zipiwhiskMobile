@@ -1,35 +1,34 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const Header = (props) => {
   return (
-    <LinearGradient
-      colors={["#fff", "rgba(255, 255, 255, .8)"]}
-      start={[0, 0]}
-      end={[0, 1]}
-      style={[styles.headerContainer, { height: props.height }]}
-    >
-      {props.children}
-      <View
-        style={[
-          styles.bottomLine,
-          props.dropDownOpen ? { opacity: 0 } : { opacity: 1 },
-        ]}
-      />
-    </LinearGradient>
+    <SafeAreaView style={{ zIndex: 2 }}>
+      <LinearGradient
+        colors={["#fff", "rgba(255, 255, 255, .8)"]}
+        start={[0, 0]}
+        end={[0, 1]}
+        style={[styles.headerContainer, { height: props.height }]}
+      >
+        {props.children}
+        <View
+          style={[
+            styles.bottomLine,
+            props.dropDownOpen ? { opacity: 0 } : { opacity: 1 },
+          ]}
+        />
+      </LinearGradient>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   headerContainer: {
     paddingTop: 2,
-    height: 75,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
-    position: "absolute",
-    zIndex: 2,
   },
   bottomLine: {
     width: "100%",

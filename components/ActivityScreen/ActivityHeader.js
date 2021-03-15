@@ -9,7 +9,7 @@ import { userData } from "./data";
 
 function ActivityHeader() {
   return (
-    <Header>
+    <Header height={75}>
       <ZipiWhiskIcon />
       <View style={styles.followContainer}>
         <NumFollows

@@ -21,6 +21,15 @@ export const data = [
     timestamp: "2021-02-15T19:28:38-05:00",
   },
   {
+    type: "follow",
+    id: 96675956664333,
+    user: {
+      username: "mjackchef12",
+      image: "https://randomuser.me/api/portraits/men/67.jpg",
+    },
+    timestamp: "2021-02-15T19:18:38-05:00",
+  },
+  {
     type: "like",
     id: 966754423333,
     user: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, SafeAreaView, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 
 import ActivityHeader from "./ActivityHeader";
 import Follow from "./Follow";
@@ -27,19 +27,16 @@ function Activity() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ flex: 1 }}>
-        <ActivityHeader />
-        <FlatList
-          style={styles.listContainer}
-          contentContainerStyle={{ paddingTop: 75 }}
-          data={data}
-          numColumns={1}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <ActivityHeader />
+      <FlatList
+        style={styles.listContainer}
+        data={data}
+        numColumns={1}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </View>
   );
 }
 

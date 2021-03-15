@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
@@ -13,6 +14,7 @@ const renderComment = ({ item }) => {
 const Comments = (props) => {
   return (
     <View style={styles.container}>
+      <StatusBar hidden={false} />
       <ScreenHeader title="Comments" subTitle={props.route.params.title} />
       <View style={styles.wrapper}>
         <Input />
