@@ -1,29 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Dimensions } from "react-native";
-
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
 import { Provider, connect } from "react-redux";
-
 import configureStore from "./redux/store";
-
 import { useFonts } from "expo-font";
 
 import Auth from "./components/Auth";
-import Nav from "./components/Nav";
-import RecipeScreen from "./components/RecipeScreen/RecipeScreen";
-import Comments from "./components/Comments";
-import FollowScreen from "./components/FollowScreen";
-import CreateRecipeScreen from "./components/CreateRecipeScreen/CreateRecipeScreen";
-import CameraScreen from "./components/CreateRecipeScreen/CameraScreen";
-import VisitProfileScreen from "./components/Profile/VisitProfileScreen";
+import HomeStack from "./components/HomeStack";
 
 const store = configureStore();
-const Stack = createStackNavigator();
-const screenWidth = Dimensions.get("screen").width;
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -44,26 +31,7 @@ const AppConatiner = connect(mapStateToProps)((props) => {
     <SafeAreaProvider style={styles.container}>
       <StatusBar barStyle="auto" />
       <NavigationContainer>
-        {!props.auth.isAuth ? (
-          <Auth />
-        ) : (
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-              gestureResponseDistance: {
-                horizontal: screenWidth,
-              },
-            }}
-          >
-            <Stack.Screen name="Home" component={Nav} />
-            <Stack.Screen name="VisitProfile" component={VisitProfileScreen} />
-            <Stack.Screen name="Recipe" component={RecipeScreen} />
-            <Stack.Screen name="Comments" component={Comments} />
-            <Stack.Screen name="Follows" component={FollowScreen} />
-            <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
-            <Stack.Screen name="Camera" component={CameraScreen} />
-          </Stack.Navigator>
-        )}
+        {!props.auth.isAuth ? <Auth /> : <HomeStack />}
       </NavigationContainer>
     </SafeAreaProvider>
   );
