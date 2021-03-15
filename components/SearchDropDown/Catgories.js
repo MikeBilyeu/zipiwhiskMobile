@@ -7,10 +7,15 @@ import {
   Animated,
   View,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const CategoryBtn = ({ name }) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.btnWrapper} onPress={null}>
+    <TouchableOpacity
+      style={styles.btnWrapper}
+      onPress={() => navigation.navigate("Results", { search: name })}
+    >
       <Text style={styles.btnText}>{name}</Text>
     </TouchableOpacity>
   );

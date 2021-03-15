@@ -6,7 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Home from "./Home";
 import Bookmarks from "./Bookmarks";
 import Groceries from "./Groceries/Groceries";
-import Activity from "./ActivityScreen/Activity";
+import ActivityScreen from "./ActivityScreen";
 import ProfileScreen from "./Profile/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
@@ -55,7 +55,7 @@ const Nav = () => {
 
       <Tab.Screen
         name="Activity"
-        component={Activity}
+        component={ActivityScreen}
         options={{
           tabBarBadge: null,
           tabBarBadgeStyle: {
