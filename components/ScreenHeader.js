@@ -1,11 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 function ScreenHeader(props) {
   const navigation = useNavigation();
   return (
-    <View style={styles.headerContainer}>
+    <SafeAreaView style={styles.headerContainer}>
       <Image
         source={require("../assets/zipiwhisk.png")}
         style={{ width: 70, height: 15 }}
@@ -28,7 +35,7 @@ function ScreenHeader(props) {
         </View>
         {props.children || <View style={styles.headerBtn} />}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -40,6 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderBottomWidth: 0.5,
     borderBottomColor: "#E3E3E3",
+    height: 120,
   },
   headerWrapper: {
     width: "100%",

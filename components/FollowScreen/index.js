@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import ScreenHeader from "../ScreenHeader";
 import Users from "./Users";
 
@@ -13,7 +13,7 @@ const renderUsers = ({ item }) => (
 
 const FollowScreen = (props) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScreenHeader
         title={props.route.params.screen}
         subTitle={`${props.route.params.num} - ${props.route.params.username}`}
@@ -24,13 +24,12 @@ const FollowScreen = (props) => {
         renderItem={renderUsers}
         keyExtractor={(item) => item.id.toString()}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
     flex: 1,
     alignItems: "center",
     width: "100%",
