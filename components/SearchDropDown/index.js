@@ -51,10 +51,17 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
             isFocused={isFocused}
             setIsFocused={setIsFocused}
           />
-
-          <Categories
-            opacityAnimationStyle={opacityAnimationStyle}
-            setDropDownOpen={setDropDownOpen}
+          {isFocused ? (
+            <></>
+          ) : (
+            <Categories
+              opacityAnimationStyle={opacityAnimationStyle}
+              setDropDownOpen={setDropDownOpen}
+            />
+          )}
+          <Animated.Image
+            source={require("../../assets/line.png")}
+            style={[styles.swipeLine, opacityAnimationStyle]}
           />
         </Animated.View>
       </View>
@@ -79,19 +86,19 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   dropDown: {
-    //paddingTop: 85,
     paddingBottom: 15,
     backgroundColor: "#fff",
     width: "100%",
-    //height: 500,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
     alignItems: "center",
     paddingHorizontal: 10,
-    // shadowColor: "#000",
-    // shadowOffset: { width: 0, height: 50 },
-    // shadowOpacity: 0.2,
-    // shadowRadius: 10,
+  },
+  swipeLine: {
+    width: 60,
+    height: 4,
+    position: "absolute",
+    bottom: 15,
   },
 });
 

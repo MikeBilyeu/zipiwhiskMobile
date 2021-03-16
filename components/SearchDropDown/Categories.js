@@ -42,10 +42,6 @@ const Categories = (props) => {
           <CategoryBtn handlePress={handlePress} name="Beverage" />
         </View>
       </Animated.View>
-      <Animated.Image
-        source={require("../../assets/line.png")}
-        style={[{ width: 60, height: 4 }, props.opacityAnimationStyle]}
-      />
     </>
   );
 };
