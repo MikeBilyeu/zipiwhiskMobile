@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,7 +10,7 @@ import {
 function SearchBtn({ dropDownOpen, toggleDropDown, BtnText, children }) {
   const rotateValue = useRef(new Animated.Value(0)).current;
 
-  const rotateAnimation = () => {
+  useEffect(() => {
     if (dropDownOpen) {
       Animated.timing(rotateValue, {
         toValue: 0,
@@ -24,7 +24,7 @@ function SearchBtn({ dropDownOpen, toggleDropDown, BtnText, children }) {
         useNativeDriver: true,
       }).start();
     }
-  };
+  }, [dropDownOpen]);
 
   const rotateValueInterpolate = rotateValue.interpolate({
     inputRange: [0, 1],
@@ -38,7 +38,6 @@ function SearchBtn({ dropDownOpen, toggleDropDown, BtnText, children }) {
   return (
     <TouchableOpacity
       onPress={() => {
-        rotateAnimation();
         toggleDropDown();
       }}
       activeOpacity={0.8}

@@ -16,7 +16,11 @@ function ProfileScreen() {
           toggleDropDown={toggleDropDown}
           dropDownOpen={dropDownOpen}
         />
-        <SearchDropDown dropDownOpen={dropDownOpen} height={130} />
+        <SearchDropDown
+          dropDownOpen={dropDownOpen}
+          setDropDownOpen={setDropDownOpen}
+          height={130}
+        />
         <RecipeScroll paddingTop={0} />
       </View>
     </SafeAreaView>
