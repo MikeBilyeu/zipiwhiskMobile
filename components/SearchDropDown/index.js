@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, Animated } from "react-native";
+import { StyleSheet, View, Animated, TouchableOpacity } from "react-native";
 
 import Categories from "./Categories";
 import Animations from "./Animations";
@@ -48,6 +48,7 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
         >
           <SearchBar
             opacityAnimationStyle={opacityAnimationStyle}
+            isFocused={isFocused}
             setIsFocused={setIsFocused}
           />
 

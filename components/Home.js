@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet, View, FlatList, Image, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Image,
+  SafeAreaView,
+  Keyboard,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import SearchBtn from "./SearchBtn";
 import SearchDropDown from "./SearchDropDown";
 import RecipeCard from "./RecipeCard";
-import RecipeCardSmall from "./RecipeCardSmall";
 import data from "../data";
 
 function Header({ dropDownOpen, toggleDropDown }) {
@@ -36,7 +42,10 @@ function Header({ dropDownOpen, toggleDropDown }) {
 }
 function Home() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
-  const toggleDropDown = () => setDropDownOpen(!dropDownOpen);
+  const toggleDropDown = () => {
+    Keyboard.dismiss();
+    setDropDownOpen(!dropDownOpen);
+  };
 
   const renderItem = ({ item }) => <RecipeCard data={item} />;
 

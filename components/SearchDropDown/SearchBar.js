@@ -1,40 +1,62 @@
 import React, { useState } from "react";
-import { Animated, Image, StyleSheet, TextInput } from "react-native";
+import {
+  Animated,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  TouchableOpacity,
+  Keyboard,
+} from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const SearchBar = (props) => {
   const [search, setSearch] = useState("");
   return (
-    <Animated.View style={[styles.searchWrapper, props.opacityAnimationStyle]}>
-      <Image
-        source={require("../../assets/search.png")}
-        style={[styles.searchIcon]}
-      />
-      <TextInput
-        style={styles.searchText}
-        placeholder="Search"
-        returnKeyType="search"
-        onFocus={() => props.setIsFocused(true)}
-        onBlur={() => props.setIsFocused(false)}
-        defaultValue={search}
-        onChangeText={(text) => setSearch(text)}
-      />
-    </Animated.View>
+    <View style={styles.searchWrapper}>
+      <Animated.View style={[styles.searchBar, props.opacityAnimationStyle]}>
+        <Ionicons
+          name="search"
+          size={25}
+          color={props.isFocused ? "#0172C4" : "#B7B7B7"}
+          style={styles.searchIcon}
+        />
+        <TextInput
+          style={styles.searchText}
+          placeholder="Search"
+          returnKeyType="search"
+          onFocus={() => props.setIsFocused(true)}
+          onBlur={() => props.setIsFocused(false)}
+          defaultValue={search}
+          onChangeText={(text) => setSearch(text)}
+        />
+      </Animated.View>
+      {props.isFocused && (
+        <TouchableOpacity
+          style={styles.cancelBtn}
+          onPress={() => Keyboard.dismiss()}
+        >
+          <Text style={styles.cancelText}>Cancel</Text>
+        </TouchableOpacity>
+      )}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   searchWrapper: {
     width: "100%",
+    flexDirection: "row",
+  },
+  searchBar: {
+    flex: 1,
     borderRadius: 100,
     backgroundColor: "#F2F2F2",
     justifyContent: "center",
   },
   searchIcon: {
-    width: 25,
-    height: 25,
     position: "absolute",
     left: 15,
-    opacity: 0.5,
   },
   searchText: {
     height: 50,
@@ -42,6 +64,17 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextRegular",
     fontSize: 20,
     paddingTop: 3,
+  },
+  cancelBtn: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingLeft: 15,
+    paddingRight: 5,
+  },
+  cancelText: {
+    fontFamily: "AvenirNextRegular",
+    color: "#707070",
+    fontSize: 18,
   },
 });
 
