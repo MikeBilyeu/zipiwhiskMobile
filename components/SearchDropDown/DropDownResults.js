@@ -23,6 +23,7 @@ const DropDownResults = (props) => {
         setResultsDisplay={setResultsDisplay}
       />
       <FlatList
+        keyboardShouldPersistTaps={"always"}
         style={styles.listContainer}
         data={resultsDisplay === "Recipes" ? data : accounts}
         renderItem={resultsDisplay === "Recipes" ? renderRecipes : renderUsers}
