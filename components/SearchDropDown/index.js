@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, Animated, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Animated, Dimensions } from "react-native";
 
+import DropDownResults from "./DropDownResults";
 import Categories from "./Categories";
 import Animations from "./Animations";
 import SearchBar from "./SearchBar";
 
+const windowHeight = Dimensions.get("window").height;
+
 const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [search, setSearch] = useState("");
   const [mount, setMount] = useState(false);
 
   const dropDownValue = useRef(new Animated.Value(-600)).current;
@@ -42,7 +46,10 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
         <Animated.View
           style={[
             styles.dropDown,
-            { paddingTop: height + 10, height: height + 425 },
+            {
+              paddingTop: height + 10,
+              height: isFocused ? windowHeight : height + 425,
+            },
             dropDownAnimationStyle,
           ]}
         >
@@ -51,8 +58,9 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
             isFocused={isFocused}
             setIsFocused={setIsFocused}
           />
+
           {isFocused ? (
-            <></>
+            <DropDownResults />
           ) : (
             <Categories
               opacityAnimationStyle={opacityAnimationStyle}

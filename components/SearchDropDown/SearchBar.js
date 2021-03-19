@@ -30,6 +30,15 @@ const SearchBar = (props) => {
           defaultValue={search}
           onChangeText={(text) => setSearch(text)}
         />
+        {props.isFocused && search !== "" && (
+          <Ionicons
+            name="close"
+            size={25}
+            color={"#B7B7B7"}
+            style={styles.clearTextIcon}
+            onPress={() => setSearch("")}
+          />
+        )}
       </Animated.View>
       {props.isFocused && (
         <TouchableOpacity
@@ -61,9 +70,16 @@ const styles = StyleSheet.create({
   searchText: {
     height: 50,
     paddingLeft: 50,
+    paddingRight: 70,
     fontFamily: "AvenirNextRegular",
     fontSize: 20,
     paddingTop: 3,
+  },
+  clearTextIcon: {
+    position: "absolute",
+    right: 0,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
   },
   cancelBtn: {
     alignItems: "center",
