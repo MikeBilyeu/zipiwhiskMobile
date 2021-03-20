@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, FlatList, Image, Text } from "react-native";
+import { StyleSheet, FlatList, Animated } from "react-native";
 import ResultsBtn from "./ResultsBtn";
 import Users from "../FollowScreen/Users";
 import RecipeSmallView from "./RecipeSmallView";
@@ -17,7 +17,7 @@ const renderUsers = ({ item }) => (
 const DropDownResults = (props) => {
   const [resultsDisplay, setResultsDisplay] = useState("Recipes");
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, props.opacityAnimationStyle]}>
       <ResultsBtn
         resultsDisplay={resultsDisplay}
         setResultsDisplay={setResultsDisplay}
@@ -29,7 +29,7 @@ const DropDownResults = (props) => {
         renderItem={resultsDisplay === "Recipes" ? renderRecipes : renderUsers}
         keyExtractor={(item) => item.id.toString()}
       />
-    </View>
+    </Animated.View>
   );
 };
 

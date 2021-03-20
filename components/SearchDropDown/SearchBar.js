@@ -18,7 +18,7 @@ const SearchBar = (props) => {
         <Ionicons
           name="search"
           size={25}
-          color={props.isFocused ? "#0172C4" : "#B7B7B7"}
+          color={props.isFocused ? "#313131" : "#B7B7B7"}
           style={styles.searchIcon}
         />
         <TextInput
@@ -33,8 +33,8 @@ const SearchBar = (props) => {
         {props.isFocused && search !== "" && (
           <Ionicons
             name="close"
-            size={25}
-            color={"#B7B7B7"}
+            size={20}
+            color="#707070"
             style={styles.clearTextIcon}
             onPress={() => setSearch("")}
           />
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   searchText: {
     height: 50,
     paddingLeft: 50,
-    paddingRight: 70,
+    paddingRight: 55,
     fontFamily: "AvenirNextRegular",
     fontSize: 20,
     paddingTop: 3,
@@ -79,6 +79,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 0,
     paddingHorizontal: 15,
+    paddingRight: 20,
+    paddingLeft: 10,
     paddingVertical: 10,
   },
   cancelBtn: {

@@ -60,7 +60,7 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
           />
 
           {isFocused ? (
-            <DropDownResults />
+            <DropDownResults opacityAnimationStyle={opacityAnimationStyle} />
           ) : (
             <Categories
               opacityAnimationStyle={opacityAnimationStyle}
