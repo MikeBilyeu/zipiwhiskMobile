@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, Animated, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Animated,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 
 import DropDownResults from "./DropDownResults";
 import Categories from "./Categories";
@@ -42,7 +48,12 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
       <View style={styles.container}>
         <Animated.View
           style={[styles.darkBackground, darkBackgroundAnimationStye]}
-        />
+        >
+          <TouchableOpacity
+            style={{ width: "100%", flex: 1 }}
+            onPress={() => setDropDownOpen(false)}
+          />
+        </Animated.View>
         <Animated.View
           style={[
             styles.dropDown,
@@ -57,6 +68,7 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
             opacityAnimationStyle={opacityAnimationStyle}
             isFocused={isFocused}
             setIsFocused={setIsFocused}
+            setDropDownOpen={setDropDownOpen}
           />
 
           {isFocused ? (

@@ -8,10 +8,16 @@ import {
   TouchableOpacity,
   Keyboard,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const SearchBar = (props) => {
+  const navigation = useNavigation();
   const [search, setSearch] = useState("");
+  const handleSubmit = () => {
+    props.setDropDownOpen(false);
+    navigation.navigate("Results", { search });
+  };
   return (
     <View style={styles.searchWrapper}>
       <Animated.View style={[styles.searchBar, props.opacityAnimationStyle]}>
@@ -29,6 +35,7 @@ const SearchBar = (props) => {
           onBlur={() => props.setIsFocused(false)}
           defaultValue={search}
           onChangeText={(text) => setSearch(text)}
+          onSubmitEditing={handleSubmit}
         />
         {props.isFocused && search !== "" && (
           <Ionicons
