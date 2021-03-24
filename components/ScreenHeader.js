@@ -30,7 +30,9 @@ function ScreenHeader(props) {
           />
         </TouchableOpacity>
         <View style={styles.titleWrapper}>
-          <Text style={styles.titleText}>{props.title}</Text>
+          <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
+            {props.title}
+          </Text>
           <Text style={styles.subTitleText}>{props.subTitle}</Text>
         </View>
         {props.children || <View style={styles.headerBtn} />}
