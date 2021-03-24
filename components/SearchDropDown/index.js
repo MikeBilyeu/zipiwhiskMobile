@@ -69,6 +69,8 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
             isFocused={isFocused}
             setIsFocused={setIsFocused}
             setDropDownOpen={setDropDownOpen}
+            search={search}
+            setSearch={setSearch}
           />
 
           {isFocused ? (

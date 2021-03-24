@@ -42,6 +42,7 @@ function Header({ dropDownOpen, toggleDropDown }) {
 }
 function Home() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
+  const [search, setSearch] = useState("");
   const toggleDropDown = () => {
     Keyboard.dismiss();
     setDropDownOpen(!dropDownOpen);
@@ -57,6 +58,8 @@ function Home() {
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
           height={75}
+          search={search}
+          setSearch={setSearch}
         />
         <FlatList
           style={styles.listContainer}

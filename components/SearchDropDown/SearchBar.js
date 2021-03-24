@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Animated,
   StyleSheet,
@@ -13,10 +13,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 const SearchBar = (props) => {
   const navigation = useNavigation();
-  const [search, setSearch] = useState("");
   const handleSubmit = () => {
     props.setDropDownOpen(false);
-    navigation.navigate("Results", { search });
+    navigation.navigate("Results", { search: props.search });
   };
   return (
     <View style={styles.searchWrapper}>
@@ -33,11 +32,11 @@ const SearchBar = (props) => {
           returnKeyType="search"
           onFocus={() => props.setIsFocused(true)}
           onBlur={() => props.setIsFocused(false)}
-          defaultValue={search}
-          onChangeText={(text) => setSearch(text)}
+          defaultValue={props.search}
+          onChangeText={(text) => props.setSearch(text)}
           onSubmitEditing={handleSubmit}
         />
-        {props.isFocused && search !== "" && (
+        {props.isFocused && props.search !== "" && (
           <Ionicons
             name="close"
             size={20}
