@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Btn = (props) => {
   const btnActive = props.resultsDisplay === props.btnName;
@@ -16,8 +17,9 @@ const Btn = (props) => {
 };
 
 const ResultsBtn = (props) => {
-  const recipesActive = props.resultsDisplay === "Recipes";
-  const accoutnsActive = props.resultsDisplay === "Accounts";
+  const navigation = useNavigation();
+  const { index, routes } = navigation.dangerouslyGetState();
+  const currentRoute = routes[index].name;
   return (
     <View style={styles.container}>
       <Btn
@@ -25,11 +27,13 @@ const ResultsBtn = (props) => {
         resultsDisplay={props.resultsDisplay}
         setResultsDisplay={props.setResultsDisplay}
       />
-      <Btn
-        btnName="Accounts"
-        resultsDisplay={props.resultsDisplay}
-        setResultsDisplay={props.setResultsDisplay}
-      />
+      {currentRoute === "Home" && (
+        <Btn
+          btnName="Accounts"
+          resultsDisplay={props.resultsDisplay}
+          setResultsDisplay={props.setResultsDisplay}
+        />
+      )}
       <View style={styles.bottomLine} />
     </View>
   );
