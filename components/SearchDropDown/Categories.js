@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   containerTitle: {
     fontFamily: "AvenirNextRegular",
     fontSize: 15,
-    color: "#B7B7B7",
+    color: "#313131",
     textAlign: "center",
     borderBottomWidth: 0.5,
     borderBottomColor: "#E3E3E3",
