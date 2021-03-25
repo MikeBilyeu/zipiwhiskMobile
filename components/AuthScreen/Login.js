@@ -47,7 +47,7 @@ function Login(props) {
           />
 
           <TouchableOpacity
-            onPress={null}
+            onPress={() => props.navigation.navigate("ForgotPassword")}
             activeOpacity={0.4}
             style={styles.ForgotPasswordBtnContainer}
           >
