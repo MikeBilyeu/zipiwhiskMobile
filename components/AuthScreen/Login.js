@@ -6,10 +6,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
-  TextInput,
   Image,
   View,
 } from "react-native";
+
+import Input from "./Input";
+import Or from "./Or";
 
 function Login(props) {
   const [username, setUsername] = useState("");
@@ -22,46 +24,27 @@ function Login(props) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
           <Image
-            source={require("../assets/zipiwhisk.png")}
+            source={require("../../assets/zipiwhisk.png")}
             style={{ height: 55 }}
             resizeMode="contain"
           />
           <Text style={styles.header}>Login</Text>
+          <Input
+            value={username}
+            handleChange={setUsername}
+            placeholder="Username"
+            textContentType="username"
+            iconPath={require("../../assets/username.png")}
+          />
 
-          <View style={styles.inputContainer}>
-            <Image
-              source={require("../assets/username.png")}
-              style={styles.icon}
-            />
-            <TextInput
-              style={styles.textInput}
-              onChangeText={(text) => setUsername(text)}
-              value={username}
-              placeholder="Username"
-              textContentType="username"
-              clearButtonMode="while-editing"
-              selectionColor="#464646"
-              returnKeyType="done"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Image
-              source={require("../assets/password.png")}
-              style={styles.icon}
-            />
-            <TextInput
-              style={styles.textInput}
-              onChangeText={(text) => setPassword(text)}
-              value={password}
-              secureTextEntry={true}
-              placeholder="Password"
-              textContentType="password"
-              clearButtonMode="while-editing"
-              selectionColor="#464646"
-              returnKeyType="done"
-            />
-          </View>
+          <Input
+            value={password}
+            handleChange={setPassword}
+            placeholder="Password"
+            textContentType="password"
+            iconPath={require("../../assets/password.png")}
+            secureTextEntry={true}
+          />
 
           <TouchableOpacity
             onPress={null}
@@ -85,11 +68,7 @@ function Login(props) {
             <Text style={styles.loginBtnText}>{"Login"}</Text>
           </TouchableOpacity>
 
-          <View style={styles.orContainer}>
-            <View style={styles.orLine} />
-            <Text style={styles.orText}>{"Or"}</Text>
-            <View style={styles.orLine} />
-          </View>
+          <Or />
 
           <TouchableOpacity
             onPress={() => props.navigation.navigate("Signup")}
@@ -117,35 +96,8 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 18,
-    marginBottom: 15,
+    marginBottom: 25,
     color: "#313131",
-  },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: "#F2F2F2",
-    height: 50,
-    width: "95%",
-    borderRadius: 100,
-    paddingHorizontal: 0,
-    margin: 5,
-  },
-  icon: {
-    padding: 10,
-    marginHorizontal: 20,
-    height: 20,
-    width: 20,
-    resizeMode: "stretch",
-  },
-  textInput: {
-    flex: 1,
-    fontSize: 18,
-    color: "#313131",
-    height: 50,
-    width: "95%",
-    position: "absolute",
-    paddingLeft: 45,
   },
   ForgotPasswordBtnContainer: {
     elevation: 8,
@@ -174,24 +126,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     alignSelf: "center",
-  },
-
-  orContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "95%",
-    marginVertical: 20,
-  },
-  orLine: {
-    borderBottomColor: "#E2E2E2",
-    borderBottomWidth: 0.5,
-    width: 75,
-    marginHorizontal: 15,
-  },
-  orText: {
-    color: "#E2E2E2",
-    fontSize: 15,
   },
   signupBtnContainer: {},
   signupBtnText: {

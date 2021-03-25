@@ -7,7 +7,7 @@ import { Provider, connect } from "react-redux";
 import configureStore from "./redux/store";
 import { useFonts } from "expo-font";
 
-import Auth from "./components/Auth";
+import Auth from "./components/AuthScreen/Auth";
 import HomeStack from "./components/HomeStack";
 
 const store = configureStore();
