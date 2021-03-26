@@ -33,7 +33,7 @@ function Signup(props) {
             handleChange={setEmail}
             placeholder="Email"
             textContentType="emailAddress"
-            iconPath={require("../../assets/email.png")}
+            iconName="mail"
           />
 
           <Input
@@ -41,7 +41,7 @@ function Signup(props) {
             handleChange={setPassword}
             placeholder="Password"
             textContentType="newPassword"
-            iconPath={require("../../assets/password.png")}
+            iconName="lock-closed"
             secureTextEntry={true}
           />
 

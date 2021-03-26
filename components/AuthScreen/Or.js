@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   orLine: {
     borderBottomColor: "#E2E2E2",
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.7,
     width: 75,
     marginHorizontal: 15,
   },

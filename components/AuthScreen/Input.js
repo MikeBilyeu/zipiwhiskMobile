@@ -1,10 +1,17 @@
-import React from "react";
-import { StyleSheet, TextInput, Image, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, TextInput, View } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 function Input(props) {
+  const [focus, setFocus] = useState(false);
   return (
     <View style={styles.inputContainer}>
-      <Image source={props.iconPath} style={styles.icon} />
+      <Ionicons
+        name={props.iconName}
+        size={25}
+        color={focus ? "#313131" : "#B7B7B7"}
+        style={styles.icon}
+      />
       <TextInput
         style={styles.textInput}
         onChangeText={(text) => props.handleChange(text)}
@@ -15,6 +22,8 @@ function Input(props) {
         selectionColor="#464646"
         returnKeyType="done"
         secureTextEntry={props.secureTextEntry}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
       />
     </View>
   );
@@ -33,11 +42,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   icon: {
-    padding: 10,
     marginHorizontal: 20,
-    height: 20,
-    width: 20,
-    resizeMode: "stretch",
   },
   textInput: {
     flex: 1,
@@ -46,7 +51,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: "95%",
     position: "absolute",
-    paddingLeft: 45,
+    paddingLeft: 55,
   },
 });
 

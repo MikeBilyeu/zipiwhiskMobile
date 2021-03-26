@@ -34,7 +34,7 @@ function Login(props) {
             handleChange={setUsername}
             placeholder="Username"
             textContentType="username"
-            iconPath={require("../../assets/username.png")}
+            iconName="person"
           />
 
           <Input
@@ -42,7 +42,7 @@ function Login(props) {
             handleChange={setPassword}
             placeholder="Password"
             textContentType="password"
-            iconPath={require("../../assets/password.png")}
+            iconName="lock-closed"
             secureTextEntry={true}
           />
 
