@@ -8,7 +8,7 @@ import Comment from "./Comment";
 import data from "../../data.js";
 
 const renderComment = ({ item }) => {
-  return <Comment key={item.id.toString()} c={item} />;
+  return <Comment c={item} />;
 };
 
 const Comments = (props) => {
