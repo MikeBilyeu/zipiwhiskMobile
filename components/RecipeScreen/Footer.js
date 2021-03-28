@@ -66,8 +66,19 @@ const Footer = (props) => {
               style={styles.footerBtnIcon}
             />
           </TouchableOpacity>
-
           <TouchableOpacity
+            onPress={() => navigation.navigate("CreateRecipe")}
+            activeOpacity={0.4}
+            style={[styles.footerBtn]}
+          >
+            <Ionicons
+              name="pencil"
+              size={25}
+              color="#FFF"
+              style={styles.footerBtnIcon}
+            />
+          </TouchableOpacity>
+          {/* <TouchableOpacity
             onPress={null}
             activeOpacity={0.4}
             style={styles.footerBtn}
@@ -78,23 +89,10 @@ const Footer = (props) => {
               color="#FFF"
               style={styles.footerBtnIcon}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
-        <View style={styles.footerBtnContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("CreateRecipe")}
-            activeOpacity={0.4}
-            style={[styles.footerBtn, { flex: 0.25 }]}
-          >
-            <Ionicons
-              name="pencil"
-              size={25}
-              color="#FFF"
-              style={styles.footerBtnIcon}
-            />
-          </TouchableOpacity>
-        </View>
+        <View style={styles.footerBtnContainer}></View>
       </LinearGradient>
     </Animated.View>
   );
@@ -105,8 +103,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    height: 260,
-    marginTop: screenHeight - 260,
+    height: 300,
+    marginTop: screenHeight - 300,
     width: "100%",
     position: "absolute",
   },

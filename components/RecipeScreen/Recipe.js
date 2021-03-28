@@ -53,7 +53,7 @@ const Recipe = ({ data }) => {
   });
 
   let footerOpacityInterpolate = yValue.interpolate({
-    inputRange: [175, 250],
+    inputRange: [175, 280],
     outputRange: [1, 0],
   });
   const animatedFooterStyle = {
