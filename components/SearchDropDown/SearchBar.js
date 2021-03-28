@@ -42,7 +42,7 @@ const SearchBar = (props) => {
             size={20}
             color="#707070"
             style={styles.clearTextIcon}
-            onPress={() => setSearch("")}
+            onPress={() => props.setSearch("")}
           />
         )}
       </Animated.View>
