@@ -5,35 +5,25 @@ const Animations = (
   dropDownValue,
   mount,
   setMount,
-  opacityValue,
   backgroudnopacityValue
 ) => {
+  //Open animation
   if (dropDownOpen && !mount) {
     setMount(true);
     Animated.spring(dropDownValue, {
-      toValue: -10,
+      toValue: -85,
       friction: 8,
       useNativeDriver: true,
     }).start();
 
-    Animated.timing(opacityValue, {
-      toValue: 1,
-      duration: 250,
-      delay: 200,
-      useNativeDriver: true,
-    }).start();
     Animated.timing(backgroudnopacityValue, {
       toValue: 0.6,
       duration: 400,
       useNativeDriver: true,
     }).start();
   }
+  //close animation
   if (!dropDownOpen && mount) {
-    Animated.timing(opacityValue, {
-      toValue: 0,
-      duration: 1,
-      useNativeDriver: true,
-    }).start();
     Animated.timing(backgroudnopacityValue, {
       toValue: 0,
       duration: 200,

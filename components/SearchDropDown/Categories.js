@@ -28,9 +28,7 @@ const Categories = (props) => {
   };
   return (
     <>
-      <Animated.View
-        style={[styles.categoryContainer, props.opacityAnimationStyle]}
-      >
+      <Animated.View style={styles.categoryContainer}>
         <TextInput editable={false} style={styles.containerTitle}>
           Categories
         </TextInput>

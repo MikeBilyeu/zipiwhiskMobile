@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: 40,
+    backgroundColor: "#fff",
   },
   backBtn: {
     width: 75,

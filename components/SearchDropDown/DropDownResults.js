@@ -17,7 +17,7 @@ const renderUsers = ({ item }) => (
 const DropDownResults = (props) => {
   const [resultsDisplay, setResultsDisplay] = useState("Recipes");
   return (
-    <Animated.View style={[styles.container, props.opacityAnimationStyle]}>
+    <Animated.View style={styles.container}>
       <ResultsBtn
         resultsDisplay={resultsDisplay}
         setResultsDisplay={setResultsDisplay}

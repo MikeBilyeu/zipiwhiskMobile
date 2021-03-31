@@ -19,7 +19,7 @@ const SearchBar = (props) => {
   };
   return (
     <View style={styles.searchWrapper}>
-      <Animated.View style={[styles.searchBar, props.opacityAnimationStyle]}>
+      <Animated.View style={styles.searchBar}>
         <Ionicons
           name="search"
           size={25}

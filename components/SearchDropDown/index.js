@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import StatusBarBackground from "../StatusBarBackground";
 import DropDownResults from "./DropDownResults";
 import Categories from "./Categories";
 import Animations from "./Animations";
@@ -20,8 +21,8 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
   const [mount, setMount] = useState(false);
 
   const dropDownValue = useRef(new Animated.Value(-600)).current;
-  const opacityValue = useRef(new Animated.Value(0)).current;
   const backgroudnopacityValue = useRef(new Animated.Value(0)).current;
+  const touch = useRef(new Animated.Value(0)).current;
 
   useEffect(() =>
     Animations(
@@ -29,7 +30,6 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
       dropDownValue,
       mount,
       setMount,
-      opacityValue,
       backgroudnopacityValue
     )
   );
@@ -38,7 +38,10 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
     transform: [{ translateY: dropDownValue }],
   };
 
-  const opacityAnimationStyle = { opacity: opacityValue };
+  const dragAnimationStyle = {
+    transform: [{ translateY: touch }],
+  };
+
   const darkBackgroundAnimationStye = {
     opacity: backgroudnopacityValue,
   };
@@ -46,6 +49,7 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
   return (
     mount && (
       <View style={styles.container}>
+        <StatusBarBackground />
         <Animated.View
           style={[styles.darkBackground, darkBackgroundAnimationStye]}
         >
@@ -54,6 +58,7 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
             onPress={() => setDropDownOpen(false)}
           />
         </Animated.View>
+
         <Animated.View
           style={[
             styles.dropDown,
@@ -63,9 +68,15 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
             },
             dropDownAnimationStyle,
           ]}
+          onStartShouldSetResponder={() => !isFocused}
+          onMoveShouldSetResponder={() => !isFocused}
+          onResponderMove={(e) => {
+            console.log(e.nativeEvent.pageY);
+            //touch.setValue(e.nativeEvent.pageY - (height + 425));
+          }}
+          onResponderRelease={(e) => {}}
         >
           <SearchBar
-            opacityAnimationStyle={opacityAnimationStyle}
             isFocused={isFocused}
             setIsFocused={setIsFocused}
             setDropDownOpen={setDropDownOpen}
@@ -74,16 +85,14 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
           />
 
           {isFocused ? (
-            <DropDownResults opacityAnimationStyle={opacityAnimationStyle} />
+            <DropDownResults />
           ) : (
-            <Categories
-              opacityAnimationStyle={opacityAnimationStyle}
-              setDropDownOpen={setDropDownOpen}
-            />
+            <Categories setDropDownOpen={setDropDownOpen} />
           )}
+
           <Animated.Image
             source={require("../../assets/line.png")}
-            style={[styles.swipeLine, opacityAnimationStyle]}
+            style={styles.swipeLine}
           />
         </Animated.View>
       </View>
