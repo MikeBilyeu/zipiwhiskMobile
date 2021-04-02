@@ -51,12 +51,12 @@ const styles = StyleSheet.create({
   },
   gradient: {
     height: 150,
-    paddingTop: 35,
+    paddingTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
   },
   headerBtn: {
-    width: 60,
+    width: 75,
     height: 60,
     justifyContent: "center",
     alignItems: "center",
