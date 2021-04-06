@@ -17,7 +17,7 @@ import data from "../data";
 function Header({ dropDownOpen, toggleDropDown }) {
   return (
     <LinearGradient
-      colors={["#fff", "rgba(255, 255, 255, .8)"]}
+      colors={["#fff", "rgba(255, 255, 255, 1)"]}
       start={[0, 0]}
       end={[0, 1]}
       style={[styles.headerContainer]}

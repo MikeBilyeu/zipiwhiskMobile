@@ -2,7 +2,7 @@ import { Animated } from "react-native";
 
 const Animations = (
   dropDownOpen,
-  dropDownValue,
+  pan,
   mount,
   setMount,
   backgroudnopacityValue
@@ -10,8 +10,8 @@ const Animations = (
   //Open animation
   if (dropDownOpen && !mount) {
     setMount(true);
-    Animated.spring(dropDownValue, {
-      toValue: -85,
+    Animated.spring(pan, {
+      toValue: { x: 0, y: -285 },
       friction: 8,
       useNativeDriver: true,
     }).start();
@@ -29,12 +29,16 @@ const Animations = (
       duration: 200,
       useNativeDriver: true,
     }).start();
-    Animated.timing(dropDownValue, {
-      toValue: -600,
+
+    Animated.timing(pan, {
+      toValue: { x: 0, y: -800 },
       duration: 200,
       delay: 100,
       useNativeDriver: true,
-    }).start(() => setMount(false));
+    }).start(() => {
+      pan.flattenOffset();
+      setMount(false);
+    });
   }
 };
 

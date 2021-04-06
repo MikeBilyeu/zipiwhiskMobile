@@ -5,6 +5,7 @@ import {
   Animated,
   Dimensions,
   TouchableOpacity,
+  PanResponder,
 } from "react-native";
 
 import StatusBarBackground from "../StatusBarBackground";
@@ -19,28 +20,30 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState("");
   const [mount, setMount] = useState(false);
+  const pan = useRef(new Animated.ValueXY({ x: 0, y: -285 })).current;
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+        pan.setOffset({
+          x: 0,
+          y: pan.y._value,
+        });
+      },
+      onPanResponderMove: Animated.event([null, { dy: pan.y }], {
+        useNativeDriver: false,
+      }),
+      onPanResponderRelease: () => {
+        pan.flattenOffset();
+      },
+    })
+  ).current;
 
-  const dropDownValue = useRef(new Animated.Value(-600)).current;
   const backgroudnopacityValue = useRef(new Animated.Value(0)).current;
-  const touch = useRef(new Animated.Value(0)).current;
 
   useEffect(() =>
-    Animations(
-      dropDownOpen,
-      dropDownValue,
-      mount,
-      setMount,
-      backgroudnopacityValue
-    )
+    Animations(dropDownOpen, pan, mount, setMount, backgroudnopacityValue)
   );
-
-  const dropDownAnimationStyle = {
-    transform: [{ translateY: dropDownValue }],
-  };
-
-  const dragAnimationStyle = {
-    transform: [{ translateY: touch }],
-  };
 
   const darkBackgroundAnimationStye = {
     opacity: backgroudnopacityValue,
@@ -63,18 +66,12 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
           style={[
             styles.dropDown,
             {
-              paddingTop: height + 10,
-              height: isFocused ? windowHeight : height + 425,
+              paddingTop: height + 210,
+              height: isFocused ? windowHeight : height + 625,
+              transform: [{ translateY: pan.y }],
             },
-            dropDownAnimationStyle,
           ]}
-          onStartShouldSetResponder={() => !isFocused}
-          onMoveShouldSetResponder={() => !isFocused}
-          onResponderMove={(e) => {
-            console.log(e.nativeEvent.pageY);
-            //touch.setValue(e.nativeEvent.pageY - (height + 425));
-          }}
-          onResponderRelease={(e) => {}}
+          {...panResponder.panHandlers}
         >
           <SearchBar
             isFocused={isFocused}
@@ -113,7 +110,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "rgb(0,0,0)",
-    opacity: 0.5,
     position: "absolute",
   },
   dropDown: {
