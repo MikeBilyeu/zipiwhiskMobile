@@ -57,7 +57,7 @@ function Home() {
         <SearchDropDown
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
-          height={75}
+          height={5}
           search={search}
           setSearch={setSearch}
         />

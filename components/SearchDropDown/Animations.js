@@ -11,10 +11,10 @@ const Animations = (
   if (dropDownOpen && !mount) {
     setMount(true);
     Animated.spring(pan, {
-      toValue: { x: 0, y: -285 },
+      toValue: { x: 0, y: 0 },
       friction: 8,
       useNativeDriver: true,
-    }).start();
+    }).start(() => pan.setValue({ x: 0, y: 0 }));
 
     Animated.timing(backgroudnopacityValue, {
       toValue: 0.6,
@@ -28,15 +28,15 @@ const Animations = (
       toValue: 0,
       duration: 200,
       useNativeDriver: true,
-    }).start();
+    }).start(() => setMount(false));
 
     Animated.timing(pan, {
-      toValue: { x: 0, y: -800 },
+      toValue: { x: 0, y: -500 },
       duration: 200,
       delay: 100,
       useNativeDriver: true,
     }).start(() => {
-      pan.flattenOffset();
+      pan.setValue({ x: 0, y: -500 });
       setMount(false);
     });
   }

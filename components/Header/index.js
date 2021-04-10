@@ -6,7 +6,7 @@ const Header = (props) => {
   return (
     <SafeAreaView style={{ zIndex: 2 }}>
       <LinearGradient
-        colors={["#fff", "rgba(255, 255, 255, .8)"]}
+        colors={["#fff", "rgba(255, 255, 255, 1)"]}
         start={[0, 0]}
         end={[0, 1]}
         style={[styles.headerContainer, { height: props.height }]}
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
+    position: "absolute",
   },
   bottomLine: {
     width: "100%",

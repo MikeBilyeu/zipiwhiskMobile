@@ -19,7 +19,7 @@ function ProfileScreen() {
         <SearchDropDown
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
-          height={130}
+          height={60}
         />
         <RecipeScroll paddingTop={0} />
       </View>

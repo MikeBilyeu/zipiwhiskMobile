@@ -20,21 +20,33 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState("");
   const [mount, setMount] = useState(false);
-  const pan = useRef(new Animated.ValueXY({ x: 0, y: -285 })).current;
+  const pan = useRef(new Animated.ValueXY({ x: 0, y: -500 })).current;
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: () => {
         pan.setOffset({
           x: 0,
-          y: pan.y._value,
+          y: 0,
         });
       },
-      onPanResponderMove: Animated.event([null, { dy: pan.y }], {
-        useNativeDriver: false,
-      }),
+      onPanResponderMove: (e, gesture) => {
+        // Prevent over pull down
+        if (gesture.dy < 0) {
+          return Animated.event([null, { dy: pan.y }], {
+            useNativeDriver: false,
+          })(e, gesture);
+        }
+      },
       onPanResponderRelease: () => {
         pan.flattenOffset();
+        Animated.spring(pan.y, {
+          toValue: 0,
+          friction: 9,
+          useNativeDriver: true,
+        }).start(() => {
+          pan.setValue({ x: 0, y: 0 });
+        });
       },
     })
   ).current;
@@ -66,8 +78,9 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
           style={[
             styles.dropDown,
             {
-              paddingTop: height + 210,
-              height: isFocused ? windowHeight : height + 625,
+              paddingTop: height,
+              top: -5,
+              height: isFocused ? windowHeight : height + 415,
               transform: [{ translateY: pan.y }],
             },
           ]}
@@ -114,7 +127,7 @@ const styles = StyleSheet.create({
   },
   dropDown: {
     paddingBottom: 15,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFF",
     width: "100%",
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
