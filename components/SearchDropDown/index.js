@@ -38,15 +38,24 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
           })(e, gesture);
         }
       },
-      onPanResponderRelease: () => {
-        pan.flattenOffset();
-        Animated.spring(pan.y, {
-          toValue: 0,
-          friction: 9,
-          useNativeDriver: true,
-        }).start(() => {
-          pan.setValue({ x: 0, y: 0 });
-        });
+      onPanResponderRelease: (e, { dy, vy }) => {
+        // Swipe velocity threshhold
+        if (vy < -1.25 || dy < -350) {
+          Animated.decay(pan, {
+            velocity: { x: 0, y: -7 },
+            deceleration: 0.98,
+            useNativeDriver: true,
+          }).start(() => setDropDownOpen(false));
+        } else {
+          pan.flattenOffset();
+          Animated.spring(pan.y, {
+            toValue: 0,
+            friction: 9,
+            useNativeDriver: true,
+          }).start(() => {
+            pan.setValue({ x: 0, y: 0 });
+          });
+        }
       },
     })
   ).current;
