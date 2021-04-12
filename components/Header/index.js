@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
-    position: "absolute",
   },
   bottomLine: {
     width: "100%",

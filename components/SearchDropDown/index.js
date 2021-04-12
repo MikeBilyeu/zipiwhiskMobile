@@ -20,7 +20,7 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState("");
   const [mount, setMount] = useState(false);
-  const pan = useRef(new Animated.ValueXY({ x: 0, y: -500 })).current;
+  const pan = useRef(new Animated.ValueXY({ x: 0, y: -450 })).current;
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
@@ -39,11 +39,11 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
         }
       },
       onPanResponderRelease: (e, { dy, vy }) => {
-        // Swipe velocity threshhold
-        if (vy < -1.25 || dy < -350) {
+        // Swipe velocity threshold
+        if (vy < -0.85 || dy < -350) {
           Animated.decay(pan, {
-            velocity: { x: 0, y: -7 },
-            deceleration: 0.98,
+            velocity: { x: 0, y: -11 },
+            deceleration: 0.97,
             useNativeDriver: true,
           }).start(() => setDropDownOpen(false));
         } else {
@@ -60,14 +60,13 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
     })
   ).current;
 
-  const backgroudnopacityValue = useRef(new Animated.Value(0)).current;
-
-  useEffect(() =>
-    Animations(dropDownOpen, pan, mount, setMount, backgroudnopacityValue)
-  );
+  useEffect(() => Animations(dropDownOpen, pan, mount, setMount));
 
   const darkBackgroundAnimationStye = {
-    opacity: backgroudnopacityValue,
+    opacity: pan.y.interpolate({
+      inputRange: [-400, 0],
+      outputRange: [0, 0.4],
+    }),
   };
 
   return (
