@@ -42,11 +42,6 @@ const Recipe = ({ data }) => {
     }
   };
 
-  let scrollInterpolate = yValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 1],
-  });
-
   let headerOpacityInterpolate = yValue.interpolate({
     inputRange: [screenHeight - 100, screenHeight - 50],
     outputRange: [1, 0],
@@ -57,11 +52,11 @@ const Recipe = ({ data }) => {
     outputRange: [1, 0],
   });
   const animatedFooterStyle = {
-    transform: [{ translateY: scrollInterpolate }],
+    transform: [{ translateY: yValue }],
     opacity: footerOpacityInterpolate,
   };
   const animatedHeaderStyle = {
-    transform: [{ translateY: scrollInterpolate }],
+    transform: [{ translateY: yValue }],
     opacity: headerOpacityInterpolate,
   };
 
