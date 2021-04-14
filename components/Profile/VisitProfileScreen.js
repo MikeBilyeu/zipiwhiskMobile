@@ -20,7 +20,7 @@ function VisitProfileScreen() {
       <SearchDropDown
         dropDownOpen={dropDownOpen}
         setDropDownOpen={setDropDownOpen}
-        height={255}
+        height={185}
       />
       <RecipeScroll paddingTop={0} />
     </View>

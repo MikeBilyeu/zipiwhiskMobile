@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const Header = (props) => {
   return (
-    <SafeAreaView style={{ zIndex: 2 }}>
+    <SafeAreaView style={{ zIndex: 2, backgroundColor: "#fff" }}>
       <LinearGradient
         colors={["#fff", "rgba(255, 255, 255, 1)"]}
         start={[0, 0]}
