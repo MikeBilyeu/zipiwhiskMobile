@@ -20,7 +20,7 @@ const ProfileHeader = ({ dropDownOpen, toggleDropDown }) => {
       <SearchBtn
         dropDownOpen={dropDownOpen}
         toggleDropDown={toggleDropDown}
-        BtnText="Likes"
+        BtnText="Saves"
       ></SearchBtn>
     </Header>
   );
