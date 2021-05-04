@@ -44,7 +44,7 @@ function RecipeCard({ data }) {
           <View style={styles.line} />
 
           <View style={styles.infoContainer}>
-            <Text style={styles.infoText}>{"Likes"}</Text>
+            <Text style={styles.infoText}>{"Saves"}</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={styles.infoText}>{parseNum(data.numLikes)}</Text>
               <Ionicons
