@@ -17,8 +17,22 @@ const ToggleFollowBtn = ({ BtnStyles, textStyles, following }) => {
 };
 
 const styles = StyleSheet.create({
-  unfollowBtn: {},
-  unfollowBtnText: {},
+  unfollowBtn: {
+    minWidth: 140,
+    paddingHorizontal: 20,
+    paddingVertical: 9,
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#313131",
+  },
+  unfollowBtnText: {
+    textAlign: "center",
+    color: "#313131",
+    fontFamily: "AvenirNextDemiBold",
+    fontSize: 15,
+  },
   followBtn: {
     minWidth: 140,
     paddingHorizontal: 20,
