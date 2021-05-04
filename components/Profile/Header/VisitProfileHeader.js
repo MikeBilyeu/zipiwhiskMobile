@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View } from "react-native";
+import { View } from "react-native";
 
 import Header from "../../Header";
 import UserInfo from "./UserInfo";

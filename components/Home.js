@@ -3,12 +3,11 @@ import {
   StyleSheet,
   View,
   FlatList,
-  Image,
   SafeAreaView,
   Keyboard,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
+import ZipiWhiskIcon from "./Header/ZipiWhiskIcon";
 import SearchBtn from "./SearchBtn";
 import SearchDropDown from "./SearchDropDown";
 import RecipeCard from "./RecipeCard";
@@ -16,16 +15,8 @@ import data from "../data";
 
 function Header({ dropDownOpen, toggleDropDown }) {
   return (
-    <LinearGradient
-      colors={["#fff", "rgba(255, 255, 255, 1)"]}
-      start={[0, 0]}
-      end={[0, 1]}
-      style={[styles.headerContainer]}
-    >
-      <Image
-        source={require("../assets/zipiwhisk.png")}
-        style={{ width: 70, height: 15 }}
-      />
+    <View style={styles.headerContainer}>
+      <ZipiWhiskIcon />
       <SearchBtn
         dropDownOpen={dropDownOpen}
         toggleDropDown={toggleDropDown}
@@ -37,7 +28,7 @@ function Header({ dropDownOpen, toggleDropDown }) {
           dropDownOpen ? { opacity: 0 } : { opacity: 1 },
         ]}
       />
-    </LinearGradient>
+    </View>
   );
 }
 function Home() {
@@ -87,6 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     position: "absolute",
     zIndex: 2,
+    backgroundColor: "#fff",
   },
   bottomLine: {
     width: "100%",

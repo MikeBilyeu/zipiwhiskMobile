@@ -8,15 +8,13 @@ import {
   SafeAreaView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import ZipiWhiskIcon from "./Header/ZipiWhiskIcon";
 
 function ScreenHeader(props) {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.headerContainer}>
-      <Image
-        source={require("../assets/zipiwhisk.png")}
-        style={{ width: 70, height: 15 }}
-      />
+      <ZipiWhiskIcon />
 
       <View style={styles.headerWrapper}>
         <TouchableOpacity

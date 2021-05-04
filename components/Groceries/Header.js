@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Keyboard,
-  Image,
   Text,
   Share,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
+
+import ZipiWhiskIcon from "../Header/ZipiWhiskIcon";
 
 const Header = ({ inputFocused, setInputFocused, list }) => {
   const onShare = async (data) => {
@@ -34,16 +34,8 @@ const Header = ({ inputFocused, setInputFocused, list }) => {
   };
 
   return (
-    <LinearGradient
-      colors={["#fff", "rgba(255, 255, 255, 1)"]}
-      start={[0, 0]}
-      end={[0, 1]}
-      style={styles.headerContainer}
-    >
-      <Image
-        source={require("../../assets/zipiwhisk.png")}
-        style={{ width: 70, height: 15 }}
-      />
+    <View style={styles.headerContainer}>
+      <ZipiWhiskIcon />
       <View style={styles.titleWrapper}>
         <Text style={styles.titleText}>{"Groceries"}</Text>
         {inputFocused ? (
@@ -63,7 +55,7 @@ const Header = ({ inputFocused, setInputFocused, list }) => {
         )}
       </View>
       <View style={styles.bottomLine} />
-    </LinearGradient>
+    </View>
   );
 };
 
@@ -76,6 +68,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: "#fff",
   },
   titleWrapper: {
     flex: 1,
