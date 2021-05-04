@@ -35,7 +35,7 @@ const Header = ({ inputFocused, setInputFocused, list }) => {
 
   return (
     <LinearGradient
-      colors={["#fff", "rgba(255, 255, 255, .9)"]}
+      colors={["#fff", "rgba(255, 255, 255, 1)"]}
       start={[0, 0]}
       end={[0, 1]}
       style={styles.headerContainer}
