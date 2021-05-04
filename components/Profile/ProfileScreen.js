@@ -20,6 +20,7 @@ function ProfileScreen() {
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
           height={60}
+          renderItemType="small"
         />
         <RecipeScroll paddingTop={0} />
       </View>

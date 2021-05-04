@@ -24,7 +24,10 @@ const Categories = (props) => {
   const navigation = useNavigation();
   const handlePress = (name) => {
     props.setDropDownOpen(false);
-    navigation.navigate("Results", { search: name });
+    navigation.navigate("Results", {
+      search: name,
+      renderItemType: props.renderItemType,
+    });
   };
   return (
     <>

@@ -16,7 +16,12 @@ import SearchBar from "./SearchBar";
 
 const windowHeight = Dimensions.get("window").height;
 
-const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
+const SearchDropDown = ({
+  dropDownOpen,
+  setDropDownOpen,
+  height,
+  renderItemType,
+}) => {
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState("");
   const [mount, setMount] = useState(false);
@@ -105,7 +110,10 @@ const SearchDropDown = ({ dropDownOpen, setDropDownOpen, height }) => {
           {isFocused ? (
             <DropDownResults />
           ) : (
-            <Categories setDropDownOpen={setDropDownOpen} />
+            <Categories
+              setDropDownOpen={setDropDownOpen}
+              renderItemType={renderItemType}
+            />
           )}
 
           <Animated.Image

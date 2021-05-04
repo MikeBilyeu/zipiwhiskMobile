@@ -2,19 +2,28 @@ import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import ScreenHeader from "../ScreenHeader";
 import RecipeCard from "../RecipeCard";
+import RecipeSmallView from "../RecipeSmallView";
 import data from "../../data";
 
 const ResultsScreen = (props) => {
-  const renderItem = ({ item }) => <RecipeCard data={item} />;
+  const { renderItemType } = props.route.params;
+  const smallViewStyles = { paddingTop: 10, paddingHorizontal: 10 };
+
+  const renderCard = ({ item }) => <RecipeCard data={item} />;
+  const renderSmallView = ({ item }) => <RecipeSmallView item={item} />;
+
   return (
     <View style={styles.container}>
-      <ScreenHeader title={props.route.params.search} subTitle="Search" />
+      <ScreenHeader title={props.route.params.search} subTitle={"Search"} />
       <FlatList
-        style={styles.listContainer}
+        style={[
+          styles.listContainer,
+          renderItemType == "small" && smallViewStyles,
+        ]}
         contentContainerStyle={{ paddingTop: 0 }}
         data={data}
         numColumns={1}
-        renderItem={renderItem}
+        renderItem={renderItemType == "small" ? renderSmallView : renderCard}
         keyExtractor={(item) => item.id.toString()}
       />
     </View>

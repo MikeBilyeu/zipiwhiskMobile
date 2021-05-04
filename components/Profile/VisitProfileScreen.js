@@ -21,6 +21,7 @@ function VisitProfileScreen() {
         dropDownOpen={dropDownOpen}
         setDropDownOpen={setDropDownOpen}
         height={185}
+        renderItemType="small"
       />
       <RecipeScroll paddingTop={0} />
     </View>
