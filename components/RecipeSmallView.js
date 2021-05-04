@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { parseNum } from "../utils";
+import { parseNum } from "./utils";
 
 const RecipeSmallView = ({ item }) => {
   const navigation = useNavigation();
@@ -14,8 +14,8 @@ const RecipeSmallView = ({ item }) => {
       <View style={styles.textWrapper}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.recipeInfo} ellipsizeMode="tail">{`${parseNum(
-          item.nutrition.calories
-        )} Calories, ${parseNum(item.numLikes)} Likes, ${parseNum(
+          item.numLikes
+        )} Saves, ${parseNum(item.nutrition.calories)} Calories, ${parseNum(
           item.numComments
         )} Comments`}</Text>
       </View>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   image: {
     height: 45,
     width: 45,
-    marginRight: 5,
+    marginRight: 10,
     marginLeft: 0,
     resizeMode: "cover",
     borderRadius: 100,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   title: {
     color: "#313131",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 15,
+    fontSize: 18,
     marginBottom: 5,
   },
   recipeInfo: {

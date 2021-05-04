@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, FlatList, Animated } from "react-native";
 import ResultsBtn from "./ResultsBtn";
 import Users from "../FollowScreen/Users";
-import RecipeSmallView from "./RecipeSmallView";
+import RecipeSmallView from "../RecipeSmallView";
 import data from "../../data";
 
 const renderRecipes = ({ item }) => <RecipeSmallView item={item} />;

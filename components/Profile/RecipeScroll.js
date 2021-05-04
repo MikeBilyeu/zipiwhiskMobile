@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
 
-import RecipeCard from "../RecipeCard";
+import RecipeSmallView from "../RecipeSmallView";
 import data from "../../data";
 
 const RecipeScroll = ({ paddingTop = 130 }) => {
-  const renderItem = ({ item }) => <RecipeCard data={item} />;
+  const renderItem = ({ item }) => <RecipeSmallView item={item} />;
   return (
     <FlatList
       style={styles.listContainer}
@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     width: "100%",
+    paddingTop: 10,
+    paddingHorizontal: 10,
   },
 });
 
