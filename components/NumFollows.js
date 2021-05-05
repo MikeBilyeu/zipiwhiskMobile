@@ -8,7 +8,7 @@ const NumFollows = ({ text, num, username }) => {
     <TouchableOpacity
       style={styles.numWrapper}
       onPress={() =>
-        navigation.navigate("Follows", {
+        navigation.push("Follows", {
           screen: text,
           num,
           username,

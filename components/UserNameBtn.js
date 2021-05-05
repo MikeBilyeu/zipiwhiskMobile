@@ -7,7 +7,7 @@ const UserNameBtn = ({ username, image }) => {
   return (
     <TouchableOpacity
       style={styles.userContainer}
-      onPress={() => navigation.navigate("VisitProfile")}
+      onPress={() => navigation.push("VisitProfile")}
     >
       <Image style={styles.userImage} source={{ uri: image }} />
       <Text style={styles.username}>{username}</Text>
