@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import Header from "../../Header";
 import ZipiWhiskIcon from "../../Header/ZipiWhiskIcon";
@@ -7,6 +8,7 @@ import UserInfo from "./UserInfo";
 import SearchBtn from "../../SearchBtn";
 
 const ProfileHeader = ({ dropDownOpen, toggleDropDown }) => {
+  const navigation = useNavigation();
   return (
     <Header
       dropDownOpen={dropDownOpen}
@@ -14,7 +16,7 @@ const ProfileHeader = ({ dropDownOpen, toggleDropDown }) => {
       height={130}
     >
       <ZipiWhiskIcon />
-      <UserInfo>
+      <UserInfo handleImagePress={() => navigation.navigate("Settings")}>
         <CreateRecipeBtn />
       </UserInfo>
       <SearchBtn

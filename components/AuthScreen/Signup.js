@@ -9,7 +9,7 @@ import {
   Image,
   View,
 } from "react-native";
-import Input from "./Input";
+import Input from "../Input";
 import Or from "./Or";
 
 function Signup(props) {

@@ -2,20 +2,16 @@ import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
 import { userData } from "./data";
+import UserImageBtn from "../../UserImageBtn";
 
 const UserInfo = (props) => {
   return (
     <View style={styles.userInfoContainer}>
-      <TouchableOpacity
-        onPress={null}
-        activeOpacity={0.5}
-        style={styles.userImageWrapper}
-      >
-        <Image
-          style={{ width: 65, height: 65, borderRadius: 50 }}
-          source={{ uri: userData.image }}
-        />
-      </TouchableOpacity>
+      <UserImageBtn
+        handleImagePress={props.handleImagePress}
+        uri={userData.image}
+      />
+
       <View style={styles.usernameContainer}>
         <Text style={styles.usernameText}>{userData.username}</Text>
         <Text style={styles.fullNameText}>{userData.fullName}</Text>
@@ -34,7 +30,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: "#fff",
   },
-  userImageWrapper: {},
   usernameContainer: {
     alignItems: "center",
     justifyContent: "space-between",

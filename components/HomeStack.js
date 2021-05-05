@@ -10,6 +10,7 @@ import CreateRecipeScreen from "./CreateRecipeScreen/CreateRecipeScreen";
 import CameraScreen from "./CreateRecipeScreen/CameraScreen";
 import VisitProfileScreen from "./Profile/VisitProfileScreen";
 import ResultsScreen from "./ResultsScreen";
+import SettingsScreen from "./SettingsScreen";
 
 const screenWidth = Dimensions.get("screen").width;
 const Stack = createStackNavigator();
@@ -32,6 +33,7 @@ const HomeStack = () => {
       <Stack.Screen name="Follows" component={FollowScreen} />
       <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
       <Stack.Screen name="Camera" component={CameraScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
     </Stack.Navigator>
   );
 };
