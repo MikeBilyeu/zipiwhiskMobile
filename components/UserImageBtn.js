@@ -4,7 +4,7 @@ import { TouchableOpacity, Image } from "react-native";
 const UserImageBtn = (props) => (
   <TouchableOpacity onPress={props.handleImagePress} activeOpacity={0.5}>
     <Image
-      style={{ width: 65, height: 65, borderRadius: 50 }}
+      style={[{ borderRadius: 50 }, props.styles]}
       source={{ uri: props.uri }}
     />
   </TouchableOpacity>

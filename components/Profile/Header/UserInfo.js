@@ -10,6 +10,7 @@ const UserInfo = (props) => {
       <UserImageBtn
         handleImagePress={props.handleImagePress}
         uri={userData.image}
+        styles={{ width: 65, height: 65 }}
       />
 
       <View style={styles.usernameContainer}>
