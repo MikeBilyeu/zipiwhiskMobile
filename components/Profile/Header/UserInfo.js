@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-import { userData } from "./data";
 import UserImageBtn from "../../UserImageBtn";
 
 const UserInfo = (props) => {
@@ -9,13 +8,13 @@ const UserInfo = (props) => {
     <View style={styles.userInfoContainer}>
       <UserImageBtn
         handleImagePress={props.handleImagePress}
-        uri={userData.image}
+        uri={props.user.image}
         styles={{ width: 65, height: 65 }}
       />
 
       <View style={styles.usernameContainer}>
-        <Text style={styles.usernameText}>{userData.username}</Text>
-        <Text style={styles.fullNameText}>{userData.fullName}</Text>
+        <Text style={styles.usernameText}>{props.user.username}</Text>
+        <Text style={styles.fullNameText}>{props.user.fullname}</Text>
       </View>
       {props.children}
     </View>

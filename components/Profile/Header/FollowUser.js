@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const FollowUser = () => {
+const FollowUser = (props) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -16,7 +16,7 @@ const FollowUser = () => {
           style={{ width: 20, height: 20, transform: [{ rotate: "90deg" }] }}
         />
       </TouchableOpacity>
-      <Text style={styles.username}>@{data.user.username}</Text>
+      <Text style={styles.username}>@{props.username}</Text>
       <TouchableOpacity style={styles.FollowBtn}>
         <Text style={styles.FollowBtnText}>Follow</Text>
       </TouchableOpacity>
@@ -53,15 +53,3 @@ const styles = StyleSheet.create({
 });
 
 export default FollowUser;
-
-const data = {
-  user: {
-    id: 480348487,
-    username: "mr_smith512",
-    fullName: "Bob Smith",
-    image: "https://randomuser.me/api/portraits/men/17.jpg",
-    email: "mikebilyeu500@gmail.com",
-    recipeUnit: "US",
-    restriction: null,
-  },
-};

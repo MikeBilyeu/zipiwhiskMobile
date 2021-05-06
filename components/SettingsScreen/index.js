@@ -7,10 +7,13 @@ import Input from "../Input";
 import UserImageBtn from "../UserImageBtn";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { logout } from "../../redux/actions/auth";
+import {
+  logout,
+  usernameChange,
+  fullnameChange,
+} from "../../redux/actions/auth";
 
 const SettingsScreen = (props) => {
-  const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
 
   return (
@@ -19,12 +22,11 @@ const SettingsScreen = (props) => {
       <View style={styles.wrapper}>
         <View style={{ flexDirection: "row" }}>
           <UserImageBtn
-            handleImagePress={null}
-            uri={"https://randomuser.me/api/portraits/men/32.jpg"}
+            uri={props.user.image}
             styles={{ width: 85, height: 85 }}
           />
           <View style={styles.emailWrapper}>
-            <Text style={styles.email}>mrsmith28@gmail.com</Text>
+            <Text style={styles.email}>{props.user.email}</Text>
             <TouchableOpacity style={styles.logoutBtn} onPress={props.logout}>
               <Text style={styles.logoutBtnText}>Logout</Text>
             </TouchableOpacity>
@@ -32,15 +34,15 @@ const SettingsScreen = (props) => {
         </View>
 
         <Input
-          value={username}
-          handleChange={setUsername}
+          value={props.user.username}
+          handleChange={props.usernameChange}
           placeholder="Username"
           textContentType="username"
           iconName="person"
         />
         <Input
-          value={fullName}
-          handleChange={setFullName}
+          value={props.user.fullname}
+          handleChange={props.fullnameChange}
           placeholder="Full Name"
           textContentType="name"
           iconName="document-text"
@@ -90,4 +92,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { logout })(SettingsScreen);
+const mapStateToProps = (state) => ({ user: state.auth.user });
+
+const mapDispatchToProps = { logout, usernameChange, fullnameChange };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);

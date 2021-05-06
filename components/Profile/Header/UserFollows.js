@@ -3,21 +3,20 @@ import { View, StyleSheet } from "react-native";
 
 import ToggleFollowBtn from "../../ToggleFollowBtn";
 import NumFollows from "../../NumFollows";
-import { userData } from "./data";
 
-const UserFollows = () => {
+const UserFollows = (props) => {
   return (
     <View style={styles.container}>
       <NumFollows
         text="Followers"
-        num={userData.numFollowers}
-        username={userData.username}
+        num={props.user.numFollowers}
+        username={props.user.username}
       />
       <ToggleFollowBtn />
       <NumFollows
         text="Following"
-        num={userData.numFollowing}
-        username={userData.username}
+        num={props.user.numFollowing}
+        username={props.user.username}
       />
     </View>
   );
