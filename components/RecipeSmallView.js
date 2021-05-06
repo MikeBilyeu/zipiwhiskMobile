@@ -12,12 +12,16 @@ const RecipeSmallView = ({ item }) => {
     >
       <Image style={styles.image} source={{ uri: item.recipeImage }} />
       <View style={styles.textWrapper}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.recipeInfo} ellipsizeMode="tail">{`${parseNum(
-          item.numLikes
-        )} Saves, ${parseNum(item.nutrition.calories)} Calories, ${parseNum(
-          item.numComments
-        )} Comments`}</Text>
+        <Text style={styles.title} ellipsizeMode="tail" numberOfLines={1}>
+          {item.title}
+        </Text>
+        <Text
+          style={styles.recipeInfo}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+        >{`${parseNum(item.numLikes)} Saves, ${parseNum(
+          item.nutrition.calories
+        )} Calories, ${parseNum(item.numComments)} Comments`}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -39,17 +43,17 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 100,
   },
-  textWrapper: {},
+  textWrapper: { flex: 1 },
   title: {
     color: "#313131",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 18,
+    fontSize: 16,
     marginBottom: 5,
   },
   recipeInfo: {
     color: "#313131",
     fontFamily: "AvenirNextRegular",
-    fontSize: 15,
+    fontSize: 14,
   },
 });
 
