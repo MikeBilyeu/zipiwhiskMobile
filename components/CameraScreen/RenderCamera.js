@@ -1,24 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  StatusBar,
-  ImageBackground,
-} from "react-native";
-import { Camera, takePictureAsync } from "expo-camera";
+import React, { useState, useRef } from "react";
+import { StyleSheet, View, TouchableOpacity, StatusBar } from "react-native";
+import { Camera } from "expo-camera";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
-
 import { changeImage } from "../../redux/actions/recipeForm";
 
-const mapStateToProps = (state) => ({
-  recipeForm: state.recipeForm,
-});
-
-const RenderCamera = connect(null, { changeImage })((props) => {
+const RenderCamera = (props) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const flashIconName =
@@ -74,55 +62,6 @@ const RenderCamera = connect(null, { changeImage })((props) => {
       </Camera>
     </View>
   );
-});
-
-const RenderPreview = connect(mapStateToProps, { changeImage })((props) => {
-  const navigation = useNavigation();
-  return (
-    <View style={styles.container}>
-      <StatusBar hidden />
-      <ImageBackground
-        source={{ uri: props.recipeForm.imagePath }}
-        style={styles.imagePreview}
-      >
-        <View style={styles.buttonContainer}>
-          <Ionicons
-            onPress={() => props.changeImage(null)}
-            name="ios-close"
-            size={30}
-            color="#FFF"
-            style={[styles.closeBtn, { right: 0 }]}
-          />
-          <TouchableOpacity
-            style={styles.nextBtn}
-            onPress={() => navigation.navigate("CreateRecipe")}
-          >
-            <Text style={styles.nextBtnText}>Continue</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </View>
-  );
-});
-
-const CameraScreen = (props) => {
-  const [hasPermission, setHasPermission] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === "granted");
-    })();
-  }, []);
-
-  if (hasPermission === null) {
-    return <View />;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
-
-  return props.recipeForm.imagePath ? <RenderPreview /> : <RenderCamera />;
 };
 
 const styles = StyleSheet.create({
@@ -155,32 +94,9 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     backgroundColor: "rgba(250,250,250,.5)",
   },
-  imagePreview: {
-    flex: 1,
-    width: "100%",
-  },
   closeBtn: {
     position: "absolute",
   },
-  nextBtn: {
-    height: 50,
-    width: 250,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 150,
-    alignSelf: "flex-end",
-    backgroundColor: "rgba(226,226,226,.8)",
-    marginBottom: 20,
-  },
-  nextBtnText: {
-    color: "white",
-    fontSize: 20,
-    fontFamily: "AvenirNextDemiBold",
-  },
-  text: {
-    fontSize: 18,
-    color: "white",
-  },
 });
 
-export default connect(mapStateToProps)(CameraScreen);
+export default connect(null, { changeImage })(RenderCamera);

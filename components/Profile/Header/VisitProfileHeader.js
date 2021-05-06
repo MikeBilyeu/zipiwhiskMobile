@@ -23,7 +23,7 @@ const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
       <SearchBtn
         dropDownOpen={dropDownOpen}
         toggleDropDown={toggleDropDown}
-        BtnText="Likes"
+        BtnText="Saves"
       />
     </Header>
   );

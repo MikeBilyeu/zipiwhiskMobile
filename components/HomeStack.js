@@ -7,7 +7,7 @@ import RecipeScreen from "./RecipeScreen/RecipeScreen";
 import Comments from "./Comments";
 import FollowScreen from "./FollowScreen";
 import CreateRecipeScreen from "./CreateRecipeScreen/CreateRecipeScreen";
-import CameraScreen from "./CreateRecipeScreen/CameraScreen";
+import CameraScreen from "./CameraScreen";
 import VisitProfileScreen from "./Profile/VisitProfileScreen";
 import ResultsScreen from "./ResultsScreen";
 import SettingsScreen from "./SettingsScreen";
