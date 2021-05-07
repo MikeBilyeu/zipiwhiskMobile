@@ -32,8 +32,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    marginRight: 5,
-    marginBottom: 20,
+    paddingVertical: 5,
   },
   image: {
     height: 45,
