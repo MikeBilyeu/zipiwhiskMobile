@@ -26,7 +26,7 @@ const SearchDropDown = ({
   const [search, setSearch] = useState("");
   const [mount, setMount] = useState(false);
   const pan = useRef(new Animated.ValueXY({ x: 0, y: -450 })).current;
-  const panResponder = useRef(
+  let panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: () => {
@@ -65,6 +65,9 @@ const SearchDropDown = ({
     })
   ).current;
 
+  //Only use panResponder when displaying categories
+  let panHandlers = !isFocused && panResponder.panHandlers;
+
   useEffect(() => Animations(dropDownOpen, pan, mount, setMount));
 
   const darkBackgroundAnimationStye = {
@@ -97,7 +100,7 @@ const SearchDropDown = ({
               transform: [{ translateY: pan.y }],
             },
           ]}
-          {...panResponder.panHandlers}
+          {...panHandlers}
         >
           <SearchBar
             isFocused={isFocused}

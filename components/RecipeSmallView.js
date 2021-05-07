@@ -8,7 +8,7 @@ const RecipeSmallView = ({ item }) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate("Recipe", { data: item })}
+      onPress={() => navigation.push("Recipe", { data: item })}
     >
       <Image style={styles.image} source={{ uri: item.recipeImage }} />
       <View style={styles.textWrapper}>
