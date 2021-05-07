@@ -7,6 +7,10 @@ import {
   Text,
   Share,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import ZipiWhiskIcon from "../Header/ZipiWhiskIcon";
@@ -80,9 +84,9 @@ const styles = StyleSheet.create({
   titleText: {
     textAlign: "left",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 30,
+    fontSize: wp("8.5%"),
     color: "#313131",
-    marginHorizontal: 10,
+    marginHorizontal: wp("3%"),
     flex: 3,
   },
 
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
   doneBtnText: {
     color: "#0172C4",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 18,
+    fontSize: wp("4.5%"),
   },
   bottomLine: {
     width: "100%",

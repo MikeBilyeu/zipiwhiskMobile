@@ -8,6 +8,7 @@ import {
   Animated,
   Dimensions,
 } from "react-native";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -44,7 +45,7 @@ const Footer = (props) => {
             <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
             <Ionicons
               name="heart"
-              size={25}
+              size={wp("7%")}
               color={saved ? "#DE4949" : "#FFF"}
               style={styles.footerBtnIcon}
             />
@@ -62,7 +63,7 @@ const Footer = (props) => {
             </Text>
             <Ionicons
               name="chatbubble-ellipses"
-              size={25}
+              size={wp("7%")}
               color="#FFF"
               style={styles.footerBtnIcon}
             />
@@ -74,23 +75,11 @@ const Footer = (props) => {
           >
             <Ionicons
               name="pencil"
-              size={25}
+              size={wp("7%")}
               color="#FFF"
               style={styles.footerBtnIcon}
             />
           </TouchableOpacity>
-          {/* <TouchableOpacity
-            onPress={null}
-            activeOpacity={0.4}
-            style={styles.footerBtn}
-          >
-            <Ionicons
-              name="bookmarks"
-              size={25}
-              color="#FFF"
-              style={styles.footerBtnIcon}
-            />
-          </TouchableOpacity> */}
         </View>
 
         <View style={styles.footerBtnContainer}></View>
@@ -104,8 +93,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    height: 275,
-    marginTop: screenHeight - 275,
+    height: wp("70%"),
+    marginTop: screenHeight - wp("70%"),
     width: "100%",
     position: "absolute",
   },
@@ -114,33 +103,34 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
     flex: 1,
-    paddingBottom: 25,
+    paddingBottom: wp("7%"),
     width: "100%",
   },
 
   footerBtnContainer: {
     height: "100%",
-    width: 50,
+    width: wp("15%"),
     justifyContent: "flex-end",
     alignItems: "stretch",
   },
   footerBtn: {
     justifyContent: "center",
     alignItems: "center",
-    height: 35,
+    height: wp("10%"),
     flex: 1,
   },
   footerBtnText: {
     color: "#FFF",
     fontFamily: "AvenirNextDemiBold",
+    fontSize: wp("3.5%"),
   },
   footerBtnIcon: {
-    width: 25,
-    height: 25,
+    width: wp("7%"),
+    height: wp("7%"),
   },
   userIcon: {
-    width: 35,
-    height: 35,
+    width: wp("10%"),
+    height: wp("10%"),
     borderRadius: 100,
   },
 });

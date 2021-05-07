@@ -7,10 +7,11 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
-  Dimensions,
 } from "react-native";
-
-const screenWidth = Dimensions.get("screen").width;
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const renderList = (list) => {
   return list.map((i) => (
@@ -46,7 +47,7 @@ const Ingredients = (props) => {
       <TouchableOpacity style={styles.groceryBtn}>
         <Image
           source={require("../../assets/cart.png")}
-          style={{ width: 30, height: 35 }}
+          style={{ width: wp("8%"), height: wp("9.5%") }}
         />
       </TouchableOpacity>
 
@@ -61,8 +62,8 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     alignItems: "center",
-    marginVertical: 25,
-    paddingHorizontal: 10,
+    marginVertical: wp("6%"),
+    paddingHorizontal: wp("2%"),
   },
   servingsContainer: {
     flexDirection: "row",
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
 
   listContainer: {
     width: "100%",
-    marginVertical: 10,
+    marginVertical: wp("4%"),
   },
 
   ingredientContainer: {
@@ -104,11 +105,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 5,
-    paddingVertical: 20,
+    paddingVertical: wp("5%"),
   },
   ingredientImage: {
-    width: 45,
-    height: 45,
+    width: wp("13%"),
+    height: wp("13%"),
     marginLeft: 10,
     borderRadius: 10,
   },
@@ -117,13 +118,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   ingredientAmount: {
-    fontSize: 30,
+    fontSize: wp("7.5%"),
     fontFamily: "AvenirNextBold",
     color: "#313131",
   },
   ingredientName: {
-    marginTop: 10,
-    fontSize: 22,
+    marginTop: wp("2%"),
+    fontSize: wp("6%"),
     fontFamily: "AvenirNextRegular",
     color: "#313131",
   },

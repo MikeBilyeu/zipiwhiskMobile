@@ -4,8 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Home from "./Home";
-import Bookmarks from "./Bookmarks";
-import Groceries from "./Groceries/Groceries";
+import Groceries from "./Groceries";
 import ActivityScreen from "./ActivityScreen";
 import ProfileScreen from "./Profile/ProfileScreen";
 

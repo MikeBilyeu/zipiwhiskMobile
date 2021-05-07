@@ -7,6 +7,10 @@ import {
   TouchableOpacity,
   PanResponder,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import StatusBarBackground from "../StatusBarBackground";
 import DropDownResults from "./DropDownResults";

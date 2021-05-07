@@ -8,6 +8,11 @@ import {
   Animated,
   Share,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -80,29 +85,32 @@ const Recipe = ({ data }) => {
       />
 
       <View pointerEvents="none" style={[styles.titleContainer]}>
-        <Text style={styles.titleText}>{data.title}</Text>
+        <Text style={styles.titleText} ellipsizeMode={"tail"} numberOfLines={2}>
+          {data.title}
+        </Text>
         <Image
           source={require("../../assets/whiteArrow.png")}
           style={{
             transform: [{ rotate: "-90deg" }],
-            width: 15,
-            height: 15,
+            width: wp("4%"),
+            height: wp("4%"),
+            opacity: 0.3,
           }}
         />
       </View>
       <View style={[styles.recipeScrollConatiner]}>
         <Image
           source={require("../../assets/line.png")}
-          style={{ width: 60, height: 4, position: "absolute", top: 30 }}
+          style={{
+            width: wp("15%"),
+            height: wp("1%"),
+            position: "absolute",
+            top: wp("8%"),
+          }}
         />
         <View style={styles.timeContainer}>
-          <Image
-            source={require("../../assets/timer.png")}
-            style={{
-              width: 20,
-              height: 20,
-            }}
-          />
+          <Ionicons name="timer-outline" size={wp("8%")} color={"#464646"} />
+
           <Text style={styles.timeText}>1Hr 30Min</Text>
         </View>
 
@@ -129,19 +137,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-end",
-    paddingBottom: 15,
-    height: 90,
-    marginTop: screenHeight - 90,
-    marginBottom: 15,
+    paddingBottom: wp("3%"),
+    height: wp("30%"),
+    marginTop: screenHeight - wp("30%"),
+    marginBottom: wp("8%"),
   },
   titleText: {
     color: "#FFF",
-    fontSize: 25,
-    fontFamily: "AvenirNextDemiBold",
+    fontSize: wp("8%"),
+    lineHeight: wp("8%"),
+    fontFamily: "AvenirNextBold",
     textAlign: "center",
-    fontWeight: "bold",
-    width: screenWidth - 100,
-    marginBottom: 10,
+    width: screenWidth - wp("30%"),
+    marginBottom: wp("2%"),
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.8,
@@ -149,9 +157,9 @@ const styles = StyleSheet.create({
   },
   recipeScrollConatiner: {
     backgroundColor: "#FFF",
-    borderTopLeftRadius: 35,
-    borderTopRightRadius: 35,
-    paddingTop: 50,
+    borderTopLeftRadius: wp("10%"),
+    borderTopRightRadius: wp("10%"),
+    paddingTop: wp("10%"),
     paddingBottom: 10,
     alignItems: "center",
     justifyContent: "space-around",
@@ -163,13 +171,13 @@ const styles = StyleSheet.create({
 
   timeContainer: {
     alignItems: "center",
-    height: 50,
+    height: wp("17%"),
     justifyContent: "space-between",
-    marginVertical: 25,
+    marginVertical: wp("10%"),
   },
 
   timeText: {
-    fontSize: 18,
+    fontSize: wp("6%"),
     fontFamily: "AvenirNextRegular",
     color: "#313131",
   },

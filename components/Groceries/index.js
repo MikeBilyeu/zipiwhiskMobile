@@ -7,6 +7,10 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { useKeepAwake } from "expo-keep-awake";
@@ -94,17 +98,17 @@ const styles = StyleSheet.create({
 
   listContainer: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: wp("5%"),
     width: "100%",
   },
 
   inputText: {
-    fontSize: 18,
+    fontSize: wp("4.5%"),
     fontFamily: "AvenirNextRegular",
     color: "#313131",
-    paddingHorizontal: 15,
-    paddingTop: 30,
-    paddingBottom: 10,
+    paddingHorizontal: wp("3%"),
+    paddingTop: wp("9%"),
+    paddingBottom: wp("4%"),
     maxHeight: 1000,
   },
 

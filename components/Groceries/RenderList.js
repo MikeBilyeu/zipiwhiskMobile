@@ -7,6 +7,10 @@ import {
   Text,
   StyleSheet,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Swipeable } from "react-native-gesture-handler";
 
@@ -29,28 +33,13 @@ const RenderList = (list, setList, inputFocused, setInputFocused) =>
     };
     const removeItem = () => setList(list.filter((item, i) => i != index));
 
-    // onRadioPress = () => {
-    //   let newList = [...list];
-    //   newList[index].completed = !newList[index].completed;
-    //   setList(newList);
-    // };
-
     return (
       <Swipeable
         renderRightActions={() => RightAction(removeItem)}
         key={i.id}
-        style={{ width: "100%", borderWdith: 5 }}
+        style={{ width: "100%" }}
       >
         <View style={styles.ingredientContainer}>
-          {/* <TouchableOpacity style={styles.radioBtn} onPress={onRadioPress}>
-            <Ionicons
-              name={
-                i.completed ? "ios-radio-button-on" : "ios-radio-button-off"
-              }
-              size={25}
-              color="#0172C4"
-            />
-          </TouchableOpacity> */}
           <View style={styles.ingredientWrapper}>
             <TextInput
               multiline
@@ -68,11 +57,7 @@ const RenderList = (list, setList, inputFocused, setInputFocused) =>
               value={i.ingredient}
               returnKeyType="done"
             />
-            {/* <Text style={styles.ingredientName}>{i.ingredient}</Text>
-      <Text style={styles.ingredientAmount}>{i.amount}</Text> */}
           </View>
-
-          {/* <Image source={{ uri: i.image }} style={styles.ingredientImage} /> */}
         </View>
       </Swipeable>
     );
@@ -87,36 +72,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flex: 5,
   },
-  ingredientImage: {
-    width: 40,
-    borderRadius: 10,
-    alignSelf: "center",
-  },
-  radioBtn: {
-    flex: 1,
-    height: "100%",
-    maxHeight: 60,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-  },
 
   ingredientName: {
-    fontSize: 18,
+    fontSize: wp("4.5%"),
     fontFamily: "AvenirNextDemiBold",
     color: "#313131",
-    paddingRight: 15,
-    paddingLeft: 15,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingHorizontal: wp("3%"),
+    paddingVertical: wp("4%"),
     maxHeight: 1000,
   },
-  ingredientAmount: {
-    marginTop: 5,
-    fontSize: 14,
-    fontFamily: "AvenirNextRegular",
-    color: "#707070",
-  },
+
   rightContainer: {
     width: 100,
     alignItems: "center",
@@ -127,7 +92,7 @@ const styles = StyleSheet.create({
   },
   rightText: {
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 18,
+    fontSize: wp("4.5"),
     color: "#fff",
   },
 });

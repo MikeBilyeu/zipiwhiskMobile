@@ -1,13 +1,10 @@
 import React, { useRef, useEffect } from "react";
 
+import { StyleSheet, View, Text, Dimensions, Animated } from "react-native";
 import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Image,
-  Animated,
-} from "react-native";
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import Svg, { G, Circle } from "react-native-svg";
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -18,7 +15,7 @@ const NutritionFacts = ({
   data,
   percentage = 10,
   radius = (screenWidth - 50) / 2,
-  strokeWidth = 15,
+  strokeWidth = wp("3%"),
   duration = 700,
   delay = 100,
   textColor,
@@ -159,22 +156,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     width: "100%",
-    height: screenHeight * 0.9,
-    //paddingVertical: 50,
-    marginVertical: 25,
+    height: hp("90%"),
+    marginVertical: wp("6%"),
   },
   title: {
     fontFamily: "AvenirNextBold",
     color: "#313131",
-    fontSize: 30,
+    fontSize: wp("7%"),
     textAlign: "center",
   },
   subTitle: {
-    fontSize: 15,
+    fontSize: wp("3.5%"),
     fontFamily: "AvenirNextRegular",
     color: "#464646",
     textAlign: "center",
-    marginVertical: 5,
+    marginVertical: wp("1.5%"),
   },
   caloriesContainer: {
     //borderWidth: 5,
@@ -197,12 +193,12 @@ const styles = StyleSheet.create({
   },
   caloriesNum: {
     shadowOpacity: 0,
-    fontSize: 45,
+    fontSize: wp("18%"),
     fontFamily: "AvenirNextBold",
     color: "#313131",
   },
   caloriesText: {
-    fontSize: 15,
+    fontSize: wp("3.5%"),
     fontFamily: "AvenirNextRegular",
     color: "#464646",
     textAlign: "center",
@@ -212,18 +208,18 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
+    paddingHorizontal: wp("4%"),
   },
 
   macroWrapper: {
     alignItems: "center",
     justifyContent: "space-between",
-    height: 70,
+    height: wp("16%"),
   },
   colorKey: {
-    width: 18,
-    height: 18,
-    borderRadius: 5,
+    width: wp("4.5%"),
+    height: wp("4.5%"),
+    borderRadius: wp("1.2%"),
   },
   protienColor: {
     backgroundColor: "#06D6A0",
@@ -236,13 +232,13 @@ const styles = StyleSheet.create({
   },
   macroText: {
     textAlign: "center",
-    fontSize: 15,
+    fontSize: wp("3.5%"),
     fontFamily: "AvenirNextDemiBold",
     color: "#464646",
   },
   macroNum: {
     textAlign: "center",
-    fontSize: 25,
+    fontSize: wp("5%"),
     fontFamily: "AvenirNextBold",
     color: "#464646",
   },

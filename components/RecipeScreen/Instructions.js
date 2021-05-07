@@ -1,13 +1,9 @@
 import React from "react";
+import { StyleSheet, ScrollView, Text, View, Dimensions } from "react-native";
 import {
-  StyleSheet,
-  ScrollView,
-  Text,
-  View,
-  Dimensions,
-  SafeAreaView,
-  StatusBar,
-} from "react-native";
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
@@ -48,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: screenHeight,
     paddingVertical: 40,
-    marginVertical: 25,
+    marginVertical: wp("6%"),
   },
   cardContainer: {
     width: screenWidth - 20,
@@ -66,16 +62,16 @@ const styles = StyleSheet.create({
   cardTitle: {
     textAlign: "center",
     color: "#B7B7B7",
-    fontSize: 12,
+    fontSize: wp("3%"),
     fontFamily: "AvenirNextRegular",
     position: "absolute",
-    top: 20,
+    top: wp("6%"),
     width: screenWidth - 20,
   },
   cardScroll: {},
   cardText: {
-    fontSize: 30,
-    lineHeight: 35,
+    fontSize: wp("8%"),
+    lineHeight: wp("10%"),
     fontFamily: "AvenirNextRegular",
     textAlign: "center",
     color: "#313131",
@@ -83,10 +79,10 @@ const styles = StyleSheet.create({
   cardNum: {
     textAlign: "center",
     color: "#B7B7B7",
-    fontSize: 12,
+    fontSize: wp("3%"),
     fontFamily: "AvenirNextRegular",
     position: "absolute",
-    bottom: 20,
+    bottom: wp("6%"),
     width: screenWidth - 20,
   },
 });

@@ -6,6 +6,10 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 function SearchBtn({ dropDownOpen, toggleDropDown, BtnText, children }) {
   const rotateValue = useRef(new Animated.Value(0)).current;
@@ -45,12 +49,12 @@ function SearchBtn({ dropDownOpen, toggleDropDown, BtnText, children }) {
     >
       <Image
         source={require("../assets/search.png")}
-        style={{ width: 20, height: 20 }}
+        style={{ width: wp("5%"), height: wp("5%") }}
       />
       <Text style={styles.searchBtnText}>{BtnText}</Text>
       <Animated.Image
         source={require("../assets/arrow.png")}
-        style={[{ width: 15, height: 15 }, rotateAnimationStyle]}
+        style={[{ width: wp("4%"), height: wp("4%") }, rotateAnimationStyle]}
       />
       {children}
     </TouchableOpacity>
@@ -60,7 +64,7 @@ function SearchBtn({ dropDownOpen, toggleDropDown, BtnText, children }) {
 const styles = StyleSheet.create({
   searchBtn: {
     width: "100%",
-    height: 65,
+    height: wp("15%"),
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
@@ -70,9 +74,9 @@ const styles = StyleSheet.create({
   searchBtnText: {
     textAlign: "center",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 30,
+    fontSize: wp("8.5%"),
     color: "#313131",
-    marginHorizontal: 10,
+    marginHorizontal: wp("2%"),
   },
 });
 
