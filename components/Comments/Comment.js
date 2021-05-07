@@ -15,6 +15,7 @@ const Comment = ({ c }) => {
   const navigation = useNavigation();
   return (
     <View
+      key={c.id.toString()}
       style={[
         styles.userCommentContainer,
         c.parent_comment_id && styles.userCommentContainerChild,

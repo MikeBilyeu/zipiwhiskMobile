@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Image,
@@ -17,6 +17,7 @@ import { parseNum } from "../utils";
 const screenHeight = Dimensions.get("screen").height;
 
 const Footer = (props) => {
+  const [saved, setSaved] = useState(false);
   const navigation = useNavigation();
   return (
     <Animated.View style={[styles.footerConatiner, props.styles]}>
@@ -36,7 +37,7 @@ const Footer = (props) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={null}
+            onPress={() => setSaved(!saved)}
             activeOpacity={0.4}
             style={styles.footerBtn}
           >
@@ -44,7 +45,7 @@ const Footer = (props) => {
             <Ionicons
               name="heart"
               size={25}
-              color="#FFF"
+              color={saved ? "#DE4949" : "#FFF"}
               style={styles.footerBtnIcon}
             />
           </TouchableOpacity>

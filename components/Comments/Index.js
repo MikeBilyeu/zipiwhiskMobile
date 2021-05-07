@@ -7,9 +7,7 @@ import Input from "./Input";
 import Comment from "./Comment";
 import data from "../../data.js";
 
-const renderComment = ({ item }) => {
-  return <Comment c={item} />;
-};
+const renderComment = ({ item }) => <Comment c={item} />;
 
 const Comments = (props) => {
   return (
@@ -18,11 +16,7 @@ const Comments = (props) => {
       <ScreenHeader title="Comments" subTitle={props.route.params.title} />
       <View style={styles.wrapper}>
         <Input />
-        <FlatList
-          data={data[0].comments}
-          renderItem={renderComment}
-          keyExtractor={(item) => item.id.toString()}
-        />
+        <FlatList data={data[0].comments} renderItem={renderComment} />
       </View>
     </View>
   );
