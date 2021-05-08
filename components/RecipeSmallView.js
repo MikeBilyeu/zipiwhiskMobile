@@ -1,5 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
 import { useNavigation } from "@react-navigation/native";
 import { parseNum } from "./utils";
 
@@ -32,12 +37,12 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 5,
+    paddingVertical: wp("1.75%"),
   },
   image: {
-    height: 45,
-    width: 45,
-    marginRight: 10,
+    height: wp("14%"),
+    width: wp("14%"),
+    marginRight: wp("3%"),
     marginLeft: 0,
     resizeMode: "cover",
     borderRadius: 100,
@@ -46,13 +51,13 @@ const styles = StyleSheet.create({
   title: {
     color: "#313131",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 16,
-    marginBottom: 5,
+    fontSize: wp("5%"),
+    marginBottom: wp("1%"),
   },
   recipeInfo: {
     color: "#313131",
     fontFamily: "AvenirNextRegular",
-    fontSize: 14,
+    fontSize: wp("3.75%"),
   },
 });
 

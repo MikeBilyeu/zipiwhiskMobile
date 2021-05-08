@@ -1,6 +1,10 @@
 import React from "react";
 import { View } from "react-native";
 import { connect } from "react-redux";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import Header from "../../Header";
 import UserInfo from "./UserInfo";
@@ -13,11 +17,11 @@ const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
     <Header
       dropDownOpen={dropDownOpen}
       toggleDropDown={toggleDropDown}
-      height={210}
+      height={wp("53%")}
     >
       <FollowUser username={user.username} />
       <UserInfo user={user}>
-        <View style={{ width: 65 }} />
+        <View style={{ width: wp("20%") }} />
       </UserInfo>
       <UserFollows user={user} />
       <SearchBtn

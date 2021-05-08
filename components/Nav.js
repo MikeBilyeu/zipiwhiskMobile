@@ -2,6 +2,10 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import Home from "./Home";
 import Groceries from "./Groceries";
@@ -40,9 +44,9 @@ const Nav = () => {
           return (
             <Ionicons
               name={iconName}
-              size={23}
+              size={wp("6%")}
               color={color}
-              style={{ marginTop: 5 }}
+              style={{ marginTop: wp("2%") }}
             />
           );
         },

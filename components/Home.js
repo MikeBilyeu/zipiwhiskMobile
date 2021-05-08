@@ -6,6 +6,10 @@ import {
   SafeAreaView,
   Keyboard,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import ZipiWhiskIcon from "./Header/ZipiWhiskIcon";
 import SearchBtn from "./SearchBtn";
@@ -54,7 +58,7 @@ function Home() {
         />
         <FlatList
           style={styles.listContainer}
-          contentContainerStyle={{ paddingTop: 75 }}
+          contentContainerStyle={{ paddingTop: wp("18%") }}
           data={data}
           numColumns={1}
           renderItem={renderItem}
@@ -72,7 +76,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     paddingTop: 2,
-    height: 75,
+    //height: 75,
+    height: wp("18%"),
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",

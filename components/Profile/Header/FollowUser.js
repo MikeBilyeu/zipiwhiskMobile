@@ -1,5 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 
 const FollowUser = (props) => {
@@ -13,7 +17,11 @@ const FollowUser = (props) => {
       >
         <Image
           source={require("../../../assets/arrow.png")}
-          style={{ width: 20, height: 20, transform: [{ rotate: "90deg" }] }}
+          style={{
+            width: wp("5%"),
+            height: wp("5%"),
+            transform: [{ rotate: "90deg" }],
+          }}
         />
       </TouchableOpacity>
       <Text style={styles.username}>@{props.username}</Text>
@@ -26,28 +34,28 @@ const FollowUser = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
+    paddingHorizontal: wp("5%"),
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 40,
+    height: wp("12%"),
     backgroundColor: "#fff",
   },
   backBtn: {
-    width: 75,
+    width: wp("20%"),
   },
   username: {
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 16,
+    fontSize: wp("4%"),
     textAlign: "center",
     color: "#313131",
   },
   FollowBtnText: {
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 16,
+    fontSize: wp("4%"),
     color: "#0172C4",
-    width: 75,
+    width: wp("20%"),
     textAlign: "right",
   },
 });

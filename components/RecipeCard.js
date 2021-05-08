@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     padding: wp("2%"),
   },
   recipeCardDarken: {
-    backgroundColor: "rgba(0,0,0,.20)",
+    backgroundColor: "rgba(0,0,0,.15)",
     borderRadius: wp("4%"),
     justifyContent: "flex-end",
     alignContent: "center",

@@ -13,7 +13,7 @@ import { userData } from "./data";
 
 function ActivityHeader() {
   return (
-    <Header height={75}>
+    <Header height={wp("18%")}>
       <ZipiWhiskIcon />
       <View style={styles.followContainer}>
         <NumFollows

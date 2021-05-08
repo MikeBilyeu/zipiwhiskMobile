@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     paddingTop: 2,
     position: "absolute",
     zIndex: 1,
-    height: 75,
+    height: wp("18%"),
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",

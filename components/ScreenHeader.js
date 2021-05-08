@@ -7,6 +7,10 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import ZipiWhiskIcon from "./Header/ZipiWhiskIcon";
 
@@ -24,7 +28,11 @@ function ScreenHeader(props) {
         >
           <Image
             source={require("../assets/arrow.png")}
-            style={{ width: 20, height: 20, transform: [{ rotate: "90deg" }] }}
+            style={{
+              width: wp("5%"),
+              height: wp("5%"),
+              transform: [{ rotate: "90deg" }],
+            }}
           />
         </TouchableOpacity>
         <View style={styles.titleWrapper}>
@@ -47,7 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderBottomWidth: 0.5,
     borderBottomColor: "#E3E3E3",
-    height: 120,
+    height: wp("30%"),
   },
   headerWrapper: {
     width: "100%",
@@ -68,14 +76,14 @@ const styles = StyleSheet.create({
   titleText: {
     textAlign: "center",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 25,
+    fontSize: wp("8.5%"),
     color: "#313131",
     marginBottom: 2,
   },
   subTitleText: {
     textAlign: "center",
     fontFamily: "AvenirNextRegular",
-    fontSize: 14,
+    fontSize: wp("4.5"),
     color: "#313131",
   },
 });

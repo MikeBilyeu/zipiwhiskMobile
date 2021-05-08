@@ -8,6 +8,10 @@ import {
   TouchableOpacity,
   Keyboard,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -22,7 +26,7 @@ const SearchBar = (props) => {
       <Animated.View style={styles.searchBar}>
         <Ionicons
           name="search"
-          size={25}
+          size={wp("6%")}
           color={props.isFocused ? "#313131" : "#B7B7B7"}
           style={styles.searchIcon}
         />
@@ -39,7 +43,7 @@ const SearchBar = (props) => {
         {props.isFocused && props.search !== "" && (
           <Ionicons
             name="close"
-            size={20}
+            size={wp("5%")}
             color="#707070"
             style={styles.clearTextIcon}
             onPress={() => props.setSearch("")}
@@ -71,34 +75,33 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     position: "absolute",
-    left: 15,
+    left: wp("4.5%"),
   },
   searchText: {
-    height: 50,
-    paddingLeft: 50,
-    paddingRight: 55,
+    height: wp("13%"),
+    paddingLeft: wp("12%"),
+    paddingRight: wp("12%"),
     fontFamily: "AvenirNextRegular",
-    fontSize: 20,
-    paddingTop: 3,
+    fontSize: wp("5.5"),
+    paddingTop: wp("1%"),
   },
   clearTextIcon: {
     position: "absolute",
     right: 0,
-    paddingHorizontal: 15,
-    paddingRight: 20,
-    paddingLeft: 10,
-    paddingVertical: 10,
+    paddingRight: wp("6%"),
+    paddingLeft: wp("6%"),
+    paddingVertical: wp("3.5%"),
   },
   cancelBtn: {
     alignItems: "center",
     justifyContent: "center",
-    paddingLeft: 15,
-    paddingRight: 5,
+    paddingLeft: wp("6%"),
+    paddingRight: wp("3%"),
   },
   cancelText: {
     fontFamily: "AvenirNextRegular",
     color: "#707070",
-    fontSize: 18,
+    fontSize: wp("4.5%"),
   },
 });
 

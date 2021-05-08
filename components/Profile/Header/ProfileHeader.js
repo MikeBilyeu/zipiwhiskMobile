@@ -1,6 +1,10 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import Header from "../../Header";
 import ZipiWhiskIcon from "../../Header/ZipiWhiskIcon";
@@ -14,7 +18,7 @@ const ProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
     <Header
       dropDownOpen={dropDownOpen}
       toggleDropDown={toggleDropDown}
-      height={130}
+      height={wp("35%")}
     >
       <ZipiWhiskIcon />
       <UserInfo
