@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     width: "100%",
     zIndex: 3,
     transform: [{ translateY: -75 }],
+    position: "absolute",
   },
 });
 

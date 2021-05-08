@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, FlatList, Animated } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
 import ResultsBtn from "./ResultsBtn";
 import Users from "../FollowScreen/Users";
 import RecipeSmallView from "../RecipeSmallView";
@@ -40,7 +45,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    paddingTop: 20,
+    paddingTop: wp("5%"),
     width: "100%",
   },
 });

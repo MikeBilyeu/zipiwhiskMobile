@@ -15,7 +15,7 @@ const CreateRecipeBtn = () => {
       style={styles.createRecipeBtn}
     >
       <Image
-        style={{ width: wp("8%"), height: wp("8%") }}
+        style={{ width: wp("7%"), height: wp("7%") }}
         source={require("../../../assets/createRecipe.png")}
       />
     </TouchableOpacity>

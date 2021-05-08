@@ -7,6 +7,10 @@ import {
   Animated,
   View,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 
 const CategoryBtn = ({ name, handlePress }) => {
@@ -54,18 +58,18 @@ const styles = StyleSheet.create({
   },
   containerTitle: {
     fontFamily: "AvenirNextRegular",
-    fontSize: 15,
+    fontSize: wp("3.5%"),
     color: "#313131",
     textAlign: "center",
     borderBottomWidth: 0.5,
     borderBottomColor: "#E3E3E3",
     paddingBottom: 5,
-    paddingTop: 15,
+    paddingTop: wp("4%"),
   },
 
   btnContainer: {
     flex: 1,
-    marginVertical: 15,
+    marginVertical: wp("4%"),
   },
   btnWrapper: {
     width: "100%",
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   btnText: {
-    fontSize: 18,
+    fontSize: wp("4.5%"),
     fontFamily: "AvenirNextDemiBold",
     color: "#464646",
     textAlign: "center",

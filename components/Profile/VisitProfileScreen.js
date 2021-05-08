@@ -1,6 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView } from "react-native";
+import { StyleSheet, View } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import VisitProfileHeader from "./Header/VisitProfileHeader";
 import SearchDropDown from "../SearchDropDown";
@@ -20,7 +24,7 @@ function VisitProfileScreen() {
       <SearchDropDown
         dropDownOpen={dropDownOpen}
         setDropDownOpen={setDropDownOpen}
-        height={185}
+        height={wp("68%")}
         renderItemType="small"
       />
       <RecipeScroll paddingTop={0} />

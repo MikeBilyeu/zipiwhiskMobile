@@ -54,7 +54,7 @@ const Header = ({ inputFocused, setInputFocused, list }) => {
           </TouchableOpacity>
         ) : (
           <TouchableOpacity style={styles.doneBtn} onPress={onShare}>
-            <Ionicons name="paper-plane-outline" size={25} color="#0172C4" />
+            <Ionicons name="share-outline" size={wp("7%")} color="#0172C4" />
           </TouchableOpacity>
         )}
       </View>
@@ -65,7 +65,6 @@ const Header = ({ inputFocused, setInputFocused, list }) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    paddingTop: 2,
     position: "absolute",
     zIndex: 1,
     height: wp("18%"),
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
   titleText: {
     textAlign: "left",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("8.5%"),
+    fontSize: wp("7%"),
     color: "#313131",
     marginHorizontal: wp("3%"),
     flex: 3,

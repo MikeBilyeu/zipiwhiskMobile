@@ -19,7 +19,6 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    paddingTop: 2,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",

@@ -13,7 +13,7 @@ const UserInfo = (props) => {
       <UserImageBtn
         handleImagePress={props.handleImagePress}
         uri={props.user.image}
-        styles={{ width: wp("20%"), height: wp("20%") }}
+        styles={{ width: wp("18%"), height: wp("18%") }}
       />
 
       <View style={styles.usernameContainer}>
@@ -42,13 +42,13 @@ const styles = StyleSheet.create({
   },
   usernameText: {
     textAlign: "center",
-    fontSize: wp("5%"),
+    fontSize: wp("4.5%"),
     fontFamily: "AvenirNextDemiBold",
     color: "#313131",
   },
   fullNameText: {
     textAlign: "center",
-    fontSize: wp("3.5%"),
+    fontSize: wp("3.25%"),
     fontFamily: "AvenirNextRegular",
     color: "#464646",
   },

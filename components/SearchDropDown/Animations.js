@@ -13,12 +13,12 @@ const Animations = (dropDownOpen, pan, mount, setMount) => {
   //close animation
   if (!dropDownOpen && mount) {
     Animated.timing(pan, {
-      toValue: { x: 0, y: -450 },
+      toValue: { x: 0, y: -550 },
       duration: 200,
       delay: 0,
       useNativeDriver: true,
     }).start(() => {
-      pan.setValue({ x: 0, y: -450 });
+      pan.setValue({ x: 0, y: -550 });
       setMount(false);
     });
   }

@@ -17,7 +17,7 @@ const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
     <Header
       dropDownOpen={dropDownOpen}
       toggleDropDown={toggleDropDown}
-      height={wp("53%")}
+      height={wp("55%")}
     >
       <FollowUser username={user.username} />
       <UserInfo user={user}>

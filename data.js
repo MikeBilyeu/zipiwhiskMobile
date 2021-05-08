@@ -5,7 +5,7 @@ const data = [
     numComments: 4,
     title: "Peanut Butter Banana Smoothie",
     user: {
-      image: "https://randomuser.me/api/portraits/men/5.jpg",
+      image: "https://randomuser.me/api/portraits/men/54.jpg",
       username: "billybob",
     },
     recipeImage:

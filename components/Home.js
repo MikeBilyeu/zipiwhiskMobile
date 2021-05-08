@@ -52,7 +52,7 @@ function Home() {
         <SearchDropDown
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
-          height={5}
+          height={wp("18%")}
           search={search}
           setSearch={setSearch}
         />
@@ -75,8 +75,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   headerContainer: {
-    paddingTop: 2,
-    //height: 75,
     height: wp("18%"),
     width: "100%",
     alignItems: "center",

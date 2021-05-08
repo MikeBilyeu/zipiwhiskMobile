@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     paddingVertical: wp("1.75%"),
   },
   image: {
-    height: wp("14%"),
-    width: wp("14%"),
+    height: wp("13%"),
+    width: wp("13%"),
     marginRight: wp("3%"),
     marginLeft: 0,
     resizeMode: "cover",
@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
   title: {
     color: "#313131",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("5%"),
+    fontSize: wp("4.5%"),
     marginBottom: wp("1%"),
   },
   recipeInfo: {
     color: "#313131",
     fontFamily: "AvenirNextRegular",
-    fontSize: wp("3.75%"),
+    fontSize: wp("3.5%"),
   },
 });
 

@@ -1,5 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 
 const Btn = (props) => {
@@ -47,14 +51,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   btnContainer: {
-    paddingTop: 15,
-    paddingBottom: 5,
+    paddingTop: wp("4%"),
+    paddingBottom: wp("2%"),
     flex: 1,
   },
   btnText: {
     textAlign: "center",
     fontFamily: "AvenirNextRegular",
-    fontSize: 15,
+    fontSize: wp("3.5%"),
     color: "#B7B7B7",
   },
   btnActive: {

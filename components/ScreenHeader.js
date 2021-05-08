@@ -49,7 +49,6 @@ function ScreenHeader(props) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    paddingTop: 2,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
   titleText: {
     textAlign: "center",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("8.5%"),
+    fontSize: wp("7%"),
     color: "#313131",
     marginBottom: 2,
   },

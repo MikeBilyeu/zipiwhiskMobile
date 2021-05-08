@@ -30,6 +30,7 @@ const SearchDropDown = ({
   const [search, setSearch] = useState("");
   const [mount, setMount] = useState(false);
   const pan = useRef(new Animated.ValueXY({ x: 0, y: -450 })).current;
+
   let panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
@@ -93,14 +94,13 @@ const SearchDropDown = ({
             onPress={() => setDropDownOpen(false)}
           />
         </Animated.View>
-
         <Animated.View
           style={[
             styles.dropDown,
             {
-              paddingTop: height,
+              paddingTop: height + 5,
               top: -5,
-              height: isFocused ? windowHeight : height + 415,
+              height: isFocused ? windowHeight : height + hp("55%"),
               transform: [{ translateY: pan.y }],
             },
           ]}
@@ -113,7 +113,6 @@ const SearchDropDown = ({
             search={search}
             setSearch={setSearch}
           />
-
           {isFocused ? (
             <DropDownResults />
           ) : (
@@ -140,7 +139,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
     width: "100%",
     height: "100%",
-    alignItems: "center",
   },
   darkBackground: {
     width: "100%",
@@ -149,19 +147,20 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   dropDown: {
-    paddingBottom: 15,
+    //position: "absolute",
+    paddingBottom: wp("4%"),
     backgroundColor: "#FFF",
     width: "100%",
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: wp("6%"),
+    borderBottomLeftRadius: wp("6%"),
     alignItems: "center",
-    paddingHorizontal: 10,
+    paddingHorizontal: wp("2%"),
   },
   swipeLine: {
-    width: 60,
-    height: 4,
+    width: wp("15%"),
+    height: wp("1%"),
     position: "absolute",
-    bottom: 15,
+    bottom: wp("3%"),
   },
 });
 
