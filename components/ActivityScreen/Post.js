@@ -1,9 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
-import moment from "moment";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import RecipeCard from "../RecipeCard";
 import UserNameBtn from "../UserNameBtn";
+import Time from "./Time";
 
 const Post = ({ data }) => {
   return (
@@ -15,7 +19,7 @@ const Post = ({ data }) => {
         <Text style={styles.text}>Posted a recipe.</Text>
       </View>
 
-      <Text style={styles.time}>{moment(data.timestamp).fromNow()}</Text>
+      <Time time={data.timestamp} />
     </View>
   );
 };
@@ -25,47 +29,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFF",
     position: "relative",
-    paddingTop: 20,
-    marginBottom: 20,
+    paddingTop: wp("3%"),
+    marginBottom: wp("5%"),
   },
   contentWrapper: {
     flexDirection: "row",
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: wp("5%"),
+    marginBottom: wp("1%"),
     marginHorizontal: 5,
   },
-  userContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 5,
-  },
-  userImage: {
-    height: 30,
-    width: 30,
-    marginRight: 5,
-    marginLeft: 0,
-    resizeMode: "stretch",
-    borderRadius: 100,
-  },
-  username: {
-    color: "#313131",
-    fontFamily: "AvenirNextDemiBold",
-    fontSize: 15,
-    lineHeight: 18,
-  },
+
   text: {
     color: "#313131",
     fontFamily: "AvenirNextRegular",
-    fontSize: 15,
-    lineHeight: 30,
-  },
-  time: {
-    color: "#B7B7B7",
-    fontSize: 15,
-    fontFamily: "AvenirNextRegular",
-    marginHorizontal: 5,
-    marginBottom: 5,
+    fontSize: wp("4%"),
+    lineHeight: wp("12%"),
   },
 });
 

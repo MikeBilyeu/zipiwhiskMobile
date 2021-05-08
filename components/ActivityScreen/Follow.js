@@ -1,9 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
-import moment from "moment";
 import ToggleFollowBtn from "../ToggleFollowBtn";
 import UserNameBtn from "../UserNameBtn";
+import Time from "./Time";
 
 const Follow = ({ data }) => {
   return (
@@ -15,7 +19,7 @@ const Follow = ({ data }) => {
 
       <ToggleFollowBtn BtnStyles={{ alignSelf: "flex-end" }} />
 
-      <Text style={styles.time}>{moment(data.timestamp).fromNow()}</Text>
+      <Time time={data.timestamp} />
     </View>
   );
 };
@@ -24,9 +28,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
-    padding: 5,
-    paddingTop: 10,
-    marginBottom: 20,
+    padding: wp("2%"),
+    paddingTop: wp("3%"),
+    marginBottom: wp("5%"),
   },
   contentWrapper: {
     flexDirection: "row",
@@ -34,13 +38,8 @@ const styles = StyleSheet.create({
   text: {
     color: "#313131",
     fontFamily: "AvenirNextRegular",
-    fontSize: 15,
-    lineHeight: 30,
-  },
-  time: {
-    color: "#B7B7B7",
-    fontSize: 15,
-    fontFamily: "AvenirNextRegular",
+    fontSize: wp("4%"),
+    lineHeight: wp("12%"),
   },
 });
 

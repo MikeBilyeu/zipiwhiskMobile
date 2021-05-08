@@ -1,14 +1,19 @@
 import React from "react";
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
-import moment from "moment";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
 import UserNameBtn from "../UserNameBtn";
+import Time from "./Time";
 
 const Like = ({ data }) => {
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
         <UserNameBtn username={data.user.username} image={data.user.image} />
-        <Text style={styles.text}>Liked your recipe.</Text>
+        <Text style={styles.text}>Saved your recipe.</Text>
         <TouchableOpacity style={styles.imageWrapper}>
           <Image
             style={styles.image}
@@ -17,8 +22,7 @@ const Like = ({ data }) => {
           />
         </TouchableOpacity>
       </View>
-
-      <Text style={styles.time}>{moment(data.timestamp).fromNow()}</Text>
+      <Time time={data.timestamp} />
     </View>
   );
 };
@@ -27,9 +31,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
-    padding: 5,
-    paddingTop: 10,
-    marginBottom: 20,
+    padding: wp("2%"),
+    paddingTop: wp("3%"),
+    marginBottom: wp("5%"),
   },
   contentWrapper: {
     flexDirection: "row",
@@ -38,24 +42,18 @@ const styles = StyleSheet.create({
   text: {
     color: "#313131",
     fontFamily: "AvenirNextRegular",
-    fontSize: 15,
-    lineHeight: 40,
+    fontSize: wp("4%"),
+    lineHeight: wp("12%"),
   },
   imageWrapper: {
     flex: 1,
     alignItems: "flex-end",
   },
   image: {
-    borderRadius: 45,
+    borderRadius: 100,
     position: "relative",
-    width: 45,
-    height: 45,
-  },
-
-  time: {
-    color: "#B7B7B7",
-    fontSize: 15,
-    fontFamily: "AvenirNextRegular",
+    width: wp("12%"),
+    height: wp("12%"),
   },
 });
 
