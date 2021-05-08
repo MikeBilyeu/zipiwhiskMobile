@@ -8,6 +8,8 @@ const data = [
       image: "https://randomuser.me/api/portraits/men/54.jpg",
       username: "billybob",
     },
+    recipeVideo:
+      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620509242/Recipes/video.mp4",
     recipeImage:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140916/Recipes/lp4ypoiaoqkvvzkp7qk5.jpg",
     recipeYield: 4,
@@ -122,6 +124,8 @@ const data = [
       image: "https://randomuser.me/api/portraits/women/20.jpg",
       username: "jackie93",
     },
+    recipeVideo:
+      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620512318/Recipes/pexels-kampus-production-6603824.mp4",
     recipeImage:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140674/Recipes/atlhfcivnnrdwprukcfd.jpg",
     recipeYield: 4,
