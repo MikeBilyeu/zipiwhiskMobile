@@ -1,5 +1,9 @@
 import React, { useState, useRef } from "react";
 import { StyleSheet, View, TouchableOpacity, StatusBar } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { Camera } from "expo-camera";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
@@ -26,14 +30,15 @@ const RenderCamera = (props) => {
         flashMode={flash}
       >
         <View style={styles.buttonContainer}>
-          <Ionicons
+          <TouchableOpacity
             onPress={() => navigation.goBack()}
-            name="ios-close"
-            size={30}
-            color="#FFF"
-            style={[styles.closeBtn, { left: 0 }]}
-          />
-          <Ionicons
+            activeOpacity={0.4}
+            style={[styles.btn, { left: 0 }]}
+          >
+            <Ionicons name="ios-close" size={wp("9%")} color="#FFF" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
             onPress={() => {
               setFlash(
                 flash === Camera.Constants.FlashMode.off
@@ -41,11 +46,11 @@ const RenderCamera = (props) => {
                   : Camera.Constants.FlashMode.off
               );
             }}
-            name={flashIconName}
-            size={30}
-            color="#FFF"
-            style={[styles.closeBtn, { right: null, left: null }]}
-          />
+            activeOpacity={0.4}
+            style={[styles.btn, { right: null, left: null }]}
+          >
+            <Ionicons name={flashIconName} size={wp("9%")} color="#FFF" />
+          </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.CaptureBtnOuter}
@@ -75,8 +80,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    marginHorizontal: 20,
-    marginVertical: 40,
+    marginHorizontal: wp("5%"),
+    marginVertical: hp("5%"),
   },
   CaptureBtnOuter: {
     alignSelf: "flex-end",
@@ -84,17 +89,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 3,
     borderColor: "rgba(250,250,250,.95)",
-    width: 85,
-    height: 85,
-    borderRadius: 85,
+    width: wp("20%") + 10,
+    height: wp("20%") + 10,
+
+    borderRadius: 100,
   },
+
   CaptureBtn: {
-    width: 75,
-    height: 75,
-    borderRadius: 75,
+    width: wp("20%"),
+    height: wp("20%"),
+    borderRadius: 100,
     backgroundColor: "rgba(250,250,250,.5)",
   },
-  closeBtn: {
+
+  btn: {
+    width: wp("15%"),
+    height: wp("15%"),
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
   },
 });

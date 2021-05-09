@@ -7,6 +7,10 @@ import {
   StatusBar,
   ImageBackground,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
@@ -23,13 +27,13 @@ const RenderPreview = (props) => {
         style={styles.imagePreview}
       >
         <View style={styles.buttonContainer}>
-          <Ionicons
+          <TouchableOpacity
             onPress={() => props.changeImage(null)}
-            name="ios-close"
-            size={30}
-            color="#FFF"
-            style={[styles.closeBtn, { right: 0 }]}
-          />
+            activeOpacity={0.4}
+            style={[styles.btn, { right: 0 }]}
+          >
+            <Ionicons name="ios-close" size={wp("8%")} color="#FFF" />
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.nextBtn}
             onPress={() => navigation.navigate("CreateRecipe")}
@@ -51,29 +55,33 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    marginHorizontal: 20,
-    marginVertical: 40,
+    marginHorizontal: wp("5%"),
+    marginVertical: hp("5%"),
   },
   imagePreview: {
     flex: 1,
     width: "100%",
   },
-  closeBtn: {
+  btn: {
+    width: wp("15%"),
+    height: wp("15%"),
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
   },
   nextBtn: {
-    height: 50,
-    width: 250,
+    height: wp("13%"),
+    width: wp("55%"),
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 150,
     alignSelf: "flex-end",
     backgroundColor: "rgba(226,226,226,.8)",
-    marginBottom: 20,
+    marginBottom: wp("5%"),
   },
   nextBtnText: {
     color: "white",
-    fontSize: 20,
+    fontSize: wp("4.5%"),
     fontFamily: "AvenirNextDemiBold",
   },
 });
