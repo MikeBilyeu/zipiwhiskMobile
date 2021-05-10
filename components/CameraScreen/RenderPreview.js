@@ -7,6 +7,7 @@ import {
   StatusBar,
   ImageBackground,
 } from "react-native";
+import { Video } from "expo-av";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -15,33 +16,44 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 
-import { changeImage } from "../../redux/actions/recipeForm";
+import { changeImage, changeVideo } from "../../redux/actions/recipeForm";
 
 const RenderPreview = (props) => {
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
-      <ImageBackground
-        source={{ uri: props.recipeForm.imagePath }}
-        style={styles.imagePreview}
-      >
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => props.changeImage(null)}
-            activeOpacity={0.4}
-            style={[styles.btn, { right: 0 }]}
-          >
-            <Ionicons name="ios-close" size={wp("8%")} color="#FFF" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.nextBtn}
-            onPress={() => navigation.navigate("CreateRecipe")}
-          >
-            <Text style={styles.nextBtnText}>Continue</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
+      {props.recipeForm.imagePath ? (
+        <ImageBackground
+          source={{ uri: props.recipeForm.imagePath }}
+          style={styles.preview}
+        />
+      ) : (
+        <Video
+          source={{ uri: props.recipeForm.videoPath }}
+          style={styles.preview}
+          resizeMode="cover"
+          isLooping
+          shouldPlay
+        />
+      )}
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => props.changeImage(null)}
+          activeOpacity={0.4}
+          style={[styles.btn, { left: 0 }]}
+        >
+          <Ionicons name="ios-close" size={wp("8%")} color="#FFF" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.nextBtn}
+          onPress={() => navigation.navigate("CreateRecipe")}
+        >
+          <Text style={styles.nextBtnText}>Continue</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -58,9 +70,14 @@ const styles = StyleSheet.create({
     marginHorizontal: wp("5%"),
     marginVertical: hp("5%"),
   },
-  imagePreview: {
+  preview: {
     flex: 1,
     width: "100%",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    position: "absolute",
   },
   btn: {
     width: wp("15%"),
@@ -68,6 +85,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
+    backgroundColor: "rgba(226,226,226,.3)",
+    borderRadius: 50,
   },
   nextBtn: {
     height: wp("13%"),
@@ -90,4 +109,6 @@ const mapStateToProps = (state) => ({
   recipeForm: state.recipeForm,
 });
 
-export default connect(mapStateToProps, { changeImage })(RenderPreview);
+export default connect(mapStateToProps, { changeImage, changeVideo })(
+  RenderPreview
+);

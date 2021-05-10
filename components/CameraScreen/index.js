@@ -1,29 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { Text, View } from "react-native";
 import { Camera } from "expo-camera";
+import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
 
 import RenderCamera from "./RenderCamera";
 import RenderPreview from "./RenderPreview";
 
 const CameraScreen = (props) => {
-  const [hasPermission, setHasPermission] = useState(null);
+  const [hasCameraPermission, setCameraPermission] = useState(null);
+  const [hasLibraryPermission, setLibraryPermission] = useState(null);
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === "granted");
+      const { status: cameraStatus } = await Camera.requestPermissionsAsync();
+      setCameraPermission(cameraStatus === "granted");
+
+      if (Platform.OS !== "web") {
+        const {
+          status: libraryStatus,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        setLibraryPermission(libraryStatus === "granted");
+      }
     })();
   }, []);
 
-  if (hasPermission === null) {
+  if (hasCameraPermission === null || hasLibraryPermission === null) {
     return <View />;
   }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+  if (hasCameraPermission === false || hasLibraryPermission === false) {
+    return <Text>No access to camera or photos</Text>;
   }
 
-  return props.recipeForm.imagePath ? <RenderPreview /> : <RenderCamera />;
+  return props.recipeForm.imagePath || props.recipeForm.videoPath ? (
+    <RenderPreview />
+  ) : (
+    <RenderCamera />
+  );
 };
 
 const mapStateToProps = (state) => ({

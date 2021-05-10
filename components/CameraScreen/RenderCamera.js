@@ -5,10 +5,11 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { Camera } from "expo-camera";
+import * as ImagePicker from "expo-image-picker";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
-import { changeImage } from "../../redux/actions/recipeForm";
+import { changeImage, changeVideo } from "../../redux/actions/recipeForm";
 
 const RenderCamera = (props) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -19,6 +20,22 @@ const RenderCamera = (props) => {
       : "ios-flash";
   const cameraRef = useRef(null);
   const navigation = useNavigation();
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: false,
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      if (result.type === "image") {
+        props.changeImage(result.uri);
+      } else if (result.type === "video") {
+        props.changeVideo(result.uri);
+      }
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -50,6 +67,14 @@ const RenderCamera = (props) => {
             style={[styles.btn, { right: null, left: null }]}
           >
             <Ionicons name={flashIconName} size={wp("9%")} color="#FFF" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={pickImage}
+            activeOpacity={0.4}
+            style={[styles.btn, { left: 0, bottom: 0 }]}
+          >
+            <Ionicons name="library" size={wp("9%")} color="#FFF" />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -111,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { changeImage })(RenderCamera);
+export default connect(null, { changeImage, changeVideo })(RenderCamera);

@@ -9,6 +9,7 @@ import {
   Text,
   Image,
 } from "react-native";
+import { Video } from "expo-av";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -55,6 +56,15 @@ const CreateRecipeScreen = (props) => {
               <Image
                 source={{ uri: props.recipeForm.imagePath }}
                 style={styles.image}
+              />
+            ) : props.recipeForm.videoPath ? (
+              <Video
+                source={{ uri: props.recipeForm.videoPath }}
+                style={styles.image}
+                resizeMode="cover"
+                isLooping
+                shouldPlay
+                isMuted
               />
             ) : (
               <View style={styles.cameraIconContainer}>

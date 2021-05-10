@@ -1,5 +1,6 @@
 import {
   IMAGE_CHANGE,
+  VIDEO_CHANGE,
   RECIPE_NAME_CHANGE,
   SERVINGS_CHANGE,
   INGREDIENTS_CHANGE,
@@ -11,6 +12,7 @@ import {
 
 const initialState = {
   imagePath: null,
+  videoPath: null,
   recipeName: null,
   servings: null,
   ingredients: null,
@@ -29,7 +31,9 @@ const initialState = {
 const recipeFormReducer = (state = initialState, action) => {
   switch (action.type) {
     case IMAGE_CHANGE:
-      return { ...state, imagePath: action.payload };
+      return { ...state, imagePath: action.payload, videoPath: null };
+    case VIDEO_CHANGE:
+      return { ...state, imagePath: null, videoPath: action.payload };
     case RECIPE_NAME_CHANGE:
       return { ...state, recipeName: action.payload };
     case SERVINGS_CHANGE:

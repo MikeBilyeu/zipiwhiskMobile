@@ -1,5 +1,6 @@
 import {
   IMAGE_CHANGE,
+  VIDEO_CHANGE,
   RECIPE_NAME_CHANGE,
   SERVINGS_CHANGE,
   INGREDIENTS_CHANGE,
@@ -12,6 +13,13 @@ import {
 export function changeImage(value) {
   return {
     type: IMAGE_CHANGE,
+    payload: value,
+  };
+}
+
+export function changeVideo(value) {
+  return {
+    type: VIDEO_CHANGE,
     payload: value,
   };
 }
