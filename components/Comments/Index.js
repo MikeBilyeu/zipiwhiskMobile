@@ -16,7 +16,11 @@ const Comments = (props) => {
       <ScreenHeader title="Comments" subTitle={props.route.params.title} />
       <View style={styles.wrapper}>
         <Input />
-        <FlatList data={data[0].comments} renderItem={renderComment} />
+        <FlatList
+          data={data[0].comments}
+          renderItem={renderComment}
+          keyExtractor={(item) => item.id.toString()}
+        />
       </View>
     </View>
   );

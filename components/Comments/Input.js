@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TextInput, Image, Dimensions } from "react-native";
+import { StyleSheet, View, TextInput, Image } from "react-native";
+import { connect } from "react-redux";
 
-const Input = () => {
+const Input = (props) => {
   const [text, setText] = useState("");
 
   return (
     <View style={styles.inputContainer}>
-      <Image
-        source={{ uri: "https://randomuser.me/api/portraits/men/15.jpg" }}
-        style={styles.icon}
-      />
+      <Image source={{ uri: props.user.image }} style={styles.icon} />
       <TextInput
         style={styles.textInput}
         onChangeText={(text) => setText(text)}
@@ -36,8 +34,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   icon: {
-    height: 30,
-    width: 30,
+    height: 35,
+    width: 35,
     margin: 5,
     resizeMode: "stretch",
     borderRadius: 100,
@@ -55,4 +53,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Input;
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+export default connect(mapStateToProps)(Input);

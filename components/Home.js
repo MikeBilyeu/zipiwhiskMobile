@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   Keyboard,
 } from "react-native";
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -17,7 +18,7 @@ import SearchDropDown from "./SearchDropDown";
 import RecipeCard from "./RecipeCard";
 import data from "../data";
 
-function Header({ dropDownOpen, toggleDropDown }) {
+const Header = ({ dropDownOpen, toggleDropDown }) => {
   return (
     <View style={styles.headerContainer}>
       <ZipiWhiskIcon />
@@ -34,15 +35,17 @@ function Header({ dropDownOpen, toggleDropDown }) {
       />
     </View>
   );
-}
-function Home() {
+};
+
+const Home = () => {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [search, setSearch] = useState("");
+
   const toggleDropDown = () => {
     Keyboard.dismiss();
     setDropDownOpen(!dropDownOpen);
   };
-
+  const handleLoadMore = () => console.log("load more");
   const renderItem = ({ item }) => <RecipeCard data={item} />;
 
   return (
@@ -63,11 +66,14 @@ function Home() {
           numColumns={1}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.5}
+          initialNumToRender={10}
         />
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

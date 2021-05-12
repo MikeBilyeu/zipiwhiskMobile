@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFF",
     position: "relative",
-    paddingTop: wp("3%"),
     marginBottom: wp("5%"),
+    padding: wp("2%"),
   },
   contentWrapper: {
     flexDirection: "row",
