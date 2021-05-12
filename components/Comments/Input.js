@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user,
+  user: state.user,
 });
 export default connect(mapStateToProps)(Input);

@@ -37,6 +37,6 @@ const ProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
 };
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user,
+  user: state.user,
 });
 export default connect(mapStateToProps)(ProfileHeader);

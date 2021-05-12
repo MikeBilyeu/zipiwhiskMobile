@@ -5,7 +5,7 @@ CREATE TABLE users (
     full_name VARCHAR(100),
     username VARCHAR(100) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password_encrypted BINARY(60),
+    password_encrypted BINARY(60) NOT NULL,
     updated_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT NOW()
 );
@@ -42,7 +42,7 @@ CREATE TABLE users_saves (
         REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (recipe_id) 
         REFERENCES recipes(id) ON DELETE CASCADE,
-    PRIMARY KEY (user_id, recipe_id)
+    PRIMARY KEY(user_id, recipe_id)
 );
 
 CREATE TABLE recipes (
@@ -66,7 +66,7 @@ CREATE TABLE users_recipes (
         REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (recipe_id) 
         REFERENCES recipes(id) ON DELETE CASCADE
-    PRIMARY KEY (user_id, recipe_id)
+    PRIMARY KEY(user_id, recipe_id)
 );
 
 
@@ -77,7 +77,7 @@ CREATE TABLE recipes_restrictions (
         REFERENCES recipes(id) ON DELETE CASCADE,
     FOREIGN KEY (restriction_id) 
         REFERENCES restrictions(id) ON DELETE CASCADE,
-    PRIMARY KEY (recipe_id, restriction_id)
+    PRIMARY KEY(recipe_id, restriction_id)
 );
 
 CREATE TABLE modified_recipes (
@@ -87,7 +87,7 @@ CREATE TABLE modified_recipes (
         REFERENCES recipes(id) ON DELETE CASCADE,
     FOREIGN KEY (child_recipe_id) 
         REFERENCES recipes(id) ON DELETE CASCADE
-    PRIMARY KEY (parent_recipe_id, child_recipe_id)
+    PRIMARY KEY(parent_recipe_id, child_recipe_id)
 );
 
 CREATE TABLE categories (
@@ -102,7 +102,7 @@ CREATE TABLE recipes_categories (
         REFERENCES recipes(id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) 
         REFERENCES categories(id) ON DELETE CASCADE,
-    PRIMARY KEY (recipe_id, category_id)
+    PRIMARY KEY(recipe_id, category_id)
 );
 
 CREATE TABLE ingredients (
@@ -120,7 +120,7 @@ CREATE TABLE recipes_ingredients (
         REFERENCES recipe(id) ON DELETE CASCADE,
     FOREIGN KEY (ingredient_id) 
         REFERENCES ingredient(id) ON DELETE CASCADE,
-    PRIMARY KEY (recipe_id, ingredient_id)
+    PRIMARY KEY(recipe_id, ingredient_id)
 );
 
 CREATE TABLE keywords (
@@ -136,7 +136,7 @@ CREATE TABLE recipes_keywords (
         REFERENCES keywords(id),
     FOREIGN KEY (recipe_id) 
         REFERENCES recipes(id) ON DELETE CASCADE
-    PRIMARY KEY (keyword_id, recipe_id)
+    PRIMARY KEY(keyword_id, recipe_id)
 );
 
 CREATE TABLE comments (
@@ -162,5 +162,5 @@ CREATE TABLE comments_likes (
         REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (comment_id) 
         REFERENCES coments(id) ON DELETE CASCADE
-    PRIMARY KEY (user_id, comment_id)
+    PRIMARY KEY(user_id, comment_id)
 );

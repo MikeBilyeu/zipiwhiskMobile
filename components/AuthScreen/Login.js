@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
 import {
   StyleSheet,
   Text,
@@ -9,15 +10,16 @@ import {
   Image,
   View,
 } from "react-native";
+import {
+  loginUsernameChange,
+  loginPasswordChange,
+} from "../../redux/actions/auth";
 
 import Input from "../Input";
 import Or from "./Or";
 
 function Login(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const loginDisabled = !username || !password;
+  const loginDisabled = !props.login.username || !props.login.password;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,16 +32,16 @@ function Login(props) {
           />
           <Text style={styles.header}>Login</Text>
           <Input
-            value={username}
-            handleChange={setUsername}
+            value={props.login.username}
+            handleChange={props.loginUsernameChange}
             placeholder="Username"
             textContentType="username"
             iconName="person"
           />
 
           <Input
-            value={password}
-            handleChange={setPassword}
+            value={props.login.password}
+            handleChange={props.loginPasswordChange}
             placeholder="Password"
             textContentType="password"
             iconName="lock-closed"
@@ -134,4 +136,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+const mapStateToProps = (state) => ({
+  login: state.auth.login,
+});
+
+const mapDispatchToProps = { loginUsernameChange, loginPasswordChange };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

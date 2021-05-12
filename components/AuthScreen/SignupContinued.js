@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   StyleSheet,
@@ -10,15 +10,11 @@ import {
   Image,
   View,
 } from "react-native";
-import {
-  signupEmailChange,
-  signupPasswordChange,
-} from "../../redux/actions/auth";
+import { signupUsernameChange } from "../../redux/actions/auth";
 import Input from "../Input";
-import Or from "./Or";
 
-function Signup(props) {
-  const continueDisabled = !props.signup.email || !props.signup.password;
+function SignupContinued(props) {
+  const signupDisabled = !props.signup.username;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,44 +26,26 @@ function Signup(props) {
             resizeMode="contain"
           />
           <Text style={styles.header}>Signup</Text>
+          <Text style={styles.header}>{props.signup.email}</Text>
 
           <Input
-            value={props.signup.email}
-            handleChange={props.signupEmailChange}
-            placeholder="Email"
-            textContentType="emailAddress"
-            iconName="mail"
-          />
-
-          <Input
-            value={props.signup.password}
-            handleChange={props.signupPasswordChange}
-            placeholder="Password"
-            textContentType="password"
-            iconName="lock-closed"
-            secureTextEntry={true}
+            value={props.signup.username}
+            handleChange={props.signupUsernameChange}
+            placeholder="Useraname"
+            textContentType="username"
+            iconName="person"
           />
 
           <TouchableOpacity
-            onPress={() => props.navigation.navigate("SignupContinued")}
+            onPress={null}
             activeOpacity={0.8}
             style={[
               styles.continueBtn,
-              continueDisabled && styles.continueBtnDisabled,
+              signupDisabled && styles.signupDisabled,
             ]}
-            disabled={continueDisabled}
+            disabled={signupDisabled}
           >
-            <Text style={styles.continueBtnText}>{"Continue"}</Text>
-          </TouchableOpacity>
-
-          <Or />
-
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("Login")}
-            activeOpacity={0.4}
-            style={styles.loginBtn}
-          >
-            <Text style={styles.loginBtnText}>{"Login"}</Text>
+            <Text style={styles.continueBtnText}>{"Signup"}</Text>
           </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>
@@ -100,7 +78,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 12,
   },
-  continueBtnDisabled: {
+  signupDisabled: {
     opacity: 0.6,
   },
   continueBtnText: {
@@ -117,8 +95,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({ signup: state.auth.signup });
-const mapDispatchToProps = {
-  signupEmailChange,
-  signupPasswordChange,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+
+export default connect(mapStateToProps, { signupUsernameChange })(
+  SignupContinued
+);

@@ -11,7 +11,7 @@ import {
   logout,
   usernameChange,
   fullnameChange,
-} from "../../redux/actions/auth";
+} from "../../redux/actions/user";
 
 const SettingsScreen = (props) => {
   const [fullName, setFullName] = useState("");
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({ user: state.auth.user });
+const mapStateToProps = (state) => ({ user: state.user });
 
 const mapDispatchToProps = { logout, usernameChange, fullnameChange };
 

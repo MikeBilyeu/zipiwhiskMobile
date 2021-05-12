@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 function Input(props) {
@@ -8,7 +12,7 @@ function Input(props) {
     <View style={styles.inputContainer}>
       <Ionicons
         name={props.iconName}
-        size={25}
+        size={wp("6%")}
         color={focus ? "#313131" : "#B7B7B7"}
         style={styles.icon}
       />
@@ -35,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#F2F2F2",
-    height: 50,
+    height: wp("13%"),
     width: "95%",
     borderRadius: 100,
     paddingHorizontal: 0,
@@ -46,12 +50,12 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    fontSize: 18,
+    fontSize: wp("4.5"),
     color: "#313131",
-    height: 50,
+    height: wp("13%"),
     width: "95%",
     position: "absolute",
-    paddingLeft: 55,
+    paddingLeft: wp("14%"),
   },
 });
 

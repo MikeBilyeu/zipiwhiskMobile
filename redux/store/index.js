@@ -1,13 +1,16 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import recipeFormReducer from "../reducers/recipeFormReducer";
 import authReducer from "../reducers/authReducer";
+import userReducer from "../reducers/userReducer";
 
 const rootReducer = combineReducers({
   recipeForm: recipeFormReducer,
   auth: authReducer,
+  user: userReducer,
 });
 
 const configureStore = () => {
-  return createStore(rootReducer);
+  return createStore(rootReducer, applyMiddleware(thunk));
 };
 export default configureStore;

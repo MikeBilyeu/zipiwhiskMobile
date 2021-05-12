@@ -33,5 +33,5 @@ const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ user: state.auth.user });
+const mapStateToProps = (state) => ({ user: state.user });
 export default connect(mapStateToProps)(VisitProfileHeader);

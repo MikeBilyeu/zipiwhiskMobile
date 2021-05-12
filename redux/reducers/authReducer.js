@@ -1,17 +1,22 @@
-import { AUTH_LOGOUT, FULLNAME_CHANGE, USERNAME_CHANGE } from "../constants";
+import {
+  AUTH_LOGOUT,
+  LOGIN_USERNAME_CHANGE,
+  LOGIN_PASSWORD_CHANGE,
+  SIGNUP_EMAIL_CHANGE,
+  SIGNUP_USERNAME_CHANGE,
+  SIGNUP_PASSWORD_CHANGE,
+} from "../constants";
 
 const initialState = {
   isAuth: true,
-  user: {
-    id: 1,
-    email: "smith99@gmail.com",
-    username: "smith99",
-    fullname: "Jake smith",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    recipeUnit: "US",
-    restriction: null,
-    numFollowers: "1,520",
-    numFollowing: "250",
+  login: {
+    username: null,
+    password: null,
+  },
+  signup: {
+    email: null,
+    username: null,
+    password: null,
   },
 };
 
@@ -19,12 +24,25 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_LOGOUT:
       return { isAuth: false };
-    case USERNAME_CHANGE:
-      return { ...state, user: { ...state.user, username: action.payload } };
-    case FULLNAME_CHANGE:
-      return { ...state, user: { ...state.user, fullname: action.payload } };
+    case LOGIN_USERNAME_CHANGE:
+      return { ...state, login: { ...state.login, username: action.payload } };
+    case LOGIN_PASSWORD_CHANGE:
+      return { ...state, login: { ...state.login, password: action.payload } };
+    case SIGNUP_EMAIL_CHANGE:
+      return { ...state, signup: { ...state.signup, email: action.payload } };
+    case SIGNUP_USERNAME_CHANGE:
+      return {
+        ...state,
+        signup: { ...state.signup, username: action.payload },
+      };
+    case SIGNUP_PASSWORD_CHANGE:
+      return {
+        ...state,
+        signup: { ...state.signup, password: action.payload },
+      };
     default:
       return state;
   }
 };
+
 export default authReducer;
