@@ -10,7 +10,7 @@ import {
   Image,
   View,
 } from "react-native";
-import { signupUsernameChange } from "../../redux/actions/auth";
+import { signupUsernameChange, registerUser } from "../../redux/actions/auth";
 import Input from "../Input";
 
 function SignupContinued(props) {
@@ -37,7 +37,7 @@ function SignupContinued(props) {
           />
 
           <TouchableOpacity
-            onPress={null}
+            onPress={props.registerUser}
             activeOpacity={0.8}
             style={[
               styles.continueBtn,
@@ -96,6 +96,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({ signup: state.auth.signup });
 
-export default connect(mapStateToProps, { signupUsernameChange })(
-  SignupContinued
-);
+const mapDispatchToProps = { registerUser, signupUsernameChange };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupContinued);

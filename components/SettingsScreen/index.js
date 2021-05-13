@@ -7,15 +7,10 @@ import Input from "../Input";
 import UserImageBtn from "../UserImageBtn";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import {
-  logout,
-  usernameChange,
-  fullnameChange,
-} from "../../redux/actions/user";
+import { usernameChange, fullnameChange } from "../../redux/actions/user";
+import { logout } from "../../redux/actions/auth";
 
 const SettingsScreen = (props) => {
-  const [fullName, setFullName] = useState("");
-
   return (
     <View style={styles.container}>
       <ScreenHeader title="Settings" subTitle="Profile" />

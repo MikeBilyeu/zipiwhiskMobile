@@ -23,7 +23,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_LOGOUT:
-      return { isAuth: false };
+      return { ...initialState, isAuth: false };
     case LOGIN_USERNAME_CHANGE:
       return { ...state, login: { ...state.login, username: action.payload } };
     case LOGIN_PASSWORD_CHANGE:

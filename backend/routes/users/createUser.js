@@ -1,27 +1,40 @@
-//const connection = require("../../config/db");
-
-//const bcrypt = require("bcryptjs");
+const pool = require("../../config/db");
+const bcrypt = require("bcryptjs");
 //const validateRegisterInput = require("../../validation/register");
 
 module.exports = async ({ body: { username, email, password } }, res) => {
-  console.log(username, email, password);
+  email = email.toLowerCase();
+  username = username.toLowerCase();
 
-  // VALIDATION
+  // //VALIDATION
   //   const errors = validateRegisterInput({ username, email, password });
   //   if (Object.keys(errors).length !== 0) {
   //     res.status(400).send(errors);
   //   }
-  // const q = "INSERT INTO users (email, created_at) VALUES ?";
-  // connection.query(q, [, (err, results, fields) => {
-  //   if (err) throw err;
-  //   console.log(results);
-  // });
-  //   const { rows } = await db.query(
-  //     `SELECT *
-  //     FROM "USERS"
-  //     WHERE LOWER(email) = LOWER($1)`,
-  //     [email.toLowerCase()]
-  //   );
+
+  try {
+    const password_encrypted = await bcrypt.hash(password, 10);
+    let user = {
+      email,
+      username,
+      password_encrypted,
+    };
+
+    pool.query("INSERT INTO users SET ?", user, (error, results, fields) => {
+      if (error) throw error;
+      console.log("The result is: ", results);
+      //res.status(201).send(`User added with ID: ${results.insertId}`);
+    });
+  } catch (err) {
+    console.log("error:", err);
+  }
+
+  // const { rows } = await db.query(
+  //   `SELECT *
+  //   FROM "USERS"
+  //   WHERE LOWER(email) = LOWER($1)`,
+  //   [email.toLowerCase()]
+  // );
   //   if (rows.length) {
   //     let err = "This email is already registered, Want to Log in?";
   //     res.status(400).send(err);

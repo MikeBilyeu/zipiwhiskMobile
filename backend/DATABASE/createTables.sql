@@ -5,7 +5,7 @@ CREATE TABLE users (
     full_name VARCHAR(100),
     username VARCHAR(100) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password_encrypted BINARY(60) NOT NULL,
+    password_encrypted VARCHAR(60) NOT NULL,
     updated_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT NOW()
 );
