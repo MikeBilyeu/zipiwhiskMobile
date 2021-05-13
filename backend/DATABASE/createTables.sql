@@ -48,9 +48,9 @@ CREATE TABLE users_saves (
 
 CREATE TABLE recipes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    image_url VARCHAR(255),
-    video_url VARCHAR(255),
-    name VARCHAR(255) NOT NULL,
+    media_url VARCHAR(255),
+    media_type VARCHAR(10),
+    recipe_name VARCHAR(255) NOT NULL,
     yield int NOT NULL,
     total_time_min INT NOT NULL,
     instructions TEXT,

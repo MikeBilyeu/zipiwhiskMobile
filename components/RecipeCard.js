@@ -25,9 +25,9 @@ function RecipeCard({ data }) {
       activeOpacity={1}
       style={styles.container}
     >
-      {data.recipeVideo ? (
+      {data.media_type === "video" ? (
         <Video
-          source={{ uri: data.recipeVideo }}
+          source={{ uri: data.media_url }}
           style={styles.video}
           resizeMode="cover"
           isLooping
@@ -36,7 +36,7 @@ function RecipeCard({ data }) {
         />
       ) : (
         <ImageBackground
-          source={{ uri: data.recipeImage }}
+          source={{ uri: data.media_url }}
           style={styles.image}
         />
       )}

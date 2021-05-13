@@ -10,12 +10,14 @@ import { parseNum } from "./utils";
 
 const RecipeSmallView = ({ item }) => {
   const navigation = useNavigation();
+  let thumbnail = item.media_url.replace(".mp4", ".jpg");
+
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => navigation.push("Recipe", { data: item })}
     >
-      <Image style={styles.image} source={{ uri: item.recipeImage }} />
+      <Image style={styles.image} source={{ uri: thumbnail }} />
       <View style={styles.textWrapper}>
         <Text style={styles.title} ellipsizeMode="tail" numberOfLines={1}>
           {item.title}

@@ -52,14 +52,14 @@ const CreateRecipeScreen = (props) => {
             style={{ borderBottomWidth: 0.5, borderColor: "#E3E3E3" }}
             onPress={() => navigation.navigate("Camera")}
           >
-            {props.recipeForm.imagePath ? (
+            {props.recipeForm.media_type === "image" ? (
               <Image
-                source={{ uri: props.recipeForm.imagePath }}
+                source={{ uri: props.recipeForm.media_url }}
                 style={styles.image}
               />
-            ) : props.recipeForm.videoPath ? (
+            ) : props.recipeForm.media_type === "video" ? (
               <Video
-                source={{ uri: props.recipeForm.videoPath }}
+                source={{ uri: props.recipeForm.media_url }}
                 style={styles.image}
                 resizeMode="cover"
                 isLooping

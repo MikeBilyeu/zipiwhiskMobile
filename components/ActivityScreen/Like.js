@@ -5,6 +5,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
+import RecipeThumbnailBtn from "./RecipethumbnailBtn";
 import UserNameBtn from "../UserNameBtn";
 import Time from "./Time";
 
@@ -17,13 +18,7 @@ const Like = ({ data }) => {
           image_url={data.user.image_url}
         />
         <Text style={styles.text}>Saved your recipe.</Text>
-        <TouchableOpacity style={styles.imageWrapper}>
-          <Image
-            style={styles.image}
-            onPress={null}
-            source={{ uri: data.image }}
-          />
-        </TouchableOpacity>
+        <RecipeThumbnailBtn media_url={data.media_url} />
       </View>
       <Time time={data.timestamp} />
     </View>
@@ -47,16 +42,6 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextRegular",
     fontSize: wp("4%"),
     lineHeight: wp("12%"),
-  },
-  imageWrapper: {
-    flex: 1,
-    alignItems: "flex-end",
-  },
-  image: {
-    borderRadius: 100,
-    position: "relative",
-    width: wp("12%"),
-    height: wp("12%"),
   },
 });
 

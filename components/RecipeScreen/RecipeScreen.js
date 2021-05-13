@@ -32,10 +32,10 @@ const RecipeScreen = ({
   return (
     <View style={styles.container}>
       <StatusBar hidden />
-      {data.recipeVideo ? (
+      {data.media_type === "video" ? (
         <Animated.View style={[styles.full, animatedScaleStyle]}>
           <Video
-            source={{ uri: data.recipeVideo }}
+            source={{ uri: data.media_url }}
             style={styles.full}
             resizeMode="cover"
             isLooping
@@ -45,7 +45,7 @@ const RecipeScreen = ({
       ) : (
         <Animated.View style={[styles.full, animatedScaleStyle]}>
           <ImageBackground
-            source={{ uri: data.recipeImage }}
+            source={{ uri: data.media_url }}
             style={styles.full}
           />
         </Animated.View>

@@ -8,10 +8,9 @@ const data = [
       image: "https://randomuser.me/api/portraits/men/54.jpg",
       username: "billybob",
     },
-    recipeVideo:
+    media_url:
       "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.mp4",
-    recipeImage:
-      "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140916/Recipes/lp4ypoiaoqkvvzkp7qk5.jpg",
+    media_type: "video",
     recipeYield: 4,
     ingredientList: [
       {
@@ -124,10 +123,9 @@ const data = [
       image: "https://randomuser.me/api/portraits/women/20.jpg",
       username: "jackie93",
     },
-    recipeVideo:
+    media_url:
       "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620512318/Recipes/pexels-kampus-production-6603824.mp4",
-    recipeImage:
-      "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140674/Recipes/atlhfcivnnrdwprukcfd.jpg",
+    media_type: "video",
     recipeYield: 4,
     ingredientList: [
       {
@@ -191,8 +189,9 @@ const data = [
       image: "https://randomuser.me/api/portraits/women/10.jpg",
       username: "jess",
     },
-    recipeImage:
+    media_url:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1602904544/Recipes/fpx1wp8y8asygg8oymfx.jpg",
+    media_type: "photo",
     recipeYield: 4,
     ingredientList: [
       {
@@ -256,8 +255,9 @@ const data = [
       image: "https://randomuser.me/api/portraits/women/19.jpg",
       username: "alice",
     },
-    recipeImage:
+    media_url:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1593983807/Recipes/s0odyvjiko4yuisb8iwm.jpg",
+    media_type: "photo",
     recipeYield: 4,
     ingredientList: [
       {

@@ -37,7 +37,7 @@ export const data = [
       image_url: "https://randomuser.me/api/portraits/men/17.jpg",
     },
     timestamp: "2021-01-19T17:58:38-05:00",
-    image_url:
+    media_url:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140674/Recipes/atlhfcivnnrdwprukcfd.jpg",
   },
   {
@@ -58,8 +58,9 @@ export const data = [
         image: "https://randomuser.me/api/portraits/men/5.jpg",
         username: "billybob",
       },
-      recipeImage:
+      media_url:
         "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140916/Recipes/lp4ypoiaoqkvvzkp7qk5.jpg",
+      media_type: "photo",
       recipeYield: 4,
       ingredientList: [
         {
@@ -181,8 +182,9 @@ export const data = [
         image: "https://randomuser.me/api/portraits/men/5.jpg",
         username: "billybob",
       },
-      recipeImage:
+      media_url:
         "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140916/Recipes/lp4ypoiaoqkvvzkp7qk5.jpg",
+      media_type: "photo",
       recipeYield: 4,
       ingredientList: [
         {

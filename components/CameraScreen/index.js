@@ -17,9 +17,8 @@ const CameraScreen = (props) => {
       setCameraPermission(cameraStatus === "granted");
 
       if (Platform.OS !== "web") {
-        const {
-          status: libraryStatus,
-        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const { status: libraryStatus } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
         setLibraryPermission(libraryStatus === "granted");
       }
     })();
@@ -32,11 +31,7 @@ const CameraScreen = (props) => {
     return <Text>No access to camera or photos</Text>;
   }
 
-  return props.recipeForm.imagePath || props.recipeForm.videoPath ? (
-    <RenderPreview />
-  ) : (
-    <RenderCamera />
-  );
+  return props.recipeForm.media_url ? <RenderPreview /> : <RenderCamera />;
 };
 
 const mapStateToProps = (state) => ({

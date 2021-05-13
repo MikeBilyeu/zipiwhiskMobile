@@ -16,7 +16,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 
-import { changeImage, changeVideo } from "../../redux/actions/recipeForm";
+import { changeMedia } from "../../redux/actions/recipeForm";
 
 const RenderPreview = (props) => {
   const navigation = useNavigation();
@@ -24,14 +24,14 @@ const RenderPreview = (props) => {
   return (
     <View style={styles.container}>
       <StatusBar hidden />
-      {props.recipeForm.imagePath ? (
+      {props.recipeForm.media_type === "image" ? (
         <ImageBackground
-          source={{ uri: props.recipeForm.imagePath }}
+          source={{ uri: props.recipeForm.media_url }}
           style={styles.preview}
         />
       ) : (
         <Video
-          source={{ uri: props.recipeForm.videoPath }}
+          source={{ uri: props.recipeForm.media_url }}
           style={styles.preview}
           resizeMode="cover"
           isLooping
@@ -41,7 +41,9 @@ const RenderPreview = (props) => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => props.changeImage(null)}
+          onPress={() =>
+            props.changeMedia({ media_url: null, media_type: null })
+          }
           activeOpacity={0.4}
           style={[styles.btn, { left: 0 }]}
         >
@@ -109,6 +111,4 @@ const mapStateToProps = (state) => ({
   recipeForm: state.recipeForm,
 });
 
-export default connect(mapStateToProps, { changeImage, changeVideo })(
-  RenderPreview
-);
+export default connect(mapStateToProps, { changeMedia })(RenderPreview);

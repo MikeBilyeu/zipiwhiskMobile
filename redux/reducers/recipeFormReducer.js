@@ -1,6 +1,5 @@
 import {
-  IMAGE_CHANGE,
-  VIDEO_CHANGE,
+  MEDIA_CHANGE,
   RECIPE_NAME_CHANGE,
   SERVINGS_CHANGE,
   INGREDIENTS_CHANGE,
@@ -11,14 +10,15 @@ import {
 } from "../constants";
 
 const initialState = {
-  imagePath: null,
-  videoPath: null,
-  recipeName: null,
-  servings: null,
-  ingredients: null,
-  instructions: null,
-  totalTime: null,
-  keywords: null,
+  id: null,
+  media_url: "",
+  media_type: "",
+  recipe_name: "",
+  servings: "",
+  ingredients: "",
+  instructions: "",
+  totalTime: "",
+  keywords: "",
   categories: [
     { name: "Breakfast", selected: false },
     { name: "Lunch", selected: false },
@@ -30,12 +30,14 @@ const initialState = {
 
 const recipeFormReducer = (state = initialState, action) => {
   switch (action.type) {
-    case IMAGE_CHANGE:
-      return { ...state, imagePath: action.payload, videoPath: null };
-    case VIDEO_CHANGE:
-      return { ...state, imagePath: null, videoPath: action.payload };
     case RECIPE_NAME_CHANGE:
-      return { ...state, recipeName: action.payload };
+      return { ...state, recipe_name: action.payload };
+    case MEDIA_CHANGE:
+      return {
+        ...state,
+        media_url: action.payload.media_url,
+        media_type: action.payload.media_type,
+      };
     case SERVINGS_CHANGE:
       return { ...state, servings: action.payload };
     case INGREDIENTS_CHANGE:

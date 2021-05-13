@@ -9,7 +9,7 @@ import * as ImagePicker from "expo-image-picker";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
-import { changeImage, changeVideo } from "../../redux/actions/recipeForm";
+import { changeMedia } from "../../redux/actions/recipeForm";
 
 const RenderCamera = (props) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -29,11 +29,7 @@ const RenderCamera = (props) => {
     });
 
     if (!result.cancelled) {
-      if (result.type === "image") {
-        props.changeImage(result.uri);
-      } else if (result.type === "video") {
-        props.changeVideo(result.uri);
-      }
+      props.changeMedia({ media_url: result.uri, media_type: result.type });
     }
   };
 
@@ -82,7 +78,10 @@ const RenderCamera = (props) => {
             onPress={async () => {
               if (cameraRef) {
                 let photo = await cameraRef.current.takePictureAsync();
-                props.changeImage(photo.uri);
+                props.changeMedia({
+                  media_url: photo.uri,
+                  media_type: "image",
+                });
               }
             }}
           >
@@ -136,4 +135,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { changeImage, changeVideo })(RenderCamera);
+export default connect(null, { changeMedia })(RenderCamera);

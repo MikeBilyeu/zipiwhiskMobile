@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
+import RecipeThumbnailBtn from "./RecipethumbnailBtn";
 import UserNameBtn from "../UserNameBtn";
 import Time from "./Time";
 
@@ -19,13 +20,7 @@ const Mention = ({ data }) => {
         <Text style={styles.text}>
           Mentioned you in a comment: {data.comment}
         </Text>
-        <TouchableOpacity style={styles.imageWrapper}>
-          <Image
-            style={styles.image}
-            onPress={null}
-            source={{ uri: data.recipe.recipeImage }}
-          />
-        </TouchableOpacity>
+        <RecipeThumbnailBtn media_url={data.recipe.media_url} />
       </View>
 
       <Time time={data.timestamp} />
@@ -51,16 +46,6 @@ const styles = StyleSheet.create({
     fontSize: wp("4%"),
     lineHeight: wp("4%"),
     flex: 3,
-  },
-  imageWrapper: {
-    flex: 1,
-    alignItems: "flex-end",
-  },
-  image: {
-    borderRadius: 100,
-    position: "relative",
-    width: wp("12%"),
-    height: wp("12%"),
   },
 });
 

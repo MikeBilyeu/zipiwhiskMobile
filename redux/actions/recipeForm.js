@@ -1,6 +1,5 @@
 import {
-  IMAGE_CHANGE,
-  VIDEO_CHANGE,
+  MEDIA_CHANGE,
   RECIPE_NAME_CHANGE,
   SERVINGS_CHANGE,
   INGREDIENTS_CHANGE,
@@ -10,16 +9,9 @@ import {
   CATEGORIES_CHANGE,
 } from "../constants";
 
-export function changeImage(value) {
+export function changeMedia(value) {
   return {
-    type: IMAGE_CHANGE,
-    payload: value,
-  };
-}
-
-export function changeVideo(value) {
-  return {
-    type: VIDEO_CHANGE,
+    type: MEDIA_CHANGE,
     payload: value,
   };
 }
