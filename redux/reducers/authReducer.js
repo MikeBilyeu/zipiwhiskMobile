@@ -9,7 +9,7 @@ import {
 } from "../constants";
 
 const initialState = {
-  isAuth: false,
+  isAuth: true,
   login: {
     username: null,
     password: null,

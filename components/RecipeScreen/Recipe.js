@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -23,10 +23,8 @@ import NutritionFacts from "./NutritionFacts";
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
-const Recipe = ({ data }) => {
-  const yValue = useRef(new Animated.Value(0)).current;
-
-  const onShare = async (d) => {
+const Recipe = ({ data, yValue }) => {
+  const onShare = async () => {
     try {
       const result = await Share.share({
         message: `${data.title} | ZipiWhisk`,

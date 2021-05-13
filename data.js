@@ -9,7 +9,7 @@ const data = [
       username: "billybob",
     },
     recipeVideo:
-      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620509242/Recipes/video.mp4",
+      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.mp4",
     recipeImage:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140916/Recipes/lp4ypoiaoqkvvzkp7qk5.jpg",
     recipeYield: 4,
