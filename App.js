@@ -4,13 +4,14 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider, connect } from "react-redux";
-import configureStore from "./redux/store";
+import store from "./redux/store";
 import { useFonts } from "expo-font";
+import { checkAuthToken } from "./utils/checkAuthToken";
 
 import Auth from "./components/AuthScreen/Auth";
 import HomeStack from "./components/HomeStack";
 
-const store = configureStore();
+checkAuthToken();
 
 const mapStateToProps = (state) => ({
   auth: state.auth,

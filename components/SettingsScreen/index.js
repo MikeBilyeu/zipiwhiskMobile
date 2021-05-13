@@ -17,7 +17,7 @@ const SettingsScreen = (props) => {
       <View style={styles.wrapper}>
         <View style={{ flexDirection: "row" }}>
           <UserImageBtn
-            uri={props.user.image}
+            uri={props.user.image_url}
             styles={{ width: 85, height: 85 }}
           />
           <View style={styles.emailWrapper}>

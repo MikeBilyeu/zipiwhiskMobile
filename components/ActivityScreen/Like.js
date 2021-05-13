@@ -12,7 +12,10 @@ const Like = ({ data }) => {
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
-        <UserNameBtn username={data.user.username} image={data.user.image} />
+        <UserNameBtn
+          username={data.user.username}
+          image_url={data.user.image_url}
+        />
         <Text style={styles.text}>Saved your recipe.</Text>
         <TouchableOpacity style={styles.imageWrapper}>
           <Image

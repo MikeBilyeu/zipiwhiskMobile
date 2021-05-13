@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-// const passport = require("passport");
+const passport = require("passport");
 
-// router.get(
-//   "/user",
-//   passport.authenticate("jwt", { session: false }),
-//   require("./getUser")
-// );
+router.get(
+  "/user",
+  passport.authenticate("jwt", { session: false }),
+  require("./getUser")
+);
 
 router.post("/register", require("./createUser"));
 

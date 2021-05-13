@@ -1,4 +1,5 @@
 import {
+  AUTH_LOGIN,
   AUTH_LOGOUT,
   LOGIN_USERNAME_CHANGE,
   LOGIN_PASSWORD_CHANGE,
@@ -8,7 +9,7 @@ import {
 } from "../constants";
 
 const initialState = {
-  isAuth: true,
+  isAuth: false,
   login: {
     username: null,
     password: null,
@@ -22,6 +23,14 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_LOGIN:
+      if (Object.keys(action.payload).length !== 0) {
+        return {
+          ...state,
+          isAuth: true,
+        };
+      }
+      return initialState;
     case AUTH_LOGOUT:
       return { ...initialState, isAuth: false };
     case LOGIN_USERNAME_CHANGE:

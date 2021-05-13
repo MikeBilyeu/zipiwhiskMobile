@@ -1,8 +1,9 @@
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    image_url VARCHAR(255),
-    full_name VARCHAR(100),
+    image_url VARCHAR(255) NOT NULL 
+        DEFAULT 'https://res.cloudinary.com/mikebilyeuimg/image/upload/v1620916867/whisk-256.png',
+    fullname VARCHAR(100),
     username VARCHAR(100) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password_encrypted VARCHAR(60) NOT NULL,

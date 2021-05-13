@@ -13,7 +13,7 @@ import {
 import {
   loginUsernameChange,
   loginPasswordChange,
-  userLogin,
+  getAuth,
 } from "../../redux/actions/auth";
 
 import Input from "../Input";
@@ -60,7 +60,7 @@ function Login(props) {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={props.userLogin}
+            onPress={props.getAuth}
             activeOpacity={0.8}
             style={[
               styles.loginBtnContainer,
@@ -144,7 +144,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   loginUsernameChange,
   loginPasswordChange,
-  userLogin,
+  getAuth,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -23,7 +23,7 @@ module.exports = async ({ body: { username, password } }, res) => {
 
         if (!results[0]) {
           res.status(401).json({
-            email: "We can't find an account with that username",
+            error: "We can't find an account with that username",
           });
         }
 
@@ -44,7 +44,7 @@ module.exports = async ({ body: { username, password } }, res) => {
             },
             (err, token) => {
               if (err) throw err;
-              res.json({
+              res.status(200).json({
                 success: true,
                 token: "Bearer " + token,
               });

@@ -1,5 +1,8 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
+import * as SecureStore from "expo-secure-store";
 import {
+  AUTH_LOGIN,
   AUTH_LOGOUT,
   LOGIN_USERNAME_CHANGE,
   LOGIN_PASSWORD_CHANGE,
@@ -7,6 +10,8 @@ import {
   SIGNUP_USERNAME_CHANGE,
   SIGNUP_PASSWORD_CHANGE,
 } from "../constants";
+import setAuthToken from "../../utils/setAuthToken";
+import { getUser } from "./user";
 
 export const logout = () => ({
   type: AUTH_LOGOUT,
@@ -59,21 +64,32 @@ export const registerUser = () => async (dispatch, getState) => {
   }
 };
 
-export const userLogin = () => async (dispatch, getState) => {
+export const getAuth = () => async (dispatch, getState) => {
   const { login } = getState().auth;
 
   try {
     let {
       data: { token },
     } = await axios.post("http://localhost:3000/api/users/login", login);
+    // Store token in local secure store
+    SecureStore.setItemAsync("jwtToken", token);
 
-    //localStorage.setItem("jwtToken", token);
-
-    // // Add token to auth header for future requests
-    // setAuthToken(token);
-    // const decodedToken = jwt_decode(token);
-    // dispatch(setCurrentUser(decodedToken));
+    // Add token to auth header for future requests
+    setAuthToken(token);
+    const decodedToken = jwt_decode(token);
+    dispatch(setCurrentUser(decodedToken));
   } catch (err) {
-    console.log("error:", err);
+    console.log("auth error:", err);
+  }
+};
+
+export const setCurrentUser = (decodedToken) => async (dispatch) => {
+  const isAuth = Object.keys(decodedToken).length !== 0;
+  if (isAuth) {
+    dispatch({
+      type: AUTH_LOGIN,
+      payload: decodedToken,
+    });
+    dispatch(getUser());
   }
 };

@@ -12,7 +12,7 @@ const UserInfo = (props) => {
     <View style={styles.userInfoContainer}>
       <UserImageBtn
         handleImagePress={props.handleImagePress}
-        uri={props.user.image}
+        uri={props.user.image_url}
         styles={{ width: wp("18%"), height: wp("18%") }}
       />
 

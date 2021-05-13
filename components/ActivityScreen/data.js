@@ -2,7 +2,7 @@ export const userData = {
   id: 480348487,
   username: "mr_smith512",
   fullName: "Bob Smith",
-  image: "https://randomuser.me/api/portraits/men/17.jpg",
+  image_url: "https://randomuser.me/api/portraits/men/17.jpg",
   email: "mikebilyeu500@gmail.com",
   recipeUnit: "US",
   restriction: null,
@@ -16,7 +16,7 @@ export const data = [
     id: 9667556664333,
     user: {
       username: "mikebilyeu512",
-      image: "https://randomuser.me/api/portraits/men/17.jpg",
+      image_url: "https://randomuser.me/api/portraits/men/17.jpg",
     },
     timestamp: "2021-02-15T19:28:38-05:00",
   },
@@ -25,7 +25,7 @@ export const data = [
     id: 96675956664333,
     user: {
       username: "mjackchef12",
-      image: "https://randomuser.me/api/portraits/men/67.jpg",
+      image_url: "https://randomuser.me/api/portraits/men/67.jpg",
     },
     timestamp: "2021-02-15T19:18:38-05:00",
   },
@@ -34,10 +34,10 @@ export const data = [
     id: 966754423333,
     user: {
       username: "mikebilyeu512",
-      image: "https://randomuser.me/api/portraits/men/17.jpg",
+      image_url: "https://randomuser.me/api/portraits/men/17.jpg",
     },
     timestamp: "2021-01-19T17:58:38-05:00",
-    image:
+    image_url:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140674/Recipes/atlhfcivnnrdwprukcfd.jpg",
   },
   {
@@ -45,7 +45,7 @@ export const data = [
     id: 96675104333,
     user: {
       username: "mikebilyeu512",
-      image: "https://randomuser.me/api/portraits/men/17.jpg",
+      image_url: "https://randomuser.me/api/portraits/men/17.jpg",
     },
     timestamp: "2021-01-19T16:58:38-05:00",
     comment: "@mikeb yeah try this out!",
@@ -169,7 +169,7 @@ export const data = [
     id: 966754003333,
     user: {
       username: "billybob",
-      image: "https://randomuser.me/api/portraits/men/5.jpg",
+      image_url: "https://randomuser.me/api/portraits/men/5.jpg",
     },
     timestamp: "2021-02-15T17:28:38-05:00",
     recipe: {
