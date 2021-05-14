@@ -63,6 +63,15 @@ const Recipe = ({ data, yValue }) => {
     opacity: headerOpacityInterpolate,
   };
 
+  let scaleInterpolate = yValue.interpolate({
+    inputRange: [-201, -200, 0, 1],
+    outputRange: [1.2, 1.2, 1, 1],
+  });
+
+  const animatedScaleStyle = {
+    transform: [{ scale: scaleInterpolate }],
+  };
+
   return (
     <Animated.ScrollView
       onScroll={Animated.event(
@@ -71,7 +80,7 @@ const Recipe = ({ data, yValue }) => {
           useNativeDriver: true,
         }
       )}
-      style={[styles.RecipeScrollView]}
+      style={[styles.RecipeScrollView, animatedScaleStyle]}
     >
       <Header styles={animatedHeaderStyle} onShare={onShare} />
       <Footer

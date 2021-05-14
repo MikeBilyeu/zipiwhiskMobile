@@ -7,7 +7,7 @@ const Input = (props) => {
 
   return (
     <View style={styles.inputContainer}>
-      <Image source={{ uri: props.user.image }} style={styles.icon} />
+      <Image source={{ uri: props.user.image_url }} style={styles.icon} />
       <TextInput
         style={styles.textInput}
         onChangeText={(text) => setText(text)}

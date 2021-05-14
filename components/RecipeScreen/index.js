@@ -16,7 +16,7 @@ const RecipeScreen = ({
 
   let scaleInterpolate = yValue.interpolate({
     inputRange: [-201, -200, 0, 1],
-    outputRange: [1.1, 1.15, 1, 1],
+    outputRange: [1.1, 1.1, 1, 1],
   });
 
   let opacityInterpolate = yValue.interpolate({

@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Nav from "./Nav";
-import RecipeScreen from "./RecipeScreen/RecipeScreen";
+import RecipeScreen from "./RecipeScreen";
 import Comments from "./Comments";
 import FollowScreen from "./FollowScreen";
 import CreateRecipeScreen from "./CreateRecipeScreen/CreateRecipeScreen";
