@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     marginVertical: wp("1%"),
   },
   infoText: {
-    fontSize: wp("4%"),
+    fontSize: wp("3.5%"),
     color: "#FFF",
     fontFamily: "AvenirNextDemiBold",
   },

@@ -38,7 +38,7 @@ const Header = (props) => {
         >
           <Ionicons
             name="share-outline"
-            size={wp("7%")}
+            size={wp("6%")}
             color="#FFF"
             style={styles.footerBtnIcon}
           />
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerBtnIcon: {
-    width: wp("5%"),
-    height: wp("5%"),
+    width: wp("4%"),
+    height: wp("4%"),
   },
 });
 

@@ -45,7 +45,7 @@ const Footer = (props) => {
             <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
             <Ionicons
               name="heart"
-              size={wp("7%")}
+              size={wp("6%")}
               color={saved ? "#DE4949" : "#FFF"}
               style={styles.footerBtnIcon}
             />
@@ -63,7 +63,7 @@ const Footer = (props) => {
             </Text>
             <Ionicons
               name="chatbubble-ellipses"
-              size={wp("7%")}
+              size={wp("6%")}
               color="#FFF"
               style={styles.footerBtnIcon}
             />
@@ -75,7 +75,7 @@ const Footer = (props) => {
           >
             <Ionicons
               name="pencil"
-              size={wp("7%")}
+              size={wp("6%")}
               color="#FFF"
               style={styles.footerBtnIcon}
             />
@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    height: wp("70%"),
-    marginTop: screenHeight - wp("70%"),
+    height: wp("63%"),
+    marginTop: screenHeight - wp("63%"),
     width: "100%",
     position: "absolute",
   },
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
     flex: 1,
-    paddingBottom: wp("7%"),
+    paddingBottom: wp("5%"),
     width: "100%",
   },
 
@@ -122,15 +122,15 @@ const styles = StyleSheet.create({
   footerBtnText: {
     color: "#FFF",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("3.5%"),
+    fontSize: wp("3.2%"),
   },
   footerBtnIcon: {
     width: wp("7%"),
     height: wp("7%"),
   },
   userIcon: {
-    width: wp("10%"),
-    height: wp("10%"),
+    width: wp("8%"),
+    height: wp("8%"),
     borderRadius: 100,
   },
 });
