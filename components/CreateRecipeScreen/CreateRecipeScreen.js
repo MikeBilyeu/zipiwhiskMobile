@@ -93,6 +93,7 @@ const CreateRecipeScreen = (props) => {
             returnKeyType={null}
             value={props.recipeForm.ingredients}
             setValue={props.ingredientsChange}
+            multiline={true}
           />
           <Input
             name="Instructions"
@@ -101,6 +102,7 @@ const CreateRecipeScreen = (props) => {
             returnKeyType={null}
             value={props.recipeForm.instructions}
             setValue={props.instructionsChange}
+            multiline={true}
           />
           <Input
             name="Total Time"
