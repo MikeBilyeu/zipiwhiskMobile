@@ -41,8 +41,8 @@ const Categories = (props) => {
         </TextInput>
         <View style={styles.btnContainer}>
           <CategoryBtn handlePress={handlePress} name="Breakfast" />
-          <CategoryBtn handlePress={handlePress} name="Lunch" />
-          <CategoryBtn handlePress={handlePress} name="Dinner" />
+          <CategoryBtn handlePress={handlePress} name="Lunch/Dinner" />
+          <CategoryBtn handlePress={handlePress} name="Snack" />
           <CategoryBtn handlePress={handlePress} name="Dessert" />
           <CategoryBtn handlePress={handlePress} name="Beverage" />
         </View>
@@ -70,14 +70,28 @@ const styles = StyleSheet.create({
   btnContainer: {
     flex: 1,
     marginVertical: wp("4%"),
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnWrapper: {
-    width: "100%",
-    flex: 1,
+    //width: wp("40%"),
     justifyContent: "center",
+    paddingVertical: wp("3.7%"),
+    paddingHorizontal: wp("10%"),
+
+    marginVertical: wp("3.2%"),
+    borderRadius: 50,
+    backgroundColor: "#fff",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowColor: "black",
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   btnText: {
-    fontSize: wp("4.5%"),
+    fontSize: wp("3.5%"),
     fontFamily: "AvenirNextDemiBold",
     color: "#464646",
     textAlign: "center",
