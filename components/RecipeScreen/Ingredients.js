@@ -47,7 +47,7 @@ const Ingredients = (props) => {
       <TouchableOpacity style={styles.groceryBtn}>
         <Image
           source={require("../../assets/cart.png")}
-          style={{ width: wp("8%"), height: wp("9.5%") }}
+          style={{ width: wp("6.5%"), height: wp("8%") }}
         />
       </TouchableOpacity>
 

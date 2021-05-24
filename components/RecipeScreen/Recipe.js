@@ -116,7 +116,7 @@ const Recipe = ({ data, yValue }) => {
           }}
         />
         <View style={styles.timeContainer}>
-          <Ionicons name="timer-outline" size={wp("8%")} color={"#464646"} />
+          <Ionicons name="timer-outline" size={wp("6%")} color={"#464646"} />
 
           <Text style={styles.timeText}>1Hr 30Min</Text>
         </View>
@@ -178,13 +178,14 @@ const styles = StyleSheet.create({
 
   timeContainer: {
     alignItems: "center",
-    height: wp("17%"),
     justifyContent: "space-between",
-    marginVertical: wp("10%"),
+    marginVertical: wp("8%"),
+    marginBottom: wp("6%"),
+    height: wp("13%"),
   },
 
   timeText: {
-    fontSize: wp("6%"),
+    fontSize: wp("4.5%"),
     fontFamily: "AvenirNextRegular",
     color: "#313131",
   },
