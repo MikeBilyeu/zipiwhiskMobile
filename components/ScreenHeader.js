@@ -29,8 +29,8 @@ function ScreenHeader(props) {
           <Image
             source={require("../assets/arrow.png")}
             style={{
-              width: wp("5%"),
-              height: wp("5%"),
+              width: wp("4%"),
+              height: wp("4%"),
               transform: [{ rotate: "90deg" }],
             }}
           />
