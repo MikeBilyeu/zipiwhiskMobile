@@ -21,8 +21,8 @@ const initialState = {
   keywords: "",
   categories: [
     { name: "Breakfast", selected: false },
-    { name: "Lunch", selected: false },
-    { name: "Dinner", selected: false },
+    { name: "Lunch/Dinner", selected: false },
+    { name: "Snack", selected: false },
     { name: "Dessert", selected: false },
     { name: "Beverage", selected: false },
   ],
