@@ -1,10 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useRef } from "react";
-import { StyleSheet, View, ImageBackground, Animated } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ImageBackground,
+  Animated,
+  Dimensions,
+} from "react-native";
 import { Video } from "expo-av";
 import { useKeepAwake } from "expo-keep-awake";
 
 import Recipe from "./Recipe";
+const screenHeight = Dimensions.get("screen").height;
 
 const RecipeScreen = ({
   route: {
@@ -20,8 +27,8 @@ const RecipeScreen = ({
   });
 
   let opacityInterpolate = yValue.interpolate({
-    inputRange: [-200, 0],
-    outputRange: [0.8, 1],
+    inputRange: [-200, 0, screenHeight, screenHeight + 50],
+    outputRange: [0.8, 1, 1, 0],
   });
 
   const animatedScaleStyle = {
@@ -60,6 +67,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: "relative",
+    backgroundColor: "#fff",
   },
   full: {
     position: "absolute",

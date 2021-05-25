@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     paddingBottom: wp("3%"),
     height: wp("30%"),
     marginTop: screenHeight - wp("30%"),
-    marginBottom: wp("8%"),
+    marginBottom: wp("3%"),
   },
   titleText: {
     color: "#FFF",
@@ -171,9 +171,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: -3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
+    shadowOffset: { width: 0, height: -15 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
   },
 
   timeContainer: {
