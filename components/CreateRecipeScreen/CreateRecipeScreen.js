@@ -98,7 +98,6 @@ const CreateRecipeScreen = (props) => {
           <Input
             name="Instructions"
             placeholder="Add instructions..."
-            info="(one step per paragraph)"
             returnKeyType={null}
             value={props.recipeForm.instructions}
             setValue={props.instructionsChange}
@@ -106,7 +105,9 @@ const CreateRecipeScreen = (props) => {
           />
           <Input
             name="Total Time"
-            placeholder="Add total time..."
+            placeholder="00:00"
+            keyboardType="number-pad"
+            returnKeyType="done"
             value={props.recipeForm.totalTime}
             setValue={props.totalTimeChange}
           />
