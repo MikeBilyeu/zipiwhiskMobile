@@ -35,7 +35,7 @@ function Login(props) {
           <Input
             value={props.login.username}
             handleChange={props.loginUsernameChange}
-            placeholder="Username"
+            placeholder="Username or Email"
             textContentType="username"
             iconName="person"
           />

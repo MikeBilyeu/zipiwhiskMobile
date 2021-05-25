@@ -16,8 +16,8 @@ module.exports = async ({ body: { username, password } }, res) => {
 
   try {
     pool.query(
-      `SELECT * FROM users WHERE username = ?`,
-      username,
+      `SELECT * FROM users WHERE username = ? OR email = ?`,
+      [username, username],
       async (error, results, fields) => {
         if (error) throw error;
 
