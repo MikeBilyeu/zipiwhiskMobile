@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
   image: {
     borderRadius: 100,
     position: "relative",
-    width: wp("12%"),
-    height: wp("12%"),
+    width: wp("10%"),
+    height: wp("10%"),
   },
 });
 

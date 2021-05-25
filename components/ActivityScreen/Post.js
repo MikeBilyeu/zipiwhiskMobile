@@ -13,16 +13,17 @@ const Post = ({ data }) => {
   return (
     <View style={styles.container}>
       <RecipeCard data={data.recipe} />
+      <View style={{ paddingHorizontal: wp("2%") }}>
+        <View style={styles.contentWrapper}>
+          <UserNameBtn
+            username={data.user.username}
+            image_url={data.user.image_url}
+          />
+          <Text style={styles.text}>Posted a recipe.</Text>
+        </View>
 
-      <View style={styles.contentWrapper}>
-        <UserNameBtn
-          username={data.user.username}
-          image_url={data.user.image_url}
-        />
-        <Text style={styles.text}>Posted a recipe.</Text>
+        <Time time={data.timestamp} />
       </View>
-
-      <Time time={data.timestamp} />
     </View>
   );
 };
@@ -33,20 +34,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     position: "relative",
     marginBottom: wp("5%"),
-    padding: wp("2%"),
+    // padding: wp("2%"),
   },
   contentWrapper: {
     flexDirection: "row",
     marginTop: wp("5%"),
     marginBottom: wp("1%"),
-    marginHorizontal: 5,
   },
 
   text: {
     color: "#313131",
     fontFamily: "AvenirNextRegular",
     fontSize: wp("4%"),
-    lineHeight: wp("12%"),
+    lineHeight: wp("10%"),
   },
 });
 

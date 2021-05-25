@@ -169,8 +169,8 @@ export const data = [
     type: "post",
     id: 966754003333,
     user: {
+      image_url: "https://randomuser.me/api/portraits/men/54.jpg",
       username: "billybob",
-      image_url: "https://randomuser.me/api/portraits/men/5.jpg",
     },
     timestamp: "2021-02-15T17:28:38-05:00",
     recipe: {
@@ -179,12 +179,13 @@ export const data = [
       numComments: 4,
       title: "Peanut Butter Banana Smoothie",
       user: {
-        image: "https://randomuser.me/api/portraits/men/5.jpg",
+        image: "https://randomuser.me/api/portraits/men/54.jpg",
         username: "billybob",
       },
       media_url:
-        "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1603140916/Recipes/lp4ypoiaoqkvvzkp7qk5.jpg",
-      media_type: "photo",
+        //"https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.mp4",
+        "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.jpg",
+      media_type: "image",
       recipeYield: 4,
       ingredientList: [
         {
@@ -229,7 +230,7 @@ export const data = [
       },
       comments: [
         {
-          id: 966754334333,
+          id: 96675000333,
           comment: "Nice, I'm sharing this recipe with everyone.",
           user: {
             id: 324832904,

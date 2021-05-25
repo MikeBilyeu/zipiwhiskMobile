@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     color: "#313131",
     fontFamily: "AvenirNextRegular",
     fontSize: wp("4%"),
-    lineHeight: wp("12%"),
+    lineHeight: wp("10%"),
   },
 });
 
