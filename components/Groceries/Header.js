@@ -54,7 +54,7 @@ const Header = ({ inputFocused, setInputFocused, list }) => {
           </TouchableOpacity>
         ) : (
           <TouchableOpacity style={styles.doneBtn} onPress={onShare}>
-            <Ionicons name="share-outline" size={wp("7%")} color="#0172C4" />
+            <Ionicons name="share-outline" size={wp("6%")} color="#0172C4" />
           </TouchableOpacity>
         )}
       </View>

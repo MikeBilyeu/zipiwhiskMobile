@@ -3,7 +3,6 @@ import {
   TouchableOpacity,
   View,
   TextInput,
-  Image,
   Text,
   StyleSheet,
 } from "react-native";
@@ -11,7 +10,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Swipeable } from "react-native-gesture-handler";
 
 const RightAction = (removeItem) => (
@@ -34,30 +32,24 @@ const RenderList = (list, setList, inputFocused, setInputFocused) =>
     const removeItem = () => setList(list.filter((item, i) => i != index));
 
     return (
-      <Swipeable
-        renderRightActions={() => RightAction(removeItem)}
-        key={i.id}
-        style={{ width: "100%" }}
-      >
+      <Swipeable renderRightActions={() => RightAction(removeItem)} key={i.id}>
         <View style={styles.ingredientContainer}>
-          <View style={styles.ingredientWrapper}>
-            <TextInput
-              multiline
-              scrollEnabled={false}
-              style={styles.ingredientName}
-              onFocus={() => setInputFocused(true)}
-              onChangeText={(text) => {
-                let newList = [...list];
-                newList[index].ingredient = text;
-                setList(newList);
-              }}
-              blurOnSubmit={true}
-              //onSubmitEditing={onSubmit}
-              onBlur={onSubmit}
-              value={i.ingredient}
-              returnKeyType="done"
-            />
-          </View>
+          <TextInput
+            multiline
+            scrollEnabled={false}
+            style={styles.ingredientName}
+            onFocus={() => setInputFocused(true)}
+            onChangeText={(text) => {
+              let newList = [...list];
+              newList[index].ingredient = text;
+              setList(newList);
+            }}
+            blurOnSubmit={true}
+            //onSubmitEditing={onSubmit}
+            onBlur={onSubmit}
+            value={i.ingredient}
+            returnKeyType="done"
+          />
         </View>
       </Swipeable>
     );
@@ -67,21 +59,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: "#fff",
+    width: "100%",
   },
-  ingredientWrapper: {
-    justifyContent: "space-between",
-    flex: 5,
-  },
-
   ingredientName: {
     fontSize: wp("4.5%"),
     fontFamily: "AvenirNextDemiBold",
     color: "#313131",
     paddingHorizontal: wp("3%"),
-    paddingVertical: wp("4%"),
+    paddingTop: wp("3%"),
+    paddingBottom: wp("3%"),
     maxHeight: 1000,
   },
-
   rightContainer: {
     width: 100,
     alignItems: "center",
@@ -89,10 +77,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#DE4949",
     marginHorizontal: 5,
     marginVertical: 0.5,
+    paddingVertical: wp("3%"),
+    borderRadius: 5,
+    alignSelf: "center",
   },
   rightText: {
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("4.5"),
+    fontSize: wp("3.5%"),
     color: "#fff",
   },
 });
