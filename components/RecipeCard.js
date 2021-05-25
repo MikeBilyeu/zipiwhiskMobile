@@ -45,6 +45,10 @@ function RecipeCard({ data }) {
         <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
           {data.title}
         </Text>
+        <View style={styles.userInfoContainer}>
+          <Image source={{ uri: data.user.image }} style={styles.userIcon} />
+          <Text style={styles.userInfoText}>{data.user.username}</Text>
+        </View>
         <View style={styles.infoContainer}>
           <Text style={styles.infoText}>{"Calories"}</Text>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -84,11 +88,6 @@ function RecipeCard({ data }) {
               style={styles.icon}
             />
           </View>
-        </View>
-
-        <View style={styles.userInfoContainer}>
-          <Image source={{ uri: data.user.image }} style={styles.userIcon} />
-          <Text style={styles.userInfoText}>{data.user.username}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -160,18 +159,19 @@ const styles = StyleSheet.create({
   },
   userInfoContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
+    marginBottom: wp("3%"),
   },
   userIcon: {
     width: wp("7%"),
     height: wp("7%"),
     borderRadius: 100,
-    marginHorizontal: wp("2%"),
+    marginRight: wp("2%"),
     alignItems: "center",
   },
   userInfoText: {
-    fontSize: wp("4%"),
+    fontSize: wp("3.5%"),
     color: "#FFF",
     fontFamily: "AvenirNextDemiBold",
   },
