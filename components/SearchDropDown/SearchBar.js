@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     paddingLeft: wp("12%"),
     paddingRight: wp("12%"),
     fontFamily: "AvenirNextRegular",
-    fontSize: wp("5.5"),
+    fontSize: wp("4.5"),
     paddingTop: wp("1%"),
   },
   clearTextIcon: {

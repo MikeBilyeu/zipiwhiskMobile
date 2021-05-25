@@ -69,17 +69,19 @@ const styles = StyleSheet.create({
 
   btnContainer: {
     flex: 1,
-    marginVertical: wp("4%"),
+    marginTop: wp("4%"),
+    marginBottom: wp("6%"),
     justifyContent: "center",
     alignItems: "center",
+    alignContent: "space-around",
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   btnWrapper: {
-    //width: wp("40%"),
     justifyContent: "center",
     paddingVertical: wp("3.7%"),
     paddingHorizontal: wp("10%"),
-
-    marginVertical: wp("3.2%"),
+    margin: wp("3.2%"),
     borderRadius: 50,
     backgroundColor: "#fff",
     shadowOffset: {

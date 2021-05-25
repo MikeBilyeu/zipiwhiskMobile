@@ -100,7 +100,7 @@ const SearchDropDown = ({
             {
               paddingTop: height + 5,
               top: -5,
-              height: isFocused ? windowHeight : height + hp("55%"),
+              height: isFocused ? windowHeight : height + hp("45%"),
               transform: [{ translateY: pan.y }],
             },
           ]}
