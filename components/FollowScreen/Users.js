@@ -5,7 +5,7 @@ import ToggleFollowBtn from "../ToggleFollowBtn";
 
 const Users = ({ username, image }) => (
   <View style={styles.container}>
-    <UserNameBtn username={username} image={image} />
+    <UserNameBtn username={username} image_url={image} />
 
     <ToggleFollowBtn BtnStyles={{ alignSelf: "flex-end" }} />
   </View>

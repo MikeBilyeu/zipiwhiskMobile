@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   userImage: {
-    height: wp("12%"),
-    width: wp("12%"),
-    marginRight: wp("1%"),
+    height: wp("10%"),
+    width: wp("10%"),
+    marginRight: wp("1.5%"),
     marginLeft: 0,
     resizeMode: "cover",
     borderRadius: 100,
