@@ -26,8 +26,8 @@ const ToggleFollowBtn = ({ BtnStyles, textStyles, following }) => {
 
 const styles = StyleSheet.create({
   unfollowBtn: {
-    width: wp("38%"),
-    paddingHorizontal: wp("5%"),
+    width: wp("30%"),
+    paddingHorizontal: wp("4.5%"),
     paddingVertical: wp("2.8%") - 1,
     justifyContent: "center",
     backgroundColor: "#fff",
@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#313131",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("4%"),
+    fontSize: wp("3.5%"),
   },
   followBtn: {
-    width: wp("38%"),
-    paddingHorizontal: wp("5%"),
+    width: wp("30%"),
+    paddingHorizontal: wp("4.5%"),
     paddingVertical: wp("2.8%"),
     justifyContent: "center",
     backgroundColor: "#0172C4",
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFF",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("4%"),
+    fontSize: wp("3.5%"),
   },
 });
 

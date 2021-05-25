@@ -12,18 +12,18 @@ import SearchBtn from "../../SearchBtn";
 import FollowUser from "./FollowUser";
 import UserFollows from "./UserFollows";
 
-const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
+const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, userProfile }) => {
   return (
     <Header
       dropDownOpen={dropDownOpen}
       toggleDropDown={toggleDropDown}
       height={wp("55%")}
     >
-      <FollowUser username={user.username} />
-      <UserInfo user={user}>
+      <FollowUser username={userProfile.username} />
+      <UserInfo user={userProfile}>
         <View style={{ width: wp("20%") }} />
       </UserInfo>
-      <UserFollows user={user} />
+      <UserFollows user={userProfile} />
       <SearchBtn
         dropDownOpen={dropDownOpen}
         toggleDropDown={toggleDropDown}
@@ -33,5 +33,5 @@ const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ user: state.user });
+const mapStateToProps = (state) => ({ userProfile: state.userProfile });
 export default connect(mapStateToProps)(VisitProfileHeader);

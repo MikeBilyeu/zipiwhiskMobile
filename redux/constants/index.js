@@ -13,6 +13,9 @@ export const GET_USER = "GET_USER";
 export const USERNAME_CHANGE = "USERNAME_CHANGE";
 export const FULLNAME_CHANGE = "FULLNAME_CHANGE";
 
+//USER PROFILE ACTIONS - viewing another users profile
+export const GET_USER_PROFILE = "GET_USER_PROFILE";
+
 //AUTH ACTIONS
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
