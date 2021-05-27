@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import ScreenHeader from "../ScreenHeader";
-import RecipeCard from "../RecipeCard";
+import RecipeCardSmall from "../RecipeCardSmall";
 import RecipeSmallView from "../RecipeSmallView";
 import data from "../../data";
 
@@ -9,7 +9,7 @@ const ResultsScreen = (props) => {
   const { renderItemType } = props.route.params;
   const smallViewStyles = { paddingTop: 10, paddingHorizontal: 10 };
 
-  const renderCard = ({ item }) => <RecipeCard data={item} />;
+  const renderCard = ({ item }) => <RecipeCardSmall data={item} />;
   const renderSmallView = ({ item }) => <RecipeSmallView item={item} />;
 
   return (
@@ -22,7 +22,7 @@ const ResultsScreen = (props) => {
         ]}
         contentContainerStyle={{ paddingTop: 0 }}
         data={data}
-        numColumns={1}
+        numColumns={renderItemType == "small" ? 1 : 2}
         renderItem={renderItemType == "small" ? renderSmallView : renderCard}
         keyExtractor={(item) => item.id.toString()}
       />

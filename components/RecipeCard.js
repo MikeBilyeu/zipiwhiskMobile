@@ -17,7 +17,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { parseNum } from "./utils";
 
-function RecipeCard({ data }) {
+const RecipeCard = ({ data }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -54,7 +54,7 @@ function RecipeCard({ data }) {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={styles.infoText}>{data.nutrition.calories}</Text>
             <Ionicons
-              name="fast-food"
+              name="pie-chart"
               size={wp("4%")}
               color="#FFF"
               style={styles.icon}
@@ -92,11 +92,11 @@ function RecipeCard({ data }) {
       </View>
     </TouchableOpacity>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("40%"),
+    height: hp("39%"),
     justifyContent: "center",
   },
   image: {
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
   recipeCardDarken: {
-    backgroundColor: "rgba(0,0,0,.15)",
+    backgroundColor: "rgba(0,0,0,.1)",
     borderRadius: wp("4%"),
     justifyContent: "flex-end",
     alignContent: "center",
@@ -126,6 +126,13 @@ const styles = StyleSheet.create({
     paddingVertical: wp("3%"),
     flex: 1,
     margin: wp("1.5%"),
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowColor: "#000",
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
   },
   title: {
     color: "white",
