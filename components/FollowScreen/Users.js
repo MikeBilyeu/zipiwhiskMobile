@@ -7,7 +7,7 @@ const Users = ({ username, image }) => (
   <View style={styles.container}>
     <UserNameBtn username={username} image_url={image} />
 
-    <ToggleFollowBtn BtnStyles={{ alignSelf: "flex-end" }} />
+    <ToggleFollowBtn />
   </View>
 );
 
@@ -16,21 +16,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     backgroundColor: "#FFF",
-    padding: 10,
-    paddingTop: 5,
-    marginBottom: 5,
-  },
-  text: {
-    color: "#313131",
-    fontFamily: "AvenirNextRegular",
-    fontSize: 15,
-    lineHeight: 30,
-  },
-  time: {
-    color: "#B7B7B7",
-    fontSize: 15,
-    fontFamily: "AvenirNextRegular",
+    paddingHorizontal: 10,
+    marginBottom: 10,
   },
 });
 export default Users;

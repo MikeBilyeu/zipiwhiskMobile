@@ -18,7 +18,7 @@ const ToggleFollowBtn = ({ BtnStyles, textStyles, following }) => {
           textStyles,
         ]}
       >
-        {isFollowing ? "Unfollow" : "Follow"}
+        {isFollowing ? "Following" : "Follow"}
       </Text>
     </TouchableOpacity>
   );

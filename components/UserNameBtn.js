@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginRight: 5,
-    marginBottom: 5,
   },
   userImage: {
     height: wp("10%"),
