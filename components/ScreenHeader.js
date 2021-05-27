@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   subTitleText: {
     textAlign: "center",
     fontFamily: "AvenirNextRegular",
-    fontSize: wp("4"),
+    fontSize: wp("3.5"),
     color: "#313131",
   },
 });
