@@ -14,20 +14,23 @@ module.exports = async ({ body: { username, password } }, res) => {
   //   }
   username = username.toLowerCase();
 
-  try {
-    pool.query(
-      `SELECT * FROM users WHERE username = ? OR email = ?`,
-      [username, username],
-      async (error, results, fields) => {
+  pool.query(
+    `SELECT * FROM users WHERE username = ? OR email = ?`,
+    [username, username],
+    async (error, results, fields) => {
+      try {
         if (error) throw error;
 
-        if (!results[0]) {
-          res.status(401).json({
-            error: "We can't find an account with that username",
-          });
-        }
-
         const user = results[0];
+
+        if (!user) {
+          throw {
+            status: 403,
+            type: "username",
+            message:
+              "Sorry, We can't find an account with that username or email.",
+          };
+        }
 
         // Check password
         const isMatch = await bcrypt.compare(password, user.password_encrypted);
@@ -51,12 +54,19 @@ module.exports = async ({ body: { username, password } }, res) => {
             }
           );
         } else {
-          res.status(401).json({ password: "Password incorrect" });
+          throw {
+            status: 403,
+            type: "password",
+            message: "Sorry, Incorrect password",
+          };
         }
+      } catch (err) {
+        if (err.status === 403) {
+          return res.status(403).json(err);
+        }
+
+        res.status(500).json(err);
       }
-    );
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
-  }
+    }
+  );
 };

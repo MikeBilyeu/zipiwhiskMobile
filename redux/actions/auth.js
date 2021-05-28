@@ -5,7 +5,9 @@ import {
   AUTH_LOGIN,
   AUTH_LOGOUT,
   LOGIN_USERNAME_CHANGE,
+  LOGIN_USERNAME_ERROR,
   LOGIN_PASSWORD_CHANGE,
+  LOGIN_PASSWORD_ERROR,
   SIGNUP_EMAIL_CHANGE,
   SIGNUP_USERNAME_CHANGE,
   SIGNUP_PASSWORD_CHANGE,
@@ -78,8 +80,18 @@ export const getAuth = () => async (dispatch, getState) => {
     setAuthToken(token);
     const decodedToken = jwt_decode(token);
     dispatch(setCurrentUser(decodedToken));
-  } catch (err) {
-    console.log("auth error:", err);
+  } catch ({ response: { data } }) {
+    if (data.type === "username") {
+      dispatch({
+        type: LOGIN_USERNAME_ERROR,
+        payload: data.message,
+      });
+    } else if (data.type === "password") {
+      dispatch({
+        type: LOGIN_PASSWORD_ERROR,
+        payload: data.message,
+      });
+    }
   }
 };
 

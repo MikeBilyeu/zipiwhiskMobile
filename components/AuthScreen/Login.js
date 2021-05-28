@@ -20,7 +20,11 @@ import Input from "../Input";
 import Or from "./Or";
 
 function Login(props) {
-  const loginDisabled = !props.login.username || !props.login.password;
+  const loginDisabled =
+    !props.login.username ||
+    !props.login.password ||
+    props.login.usernameError ||
+    props.login.passwordError;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,6 +42,7 @@ function Login(props) {
             placeholder="Username or Email"
             textContentType="username"
             iconName="person"
+            error={props.login.usernameError}
           />
 
           <Input
@@ -47,6 +52,7 @@ function Login(props) {
             textContentType="password"
             iconName="lock-closed"
             secureTextEntry={true}
+            error={props.login.passwordError}
           />
 
           <TouchableOpacity
