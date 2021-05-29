@@ -42,9 +42,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   header: {
-    marginBottom: hp("6%"),
+    marginTop: hp(".5%"),
+    marginBottom: hp("4%"),
     color: "#313131",
-    fontSize: wp("4.5%"),
+    fontSize: wp("6%"),
     fontFamily: "AvenirNextRegular",
   },
 });
