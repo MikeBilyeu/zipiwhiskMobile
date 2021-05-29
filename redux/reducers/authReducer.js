@@ -6,7 +6,9 @@ import {
   LOGIN_PASSWORD_CHANGE,
   LOGIN_PASSWORD_ERROR,
   SIGNUP_EMAIL_CHANGE,
+  SIGNUP_EMAIL_ERROR,
   SIGNUP_USERNAME_CHANGE,
+  SIGNUP_USERNAME_ERROR,
   SIGNUP_PASSWORD_CHANGE,
 } from "../constants";
 
@@ -20,7 +22,9 @@ const initialState = {
   },
   signup: {
     email: null,
+    emailError: null,
     username: null,
+    usernameError: null,
     password: null,
   },
 };
@@ -67,11 +71,28 @@ const authReducer = (state = initialState, action) => {
         login: { ...state.login, passwordError: action.payload },
       };
     case SIGNUP_EMAIL_CHANGE:
-      return { ...state, signup: { ...state.signup, email: action.payload } };
+      return {
+        ...state,
+        signup: { ...state.signup, emailError: null, email: action.payload },
+      };
+    case SIGNUP_EMAIL_ERROR:
+      return {
+        ...state,
+        signup: { ...state.signup, emailError: action.payload },
+      };
     case SIGNUP_USERNAME_CHANGE:
       return {
         ...state,
-        signup: { ...state.signup, username: action.payload },
+        signup: {
+          ...state.signup,
+          usernameError: null,
+          username: action.payload,
+        },
+      };
+    case SIGNUP_USERNAME_ERROR:
+      return {
+        ...state,
+        signup: { ...state.signup, usernameError: action.payload },
       };
     case SIGNUP_PASSWORD_CHANGE:
       return {

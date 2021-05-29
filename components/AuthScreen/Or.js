@@ -1,5 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const Or = () => (
   <View style={styles.orContainer}>
@@ -14,17 +18,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "95%",
-    marginVertical: 20,
+    marginTop: hp("3.5%"),
+    marginBottom: hp("2%"),
   },
   orLine: {
     borderBottomColor: "#E2E2E2",
     borderBottomWidth: 0.7,
-    width: 75,
+    width: wp("25%"),
     marginHorizontal: 15,
   },
   orText: {
     color: "#E2E2E2",
-    fontSize: 15,
+    fontSize: wp("4.5%"),
+    fontFamily: "AvenirNextRegular",
   },
 });
 

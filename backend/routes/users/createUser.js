@@ -12,22 +12,54 @@ module.exports = async ({ body: { username, email, password } }, res) => {
   //     res.status(400).send(errors);
   //   }
 
-  try {
-    const password_encrypted = await bcrypt.hash(password, 10);
-    let user = {
-      email,
-      username,
-      password_encrypted,
-    };
+  pool.query("SELECT * FROM users WHERE email = ?", email, (error, results) => {
+    try {
+      if (results[0]) {
+        throw {
+          status: 409,
+          type: "email",
+          message: "This email is alreay taken.",
+        };
+      }
+    } catch (err) {
+      if (err.status === 409) {
+        return res.status(409).json(err);
+      }
+    }
+  });
 
-    pool.query("INSERT INTO users SET ?", user, (error, results, fields) => {
-      if (error) throw error;
-      console.log("The result is: ", results);
-      //res.status(201).send(`User added with ID: ${results.insertId}`);
-    });
-  } catch (err) {
-    console.log("error:", err);
-  }
+  pool.query(
+    "SELECT * FROM users WHER username = ?",
+    username,
+    (error, results) => {
+      try {
+        if (results[0]) {
+          throw {
+            status: 409,
+            type: "username",
+            message: "This username is alreay taken.",
+          };
+        }
+      } catch (err) {
+        if (err.status === 409) {
+          return res.status(409).json(err);
+        }
+      }
+    }
+  );
+
+  const password_encrypted = await bcrypt.hash(password, 10);
+  let user = {
+    email,
+    username,
+    password_encrypted,
+  };
+
+  // pool.query("INSERT INTO users SET ?", user, (error, results, fields) => {
+  //   if (error) throw error;
+  //   console.log("The result is: ", results);
+  //   //res.status(201).send(`User added with ID: ${results.insertId}`);
+  // });
 
   // const { rows } = await db.query(
   //   `SELECT *

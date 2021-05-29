@@ -5,40 +5,27 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-const ForgotPassword = (props) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>
-        We sent you an email to reset your password.
-      </Text>
-      <TouchableOpacity
-        onPress={() => props.navigation.navigate("Login")}
-        activeOpacity={0.4}
-        style={styles.loginBtn}
-      >
-        <Text style={styles.backBtnText}>{"Go back"}</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
-  );
-};
+import AuthScreenWrapper from "./AuthScreenWrapper";
+import NavBtn from "./NavBtn";
+
+const ForgotPassword = (props) => (
+  <AuthScreenWrapper headerText="Forgot Password">
+    <Text style={styles.text}>
+      We sent you an email to reset your password.
+    </Text>
+    <NavBtn
+      text="Go Back"
+      handleOnPress={() => props.navigation.navigate("Login")}
+    />
+  </AuthScreenWrapper>
+);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-    justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: 5,
-  },
-  header: {
-    fontSize: wp("6%"),
+  text: {
+    fontSize: wp("5%"),
     textAlign: "center",
     marginBottom: wp("10%"),
     color: "#313131",
-  },
-  backBtnText: {
-    fontSize: wp("5%"),
-    color: "#0172C4",
   },
 });
 

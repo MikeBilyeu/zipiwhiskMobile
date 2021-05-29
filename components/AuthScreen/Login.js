@@ -1,22 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  TouchableOpacity,
-  Image,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+
 import {
   loginUsernameChange,
   loginPasswordChange,
   getAuth,
 } from "../../redux/actions/auth";
 
+import AuthScreenWrapper from "./AuthScreenWrapper";
 import Input from "../Input";
+import Btn from "./Btn";
+import NavBtn from "./NavBtn";
 import Or from "./Or";
 
 function Login(props) {
@@ -27,119 +22,61 @@ function Login(props) {
     props.login.passwordError;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
-          <Image
-            source={require("../../assets/zipiwhisk.png")}
-            style={{ height: 55 }}
-            resizeMode="contain"
-          />
-          <Text style={styles.header}>Login</Text>
-          <Input
-            value={props.login.username}
-            handleChange={props.loginUsernameChange}
-            placeholder="Username or Email"
-            textContentType="username"
-            iconName="person"
-            error={props.login.usernameError}
-          />
+    <AuthScreenWrapper headerText="Login">
+      <Input
+        value={props.login.username}
+        handleChange={props.loginUsernameChange}
+        placeholder="Username or Email"
+        textContentType="username"
+        iconName="person"
+        error={props.login.usernameError}
+      />
 
-          <Input
-            value={props.login.password}
-            handleChange={props.loginPasswordChange}
-            placeholder="Password"
-            textContentType="password"
-            iconName="lock-closed"
-            secureTextEntry={true}
-            error={props.login.passwordError}
-          />
+      <Input
+        value={props.login.password}
+        handleChange={props.loginPasswordChange}
+        placeholder="Password"
+        textContentType="password"
+        iconName="lock-closed"
+        secureTextEntry={true}
+        error={props.login.passwordError}
+      />
 
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("ForgotPassword")}
-            activeOpacity={0.4}
-            style={styles.ForgotPasswordBtnContainer}
-          >
-            <Text style={styles.ForgotPasswordBtnText}>
-              {"Forgot password?"}
-            </Text>
-          </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate("ForgotPassword")}
+        activeOpacity={0.4}
+        style={styles.forgotPasswordBtnContainer}
+      >
+        <Text style={styles.forgotPasswordBtnText}>{"Forgot password?"}</Text>
+      </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={props.getAuth}
-            activeOpacity={0.8}
-            style={[
-              styles.loginBtnContainer,
-              loginDisabled && styles.loginBtnContainerDisabled,
-            ]}
-            disabled={loginDisabled}
-          >
-            <Text style={styles.loginBtnText}>{"Login"}</Text>
-          </TouchableOpacity>
+      <Btn
+        text="Login"
+        handleOnPress={props.getAuth}
+        disabled={loginDisabled}
+      />
 
-          <Or />
+      <Or />
 
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("Signup")}
-            activeOpacity={0.4}
-            style={styles.signupBtnContainer}
-          >
-            <Text style={styles.signupBtnText}>{"Signup"}</Text>
-          </TouchableOpacity>
-        </View>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
+      <NavBtn
+        text="Signup"
+        handleOnPress={() => props.navigation.navigate("Signup")}
+      />
+    </AuthScreenWrapper>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-  },
-  inner: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: 5,
-  },
-  header: {
-    fontSize: 18,
-    marginBottom: 25,
-    color: "#313131",
-  },
-  ForgotPasswordBtnContainer: {
+  forgotPasswordBtnContainer: {
     elevation: 8,
     paddingVertical: 5,
     paddingHorizontal: 25,
     alignSelf: "flex-end",
   },
-  ForgotPasswordBtnText: {
+  forgotPasswordBtnText: {
     color: "#B7B7B7",
     alignSelf: "center",
-  },
-  loginBtnContainer: {
-    elevation: 8,
-    marginTop: 35,
-    backgroundColor: "#0172C4",
-    borderRadius: 100,
-    width: "95%",
-    paddingVertical: 15,
-    paddingHorizontal: 12,
-  },
-  loginBtnContainerDisabled: {
-    opacity: 0.6,
-  },
-  loginBtnText: {
-    fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-    alignSelf: "center",
-  },
-  signupBtnContainer: {},
-  signupBtnText: {
-    color: "#0172C4",
-    fontSize: 18,
+    fontFamily: "AvenirNextRegular",
   },
 });
 
