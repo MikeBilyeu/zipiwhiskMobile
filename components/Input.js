@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   error: {
     borderColor: "#DE4949",
   },
+
   icon: {
     marginHorizontal: 20,
   },

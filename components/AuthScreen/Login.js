@@ -6,7 +6,7 @@ import {
   loginUsernameChange,
   loginPasswordChange,
   getAuth,
-} from "../../redux/actions/auth";
+} from "../../redux/actions/login";
 
 import AuthScreenWrapper from "./AuthScreenWrapper";
 import Input from "../Input";
@@ -14,7 +14,7 @@ import Btn from "./Btn";
 import NavBtn from "./NavBtn";
 import Or from "./Or";
 
-function Login(props) {
+const Login = (props) => {
   const loginDisabled =
     !props.login.username ||
     !props.login.password ||
@@ -64,7 +64,7 @@ function Login(props) {
       />
     </AuthScreenWrapper>
   );
-}
+};
 
 const styles = StyleSheet.create({
   forgotPasswordBtnContainer: {
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  login: state.auth.login,
+  login: state.login,
 });
 
 const mapDispatchToProps = {

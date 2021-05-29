@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import {
   signupEmailChange,
   signupUsernameChange,
-} from "../../redux/actions/auth";
+} from "../../redux/actions/signup";
 
 import AuthScreenWrapper from "./AuthScreenWrapper";
 import Input from "../Input";
@@ -12,8 +12,8 @@ import Btn from "./Btn";
 import NavBtn from "./NavBtn";
 import Or from "./Or";
 
-function Signup(props) {
-  const continueDisabled = !props.signup.email || !props.signup.password;
+const Signup = (props) => {
+  const continueDisabled = !props.signup.email || !props.signup.username;
 
   return (
     <AuthScreenWrapper headerText="Signup">
@@ -43,9 +43,9 @@ function Signup(props) {
       />
     </AuthScreenWrapper>
   );
-}
+};
 
-const mapStateToProps = (state) => ({ signup: state.auth.signup });
+const mapStateToProps = (state) => ({ signup: state.signup });
 const mapDispatchToProps = {
   signupEmailChange,
   signupUsernameChange,

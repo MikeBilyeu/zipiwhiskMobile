@@ -14,23 +14,21 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-function AuthScreenWrapper(props) {
-  return (
-    <SafeAreaView style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
-          <Image
-            source={require("../../assets/zipiwhisk.png")}
-            style={{ height: wp("14%") }}
-            resizeMode="contain"
-          />
-          <Text style={styles.header}>{props.headerText}</Text>
-          {props.children}
-        </View>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
-  );
-}
+const AuthScreenWrapper = (props) => (
+  <SafeAreaView style={styles.container}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.inner}>
+        <Image
+          source={require("../../assets/zipiwhisk.png")}
+          style={{ height: wp("14%") }}
+          resizeMode="contain"
+        />
+        <Text style={styles.header}>{props.headerText}</Text>
+        {props.children}
+      </View>
+    </TouchableWithoutFeedback>
+  </SafeAreaView>
+);
 
 const styles = StyleSheet.create({
   container: {

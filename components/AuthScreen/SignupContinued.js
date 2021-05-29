@@ -6,7 +6,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import { signupPasswordChange, registerUser } from "../../redux/actions/auth";
+import { signupPasswordChange, registerUser } from "../../redux/actions/signup";
 
 import AuthScreenWrapper from "./AuthScreenWrapper";
 import Input from "../Input";
@@ -15,7 +15,7 @@ import NavBtn from "./NavBtn";
 import Or from "./Or";
 
 function SignupContinued(props) {
-  const signupDisabled = !props.signup.username;
+  const signupDisabled = !props.signup.password;
 
   return (
     <AuthScreenWrapper headerText="Signup">
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({ signup: state.auth.signup });
+const mapStateToProps = (state) => ({ signup: state.signup });
 
 const mapDispatchToProps = { registerUser, signupPasswordChange };
 
