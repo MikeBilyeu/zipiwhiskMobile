@@ -1,20 +1,26 @@
 import axios from "axios";
+
 import {
   SIGNUP_EMAIL_CHANGE,
   SIGNUP_EMAIL_ERROR,
   SIGNUP_USERNAME_CHANGE,
+  SIGNUP_USERNAME_ERROR,
   SIGNUP_PASSWORD_CHANGE,
 } from "../constants";
+import { checkUsername } from "./user";
 
 export const signupEmailChange = (value) => ({
   type: SIGNUP_EMAIL_CHANGE,
   payload: value,
 });
 
-export const signupUsernameChange = (value) => ({
-  type: SIGNUP_USERNAME_CHANGE,
-  payload: value,
-});
+export const signupUsernameChange = (value) => (dispatch) => {
+  dispatch({
+    type: SIGNUP_USERNAME_CHANGE,
+    payload: value,
+  });
+  dispatch(checkUsername(value, SIGNUP_USERNAME_ERROR));
+};
 
 export const signupPasswordChange = (value) => ({
   type: SIGNUP_PASSWORD_CHANGE,

@@ -6,6 +6,7 @@ import {
   signupUsernameChange,
   checkEmail,
 } from "../../redux/actions/signup";
+import { checkUsername } from "../../redux/actions/user";
 
 import AuthScreenWrapper from "./AuthScreenWrapper";
 import Input from "../Input";
@@ -14,10 +15,14 @@ import NavBtn from "./NavBtn";
 import Or from "./Or";
 
 const Signup = (props) => {
-  const continueDisabled = !props.signup.email || !props.signup.username;
+  const continueDisabled =
+    !props.signup.email ||
+    !props.signup.username ||
+    props.signup.usernameError ||
+    props.signup.emailError;
 
-  const handleContinuePress = () => {
-    props.checkEmail();
+  const handleContinuePress = async () => {
+    await props.checkEmail();
     //props.navigation.navigate("SignupContinued");
   };
 
@@ -37,6 +42,7 @@ const Signup = (props) => {
         placeholder="Username"
         textContentType="username"
         iconName="person"
+        error={props.signup.usernameError}
       />
       <Btn
         text="Continue"
@@ -57,5 +63,6 @@ const mapDispatchToProps = {
   signupEmailChange,
   signupUsernameChange,
   checkEmail,
+  checkUsername,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

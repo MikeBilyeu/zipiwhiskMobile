@@ -22,3 +22,18 @@ export const getUser = () => async (dispatch) => {
     console.log("user error:", err);
   }
 };
+
+export const checkUsername = (username, actionType) => async (dispatch) => {
+  try {
+    await axios.get("http://localhost:3000/api/users/username", {
+      params: { username },
+    });
+  } catch ({ response: { data } }) {
+    if (data.type === "username") {
+      dispatch({
+        type: actionType,
+        payload: data.message,
+      });
+    }
+  }
+};
