@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     width: "95%",
     position: "absolute",
     paddingLeft: wp("14%"),
+    fontFamily: "AvenirNextRegular",
   },
 });
 
