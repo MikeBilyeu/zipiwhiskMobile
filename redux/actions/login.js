@@ -26,9 +26,11 @@ export const getAuth = () => async (dispatch, getState) => {
   try {
     let {
       data: { token },
-    } = await axios.post("http://localhost:3000/api/users/login", {
-      username,
-      password,
+    } = await axios.get("http://localhost:3000/api/users/login", {
+      params: {
+        username,
+        password,
+      },
     });
     // Store token in local secure store
     SecureStore.setItemAsync("jwtToken", token);

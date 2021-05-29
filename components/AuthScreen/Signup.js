@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   signupEmailChange,
   signupUsernameChange,
+  checkEmail,
 } from "../../redux/actions/signup";
 
 import AuthScreenWrapper from "./AuthScreenWrapper";
@@ -15,6 +16,11 @@ import Or from "./Or";
 const Signup = (props) => {
   const continueDisabled = !props.signup.email || !props.signup.username;
 
+  const handleContinuePress = () => {
+    props.checkEmail();
+    //props.navigation.navigate("SignupContinued");
+  };
+
   return (
     <AuthScreenWrapper headerText="Signup">
       <Input
@@ -23,6 +29,7 @@ const Signup = (props) => {
         placeholder="Email"
         textContentType="emailAddress"
         iconName="mail"
+        error={props.signup.emailError}
       />
       <Input
         value={props.signup.username}
@@ -33,7 +40,7 @@ const Signup = (props) => {
       />
       <Btn
         text="Continue"
-        handleOnPress={() => props.navigation.navigate("SignupContinued")}
+        handleOnPress={handleContinuePress}
         disabled={continueDisabled}
       />
       <Or />
@@ -49,5 +56,6 @@ const mapStateToProps = (state) => ({ signup: state.signup });
 const mapDispatchToProps = {
   signupEmailChange,
   signupUsernameChange,
+  checkEmail,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 //const validateLoginInput = require("../../validation/login");
 
-module.exports = async ({ body: { username, password } }, res) => {
+module.exports = async ({ query: { username, password } }, res) => {
   // Form validation
   //const errors = validateLoginInput(req.body);
   // checking if login validator has errors
@@ -24,12 +24,11 @@ module.exports = async ({ body: { username, password } }, res) => {
         const user = results[0];
 
         if (!user) {
-          throw {
-            status: 403,
+          return res.status(403).json({
             type: "username",
             message:
               "Sorry, We can't find an account with that username or email.",
-          };
+          });
         }
 
         // Check password
@@ -54,17 +53,11 @@ module.exports = async ({ body: { username, password } }, res) => {
             }
           );
         } else {
-          throw {
-            status: 403,
-            type: "password",
-            message: "Sorry, Incorrect password",
-          };
+          return res
+            .status(403)
+            .json({ type: "password", message: "Sorry, Incorrect password" });
         }
       } catch (err) {
-        if (err.status === 403) {
-          return res.status(403).json(err);
-        }
-
         res.status(500).json(err);
       }
     }

@@ -10,6 +10,8 @@ router.get(
 
 router.post("/register", require("./createUser"));
 
-router.post("/login", require("./userLogin"));
+router.get("/login", require("./login"));
+
+router.get("/email", require("./checkEmail"));
 
 module.exports = router;
