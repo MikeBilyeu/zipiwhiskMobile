@@ -1,4 +1,5 @@
 import {
+  AUTH_LOGIN,
   LOGIN_USERNAME_CHANGE,
   LOGIN_USERNAME_ERROR,
   LOGIN_PASSWORD_CHANGE,
@@ -14,6 +15,8 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_LOGIN:
+      return initialState;
     case LOGIN_USERNAME_CHANGE:
       return {
         ...state,

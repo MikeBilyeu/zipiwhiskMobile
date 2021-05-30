@@ -1,4 +1,5 @@
 import {
+  AUTH_LOGIN,
   SIGNUP_EMAIL_CHANGE,
   SIGNUP_EMAIL_ERROR,
   SIGNUP_USERNAME_CHANGE,
@@ -18,6 +19,8 @@ const initialState = {
 
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_LOGIN:
+      return initialState;
     case SIGNUP_EMAIL_CHANGE:
       return {
         ...state,
