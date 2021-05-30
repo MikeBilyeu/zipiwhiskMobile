@@ -34,6 +34,7 @@ const Signup = (props) => {
         placeholder="Email"
         textContentType="emailAddress"
         iconName="mail"
+        autoCapitalize="none"
         error={props.signup.emailError}
       />
       <Input
@@ -42,6 +43,7 @@ const Signup = (props) => {
         placeholder="Username"
         textContentType="username"
         iconName="person"
+        autoCapitalize="none"
         error={props.signup.usernameError}
       />
       <Btn

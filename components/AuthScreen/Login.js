@@ -29,6 +29,7 @@ const Login = (props) => {
         placeholder="Username or Email"
         textContentType="username"
         iconName="person"
+        autoCapitalize="none"
         error={props.login.usernameError}
       />
 
@@ -38,6 +39,7 @@ const Login = (props) => {
         placeholder="Password"
         textContentType="password"
         iconName="lock-closed"
+        autoCapitalize="none"
         secureTextEntry={true}
         error={props.login.passwordError}
       />

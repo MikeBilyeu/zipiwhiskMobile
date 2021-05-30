@@ -26,12 +26,12 @@ function Input(props) {
           clearButtonMode="while-editing"
           selectionColor="#464646"
           returnKeyType="done"
-          secureTextEntry={props.secureTextEntry}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
+          {...props}
         />
       </View>
-      {props.error && <Text>{props.error}</Text>}
+      {props.error && <Text style={styles.errorText}>{props.error}</Text>}
     </>
   );
 }
@@ -59,12 +59,19 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    fontSize: wp("4.5"),
+    fontSize: wp("4.5%"),
+    lineHeight: wp("4.5%"),
     color: "#313131",
     height: wp("13%"),
     width: "95%",
     position: "absolute",
     paddingLeft: wp("14%"),
+    paddingTop: wp("1%"),
+    fontFamily: "AvenirNextRegular",
+  },
+  errorText: {
+    color: "#313131",
+    fontSize: wp("3.5%"),
     fontFamily: "AvenirNextRegular",
   },
 });
