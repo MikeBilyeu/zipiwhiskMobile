@@ -1,24 +1,23 @@
 import axios from "axios";
-import { GET_USER, USERNAME_CHANGE, FULLNAME_CHANGE } from "../constants";
-
-export const usernameChange = (value) => ({
-  type: USERNAME_CHANGE,
-  payload: value,
-});
-
-export const fullnameChange = (value) => ({
-  type: FULLNAME_CHANGE,
-  payload: value,
-});
+import {
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
+} from "../constants";
 
 export const getUser = () => async (dispatch) => {
   try {
+    dispatch({ type: GET_USER_REQUEST });
     const { data } = await axios.get("http://localhost:3000/api/users/user");
     dispatch({
-      type: GET_USER,
+      type: GET_USER_SUCCESS,
       payload: data,
     });
   } catch (err) {
+    dispatch({
+      type: GET_USER_FAILURE,
+      payload: err.response.data,
+    });
     console.log("user error:", err);
   }
 };

@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { connect } from "react-redux";
 import {
   widthPercentageToDP as wp,
@@ -11,44 +17,52 @@ import Input from "../Input";
 import UserImageBtn from "../UserImageBtn";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { usernameChange, fullnameChange } from "../../redux/actions/user";
+import { usernameChange, fullnameChange } from "../../redux/actions/userForm";
 import { logout } from "../../redux/actions/auth";
 
 const SettingsScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScreenHeader title="Settings" subTitle="Profile" />
-      <View style={styles.wrapper}>
-        <View style={{ flexDirection: "row" }}>
-          <UserImageBtn
-            uri={props.user.image_url}
-            styles={{ width: 85, height: 85 }}
-          />
-          <View style={styles.emailWrapper}>
-            <Text style={styles.email}>{props.user.email}</Text>
-            <TouchableOpacity style={styles.logoutBtn} onPress={props.logout}>
-              <Text style={styles.logoutBtnText}>Logout</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
 
-        <Input
-          value={props.user.username}
-          handleChange={props.usernameChange}
-          placeholder="Username"
-          textContentType="username"
-          iconName="person"
-          autoCapitalize="none"
-          error={props.user.usernameError}
-        />
-        <Input
-          value={props.user.fullname}
-          handleChange={props.fullnameChange}
-          placeholder="Full Name"
-          textContentType="name"
-          iconName="document-text"
-        />
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inner}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <UserImageBtn
+              uri={props.user.image_url}
+              styles={{ width: 85, height: 85 }}
+            />
+            <View style={styles.emailWrapper}>
+              <Text style={styles.email}>{props.email}</Text>
+              <TouchableOpacity style={styles.logoutBtn} onPress={props.logout}>
+                <Text style={styles.logoutBtnText}>Logout</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <Input
+            value={props.user.username}
+            handleChange={props.usernameChange}
+            placeholder="Username"
+            textContentType="username"
+            iconName="person"
+            autoCapitalize="none"
+            error={props.user.usernameError}
+          />
+          <Input
+            value={props.user.fullname}
+            handleChange={props.fullnameChange}
+            placeholder="Full Name"
+            textContentType="name"
+            iconName="document-text"
+          />
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
@@ -60,16 +74,18 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#FFF",
   },
-  wrapper: {
-    paddingHorizontal: 10,
-    paddingTop: 25,
-    width: "100%",
+  inner: {
     flex: 1,
+    width: "100%",
+    alignItems: "center",
+    paddingTop: hp("2%"),
+    paddingHorizontal: wp("2%"),
   },
   emailWrapper: {
     flex: 1,
     alignItems: "center",
     justifyContent: "space-around",
+    paddingVertical: hp("5%"),
   },
   email: {
     color: "#464646",
@@ -93,7 +109,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({ user: state.user });
+const mapStateToProps = (state) => ({
+  user: state.userForm,
+  email: state.user.email,
+});
 
 const mapDispatchToProps = { logout, usernameChange, fullnameChange };
 

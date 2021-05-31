@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import recipeFormReducer from "../reducers/recipeFormReducer";
 import authReducer from "../reducers/authReducer";
 import userReducer from "../reducers/userReducer";
+import userFormReducer from "../reducers/userFormReducer";
 import userProfileReducer from "../reducers/userProfileReducer";
 import loginReducer from "../reducers/loginReducer";
 import signupReducer from "../reducers/signupReducer";
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   signup: signupReducer,
   user: userReducer,
+  userForm: userFormReducer,
   userProfile: userProfileReducer,
 });
 

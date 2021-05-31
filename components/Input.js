@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     color: "#313131",
     fontSize: wp("3.5%"),
     fontFamily: "AvenirNextRegular",
+    alignSelf: "center",
   },
 });
 

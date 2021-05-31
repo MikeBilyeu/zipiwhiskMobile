@@ -1,6 +1,11 @@
-import { GET_USER, FULLNAME_CHANGE, USERNAME_CHANGE } from "../constants";
+import {
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
+} from "../constants";
 
 const initialState = {
+  isLoading: true,
   id: 1,
   email: "smith99@gmail.com",
   username: "smith99",
@@ -14,12 +19,12 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_USER:
-      return action.payload;
-    case USERNAME_CHANGE:
-      return { ...state, username: action.payload };
-    case FULLNAME_CHANGE:
-      return { ...state, fullname: action.payload };
+    case GET_USER_REQUEST:
+      return initialState;
+    case GET_USER_SUCCESS:
+      return { ...action.payload, isLoading: false };
+    case GET_USER_FAILURE:
+      return initialState;
     default:
       return state;
   }
