@@ -5,7 +5,7 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import {
   loginUsernameChange,
   loginPasswordChange,
-  getAuth,
+  authLogin,
 } from "../../redux/actions/login";
 
 import AuthScreenWrapper from "./AuthScreenWrapper";
@@ -54,7 +54,7 @@ const Login = (props) => {
 
       <Btn
         text="Login"
-        handleOnPress={props.getAuth}
+        handleOnPress={props.authLogin}
         disabled={loginDisabled}
       />
 
@@ -89,7 +89,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   loginUsernameChange,
   loginPasswordChange,
-  getAuth,
+  authLogin,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -17,6 +17,11 @@ export const FULLNAME_CHANGE = "FULLNAME_CHANGE";
 export const GET_USER_PROFILE = "GET_USER_PROFILE";
 
 //AUTH ACTIONS
+export const LOGIN_REQEUST = "LOGIN_REQEUST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOING_FAILURE = "LOING_FAILURE";
+export const LOGOUT = "LOGOUT";
+
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 

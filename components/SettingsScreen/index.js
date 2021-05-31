@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { connect } from "react-redux";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import ScreenHeader from "../ScreenHeader";
 import Input from "../Input";
@@ -34,6 +38,8 @@ const SettingsScreen = (props) => {
           placeholder="Username"
           textContentType="username"
           iconName="person"
+          autoCapitalize="none"
+          error={props.user.usernameError}
         />
         <Input
           value={props.user.fullname}
@@ -77,7 +83,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 35,
     paddingVertical: 10,
     borderRadius: 5,
-    width: 150,
+    width: wp("35%"),
   },
   logoutBtnText: {
     color: "#0172C4",

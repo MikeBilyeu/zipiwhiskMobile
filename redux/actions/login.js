@@ -6,6 +6,8 @@ import {
   LOGIN_USERNAME_ERROR,
   LOGIN_PASSWORD_CHANGE,
   LOGIN_PASSWORD_ERROR,
+  LOGIN_REQEUST,
+  LOGIN_FAILURE,
 } from "../constants";
 import setAuthToken from "../../utils/setAuthToken";
 import { setCurrentUser } from "./auth";
@@ -20,10 +22,14 @@ export const loginPasswordChange = (value) => ({
   payload: value,
 });
 
-export const getAuth = () => async (dispatch, getState) => {
+export const authLogin = () => async (dispatch, getState) => {
   const { username, password } = getState().login;
 
   try {
+    dispatch({
+      type: LOGIN_REQEUST,
+    });
+
     let {
       data: { token },
     } = await axios.get("http://localhost:3000/api/users/login", {
@@ -40,6 +46,8 @@ export const getAuth = () => async (dispatch, getState) => {
     const decodedToken = jwt_decode(token);
     dispatch(setCurrentUser(decodedToken));
   } catch ({ response: { data } }) {
+    dispatch({ type: LOGIN_FAILURE });
+
     if (data.type === "username") {
       dispatch({
         type: LOGIN_USERNAME_ERROR,

@@ -41,7 +41,18 @@ function ScreenHeader(props) {
           </Text>
           <Text style={styles.subTitleText}>{props.subTitle}</Text>
         </View>
-        {props.children || <View style={styles.headerBtn} />}
+        {(
+          <TouchableOpacity
+            style={styles.headerBtn}
+            onPress={() => {
+              //setInputFocused(false);
+              //Keyboard.dismiss();
+              console.log("Save Changes");
+            }}
+          >
+            <Text style={styles.saveBtnText}>Save</Text>
+          </TouchableOpacity>
+        ) || <View style={styles.headerBtn} />}
       </View>
     </SafeAreaView>
   );
@@ -70,7 +81,9 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   titleWrapper: {
-    flex: 8,
+    flex: 6,
+    height: 60,
+    justifyContent: "center",
   },
   titleText: {
     textAlign: "center",
@@ -84,6 +97,20 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextRegular",
     fontSize: wp("3.5"),
     color: "#313131",
+  },
+
+  saveBtn: {
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 2,
+    borderWidth: 0.5,
+  },
+  saveBtnText: {
+    color: "#0172C4",
+    fontFamily: "AvenirNextDemiBold",
+    fontSize: wp("4.5%"),
   },
 });
 
