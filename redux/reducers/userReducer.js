@@ -6,11 +6,11 @@ import {
 
 const initialState = {
   isLoading: true,
-  id: 1,
-  email: "smith99@gmail.com",
-  username: "smith99",
-  fullname: "Jake smith",
-  image_url: "https://randomuser.me/api/portraits/men/32.jpg",
+  id: null,
+  email: "",
+  username: "",
+  fullname: "",
+  image_url: "",
   recipeUnit: "US",
   restriction: null,
   numFollowers: "1,520",

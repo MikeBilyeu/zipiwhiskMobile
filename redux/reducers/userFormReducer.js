@@ -10,11 +10,11 @@ import {
 
 const initialState = {
   isLoading: false,
-  username: "smith99",
+  username: "",
   usernameError: null,
-  fullname: "Jake smith",
+  fullname: "",
   fullnameError: null,
-  image_url: "https://randomuser.me/api/portraits/men/32.jpg",
+  image_url: "",
   image_urlError: null,
   recipeUnit: "US",
   restriction: null,
