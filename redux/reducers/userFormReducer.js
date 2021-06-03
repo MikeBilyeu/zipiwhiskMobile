@@ -3,9 +3,13 @@ import {
   FULLNAME_CHANGE,
   USERNAME_CHANGE,
   USERNAME_ERROR,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAILURE,
 } from "../constants";
 
 const initialState = {
+  isLoading: false,
   username: "smith99",
   usernameError: null,
   fullname: "Jake smith",
@@ -33,6 +37,10 @@ const userReducer = (state = initialState, action) => {
       return { ...state, usernameError: action.payload };
     case FULLNAME_CHANGE:
       return { ...state, fullname: action.payload };
+    case EDIT_USER_REQUEST:
+      return { ...state, isLoading: true };
+    case EDIT_USER_SUCCESS:
+      return { ...state, isLoading: false };
     default:
       return state;
   }

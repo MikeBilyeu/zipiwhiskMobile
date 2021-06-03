@@ -16,4 +16,10 @@ router.get("/email", require("./checkEmail"));
 
 router.get("/username", require("./checkUsername"));
 
+router.put(
+  "/edit",
+  passport.authenticate("jwt", { session: false }),
+  require("./edit")
+);
+
 module.exports = router;

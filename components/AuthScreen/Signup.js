@@ -23,7 +23,7 @@ const Signup = (props) => {
 
   const handleContinuePress = async () => {
     await props.checkEmail();
-    //props.navigation.navigate("SignupContinued");
+    props.navigation.navigate("SignupContinued");
   };
 
   return (

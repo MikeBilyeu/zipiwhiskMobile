@@ -1,10 +1,10 @@
 import { GET_USER_PROFILE } from "../constants";
 
 const initialState = {
-  id: 1,
-  username: "smith99",
-  fullname: "Jake smith",
-  image_url: "https://randomuser.me/api/portraits/men/32.jpg",
+  id: null,
+  username: "",
+  fullname: "",
+  image_url: "",
   numFollowers: "1,520",
   numFollowing: "250",
 };

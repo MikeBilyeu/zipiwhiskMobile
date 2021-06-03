@@ -44,13 +44,17 @@ function ScreenHeader(props) {
         {(
           <TouchableOpacity
             style={styles.headerBtn}
-            onPress={() => {
-              //setInputFocused(false);
-              //Keyboard.dismiss();
-              console.log("Save Changes");
-            }}
+            onPress={props.handleSavePress}
+            disabled={props.isLoading}
           >
-            <Text style={styles.saveBtnText}>Save</Text>
+            <Text
+              style={[
+                styles.saveBtnText,
+                props.isLoading && styles.saveBtnTextLoading,
+              ]}
+            >
+              {props.isLoading ? "Saving" : "Save"}
+            </Text>
           </TouchableOpacity>
         ) || <View style={styles.headerBtn} />}
       </View>
@@ -99,18 +103,14 @@ const styles = StyleSheet.create({
     color: "#313131",
   },
 
-  saveBtn: {
-    width: 60,
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 2,
-    borderWidth: 0.5,
-  },
   saveBtnText: {
     color: "#0172C4",
     fontFamily: "AvenirNextDemiBold",
     fontSize: wp("4.5%"),
+  },
+  saveBtnTextLoading: {
+    color: "#313131",
+    fontFamily: "AvenirNextRegular",
   },
 });
 
