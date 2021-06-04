@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -24,7 +24,10 @@ import {
 } from "../../redux/actions/userForm";
 import { logout } from "../../redux/actions/auth";
 
+import Modal from "../Modal";
+
 const SettingsScreen = (props) => {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.container}>
       <ScreenHeader
@@ -32,6 +35,11 @@ const SettingsScreen = (props) => {
         subTitle="Profile"
         handleSavePress={() => props.editProfile(props.navigation.goBack)}
         isLoading={props.userForm.isLoading}
+      />
+      <Modal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        modalText="Change Profile Image"
       />
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -42,15 +50,24 @@ const SettingsScreen = (props) => {
               alignItems: "center",
             }}
           >
-            <UserImageBtn
-              uri={props.userForm.image_url}
-              styles={{ width: 85, height: 85 }}
-            />
-            <View style={styles.emailWrapper}>
-              <Text style={styles.email}>{props.user.email}</Text>
-              <TouchableOpacity style={styles.logoutBtn} onPress={props.logout}>
-                <Text style={styles.logoutBtnText}>Logout</Text>
-              </TouchableOpacity>
+            <View style={styles.wrapper}>
+              <View style={styles.center}>
+                <UserImageBtn
+                  uri={props.userForm.image_url}
+                  styles={{ width: 85, height: 85 }}
+                  handleImagePress={() => setModalVisible(true)}
+                />
+                <Text style={styles.imageBtnText}>Change Image</Text>
+              </View>
+              <View style={styles.emailWrapper}>
+                <Text style={styles.email}>{props.user.email}</Text>
+                <TouchableOpacity
+                  style={styles.logoutBtn}
+                  onPress={props.logout}
+                >
+                  <Text style={styles.logoutBtnText}>Logout</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
 
@@ -90,6 +107,22 @@ const styles = StyleSheet.create({
     paddingTop: hp("1%"),
     paddingHorizontal: wp("2%"),
   },
+  wrapper: {
+    width: "95%",
+    flexDirection: "row",
+    marginBottom: hp("3%"),
+  },
+  center: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imageBtnText: {
+    color: "#0172C4",
+    fontSize: wp("3%"),
+    textAlign: "center",
+    fontFamily: "AvenirNextRegular",
+    marginTop: wp("1%"),
+  },
   emailWrapper: {
     flex: 1,
     alignItems: "center",
@@ -99,7 +132,7 @@ const styles = StyleSheet.create({
   },
   email: {
     color: "#464646",
-    fontSize: 18,
+    fontSize: wp("4%"),
     textAlign: "center",
     fontFamily: "AvenirNextDemiBold",
   },
