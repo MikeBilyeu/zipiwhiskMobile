@@ -1,20 +1,16 @@
 import React from "react";
 import {
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
   TouchableOpacity,
   View,
   Text,
-  Image,
 } from "react-native";
-import { Video } from "expo-av";
-import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 import {
+  changeMedia,
   recipeNameChange,
   servingsChange,
   ingredientsChange,
@@ -25,12 +21,11 @@ import {
 } from "../../redux/actions/recipeForm";
 
 import ScreenHeader from "../ScreenHeader";
+import MediaInput from "./MediaInput";
 import Input from "./Input";
 import Categories from "./Categories";
 
 const CreateRecipeScreen = (props) => {
-  const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
@@ -48,30 +43,11 @@ const CreateRecipeScreen = (props) => {
           </TouchableOpacity>
         </ScreenHeader>
         <ScrollView style={styles.listContainer}>
-          <TouchableOpacity
-            style={{ borderBottomWidth: 0.5, borderColor: "#E3E3E3" }}
-            onPress={() => navigation.navigate("Camera")}
-          >
-            {props.recipeForm.media_type === "image" ? (
-              <Image
-                source={{ uri: props.recipeForm.media_url }}
-                style={styles.image}
-              />
-            ) : props.recipeForm.media_type === "video" ? (
-              <Video
-                source={{ uri: props.recipeForm.media_url }}
-                style={styles.image}
-                resizeMode="cover"
-                isLooping
-                shouldPlay
-                isMuted
-              />
-            ) : (
-              <View style={styles.cameraIconContainer}>
-                <Ionicons name="camera-outline" size={75} color="#B7B7B7" />
-              </View>
-            )}
-          </TouchableOpacity>
+          <MediaInput
+            media_url={props.recipeForm.media_url}
+            media_type={props.recipeForm.media_type}
+            handleOnChange={props.changeMedia}
+          />
           <Input
             name="Recipe Name"
             placeholder="Add a recipe name..."
@@ -173,6 +149,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  changeMedia,
   recipeNameChange,
   servingsChange,
   ingredientsChange,
