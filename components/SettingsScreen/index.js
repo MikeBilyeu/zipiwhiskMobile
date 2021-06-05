@@ -25,6 +25,7 @@ import {
 import { logout } from "../../redux/actions/auth";
 
 import Modal from "../Modal";
+import ModalBtn from "../Modal/ModalBtn";
 
 const SettingsScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -40,7 +41,23 @@ const SettingsScreen = (props) => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         modalText="Change Profile Image"
-      />
+      >
+        <ModalBtn
+          text="Remove Current Image"
+          handleOnPress={null}
+          setModalVisible={setModalVisible}
+        />
+        <ModalBtn
+          text="Take Photo"
+          handleOnPress={null}
+          setModalVisible={setModalVisible}
+        />
+        <ModalBtn
+          text="Choose From Library"
+          handleOnPress={null}
+          setModalVisible={setModalVisible}
+        />
+      </Modal>
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>

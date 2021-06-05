@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -13,23 +20,19 @@ const ModalComponent = (props) => {
           animationType="slide"
           transparent={true}
           visible={props.modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            props.setModalVisible(!props.modalVisible);
-          }}
         >
           <View style={styles.wrapper}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>{props.modalText}</Text>
               {props.children}
-              <Pressable
+              <TouchableOpacity
                 style={[styles.btn, styles.cancelBtn]}
-                onPress={() => props.setModalVisible(!props.modalVisible)}
+                onPress={() => props.setModalVisible(false)}
               >
                 <Text style={[styles.btnText, styles.cancelBtnText]}>
                   Cancel
                 </Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
         </Modal>
@@ -51,15 +54,15 @@ const styles = StyleSheet.create({
   wrapper: {
     justifyContent: "flex-end",
     alignItems: "center",
-    marginBottom: hp("10%"),
+    marginBottom: hp("15%"),
     flex: 1,
   },
   modalView: {
     width: "95%",
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: "#FFF",
     borderRadius: 20,
-    padding: 35,
+    paddingVertical: 35,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -71,13 +74,24 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   btn: {
-    borderRadius: 20,
-    padding: 10,
+    paddingVertical: hp("3%"),
+    width: "100%",
     elevation: 2,
   },
 
   cancelBtn: {
-    //backgroundColor: "#2196F3",
+    backgroundColor: "#FFF",
+    borderRadius: 20,
+    position: "absolute",
+    bottom: -90,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   cancelBtnText: {
     color: "#0172C4",
@@ -89,7 +103,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalText: {
-    marginBottom: 15,
+    marginBottom: hp("5%"),
     textAlign: "center",
     fontSize: wp("4.5%"),
     fontFamily: "AvenirNextRegular",
