@@ -6,13 +6,7 @@ import {
 } from "react-native-responsive-screen";
 
 const ModalBtn = (props) => (
-  <TouchableOpacity
-    style={styles.btn}
-    onPress={() => {
-      props.handleOnPress();
-      props.setModalVisible(false);
-    }}
-  >
+  <TouchableOpacity style={styles.btn} onPress={props.handleOnPress}>
     <Text style={styles.btnText}>{props.text}</Text>
   </TouchableOpacity>
 );

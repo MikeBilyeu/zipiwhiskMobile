@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
 import {
   widthPercentageToDP as wp,
@@ -30,6 +31,31 @@ import ModalBtn from "../Modal/ModalBtn";
 
 const SettingsScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      props.imageUrlChange(result.uri);
+      setModalVisible(false);
+    }
+  };
   return (
     <View style={styles.container}>
       <ScreenHeader
@@ -45,19 +71,17 @@ const SettingsScreen = (props) => {
       >
         <ModalBtn
           text="Remove Current Image"
-          handleOnPress={() => props.imageUrlChange(null)}
-          setModalVisible={setModalVisible}
+          handleOnPress={() => {
+            props.imageUrlChange(null);
+            setModalVisible(false);
+          }}
         />
         <ModalBtn
           text="Take Photo"
           handleOnPress={() => console.log("Take photo")}
           setModalVisible={setModalVisible}
         />
-        <ModalBtn
-          text="Choose From Library"
-          handleOnPress={() => console.log("choose from library")}
-          setModalVisible={setModalVisible}
-        />
+        <ModalBtn text="Choose From Library" handleOnPress={pickImage} />
       </Modal>
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

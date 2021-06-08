@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalText: {
-    marginBottom: hp("5%"),
+    marginBottom: hp("4%"),
     textAlign: "center",
-    fontSize: wp("4.5%"),
+    fontSize: wp("5%"),
     fontFamily: "AvenirNextRegular",
   },
 });
