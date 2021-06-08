@@ -2,6 +2,7 @@ import {
   USERNAME_CHANGE,
   USERNAME_ERROR,
   FULLNAME_CHANGE,
+  IMAGE_URL_CHANGE,
   EDIT_USER_REQUEST,
   EDIT_USER_SUCCESS,
   EDIT_USER_FAILURE,
@@ -19,6 +20,11 @@ export const usernameChange = (value) => (dispatch, getState) => {
 
 export const fullnameChange = (value) => ({
   type: FULLNAME_CHANGE,
+  payload: value,
+});
+
+export const imageUrlChange = (value) => ({
+  type: IMAGE_URL_CHANGE,
   payload: value,
 });
 

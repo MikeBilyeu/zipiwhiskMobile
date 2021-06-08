@@ -9,7 +9,7 @@ const ModalBtn = (props) => (
   <TouchableOpacity
     style={styles.btn}
     onPress={() => {
-      // props.handleOnPress();
+      props.handleOnPress();
       props.setModalVisible(false);
     }}
   >

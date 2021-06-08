@@ -20,6 +20,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import {
   usernameChange,
   fullnameChange,
+  imageUrlChange,
   editProfile,
 } from "../../redux/actions/userForm";
 import { logout } from "../../redux/actions/auth";
@@ -44,17 +45,17 @@ const SettingsScreen = (props) => {
       >
         <ModalBtn
           text="Remove Current Image"
-          handleOnPress={null}
+          handleOnPress={() => props.imageUrlChange(null)}
           setModalVisible={setModalVisible}
         />
         <ModalBtn
           text="Take Photo"
-          handleOnPress={null}
+          handleOnPress={() => console.log("Take photo")}
           setModalVisible={setModalVisible}
         />
         <ModalBtn
           text="Choose From Library"
-          handleOnPress={null}
+          handleOnPress={() => console.log("choose from library")}
           setModalVisible={setModalVisible}
         />
       </Modal>
@@ -178,6 +179,7 @@ const mapDispatchToProps = {
   logout,
   usernameChange,
   fullnameChange,
+  imageUrlChange,
   editProfile,
 };
 

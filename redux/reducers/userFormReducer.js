@@ -3,6 +3,7 @@ import {
   FULLNAME_CHANGE,
   USERNAME_CHANGE,
   USERNAME_ERROR,
+  IMAGE_URL_CHANGE,
   EDIT_USER_REQUEST,
   EDIT_USER_SUCCESS,
   EDIT_USER_FAILURE,
@@ -37,6 +38,8 @@ const userReducer = (state = initialState, action) => {
       return { ...state, usernameError: action.payload };
     case FULLNAME_CHANGE:
       return { ...state, fullname: action.payload };
+    case IMAGE_URL_CHANGE:
+      return { ...state, image_url: action.payload };
     case EDIT_USER_REQUEST:
       return { ...state, isLoading: true };
     case EDIT_USER_SUCCESS:
