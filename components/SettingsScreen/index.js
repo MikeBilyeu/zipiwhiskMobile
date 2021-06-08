@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
-  Text,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -14,9 +13,8 @@ import {
 } from "react-native-responsive-screen";
 
 import ScreenHeader from "../ScreenHeader";
+import ImageAndLogout from "./ImageAndLogout";
 import Input from "../Input";
-import UserImageBtn from "../UserImageBtn";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 import {
   usernameChange,
@@ -24,7 +22,6 @@ import {
   imageUrlChange,
   editProfile,
 } from "../../redux/actions/userForm";
-import { logout } from "../../redux/actions/auth";
 
 import Modal from "../Modal";
 import ModalBtn from "../Modal/ModalBtn";
@@ -79,40 +76,13 @@ const SettingsScreen = (props) => {
         <ModalBtn
           text="Take Photo"
           handleOnPress={() => console.log("Take photo")}
-          setModalVisible={setModalVisible}
         />
         <ModalBtn text="Choose From Library" handleOnPress={pickImage} />
       </Modal>
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <View style={styles.wrapper}>
-              <View style={styles.center}>
-                <UserImageBtn
-                  uri={props.userForm.image_url}
-                  styles={{ width: 85, height: 85 }}
-                  handleImagePress={() => setModalVisible(true)}
-                />
-                <Text style={styles.imageBtnText}>Change Image</Text>
-              </View>
-              <View style={styles.emailWrapper}>
-                <Text style={styles.email}>{props.user.email}</Text>
-                <TouchableOpacity
-                  style={styles.logoutBtn}
-                  onPress={props.logout}
-                >
-                  <Text style={styles.logoutBtnText}>Logout</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-
+          <ImageAndLogout setModalVisible={setModalVisible} />
           <Input
             value={props.userForm.username}
             handleChange={props.usernameChange}
@@ -149,58 +119,13 @@ const styles = StyleSheet.create({
     paddingTop: hp("1%"),
     paddingHorizontal: wp("2%"),
   },
-  wrapper: {
-    width: "95%",
-    flexDirection: "row",
-    marginBottom: hp("3%"),
-  },
-  center: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imageBtnText: {
-    color: "#0172C4",
-    fontSize: wp("3%"),
-    textAlign: "center",
-    fontFamily: "AvenirNextRegular",
-    marginTop: wp("1%"),
-  },
-  emailWrapper: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: hp("2%"),
-    height: hp("12%"),
-  },
-  email: {
-    color: "#464646",
-    fontSize: wp("4%"),
-    textAlign: "center",
-    fontFamily: "AvenirNextDemiBold",
-  },
-  logoutBtn: {
-    borderWidth: 1,
-    borderColor: "#0172C4",
-    paddingHorizontal: 35,
-    paddingVertical: 10,
-    borderRadius: 5,
-    width: wp("35%"),
-  },
-  logoutBtnText: {
-    color: "#0172C4",
-    fontSize: 16,
-    fontFamily: "AvenirNextDemiBold",
-    textAlign: "center",
-  },
 });
 
 const mapStateToProps = (state) => ({
   userForm: state.userForm,
-  user: state.user,
 });
 
 const mapDispatchToProps = {
-  logout,
   usernameChange,
   fullnameChange,
   imageUrlChange,
