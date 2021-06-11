@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextDemiBold",
   },
   logoutBtn: {
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: "#0172C4",
     paddingHorizontal: 35,
     paddingVertical: 10,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   logoutBtnText: {
     color: "#0172C4",
-    fontSize: 16,
+    fontSize: wp("3.5%"),
     fontFamily: "AvenirNextDemiBold",
     textAlign: "center",
   },

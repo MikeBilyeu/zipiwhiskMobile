@@ -26,14 +26,16 @@ function ScreenHeader(props) {
           activeOpacity={0.4}
           style={styles.headerBtn}
         >
-          <Image
+          <Text style={styles.btnText}>Cancel</Text>
+
+          {/* <Image
             source={require("../assets/arrow.png")}
             style={{
               width: wp("4%"),
               height: wp("4%"),
               transform: [{ rotate: "90deg" }],
             }}
-          />
+          /> */}
         </TouchableOpacity>
         <View style={styles.titleWrapper}>
           <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
@@ -78,11 +80,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   headerBtn: {
-    width: 60,
     height: 60,
     justifyContent: "center",
     alignItems: "center",
-    flex: 2,
+    flex: 3,
   },
   titleWrapper: {
     flex: 6,
@@ -102,11 +103,15 @@ const styles = StyleSheet.create({
     fontSize: wp("3.5"),
     color: "#313131",
   },
-
+  btnText: {
+    color: "#313131",
+    fontFamily: "AvenirNextRegular",
+    fontSize: wp("4%"),
+  },
   saveBtnText: {
     color: "#0172C4",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("4.5%"),
+    fontSize: wp("4%"),
   },
   saveBtnTextLoading: {
     color: "#313131",
