@@ -5,7 +5,6 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
 import {
   widthPercentageToDP as wp,
@@ -24,9 +23,8 @@ import {
   editProfile,
 } from "../../redux/actions/userForm";
 
-import Modal from "../Modal";
-import ModalBtn from "../Modal/ModalBtn";
 import RenderCamera from "./RenderCamera";
+import ImageModal from "./ImageModal";
 
 const SettingsScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -34,29 +32,8 @@ const SettingsScreen = (props) => {
 
   useEffect(() => {
     props.getUserState();
-    (async () => {
-      if (Platform.OS !== "web") {
-        const { status } =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
-        }
-      }
-    })();
   }, []);
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: false,
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      props.imageUrlChange(result.uri);
-      setModalVisible(false);
-    }
-  };
   return renderCamera ? (
     <RenderCamera
       setRenderCamera={setRenderCamera}
@@ -70,24 +47,11 @@ const SettingsScreen = (props) => {
         handleSavePress={() => props.editProfile(props.navigation.goBack)}
         isLoading={props.userForm.isLoading}
       />
-      <Modal
+      <ImageModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        modalText="Change Profile Image"
-      >
-        <ModalBtn
-          text="Remove Current Image"
-          handleOnPress={() => {
-            props.imageUrlChange(null);
-            setModalVisible(false);
-          }}
-        />
-        <ModalBtn
-          text="Take Photo"
-          handleOnPress={() => setRenderCamera(true)}
-        />
-        <ModalBtn text="Choose From Library" handleOnPress={pickImage} />
-      </Modal>
+        setRenderCamera={setRenderCamera}
+      />
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
