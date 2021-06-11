@@ -17,6 +17,7 @@ import ImageAndLogout from "./ImageAndLogout";
 import Input from "../Input";
 
 import {
+  getUserState,
   usernameChange,
   fullnameChange,
   imageUrlChange,
@@ -25,11 +26,14 @@ import {
 
 import Modal from "../Modal";
 import ModalBtn from "../Modal/ModalBtn";
+import RenderCamera from "./RenderCamera";
 
 const SettingsScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [renderCamera, setRenderCamera] = useState(false);
 
   useEffect(() => {
+    props.getUserState();
     (async () => {
       if (Platform.OS !== "web") {
         const { status } =
@@ -53,7 +57,12 @@ const SettingsScreen = (props) => {
       setModalVisible(false);
     }
   };
-  return (
+  return renderCamera ? (
+    <RenderCamera
+      setRenderCamera={setRenderCamera}
+      setModalVisible={setModalVisible}
+    />
+  ) : (
     <View style={styles.container}>
       <ScreenHeader
         title="Settings"
@@ -75,7 +84,7 @@ const SettingsScreen = (props) => {
         />
         <ModalBtn
           text="Take Photo"
-          handleOnPress={() => console.log("Take photo")}
+          handleOnPress={() => setRenderCamera(true)}
         />
         <ModalBtn text="Choose From Library" handleOnPress={pickImage} />
       </Modal>
@@ -126,6 +135,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  getUserState,
   usernameChange,
   fullnameChange,
   imageUrlChange,

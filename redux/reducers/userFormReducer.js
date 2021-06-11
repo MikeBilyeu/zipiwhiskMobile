@@ -1,5 +1,5 @@
 import {
-  GET_USER_SUCCESS,
+  GET_USER_STATE,
   FULLNAME_CHANGE,
   USERNAME_CHANGE,
   USERNAME_ERROR,
@@ -23,7 +23,7 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_USER_SUCCESS:
+    case GET_USER_STATE:
       return {
         ...state,
         username: action.payload.username,

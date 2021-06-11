@@ -1,4 +1,5 @@
 import {
+  GET_USER_STATE,
   USERNAME_CHANGE,
   USERNAME_ERROR,
   FULLNAME_CHANGE,
@@ -9,6 +10,15 @@ import {
 } from "../constants";
 import axios from "axios";
 import { checkUsername, getUser } from "./user";
+
+export const getUserState = () => (dispatch, getState) => {
+  const data = getState().user;
+
+  dispatch({
+    type: GET_USER_STATE,
+    payload: data,
+  });
+};
 
 export const usernameChange = (value) => (dispatch, getState) => {
   const { username } = getState().user;
