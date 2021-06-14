@@ -3,6 +3,8 @@ import {
   StyleSheet,
   View,
   TouchableWithoutFeedback,
+  TouchableOpacity,
+  Text,
   Keyboard,
 } from "react-native";
 import { connect } from "react-redux";
@@ -11,7 +13,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import ScreenHeader from "../ScreenHeader";
+import Header from "./Header";
 import ImageAndLogout from "./ImageAndLogout";
 import Input from "../Input";
 
@@ -41,12 +43,13 @@ const SettingsScreen = (props) => {
     />
   ) : (
     <View style={styles.container}>
-      <ScreenHeader
+      <Header
         title="Settings"
         subTitle="Profile"
         handleSavePress={() => props.editProfile(props.navigation.goBack)}
         isLoading={props.userForm.isLoading}
       />
+
       <ImageModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}

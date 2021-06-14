@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
@@ -12,9 +11,9 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
-import ZipiWhiskIcon from "./Header/ZipiWhiskIcon";
+import ZipiWhiskIcon from "../Header/ZipiWhiskIcon";
 
-function ScreenHeader(props) {
+const Header = (props) => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.headerContainer}>
@@ -26,14 +25,7 @@ function ScreenHeader(props) {
           activeOpacity={0.4}
           style={styles.headerBtn}
         >
-          <Image
-            source={require("../assets/arrow.png")}
-            style={{
-              width: wp("4%"),
-              height: wp("4%"),
-              transform: [{ rotate: "90deg" }],
-            }}
-          />
+          <Text style={styles.btnText}>Cancel</Text>
         </TouchableOpacity>
         <View style={styles.titleWrapper}>
           <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
@@ -41,11 +33,26 @@ function ScreenHeader(props) {
           </Text>
           <Text style={styles.subTitleText}>{props.subTitle}</Text>
         </View>
-        <View style={styles.headerBtn} />
+        {(
+          <TouchableOpacity
+            style={styles.headerBtn}
+            onPress={props.handleSavePress}
+            disabled={props.isLoading}
+          >
+            <Text
+              style={[
+                styles.saveBtnText,
+                props.isLoading && styles.saveBtnTextLoading,
+              ]}
+            >
+              {props.isLoading ? "Saving" : "Save"}
+            </Text>
+          </TouchableOpacity>
+        ) || <View style={styles.headerBtn} />}
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -102,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScreenHeader;
+export default Header;
