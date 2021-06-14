@@ -32,6 +32,7 @@ function ScreenHeader(props) {
               width: wp("4%"),
               height: wp("4%"),
               transform: [{ rotate: "90deg" }],
+              marginRight: wp("5%")
             }}
           />
         </TouchableOpacity>
@@ -41,7 +42,7 @@ function ScreenHeader(props) {
           </Text>
           <Text style={styles.subTitleText}>{props.subTitle}</Text>
         </View>
-        <View style={styles.headerBtn} />
+       {props.children || <View style={styles.headerBtn} />}
       </View>
     </SafeAreaView>
   );
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 3,
   },
+
   titleWrapper: {
     flex: 6,
     height: 60,

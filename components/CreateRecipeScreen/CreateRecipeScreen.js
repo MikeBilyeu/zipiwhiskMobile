@@ -110,11 +110,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   headerBtn: {
-    width: 60,
     height: 60,
     justifyContent: "center",
     alignItems: "center",
-    flex: 2,
+    flex: 3,
   },
   postText: {
     fontFamily: "AvenirNextDemiBold",
