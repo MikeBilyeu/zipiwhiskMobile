@@ -30,7 +30,7 @@ export const signupPasswordChange = (value) => ({
 export const checkEmail = () => async (dispatch, getState) => {
   const { email } = getState().signup;
   try {
-    await axios.get("http://localhost:3000/api/users/email", {
+    await axios.get("http://192.168.1.4:3000:3000/api/users/email", {
       params: { email },
     });
   } catch ({ response: { data } }) {
@@ -47,7 +47,7 @@ export const registerUser = () => async (dispatch, getState) => {
   const { email, username, password } = getState().signup;
 
   try {
-    await axios.post("http://localhost:3000/api/users/register", {
+    await axios.post("http://192.168.1.4:3000/api/users/register", {
       email,
       username,
       password,

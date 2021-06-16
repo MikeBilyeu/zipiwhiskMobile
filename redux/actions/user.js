@@ -8,7 +8,7 @@ import {
 export const getUser = () => async (dispatch) => {
   try {
     dispatch({ type: GET_USER_REQUEST });
-    const { data } = await axios.get("http://localhost:3000/api/users/user");
+    const { data } = await axios.get("http://192.168.1.4:3000/api/users/user");
     dispatch({
       type: GET_USER_SUCCESS,
       payload: data,
@@ -24,7 +24,7 @@ export const getUser = () => async (dispatch) => {
 
 export const checkUsername = (username, actionType) => async (dispatch) => {
   try {
-    await axios.get("http://localhost:3000/api/users/username", {
+    await axios.get("http://192.168.1.4:3000/api/users/username", {
       params: { username },
     });
   } catch ({ response: { data } }) {
