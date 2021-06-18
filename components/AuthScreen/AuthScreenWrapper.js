@@ -13,13 +13,14 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import image from "../../assets/zipiwhisk.png";
 
 const AuthScreenWrapper = (props) => (
   <SafeAreaView style={styles.container}>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.inner}>
         <Image
-          source={require("../../assets/zipiwhisk.png")}
+          source={image}
           style={{ height: wp("14%") }}
           resizeMode="contain"
         />

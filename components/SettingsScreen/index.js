@@ -3,8 +3,6 @@ import {
   StyleSheet,
   View,
   TouchableWithoutFeedback,
-  TouchableOpacity,
-  Text,
   Keyboard,
 } from "react-native";
 import { connect } from "react-redux";

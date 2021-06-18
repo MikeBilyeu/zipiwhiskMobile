@@ -4,12 +4,11 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import image from "../../assets/zipiwhisk.png";
 
-const ZipiWhiskIcon = () => (
-  <Image
-    source={require("../../assets/zipiwhisk.png")}
-    style={{ width: wp("18%"), height: wp("4%") }}
-  />
-);
-
+const ZipiWhiskIcon = () => {
+  return (
+    <Image style={{ width: wp("18%"), height: wp("4%") }} source={image} />
+  );
+};
 export default ZipiWhiskIcon;
