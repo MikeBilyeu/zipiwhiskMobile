@@ -22,8 +22,9 @@ const ImageModal = (props) => {
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: false,
-      quality: 1,
+      allowsEditing: true,
+      quality: 0,
+      aspect: [1, 1],
     });
 
     if (!result.cancelled) {
