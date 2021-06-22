@@ -16,6 +16,7 @@ import Or from "./Or";
 
 const Login = (props) => {
   const loginDisabled =
+    props.login.isLoading ||
     !props.login.username ||
     !props.login.password ||
     props.login.usernameError ||
@@ -53,7 +54,7 @@ const Login = (props) => {
       </TouchableOpacity>
 
       <Btn
-        text="Login"
+        text={props.login.isLoading ? "logging in..." : "Login"}
         handleOnPress={props.authLogin}
         disabled={loginDisabled}
       />
@@ -63,6 +64,7 @@ const Login = (props) => {
       <NavBtn
         text="Signup"
         handleOnPress={() => props.navigation.navigate("Signup")}
+        disabled={props.login.isLoading}
       />
     </AuthScreenWrapper>
   );

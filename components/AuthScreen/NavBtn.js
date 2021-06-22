@@ -10,6 +10,7 @@ const NavBtn = (props) => (
     onPress={props.handleOnPress}
     activeOpacity={0.4}
     style={styles.btn}
+    disabled={props.disabled}
   >
     <Text style={styles.btnText}>{props.text}</Text>
   </TouchableOpacity>

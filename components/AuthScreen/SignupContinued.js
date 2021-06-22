@@ -15,7 +15,7 @@ import NavBtn from "./NavBtn";
 import Or from "./Or";
 
 function SignupContinued(props) {
-  const signupDisabled = !props.signup.password;
+  const signupDisabled = props.signup.isLoading || !props.signup.password;
 
   return (
     <AuthScreenWrapper headerText="Signup">
@@ -29,7 +29,13 @@ function SignupContinued(props) {
         secureTextEntry={true}
       />
       <Btn
-        text="Signup"
+        text={
+          props.login.isLoading
+            ? "logging in..."
+            : props.signup.isLoading
+            ? "Loading..."
+            : "Signup"
+        }
         handleOnPress={props.registerUser}
         disabled={signupDisabled}
       />
@@ -37,6 +43,7 @@ function SignupContinued(props) {
       <NavBtn
         text="Go Back"
         handleOnPress={() => props.navigation.navigate("Signup")}
+        disabled={props.signup.isLoading}
       />
     </AuthScreenWrapper>
   );
@@ -51,7 +58,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({ signup: state.signup });
+const mapStateToProps = (state) => ({
+  signup: state.signup,
+  login: state.login,
+});
 
 const mapDispatchToProps = { registerUser, signupPasswordChange };
 

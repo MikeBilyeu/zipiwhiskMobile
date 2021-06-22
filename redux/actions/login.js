@@ -6,7 +6,7 @@ import {
   LOGIN_USERNAME_ERROR,
   LOGIN_PASSWORD_CHANGE,
   LOGIN_PASSWORD_ERROR,
-  LOGIN_REQEUST,
+  LOGIN_REQUEST,
   LOGIN_FAILURE,
 } from "../constants";
 import setAuthToken from "../../utils/setAuthToken";
@@ -22,12 +22,15 @@ export const loginPasswordChange = (value) => ({
   payload: value,
 });
 
-export const authLogin = () => async (dispatch, getState) => {
-  const { username, password } = getState().login;
+export const authLogin = (username, password) => async (dispatch, getState) => {
+  if (!username || !password) {
+    username = getState().login.username;
+    password = getState().login.password;
+  }
 
   try {
     dispatch({
-      type: LOGIN_REQEUST,
+      type: LOGIN_REQUEST,
     });
 
     let {

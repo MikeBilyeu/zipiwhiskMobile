@@ -1,5 +1,7 @@
 import {
+  LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  LOING_FAILURE,
   LOGIN_USERNAME_CHANGE,
   LOGIN_USERNAME_ERROR,
   LOGIN_PASSWORD_CHANGE,
@@ -7,6 +9,7 @@ import {
 } from "../constants";
 
 const initialState = {
+  isLoading: false,
   username: null,
   usernameError: null,
   password: null,
@@ -17,6 +20,8 @@ const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return initialState;
+    case LOGIN_REQUEST:
+      return { ...state, isLoading: true };
     case LOGIN_USERNAME_CHANGE:
       return {
         ...state,

@@ -1,5 +1,8 @@
 import {
-  AUTH_LOGIN,
+  LOGIN_SUCCESS,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_ERROR,
   SIGNUP_EMAIL_CHANGE,
   SIGNUP_EMAIL_ERROR,
   SIGNUP_USERNAME_CHANGE,
@@ -9,6 +12,7 @@ import {
 } from "../constants";
 
 const initialState = {
+  isLoading: false,
   email: null,
   emailError: null,
   username: null,
@@ -19,8 +23,10 @@ const initialState = {
 
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
-    case AUTH_LOGIN:
+    case LOGIN_SUCCESS:
       return initialState;
+    case SIGNUP_REQUEST:
+      return { ...state, isLoading: true };
     case SIGNUP_EMAIL_CHANGE:
       return {
         ...state,
