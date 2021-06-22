@@ -35,14 +35,14 @@ export const authLogin = (username, password) => async (dispatch, getState) => {
 
     let {
       data: { token },
-    } = await axios.get("http://192.168.1.4:3000/api/users/login", {
+    } = await axios.get("http://192.168.1.2:3000/api/users/login", {
       params: {
         username,
         password,
       },
     });
     // Store token in local secure store
-    SecureStore.setItemAsync("jwtToken", token);
+    await SecureStore.setItemAsync("jwtToken", token);
 
     // Add token to auth header for future requests
     setAuthToken(token);

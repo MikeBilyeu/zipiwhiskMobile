@@ -6,7 +6,7 @@ import {
 } from "../constants";
 
 const initialState = {
-  isAuth: true,
+  isAuth: false,
   isLoading: false,
 };
 
@@ -15,9 +15,8 @@ const authReducer = (state = initialState, action) => {
     case LOGIN_REQEUST:
       return { ...state, isLoading: true };
     case LOGIN_SUCCESS:
-      if (Object.keys(action.payload).length !== 0) {
-        return { isAuth: true, isLoading: false };
-      }
+      return { isAuth: true, isLoading: false };
+
     case LOGOUT:
       return { ...state, isAuth: false };
     default:

@@ -79,7 +79,7 @@ export const editProfile = (goBack) => async (dispatch, getState) => {
 
   const data = { fullname, username, image_url };
   try {
-    await axios.put("http://192.168.1.4:3000/api/users/edit", data);
+    await axios.put("http://192.168.1.2:3000/api/users/edit", data);
     dispatch({ type: EDIT_USER_SUCCESS });
     dispatch(getUser());
     goBack();

@@ -32,7 +32,7 @@ const AppConatiner = connect(mapStateToProps)((props) => {
     <SafeAreaProvider style={styles.container}>
       <StatusBar barStyle="auto" />
       <NavigationContainer>
-        {!props.auth.isAuth ? <Auth /> : <HomeStack />}
+        {props.auth.isAuth ? <HomeStack /> : <Auth />}
       </NavigationContainer>
     </SafeAreaProvider>
   );
@@ -44,12 +44,10 @@ const styles = StyleSheet.create({
   },
 });
 
-function App() {
-  return (
-    <Provider store={store}>
-      <AppConatiner />
-    </Provider>
-  );
-}
+const App = () => (
+  <Provider store={store}>
+    <AppConatiner />
+  </Provider>
+);
 
 export default App;
