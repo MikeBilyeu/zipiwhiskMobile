@@ -34,7 +34,7 @@ export const signupPasswordChange = (value) => ({
 export const checkEmail = () => async (dispatch, getState) => {
   const { email } = getState().signup;
   try {
-    await axios.get("http://192.168.1.2:3000/api/users/email", {
+    await axios.get("api/users/email", {
       params: { email },
     });
   } catch ({ response: { data } }) {
@@ -52,7 +52,7 @@ export const registerUser = () => async (dispatch, getState) => {
 
   try {
     dispatch({ type: SIGNUP_REQUEST });
-    await axios.post("http://192.168.1.2:3000/api/users/register", {
+    await axios.post("api/users/register", {
       email,
       username,
       password,

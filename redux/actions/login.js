@@ -35,7 +35,7 @@ export const authLogin = (username, password) => async (dispatch, getState) => {
 
     let {
       data: { token },
-    } = await axios.get("http://192.168.1.2:3000/api/users/login", {
+    } = await axios.get("api/users/login", {
       params: {
         username,
         password,

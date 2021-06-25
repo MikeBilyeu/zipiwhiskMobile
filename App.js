@@ -7,9 +7,12 @@ import { Provider, connect } from "react-redux";
 import store from "./redux/store";
 import { useFonts } from "expo-font";
 import { checkAuthToken } from "./utils/checkAuthToken";
+import axios from "axios";
 
 import Auth from "./components/AuthScreen/Auth";
 import HomeStack from "./components/HomeStack";
+
+axios.defaults.baseURL = "http://192.168.1.3:3000/";
 
 checkAuthToken();
 
