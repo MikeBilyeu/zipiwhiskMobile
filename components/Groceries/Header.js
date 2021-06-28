@@ -15,7 +15,14 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import ZipiWhiskIcon from "../Header/ZipiWhiskIcon";
 
-const Header = ({ inputFocused, setInputFocused, list }) => {
+const Header = ({
+  inputFocused,
+  setInputFocused,
+  list,
+  setList,
+  swipeIsOpen,
+  setSwipeIsOpen,
+}) => {
   const onShare = async (data) => {
     try {
       const result = await Share.share({
@@ -42,7 +49,19 @@ const Header = ({ inputFocused, setInputFocused, list }) => {
       <ZipiWhiskIcon />
       <View style={styles.titleWrapper}>
         <Text style={styles.titleText}>{"Groceries"}</Text>
-        {inputFocused ? (
+        {swipeIsOpen ? (
+          <TouchableOpacity
+            style={styles.doneBtn}
+            onPress={() => {
+              setList([]);
+              setInputFocused(false);
+              Keyboard.dismiss();
+              setSwipeIsOpen(false);
+            }}
+          >
+            <Text style={styles.btnText}>Clear list</Text>
+          </TouchableOpacity>
+        ) : inputFocused ? (
           <TouchableOpacity
             style={styles.doneBtn}
             onPress={() => {
@@ -50,7 +69,7 @@ const Header = ({ inputFocused, setInputFocused, list }) => {
               Keyboard.dismiss();
             }}
           >
-            <Text style={styles.doneBtnText}>Done</Text>
+            <Text style={styles.btnText}>Done</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity style={styles.doneBtn} onPress={onShare}>
@@ -95,10 +114,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-  doneBtnText: {
+  btnText: {
     color: "#0172C4",
-    fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("4.5%"),
+    fontFamily: "AvenirNextRegular",
+    fontSize: wp("4%"),
   },
   bottomLine: {
     width: "100%",

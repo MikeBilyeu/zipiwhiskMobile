@@ -22,17 +22,31 @@ const RightAction = (removeItem) => (
     <Text style={styles.rightText}>Remove</Text>
   </TouchableOpacity>
 );
-const RenderList = (list, setList, inputFocused, setInputFocused) =>
+const RenderList = (
+  list,
+  setList,
+  inputFocused,
+  setInputFocused,
+  setSwipeIsOpen
+) =>
   list.map((i, index) => {
     const onSubmit = () => {
       setInputFocused(false);
       //this will remove empty textinput
       !i.ingredient && removeItem();
     };
-    const removeItem = () => setList(list.filter((item, i) => i != index));
+    const removeItem = () => {
+      setList(list.filter((item, i) => i != index));
+      setSwipeIsOpen(false);
+    };
 
     return (
-      <Swipeable renderRightActions={() => RightAction(removeItem)} key={i.id}>
+      <Swipeable
+        renderRightActions={() => RightAction(removeItem)}
+        onSwipeableRightOpen={() => setSwipeIsOpen(true)}
+        onSwipeableClose={() => setSwipeIsOpen(false)}
+        key={i.id}
+      >
         <View style={styles.ingredientContainer}>
           <TextInput
             multiline

@@ -26,6 +26,7 @@ const Groceries = () => {
   const [inputText, setInputText] = useState("");
   const inputField = useRef(null);
   const [inputFocused, setInputFocused] = useState();
+  const [swipeIsOpen, setSwipeIsOpen] = useState(false);
 
   const onSubmit = () => {
     setInputFocused(false);
@@ -35,13 +36,11 @@ const Groceries = () => {
           ...list,
           {
             id: uuidv4(),
-            completed: false,
-            amount: null,
             ingredient: inputText,
-            image: null,
           },
         ],
-        setInputText("")
+        setInputText(""),
+        inputField.current.focus()
       );
   };
 
@@ -56,13 +55,22 @@ const Groceries = () => {
           inputFocused={inputFocused}
           setInputFocused={setInputFocused}
           list={list}
+          setList={setList}
+          swipeIsOpen={swipeIsOpen}
+          setSwipeIsOpen={setSwipeIsOpen}
         />
         <ScrollView
           style={styles.listContainer}
           contentContainerStyle={{ paddingTop: 75, flexGrow: 1 }}
           keyboardShouldPersistTaps="always"
         >
-          {RenderList(list, setList, inputFocused, setInputFocused)}
+          {RenderList(
+            list,
+            setList,
+            inputFocused,
+            setInputFocused,
+            setSwipeIsOpen
+          )}
 
           <TextInput
             style={styles.inputText}
@@ -98,7 +106,7 @@ const styles = StyleSheet.create({
 
   listContainer: {
     flex: 1,
-    paddingTop: wp("5%"),
+    paddingTop: wp("3%"),
     width: "100%",
   },
 
