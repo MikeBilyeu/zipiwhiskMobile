@@ -16,6 +16,7 @@ const Mention = ({ data }) => {
         <UserNameBtn
           username={data.user.username}
           image_url={data.user.image_url}
+          id={data.user.id}
         />
         <Text style={styles.text}>
           Mentioned you in a comment: {data.comment}

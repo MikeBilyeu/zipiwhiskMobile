@@ -16,6 +16,7 @@ const Like = ({ data }) => {
         <UserNameBtn
           username={data.user.username}
           image_url={data.user.image_url}
+          id={data.user.id}
         />
         <Text style={styles.text}>Saved your recipe.</Text>
         <RecipeThumbnailBtn media_url={data.media_url} />

@@ -16,6 +16,7 @@ const Follow = ({ data }) => {
         <UserNameBtn
           username={data.user.username}
           image_url={data.user.image_url}
+          id={data.user.id}
         />
         <Text style={styles.text}>Started following you.</Text>
       </View>

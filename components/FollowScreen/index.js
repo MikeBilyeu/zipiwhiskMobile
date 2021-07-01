@@ -8,6 +8,7 @@ const renderUsers = ({ item }) => (
     username={item.username}
     image={item.image}
     Following={item.Following}
+    id={item.id}
   />
 );
 
@@ -46,19 +47,19 @@ export default FollowScreen;
 
 const data = [
   {
-    id: 324832904,
+    id: 10,
     username: "zipiwhiskuser943",
     image: "https://randomuser.me/api/portraits/men/55.jpg",
     Following: false,
   },
   {
-    id: 961929556664333,
+    id: 10,
     username: "jess99",
     image: "https://randomuser.me/api/portraits/women/10.jpg",
     Following: false,
   },
   {
-    id: 96675566622913,
+    id: 10,
     username: "jackie93",
     image: "https://randomuser.me/api/portraits/women/20.jpg",
     Following: false,

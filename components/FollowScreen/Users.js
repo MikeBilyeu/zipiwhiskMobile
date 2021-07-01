@@ -3,9 +3,9 @@ import { StyleSheet, View } from "react-native";
 import UserNameBtn from "../UserNameBtn";
 import ToggleFollowBtn from "../ToggleFollowBtn";
 
-const Users = ({ username, image }) => (
+const Users = ({ id, username, image }) => (
   <View style={styles.container}>
-    <UserNameBtn username={username} image_url={image} />
+    <UserNameBtn username={username} image_url={image} id={id} />
 
     <ToggleFollowBtn />
   </View>

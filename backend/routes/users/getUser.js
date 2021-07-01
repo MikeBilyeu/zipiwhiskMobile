@@ -1,7 +1,8 @@
 const pool = require("../../config/db");
 
 module.exports = async (req, res) => {
-  const { id } = req.user; // Get user_id from auth
+  // Get user_id from auth or params
+  const id = req.query.id ? req.query.id : req.user.id;
   try {
     pool.query(
       `SELECT id, username, fullname, email, image_url FROM users WHERE id = ?`,

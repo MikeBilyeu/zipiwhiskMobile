@@ -1,14 +1,27 @@
 import axios from "axios";
-import { GET_USER_PROFILE } from "../constants";
+import {
+  GET_USER_PROFILE_REQUEST,
+  GET_USER_PROFILE_SUCCESS,
+  GET_USER_PROFILE_FAILURE,
+} from "../constants";
 
-export const getUserProfile = () => async (dispatch) => {
+export const getUserProfile = (id) => async (dispatch) => {
   try {
-    // const { data } = await axios.get("api/users/user");
-    // dispatch({
-    //   type: GET_USER,
-    //   payload: data,
-    // });
+    dispatch({ type: GET_USER_PROFILE_REQUEST });
+    const { data } = await axios.get("api/users/user", {
+      params: {
+        id,
+      },
+    });
+    dispatch({
+      type: GET_USER_PROFILE_SUCCESS,
+      payload: data,
+    });
   } catch (err) {
+    dispatch({
+      type: GET_USER_PROFILE_FAILURE,
+      payload: data,
+    });
     console.log("user error:", err);
   }
 };

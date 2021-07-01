@@ -7,6 +7,7 @@ const data = [
     user: {
       image: "https://randomuser.me/api/portraits/men/54.jpg",
       username: "billybob",
+      id: 10,
     },
     media_url:
       //"https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.mp4",
@@ -59,7 +60,7 @@ const data = [
         id: 96675000333,
         comment: "Nice, I'm sharing this recipe with everyone.",
         user: {
-          id: 324832904,
+          id: 10,
           username: "zipiwhiskuser943",
           image: "https://randomuser.me/api/portraits/men/55.jpg",
         },
@@ -74,7 +75,7 @@ const data = [
         comment:
           "I made this last night and Loved it! Combine the flour and pepper in a bowl, add the beef and toss to coat well.",
         user: {
-          id: 908432908423,
+          id: 10,
           username: "mikeb",
           image: "https://randomuser.me/api/portraits/men/4.jpg",
         },
@@ -84,7 +85,7 @@ const data = [
             id: 7987987897897,
             comment: `@mikeb I'm gonna make this ASAP, Combine the flour and pepper in a bowl, add the beef and toss to coat well.`,
             user: {
-              id: 324832904,
+              id: 10,
               username: "joe94",
               image: "https://randomuser.me/api/portraits/men/10.jpg",
             },
@@ -103,7 +104,7 @@ const data = [
         id: 786876844,
         comment: "Nice!",
         user: {
-          id: 940894823,
+          id: 10,
           username: "davesmith",
           image: "https://randomuser.me/api/portraits/men/71.jpg",
         },
@@ -123,6 +124,7 @@ const data = [
     user: {
       image: "https://randomuser.me/api/portraits/women/20.jpg",
       username: "jackie93",
+      id: 10,
     },
     media_url:
       //"https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620512318/Recipes/pexels-kampus-production-6603824.mp4",
@@ -170,7 +172,7 @@ const data = [
         id: 96967543934333,
         comment: "Nice, I'm sharing this recipe with everyone.",
         user: {
-          id: 324832904,
+          id: 10,
           username: "zipiwhiskuser943",
           image: "https://randomuser.me/api/portraits/men/55.jpg",
         },
@@ -190,6 +192,7 @@ const data = [
     user: {
       image: "https://randomuser.me/api/portraits/women/10.jpg",
       username: "jess",
+      id: 10,
     },
     media_url:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1602904544/Recipes/fpx1wp8y8asygg8oymfx.jpg",
@@ -236,7 +239,7 @@ const data = [
         id: 9667543934333,
         comment: "Nice, I'm sharing this recipe with everyone.",
         user: {
-          id: 324832904,
+          id: 10,
           username: "zipiwhiskuser943",
           image: "https://randomuser.me/api/portraits/men/9.jpg",
         },
@@ -256,6 +259,7 @@ const data = [
     user: {
       image: "https://randomuser.me/api/portraits/women/19.jpg",
       username: "alice",
+      id: 10,
     },
     media_url:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1593983807/Recipes/s0odyvjiko4yuisb8iwm.jpg",
@@ -302,7 +306,7 @@ const data = [
         id: 966754334333,
         comment: "Nice, I'm sharing this recipe with everyone.",
         user: {
-          id: 324832904,
+          id: 10,
           username: "zipiwhiskuser943",
           image: "https://randomuser.me/api/portraits/men/9.jpg",
         },

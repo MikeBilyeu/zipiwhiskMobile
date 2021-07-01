@@ -18,6 +18,7 @@ const Post = ({ data }) => {
           <UserNameBtn
             username={data.user.username}
             image_url={data.user.image_url}
+            id={data.user.id}
           />
           <Text style={styles.text}>Posted a recipe.</Text>
         </View>

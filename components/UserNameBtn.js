@@ -6,12 +6,12 @@ import {
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 
-const UserNameBtn = ({ username, image_url }) => {
+const UserNameBtn = ({ id, username, image_url }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={styles.userContainer}
-      onPress={() => navigation.push("VisitProfile")}
+      onPress={() => navigation.push("VisitProfile", { id })}
     >
       <Image style={styles.userImage} source={{ uri: image_url }} />
       <Text style={styles.username}>{username}</Text>

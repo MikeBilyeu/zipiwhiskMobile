@@ -88,6 +88,7 @@ const Recipe = ({ data, yValue }) => {
         numLikes={data.numLikes}
         numComments={data.numComments}
         userImage={data.user.image}
+        id={data.user.id}
         styles={animatedFooterStyle}
       />
 

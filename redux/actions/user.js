@@ -25,7 +25,7 @@ export const getUser = () => async (dispatch) => {
 
 export const checkUsername = (username, actionType) => async (dispatch) => {
   try {
-    await axios.get("users/username", {
+    await axios.get("api/users/username", {
       params: { username },
     });
   } catch ({ response: { data } }) {
