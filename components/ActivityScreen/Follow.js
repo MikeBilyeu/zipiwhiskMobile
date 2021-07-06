@@ -21,7 +21,11 @@ const Follow = ({ data }) => {
         <Text style={styles.text}>Started following you.</Text>
       </View>
 
-      <ToggleFollowBtn BtnStyles={{ alignSelf: "flex-end" }} />
+      <ToggleFollowBtn
+        BtnStyles={{ alignSelf: "flex-end" }}
+        id={data.user.id}
+        following={data.user.following}
+      />
 
       <Time time={data.timestamp} />
     </View>

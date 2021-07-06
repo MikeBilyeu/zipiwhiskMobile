@@ -32,7 +32,8 @@ CREATE TABLE follows (
         REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (follower_id) 
         REFERENCES users(id) ON DELETE CASCADE,
-    PRIMARY KEY(following_id, follower_id)
+    PRIMARY KEY(following_id, follower_id),
+    CHECK (following_id != follower_id)
 );
 
 CREATE TABLE users_saves (

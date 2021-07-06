@@ -10,6 +10,18 @@ router.get(
 
 router.post("/register", require("./createUser"));
 
+router.post(
+  "/follow",
+  passport.authenticate("jwt", { session: false }),
+  require("./follow")
+);
+
+router.post(
+  "/unfollow",
+  passport.authenticate("jwt", { session: false }),
+  require("./unfollow")
+);
+
 router.get("/login", require("./login"));
 
 router.get("/email", require("./checkEmail"));

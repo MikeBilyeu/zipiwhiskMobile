@@ -12,7 +12,7 @@ const UserFollows = (props) => {
         num={props.user.numFollowers}
         username={props.user.username}
       />
-      <ToggleFollowBtn />
+      <ToggleFollowBtn id={props.user.id} following={props.user.following} />
       <NumFollows
         text="Following"
         num={props.user.numFollowing}

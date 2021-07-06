@@ -1,16 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { followUser, unfollowUser } from "../redux/actions/userProfile";
 
-const ToggleFollowBtn = ({ BtnStyles, textStyles, following }) => {
+const ToggleFollowBtn = ({
+  id,
+  following,
+  BtnStyles,
+  textStyles,
+  followUser,
+  unfollowUser,
+}) => {
+  console.log(following);
   const [isFollowing, setIsFollowing] = useState(following);
+  const handleOnPress = () => {
+    if (isFollowing) {
+      unfollowUser(id);
+      setIsFollowing(0);
+    } else {
+      followUser(id);
+      setIsFollowing(1);
+    }
+  };
+
   return (
     <TouchableOpacity
       style={[isFollowing ? styles.unfollowBtn : styles.followBtn, BtnStyles]}
-      onPress={() => setIsFollowing(!isFollowing)}
+      onPress={handleOnPress}
     >
       <Text
         style={[
@@ -18,7 +38,7 @@ const ToggleFollowBtn = ({ BtnStyles, textStyles, following }) => {
           textStyles,
         ]}
       >
-        {isFollowing ? "Following" : "Follow"}
+        {following ? "Following" : "Follow"}
       </Text>
     </TouchableOpacity>
   );
@@ -57,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ToggleFollowBtn;
+export default connect(null, { followUser, unfollowUser })(ToggleFollowBtn);

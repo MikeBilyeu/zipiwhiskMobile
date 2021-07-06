@@ -25,3 +25,19 @@ export const getUserProfile = (id) => async (dispatch) => {
     console.log("user error:", err);
   }
 };
+
+export const followUser = (following_id) => async (dispatch) => {
+  try {
+    const { data } = await axios.post("api/users/follow", { following_id });
+  } catch (err) {
+    console.log("Follow error:", err);
+  }
+};
+
+export const unfollowUser = (following_id) => async (dispatch) => {
+  try {
+    const { data } = await axios.post("api/users/unfollow", { following_id });
+  } catch (err) {
+    console.log("Follow error:", err);
+  }
+};

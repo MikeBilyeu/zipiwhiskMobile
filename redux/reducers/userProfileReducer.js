@@ -10,6 +10,7 @@ const initialState = {
   username: "",
   fullname: "",
   image_url: "",
+  following: 0,
   numFollowers: "1,520",
   numFollowing: "250",
 };
