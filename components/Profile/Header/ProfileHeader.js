@@ -7,7 +7,6 @@ import {
 } from "react-native-responsive-screen";
 
 import Header from "../../Header";
-import ZipiWhiskIcon from "../../Header/ZipiWhiskIcon";
 import CreateRecipeBtn from "./CreateRecipeBtn";
 import UserInfo from "./UserInfo";
 import SearchBtn from "../../SearchBtn";
@@ -18,9 +17,8 @@ const ProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
     <Header
       dropDownOpen={dropDownOpen}
       toggleDropDown={toggleDropDown}
-      height={wp("35%")}
+      height={wp("30%")}
     >
-      <ZipiWhiskIcon />
       <UserInfo
         user={user}
         handleImagePress={() => navigation.navigate("Settings")}

@@ -17,8 +17,6 @@ const Header = (props) => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.headerContainer}>
-      <ZipiWhiskIcon />
-
       <View style={styles.headerWrapper}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -61,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderBottomWidth: 0.5,
     borderBottomColor: "#E3E3E3",
-    height: wp("30%"),
+    height: hp("12%"),
   },
   headerWrapper: {
     width: "100%",

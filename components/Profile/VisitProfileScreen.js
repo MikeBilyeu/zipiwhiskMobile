@@ -31,7 +31,7 @@ const VisitProfileScreen = (props) => {
       <SearchDropDown
         dropDownOpen={dropDownOpen}
         setDropDownOpen={setDropDownOpen}
-        height={wp("68%")}
+        height={wp("66%")}
         renderItemType="small"
       />
       <RecipeScroll paddingTop={0} />

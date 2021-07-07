@@ -6,15 +6,13 @@ import {
 } from "react-native-responsive-screen";
 
 import Header from "../Header";
-import ZipiWhiskIcon from "../Header/ZipiWhiskIcon";
 import NumFollows from "../NumFollows";
 
 import { userData } from "./data";
 
 function ActivityHeader() {
   return (
-    <Header height={wp("18%")}>
-      <ZipiWhiskIcon />
+    <Header height={wp("17%")}>
       <View style={styles.followContainer}>
         <NumFollows
           text="Followers"

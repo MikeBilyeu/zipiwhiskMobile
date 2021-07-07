@@ -13,8 +13,6 @@ import {
 } from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import ZipiWhiskIcon from "../Header/ZipiWhiskIcon";
-
 const Header = ({
   inputFocused,
   setInputFocused,
@@ -46,7 +44,6 @@ const Header = ({
 
   return (
     <View style={styles.headerContainer}>
-      <ZipiWhiskIcon />
       <View style={styles.titleWrapper}>
         <Text style={styles.titleText}>{"Groceries"}</Text>
         {swipeIsOpen ? (
@@ -86,10 +83,8 @@ const styles = StyleSheet.create({
   headerContainer: {
     position: "absolute",
     zIndex: 1,
-    height: wp("18%"),
+    height: wp("17%"),
     width: "100%",
-    alignItems: "center",
-    justifyContent: "space-between",
     backgroundColor: "#fff",
   },
   titleWrapper: {
@@ -121,7 +116,7 @@ const styles = StyleSheet.create({
   },
   bottomLine: {
     width: "100%",
-    height: 10,
+    height: 5,
     borderBottomWidth: 0.25,
     borderBottomColor: "#E3E3E3",
   },

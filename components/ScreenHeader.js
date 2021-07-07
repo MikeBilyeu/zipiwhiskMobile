@@ -12,14 +12,11 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
-import ZipiWhiskIcon from "./Header/ZipiWhiskIcon";
 
 function ScreenHeader(props) {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.headerContainer}>
-      <ZipiWhiskIcon />
-
       <View style={styles.headerWrapper}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -32,7 +29,7 @@ function ScreenHeader(props) {
               width: wp("4%"),
               height: wp("4%"),
               transform: [{ rotate: "90deg" }],
-              marginRight: wp("5%")
+              marginRight: wp("5%"),
             }}
           />
         </TouchableOpacity>
@@ -42,7 +39,7 @@ function ScreenHeader(props) {
           </Text>
           <Text style={styles.subTitleText}>{props.subTitle}</Text>
         </View>
-       {props.children || <View style={styles.headerBtn} />}
+        {props.children || <View style={styles.headerBtn} />}
       </View>
     </SafeAreaView>
   );
@@ -50,18 +47,21 @@ function ScreenHeader(props) {
 
 const styles = StyleSheet.create({
   headerContainer: {
+    zIndex: 1,
+    height: hp("12%"),
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: "#fff",
     borderBottomWidth: 0.5,
     borderBottomColor: "#E3E3E3",
-    height: wp("30%"),
   },
   headerWrapper: {
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    flex: 1,
   },
   headerBtn: {
     height: 60,

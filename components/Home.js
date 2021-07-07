@@ -54,13 +54,13 @@ const Home = () => {
         <SearchDropDown
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
-          height={wp("18%")}
+          height={wp("17%")}
           search={search}
           setSearch={setSearch}
         />
         <FlatList
           style={styles.listContainer}
-          contentContainerStyle={{ paddingTop: wp("18%") }}
+          contentContainerStyle={{ paddingTop: wp("17%") }}
           data={data}
           numColumns={1}
           renderItem={renderItem}
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   headerContainer: {
-    height: wp("18%"),
+    height: wp("17%"),
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",

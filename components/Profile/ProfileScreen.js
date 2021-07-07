@@ -23,7 +23,7 @@ function ProfileScreen() {
         <SearchDropDown
           dropDownOpen={dropDownOpen}
           setDropDownOpen={setDropDownOpen}
-          height={wp("35%")}
+          height={wp("30%")}
           renderItemType="small"
         />
         <RecipeScroll paddingTop={0} />
