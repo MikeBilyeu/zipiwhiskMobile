@@ -1,6 +1,7 @@
 import {
   GET_USER_STATE,
   FULLNAME_CHANGE,
+  RESTRICTION_CHANGE,
   USERNAME_CHANGE,
   USERNAME_ERROR,
   IMAGE_URL_CHANGE,
@@ -38,6 +39,8 @@ const userReducer = (state = initialState, action) => {
       return { ...state, usernameError: action.payload };
     case FULLNAME_CHANGE:
       return { ...state, fullname: action.payload };
+    case RESTRICTION_CHANGE:
+      return { ...state, restriction: action.payload };
     case IMAGE_URL_CHANGE:
       return { ...state, image_url: action.payload };
     case EDIT_USER_REQUEST:

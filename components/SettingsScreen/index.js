@@ -14,17 +14,25 @@ import {
 import Header from "./Header";
 import ImageAndLogout from "./ImageAndLogout";
 import Input from "../Input";
+import SelectInput from "../SelectInput";
+import RenderCamera from "./RenderCamera";
+import ImageModal from "./ImageModal";
 
 import {
   getUserState,
   usernameChange,
   fullnameChange,
+  restrictionChange,
   imageUrlChange,
   editProfile,
 } from "../../redux/actions/userForm";
 
-import RenderCamera from "./RenderCamera";
-import ImageModal from "./ImageModal";
+const restrictions = [
+  { label: "Omnivore", value: "omnivore" },
+  { label: "Vegatarian", value: "vegatarian" },
+  { label: "Vegan", value: "vegan" },
+  { label: "Gluten-free", value: "gluten-free" },
+];
 
 const SettingsScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -73,6 +81,12 @@ const SettingsScreen = (props) => {
             textContentType="name"
             iconName="document-text"
           />
+          <SelectInput
+            value={props.userForm.restriction}
+            items={restrictions}
+            handleChange={props.restrictionChange}
+            iconName="restaurant"
+          />
         </View>
       </TouchableWithoutFeedback>
     </View>
@@ -103,6 +117,7 @@ const mapDispatchToProps = {
   getUserState,
   usernameChange,
   fullnameChange,
+  restrictionChange,
   imageUrlChange,
   editProfile,
 };

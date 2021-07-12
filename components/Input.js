@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: "#F2F2F2",
     paddingHorizontal: 0,
-    margin: 5,
+    marginVertical: 5,
   },
   error: {
     borderColor: "#DE4949",

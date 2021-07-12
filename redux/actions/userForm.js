@@ -3,6 +3,7 @@ import {
   USERNAME_CHANGE,
   USERNAME_ERROR,
   FULLNAME_CHANGE,
+  RESTRICTION_CHANGE,
   IMAGE_URL_CHANGE,
   EDIT_USER_REQUEST,
   EDIT_USER_SUCCESS,
@@ -32,6 +33,11 @@ export const usernameChange = (value) => (dispatch, getState) => {
 
 export const fullnameChange = (value) => ({
   type: FULLNAME_CHANGE,
+  payload: value,
+});
+
+export const restrictionChange = (value) => ({
+  type: RESTRICTION_CHANGE,
   payload: value,
 });
 
@@ -67,7 +73,7 @@ const profileImageUpload = (imageURI, userId) => async () => {
 };
 
 export const editProfile = (goBack) => async (dispatch, getState) => {
-  let { fullname, username, image_url } = getState().userForm;
+  let { fullname, username, restriction, image_url } = getState().userForm;
   const { image_url: user_image_url } = getState().user;
   const { id } = getState().user;
 
@@ -77,7 +83,7 @@ export const editProfile = (goBack) => async (dispatch, getState) => {
     image_url = await dispatch(profileImageUpload(image_url, id));
   }
 
-  const data = { fullname, username, image_url };
+  const data = { fullname, username, restriction, image_url };
   try {
     await axios.put("api/users/edit", data);
     dispatch({ type: EDIT_USER_SUCCESS });
