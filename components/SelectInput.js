@@ -9,19 +9,15 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 const SelectInput = (props) => {
   const [focus, setFocus] = useState(false);
-  const [inputValue, setInputValue] = useState();
 
   return (
     <RNPickerSelect
       onOpen={() => setFocus(true)}
-      onClose={() => {
-        setFocus(false);
-        props.handleChange(inputValue);
-      }}
+      onClose={() => setFocus(false)}
       value={props.value}
       style={styles}
       placeholder={{}}
-      onValueChange={(value) => setInputValue(value)}
+      onValueChange={(value) => props.handleChange(value)}
       items={props.items}
       Icon={() => (
         <View

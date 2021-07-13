@@ -11,20 +11,32 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE restrictions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    restriction VARCHAR(255) UNIQUE NOT NULL
-);
+-- CREATE TABLE restrictions (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     restriction VARCHAR(255) UNIQUE NOT NULL
+-- );
 
 CREATE TABLE users_restrictions (
-    restriction_id INT NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (restriction_id) 
-        REFERENCES restrictions(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id)
-         REFERENCES users(id) ON DELETE CASCADE,
-    PRIMARY KEY (restriction_id, user_id)
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    restriction VARCHAR(50) NOT NULL DEFAULT 'omnivore'
 );
+
+CREATE TABLE recipes_restrictions (
+    recipe_id INT PRIMARY KEY,
+    restriction VARCHAR(50) NOT NULL DEFAULT 'omnivore',
+    FOREIGN KEY (recipe_id) 
+        REFERENCES recipes(id) ON DELETE CASCADE
+);
+
+-- CREATE TABLE users_restrictions (
+--     restriction_id INT NOT NULL,
+--     user_id INT NOT NULL,
+--     FOREIGN KEY (restriction_id) 
+--         REFERENCES restrictions(id) ON DELETE CASCADE,
+--     FOREIGN KEY (user_id)
+--          REFERENCES users(id) ON DELETE CASCADE,
+--     PRIMARY KEY (restriction_id, user_id)
+-- );
 
 CREATE TABLE follows (
     following_id INT NOT NULL,
@@ -74,15 +86,15 @@ CREATE TABLE users_recipes (
 );
 
 
-CREATE TABLE recipes_restrictions (
-    recipe_id INT NOT NULL,
-    restriction_id INT NOT NULL,
-    FOREIGN KEY (recipe_id) 
-        REFERENCES recipes(id) ON DELETE CASCADE,
-    FOREIGN KEY (restriction_id) 
-        REFERENCES restrictions(id) ON DELETE CASCADE,
-    PRIMARY KEY(recipe_id, restriction_id)
-);
+-- CREATE TABLE recipes_restrictions (
+--     recipe_id INT NOT NULL,
+--     restriction_id INT NOT NULL,
+--     FOREIGN KEY (recipe_id) 
+--         REFERENCES recipes(id) ON DELETE CASCADE,
+--     FOREIGN KEY (restriction_id) 
+--         REFERENCES restrictions(id) ON DELETE CASCADE,
+--     PRIMARY KEY(recipe_id, restriction_id)
+-- );
 
 CREATE TABLE modified_recipes (
     parent_recipe_id INT,

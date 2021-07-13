@@ -13,10 +13,14 @@ module.exports = async (req, res) => {
         fullname, 
         email, 
         image_url, 
-        COUNT(f.follower_id) AS following 
+        COUNT(f.follower_id) AS following,
+        COUNT(f.following_id) AS followers,
+        ur.restriction AS restriction 
         FROM users u 
         LEFT JOIN follows f 
         ON u.id = f.following_id AND f.follower_id = ?
+        LEFT JOIN users_restrictions ur
+        ON u.id = ur.user_id
         WHERE u.id = ?;`,
       [follower_id, id],
       async (error, results, fields) => {
@@ -24,7 +28,6 @@ module.exports = async (req, res) => {
         if (!results) {
           return res.status(401);
         }
-
         res.status(200).json(results[0]);
       }
     );

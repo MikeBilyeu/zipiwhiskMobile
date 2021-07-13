@@ -56,10 +56,22 @@ module.exports = async ({ body: { username, email, password } }, res) => {
     password_encrypted,
   };
 
-  pool.query("INSERT INTO users SET ?", user, (error, results, fields) => {
+  pool.query("INSERT INTO users SET ?", user, (error, results) => {
     try {
       if (error) throw error;
-      res.status(201).send(`User added with ID: ${results.insertId}`);
+
+      pool.query(
+        "INSERT INTO users_restrictions (user_id) VALUES (?)",
+        results.insertId,
+        (error, results) => {
+          try {
+            if (error) throw error;
+            res.status(201).send(`User added with ID: ${results.insertId}`);
+          } catch (err) {
+            res.status(400).json(err);
+          }
+        }
+      );
     } catch (err) {
       res.status(400).json(err);
     }

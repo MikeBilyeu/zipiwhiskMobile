@@ -31,7 +31,6 @@ const restrictions = [
   { label: "Omnivore", value: "omnivore" },
   { label: "Vegatarian", value: "vegatarian" },
   { label: "Vegan", value: "vegan" },
-  { label: "Gluten-free", value: "gluten-free" },
 ];
 
 const SettingsScreen = (props) => {
@@ -111,6 +110,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   userForm: state.userForm,
+  user: state.user,
 });
 
 const mapDispatchToProps = {

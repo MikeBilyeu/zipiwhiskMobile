@@ -3,12 +3,14 @@ const pool = require("../../config/db");
 module.exports = async (req, res) => {
   const { id } = req.user; // Get user_id from auth
   const { username, fullname, restriction, image_url } = req.body;
-  console.log(restriction);
 
   try {
     pool.query(
-      `UPDATE users SET username = ?, fullname = NULLIF(?, ''), image_url = ? WHERE id = ?`,
-      [username, fullname, image_url, id],
+      `UPDATE users u, users_restrictions ur 
+      SET u.username = ?, u.fullname = NULLIF(?, ''), 
+      u.image_url = ?, ur.restriction = ? 
+      WHERE u.id = ? AND ur.user_id = ?`,
+      [username, fullname, image_url, restriction, id, id],
       async (error, results, fields) => {
         try {
           if (error) throw error;
