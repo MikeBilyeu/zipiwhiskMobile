@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     paddingLeft: wp("14%"),
   },
   iconContainer: {
-    top: 20,
+    top: 18,
     left: 0,
     right: 0,
     paddingHorizontal: 30,

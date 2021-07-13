@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "#fff",
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.25,
     borderBottomColor: "#E3E3E3",
   },
   headerWrapper: {
