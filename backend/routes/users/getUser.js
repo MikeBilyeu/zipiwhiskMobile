@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
         email, 
         image_url, 
         COUNT(f.follower_id) AS following,
-        COUNT(f.following_id) AS followers,
         ur.restriction AS restriction 
         FROM users u 
         LEFT JOIN follows f 
