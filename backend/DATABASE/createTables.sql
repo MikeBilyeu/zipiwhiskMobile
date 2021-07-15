@@ -195,3 +195,26 @@ CREATE TABLE comments_likes (
         REFERENCES comments(id) ON DELETE CASCADE,
     PRIMARY KEY(user_id, comment_id)
 );
+
+
+        SELECT 
+        id, 
+        username, 
+        fullname, 
+        email, 
+        image_url, 
+        COUNT(DISTINCT f.follower_id) AS isfollowing,
+        COUNT(DISTINCT followers.follower_id) AS num_followers,
+        COUNT(DISTINCT followings.following_id) AS num_followings,
+        ur.restriction AS restriction 
+        FROM users u 
+        LEFT JOIN follows f 
+        ON u.id = f.follower_id AND f.following_id = 1
+        LEFT JOIN follows followers
+        ON u.id = followers.following_id
+        LEFT JOIN follows followings
+        ON u.id = followings.follower_id
+        LEFT JOIN users_restrictions ur
+        ON u.id = ur.user_id
+        WHERE u.id = 2;
+
