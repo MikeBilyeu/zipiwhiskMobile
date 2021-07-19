@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     fontSize: wp("3.5%"),
     color: "#313131",
     textAlign: "center",
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.25,
     borderBottomColor: "#E3E3E3",
     paddingBottom: 5,
     paddingTop: wp("4%"),

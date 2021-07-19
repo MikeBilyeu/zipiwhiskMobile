@@ -11,7 +11,6 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import ZipiWhiskIcon from "./Header/ZipiWhiskIcon";
 import SearchBtn from "./SearchBtn";
 import SearchDropDown from "./SearchDropDown";
 import RecipeCard from "./RecipeCard";
@@ -20,12 +19,12 @@ import data from "../data";
 const Header = ({ dropDownOpen, toggleDropDown }) => {
   return (
     <View style={styles.headerContainer}>
-      <ZipiWhiskIcon />
       <SearchBtn
         dropDownOpen={dropDownOpen}
         toggleDropDown={toggleDropDown}
         BtnText="Search"
       />
+
       <View
         style={[
           styles.bottomLine,

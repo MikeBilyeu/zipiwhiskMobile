@@ -28,8 +28,8 @@ function ScreenHeader(props) {
             style={{
               width: wp("4%"),
               height: wp("4%"),
-              transform: [{ rotate: "90deg" }],
-              marginRight: wp("5%"),
+              transform: [{ rotate: "-90deg" }],
+              marginRight: wp("7%"),
             }}
           />
         </TouchableOpacity>

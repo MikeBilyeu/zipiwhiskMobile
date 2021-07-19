@@ -45,7 +45,7 @@ const ResultsBtn = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.25,
     borderBottomColor: "#E3E3E3",
     flexDirection: "row",
     justifyContent: "space-around",

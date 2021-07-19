@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "#0172C4",
-    fontFamily: "AvenirNextRegular",
+    fontFamily: "AvenirNextDemiBold",
     fontSize: wp("4%"),
   },
   bottomLine: {
