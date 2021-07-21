@@ -81,10 +81,11 @@ const CreateRecipeScreen = (props) => {
           />
           <Input
             name="Total Time"
-            placeholder="00:00"
+            placeholder="00:30"
             keyboardType="number-pad"
             returnKeyType="done"
             value={props.recipeForm.totalTime}
+            inputStyles={{ textAlign: "right", paddingRight: "84.5%" }}
             setValue={props.totalTimeChange}
           />
           <Input

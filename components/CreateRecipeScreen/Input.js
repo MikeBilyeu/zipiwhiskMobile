@@ -11,7 +11,11 @@ const Input = (props) => {
       </View>
 
       <TextInput
-        style={[styles.textInput, props.multiline && { paddingTop: 35 }]}
+        style={[
+          styles.textInput,
+          props.multiline && { paddingTop: 35 },
+          props.inputStyles,
+        ]}
         onChangeText={(text) => props.setValue(text)}
         placeholderTextColor="#E2E2E2"
         scrollEnabled={false}

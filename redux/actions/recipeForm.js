@@ -8,59 +8,44 @@ import {
   KEYWORDS_CHANGE,
   CATEGORIES_CHANGE,
 } from "../constants";
+import parseTimeInput from "../../utils/parseTimeInput";
 
-export function changeMedia(value) {
-  return {
-    type: MEDIA_CHANGE,
-    payload: value,
-  };
-}
+export const changeMedia = (value) => ({
+  type: MEDIA_CHANGE,
+  payload: value,
+});
 
-export function recipeNameChange(value) {
-  return {
-    type: RECIPE_NAME_CHANGE,
-    payload: value,
-  };
-}
+export const recipeNameChange = (value) => ({
+  type: RECIPE_NAME_CHANGE,
+  payload: value,
+});
 
-export function servingsChange(value) {
-  return {
-    type: SERVINGS_CHANGE,
-    payload: value,
-  };
-}
+export const servingsChange = (value) => ({
+  type: SERVINGS_CHANGE,
+  payload: value,
+});
 
-export function ingredientsChange(value) {
-  return {
-    type: INGREDIENTS_CHANGE,
-    payload: value,
-  };
-}
+export const ingredientsChange = (value) => ({
+  type: INGREDIENTS_CHANGE,
+  payload: value,
+});
 
-export function instructionsChange(value) {
-  return {
-    type: INSTRUCTIONS_CHANGE,
-    payload: value,
-  };
-}
+export const instructionsChange = (value) => ({
+  type: INSTRUCTIONS_CHANGE,
+  payload: value,
+});
 
-export function totalTimeChange(value) {
-  return {
-    type: TOTAL_TIME_CHANGE,
-    payload: value,
-  };
-}
+export const totalTimeChange = (value) => ({
+  type: TOTAL_TIME_CHANGE,
+  payload: parseTimeInput(value),
+});
 
-export function keywordsChange(value) {
-  return {
-    type: KEYWORDS_CHANGE,
-    payload: value,
-  };
-}
+export const keywordsChange = (value) => ({
+  type: KEYWORDS_CHANGE,
+  payload: value,
+});
 
-export function categoriesChange(value) {
-  return {
-    type: CATEGORIES_CHANGE,
-    payload: value,
-  };
-}
+export const categoriesChange = (value) => ({
+  type: CATEGORIES_CHANGE,
+  payload: value,
+});
