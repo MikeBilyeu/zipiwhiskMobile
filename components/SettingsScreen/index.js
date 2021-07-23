@@ -29,7 +29,7 @@ import {
 
 const restrictions = [
   { label: "Omnivore", value: "omnivore" },
-  { label: "Vegatarian", value: "vegatarian" },
+  { label: "Vegetarian", value: "vegetarian" },
   { label: "Vegan", value: "vegan" },
 ];
 
