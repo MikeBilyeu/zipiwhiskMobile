@@ -33,6 +33,7 @@ const Signup = (props) => {
         handleChange={props.signupEmailChange}
         placeholder="Email"
         textContentType="emailAddress"
+        keyboardType="email-address"
         iconName="mail"
         autoCapitalize="none"
         error={props.signup.emailError}
