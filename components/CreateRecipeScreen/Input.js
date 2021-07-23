@@ -31,7 +31,7 @@ const Input = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.25,
     borderColor: "#E3E3E3",
     height: 85,
   },

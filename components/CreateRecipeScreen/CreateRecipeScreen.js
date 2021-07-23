@@ -18,6 +18,7 @@ import {
   totalTimeChange,
   keywordsChange,
   categoriesChange,
+  submitRecipe,
 } from "../../redux/actions/recipeForm";
 
 import ScreenHeader from "../ScreenHeader";
@@ -35,7 +36,7 @@ const CreateRecipeScreen = (props) => {
       >
         <ScreenHeader title="Create Recipe" subTitle="Recipe Info">
           <TouchableOpacity
-            onPress={null}
+            onPress={props.submitRecipe}
             activeOpacity={0.4}
             style={styles.headerBtn}
           >
@@ -51,7 +52,8 @@ const CreateRecipeScreen = (props) => {
           <Input
             name="Recipe Name"
             placeholder="Add a recipe name..."
-            value={props.recipeForm.recipeName}
+            returnKeyType="next"
+            value={props.recipeForm.recipe_name}
             setValue={props.recipeNameChange}
           />
           <Input
@@ -157,6 +159,7 @@ const mapDispatchToProps = {
   totalTimeChange,
   keywordsChange,
   categoriesChange,
+  submitRecipe,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateRecipeScreen);

@@ -7,7 +7,11 @@ import {
   TOTAL_TIME_CHANGE,
   KEYWORDS_CHANGE,
   CATEGORIES_CHANGE,
+  SUBMIT_RECIPE_REQUEST,
+  SUBMIT_RECIPE_SUCCESS,
+  SUBMIT_RECIPE_FAILURE,
 } from "../constants";
+import axios from "axios";
 import parseTimeInput from "../../utils/parseTimeInput";
 
 export const changeMedia = (value) => ({
@@ -49,3 +53,18 @@ export const categoriesChange = (value) => ({
   type: CATEGORIES_CHANGE,
   payload: value,
 });
+
+export const submitRecipe = () => async (dispatch, getState) => {
+  let recipe = getState().recipeForm;
+  console.log(recipe);
+
+  dispatch({ type: SUBMIT_RECIPE_REQUEST });
+
+  try {
+    await axios.post("api/recipes/create", { recipe });
+    dispatch({ type: SUBMIT_RECIPE_SUCCESS });
+  } catch (err) {
+    dispatch({ type: SUBMIT_RECIPE_FAILURE });
+    console.log(err);
+  }
+};
