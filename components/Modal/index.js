@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -20,6 +13,7 @@ const ModalComponent = (props) => {
           animationType="slide"
           transparent={true}
           visible={props.modalVisible}
+          hardwareAccelerated={true}
         >
           <View style={styles.wrapper}>
             <View style={styles.modalView}>
