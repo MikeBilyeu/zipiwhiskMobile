@@ -4,7 +4,8 @@ import {
   SERVINGS_CHANGE,
   INGREDIENTS_CHANGE,
   INSTRUCTIONS_CHANGE,
-  TOTAL_TIME_CHANGE,
+  TIME_HR_CHANGE,
+  TIME_MIN_CHANGE,
   KEYWORDS_CHANGE,
   CATEGORIES_CHANGE,
 } from "../constants";
@@ -17,7 +18,7 @@ const initialState = {
   servings: "",
   ingredients: "",
   instructions: "",
-  totalTime: "",
+  totalTime: { hours: "", minutes: "" },
   keywords: "",
   categories: [
     { name: "Breakfast", selected: false },
@@ -44,8 +45,16 @@ const recipeFormReducer = (state = initialState, action) => {
       return { ...state, ingredients: action.payload };
     case INSTRUCTIONS_CHANGE:
       return { ...state, instructions: action.payload };
-    case TOTAL_TIME_CHANGE:
-      return { ...state, totalTime: action.payload };
+    case TIME_HR_CHANGE:
+      return {
+        ...state,
+        totalTime: { ...state.totalTime.minutes, hours: action.payload },
+      };
+    case TIME_MIN_CHANGE:
+      return {
+        ...state,
+        totalTime: { ...state.totalTime.hours, minutes: action.payload },
+      };
     case KEYWORDS_CHANGE:
       return { ...state, keywords: action.payload };
     case CATEGORIES_CHANGE:

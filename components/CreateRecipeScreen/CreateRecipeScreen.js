@@ -15,7 +15,8 @@ import {
   servingsChange,
   ingredientsChange,
   instructionsChange,
-  totalTimeChange,
+  timeHrChange,
+  timeMinChange,
   keywordsChange,
   categoriesChange,
   submitRecipe,
@@ -24,6 +25,7 @@ import {
 import ScreenHeader from "../ScreenHeader";
 import MediaInput from "./MediaInput";
 import Input from "./Input";
+import TimeInput from "./TimeInput";
 import Categories from "./Categories";
 
 const CreateRecipeScreen = (props) => {
@@ -81,14 +83,14 @@ const CreateRecipeScreen = (props) => {
             setValue={props.instructionsChange}
             multiline={true}
           />
-          <Input
+          <TimeInput
             name="Total Time"
-            placeholder="00:30"
+            placeholder="00"
             keyboardType="number-pad"
             returnKeyType="done"
             value={props.recipeForm.totalTime}
-            inputStyles={{ textAlign: "right", paddingRight: "84.5%" }}
-            setValue={props.totalTimeChange}
+            timeHrChange={props.timeHrChange}
+            timeMinChange={props.timeMinChange}
           />
           <Input
             name="Keywords"
@@ -156,7 +158,8 @@ const mapDispatchToProps = {
   servingsChange,
   ingredientsChange,
   instructionsChange,
-  totalTimeChange,
+  timeHrChange,
+  timeMinChange,
   keywordsChange,
   categoriesChange,
   submitRecipe,

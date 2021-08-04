@@ -4,7 +4,8 @@ import {
   SERVINGS_CHANGE,
   INGREDIENTS_CHANGE,
   INSTRUCTIONS_CHANGE,
-  TOTAL_TIME_CHANGE,
+  TIME_HR_CHANGE,
+  TIME_MIN_CHANGE,
   KEYWORDS_CHANGE,
   CATEGORIES_CHANGE,
   SUBMIT_RECIPE_REQUEST,
@@ -39,9 +40,14 @@ export const instructionsChange = (value) => ({
   payload: value,
 });
 
-export const totalTimeChange = (value) => ({
-  type: TOTAL_TIME_CHANGE,
-  payload: parseTimeInput(value),
+export const timeHrChange = (value) => ({
+  type: TIME_HR_CHANGE,
+  payload: value,
+});
+
+export const timeMinChange = (value) => ({
+  type: TIME_MIN_CHANGE,
+  payload: value,
 });
 
 export const keywordsChange = (value) => ({
