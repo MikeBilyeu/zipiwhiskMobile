@@ -24,7 +24,7 @@ const MediaInput = ({ media_url, media_type, handleOnChange }) => {
         />
       ) : (
         <View style={styles.cameraIconContainer}>
-          <Ionicons name="camera-outline" size={75} color="#B7B7B7" />
+          <Ionicons name="camera-outline" size={35} color="#313131" />
         </View>
       )}
     </TouchableOpacity>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   cameraIconContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "rgba(200,200,200, .1)",
     width: 300,
     height: 175,
     borderRadius: 10,

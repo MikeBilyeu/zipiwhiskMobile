@@ -8,6 +8,10 @@ import {
   Text,
 } from "react-native";
 import { connect } from "react-redux";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import {
   changeMedia,
@@ -122,7 +126,7 @@ const styles = StyleSheet.create({
   },
   postText: {
     fontFamily: "AvenirNextDemiBold",
-    fontSize: 18,
+    fontSize: wp("4%"),
     color: "#0172C4",
   },
   image: {

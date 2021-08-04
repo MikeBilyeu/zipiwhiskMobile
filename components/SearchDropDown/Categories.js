@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontSize: wp("3.5%"),
-    fontFamily: "AvenirNextDemiBold",
+    fontFamily: "AvenirNextRegular",
     color: "#464646",
     textAlign: "center",
   },

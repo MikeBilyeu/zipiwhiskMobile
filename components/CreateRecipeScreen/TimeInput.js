@@ -22,7 +22,7 @@ const TimeInput = (props) => {
       <TextInput
         style={[
           styles.textInput,
-          { textAlign: "center", flex: 1 },
+          { textAlign: "right", flex: 1 },
           props.inputStyles,
         ]}
         onChangeText={(hr) => props.timeHrChange(hr)}
@@ -33,7 +33,7 @@ const TimeInput = (props) => {
       />
       <Text style={styles.colon}>:</Text>
       <TextInput
-        style={[styles.textInput, { flex: 11 }, props.inputStyles]}
+        style={[styles.textInput, { flex: 1 }, props.inputStyles]}
         onChangeText={(min) => props.timeMinChange(min)}
         placeholderTextColor="#E2E2E2"
         scrollEnabled={false}
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextRegular",
     fontSize: 20,
     position: "absolute",
-    left: 40,
+    left: "49.5%",
     top: 30,
   },
   textInput: {

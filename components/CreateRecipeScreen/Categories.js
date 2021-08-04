@@ -1,5 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const RenderCategoryBtns = (value, setValue) =>
   value.map((curr, i) => {
@@ -36,8 +40,6 @@ const Categories = ({ info, value, setValue }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // borderBottomWidth: 0.5,
-    // borderColor: "#E3E3E3",
     paddingVertical: 30,
   },
   nameWrapper: {
@@ -64,26 +66,33 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   btnContainer: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    flexWrap: "nowrap",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 10,
-    marginHorizontal: 5,
-    borderRadius: 100,
+    paddingVertical: wp("3%"),
+    paddingHorizontal: wp("5%"),
+    margin: wp("3.2%"),
+    borderRadius: 50,
+    backgroundColor: "#fff",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowColor: "black",
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    borderWidth: 1,
+    borderColor: "#fff",
   },
   btnText: {
     color: "#707070",
     fontFamily: "AvenirNextRegular",
-    fontSize: 20,
+    fontSize: 16,
     paddingHorizontal: 10,
   },
   btnContainerSelected: {
-    backgroundColor: "#0172C4",
+    borderWidth: 1,
+    borderColor: "#313131",
   },
   btnTextSelected: {
-    color: "#fff",
+    color: "#313131",
   },
 });
 
