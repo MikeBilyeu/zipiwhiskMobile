@@ -18,7 +18,8 @@ const initialState = {
   servings: "",
   ingredients: "",
   instructions: "",
-  totalTime: { hours: "", minutes: "" },
+  timeHours: "",
+  timeMins: "",
   keywords: "",
   categories: [
     { name: "Breakfast", selected: false },
@@ -48,12 +49,12 @@ const recipeFormReducer = (state = initialState, action) => {
     case TIME_HR_CHANGE:
       return {
         ...state,
-        totalTime: { ...state.totalTime.minutes, hours: action.payload },
+        timeHours: action.payload,
       };
     case TIME_MIN_CHANGE:
       return {
         ...state,
-        totalTime: { ...state.totalTime.hours, minutes: action.payload },
+        timeMins: action.payload,
       };
     case KEYWORDS_CHANGE:
       return { ...state, keywords: action.payload };

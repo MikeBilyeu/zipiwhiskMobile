@@ -13,7 +13,7 @@ import {
   SUBMIT_RECIPE_FAILURE,
 } from "../constants";
 import axios from "axios";
-import parseTimeInput from "../../utils/parseTimeInput";
+import { parseHourInput, parseMinuteInput } from "../../utils/parseTimeInput";
 
 export const changeMedia = (value) => ({
   type: MEDIA_CHANGE,

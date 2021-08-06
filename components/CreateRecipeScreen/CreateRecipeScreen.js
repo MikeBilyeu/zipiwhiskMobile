@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
+  Keyboard,
   TouchableOpacity,
   View,
   Text,
@@ -33,6 +34,7 @@ import TimeInput from "./TimeInput";
 import Categories from "./Categories";
 
 const CreateRecipeScreen = (props) => {
+  const [inputFocused, setInputFocused] = useState();
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
@@ -41,13 +43,25 @@ const CreateRecipeScreen = (props) => {
         keyboardVerticalOffset={10}
       >
         <ScreenHeader title="Create Recipe" subTitle="Recipe Info">
-          <TouchableOpacity
-            onPress={props.submitRecipe}
-            activeOpacity={0.4}
-            style={styles.headerBtn}
-          >
-            <Text style={styles.postText}>Post</Text>
-          </TouchableOpacity>
+          {inputFocused ? (
+            <TouchableOpacity
+              style={styles.headerBtn}
+              onPress={() => {
+                setInputFocused(false);
+                Keyboard.dismiss();
+              }}
+            >
+              <Text style={styles.headerBtnText}>Done</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={props.submitRecipe}
+              activeOpacity={0.4}
+              style={styles.headerBtn}
+            >
+              <Text style={styles.headerBtnText}>Post</Text>
+            </TouchableOpacity>
+          )}
         </ScreenHeader>
         <ScrollView style={styles.listContainer}>
           <MediaInput
@@ -61,14 +75,16 @@ const CreateRecipeScreen = (props) => {
             returnKeyType="next"
             value={props.recipeForm.recipe_name}
             setValue={props.recipeNameChange}
+            onFocus={() => setInputFocused(true)}
           />
           <Input
             name="Servings"
             placeholder="Add # servings..."
             keyboardType="number-pad"
-            returnKeyType="done"
             value={props.recipeForm.servings}
             setValue={props.servingsChange}
+            onFocus={() => setInputFocused(true)}
+            maxLength={2}
           />
           <Input
             name="Ingredients"
@@ -78,6 +94,7 @@ const CreateRecipeScreen = (props) => {
             value={props.recipeForm.ingredients}
             setValue={props.ingredientsChange}
             multiline={true}
+            onFocus={() => setInputFocused(true)}
           />
           <Input
             name="Instructions"
@@ -86,15 +103,18 @@ const CreateRecipeScreen = (props) => {
             value={props.recipeForm.instructions}
             setValue={props.instructionsChange}
             multiline={true}
+            onFocus={() => setInputFocused(true)}
           />
           <TimeInput
             name="Total Time"
             placeholder="00"
             keyboardType="number-pad"
-            returnKeyType="done"
-            value={props.recipeForm.totalTime}
+            timeHrValue={props.recipeForm.timeHours}
+            timeMinValue={props.recipeForm.timeMins}
             timeHrChange={props.timeHrChange}
             timeMinChange={props.timeMinChange}
+            onFocus={() => setInputFocused(true)}
+            maxLength={2}
           />
           <Input
             name="Keywords"
@@ -102,6 +122,7 @@ const CreateRecipeScreen = (props) => {
             info="(separate with comma)"
             value={props.recipeForm.keywords}
             setValue={props.keywordsChange}
+            onFocus={() => setInputFocused(true)}
           />
           <Categories
             value={props.recipeForm.categories}
@@ -124,7 +145,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 3,
   },
-  postText: {
+  headerBtnText: {
     fontFamily: "AvenirNextDemiBold",
     fontSize: wp("4%"),
     color: "#0172C4",

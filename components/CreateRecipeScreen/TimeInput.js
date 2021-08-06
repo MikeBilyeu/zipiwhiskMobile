@@ -2,15 +2,6 @@ import React from "react";
 import { StyleSheet, View, TextInput, Text } from "react-native";
 import { connect } from "react-redux";
 
-// 5     ->  00:05
-// 55    ->  00:55
-// 555   ->  05:55
-// 5555  ->  55:55
-//hours and mins can only be two digits long
-// if mins becomes longer than 2 digits push the left text intot the hours
-// if the mins get deleted remove from hours and insert back into mins
-//
-
 const TimeInput = (props) => {
   return (
     <View style={styles.container}>
@@ -28,7 +19,7 @@ const TimeInput = (props) => {
         onChangeText={(hr) => props.timeHrChange(hr)}
         placeholderTextColor="#E2E2E2"
         scrollEnabled={false}
-        value={props.value.hours}
+        value={props.timeHrValue}
         {...props}
       />
       <Text style={styles.colon}>:</Text>
@@ -37,7 +28,7 @@ const TimeInput = (props) => {
         onChangeText={(min) => props.timeMinChange(min)}
         placeholderTextColor="#E2E2E2"
         scrollEnabled={false}
-        value={props.value.minutes}
+        value={props.timeMinValue}
         {...props}
       />
     </View>
