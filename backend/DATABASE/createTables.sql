@@ -106,19 +106,17 @@ CREATE TABLE modified_recipes (
     PRIMARY KEY(parent_recipe_id, child_recipe_id)
 );
 
-CREATE TABLE categories (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    category VARCHAR(25) UNIQUE NOT NULL
-);
+-- CREATE TABLE categories (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     category VARCHAR(25) UNIQUE NOT NULL
+-- );
 
 CREATE TABLE recipes_categories (
     recipe_id INT NOT NULL,
-    category_id INT NOT NULL,
+    category VARCHAR(25) NOT NULL,
     FOREIGN KEY (recipe_id) 
         REFERENCES recipes(id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) 
-        REFERENCES categories(id) ON DELETE CASCADE,
-    PRIMARY KEY(recipe_id, category_id)
+    PRIMARY KEY(recipe_id, category)
 );
 
 CREATE TABLE ingredients (

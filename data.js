@@ -2,11 +2,11 @@ const data = [
   {
     id: 49802390484,
     numLikes: 1500,
-    numComments: 4,
+    numComments: 21,
     title: "Peanut Butter Banana Smoothie",
     user: {
       image: "https://randomuser.me/api/portraits/men/54.jpg",
-      username: "billybob",
+      username: "coppola",
       id: 10,
     },
     media_url:
@@ -119,11 +119,11 @@ const data = [
   {
     id: 193243290423,
     numLikes: 3903,
-    numComments: 1,
-    title: "Cranberry Sauce",
+    numComments: 18,
+    title: "Cajun Chicken Pasta",
     user: {
       image: "https://randomuser.me/api/portraits/women/20.jpg",
-      username: "jackie93",
+      username: "messina",
       id: 10,
     },
     media_url:
@@ -162,7 +162,7 @@ const data = [
       `Remove the beef from the pot and add the vinegar and wine. Cook over medium-high heat, scraping the pan with a wooden spoon to loosen any browned bits. Add the beef, beef broth and bay leaves. Bring to a boil, then reduce to a slow simmer.`,
     ],
     nutrition: {
-      calories: 275,
+      calories: 350,
       protiens: "8g",
       fats: "10g",
       carbs: "26g",
@@ -254,7 +254,7 @@ const data = [
   {
     id: 193229390423,
     numLikes: 16903,
-    numComments: 1,
+    numComments: 52,
     title: "Black Bean Veggie Burgers",
     user: {
       image: "https://randomuser.me/api/portraits/women/19.jpg",

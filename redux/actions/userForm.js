@@ -11,8 +11,7 @@ import {
 } from "../constants";
 import axios from "axios";
 import { checkUsername, getUser } from "./user";
-import { RNS3 } from "react-native-aws3";
-const keys = require("../../backend/config/keys");
+import s3Upload from "../../utils/s3Upload";
 
 export const getUserState = () => (dispatch, getState) => {
   const data = getState().user;
@@ -46,32 +45,6 @@ export const imageUrlChange = (value) => ({
   payload: value,
 });
 
-//AWS S3 Image Upload
-const profileImageUpload = (imageURI, userId) => async () => {
-  return RNS3.put(
-    {
-      uri: imageURI,
-      name: userId,
-      type: "image/jpeg",
-    },
-    {
-      keyPrefix: "profile-image/",
-      bucket: "zipiwhisk-media",
-      region: "us-east-2",
-      accessKey: keys.accessKey,
-      secretKey: keys.secretKey,
-      successActionStatus: 201,
-    }
-  ).then((response) => {
-    if (response.status !== 201) {
-      //throw error
-      alert("Sorry, Failed to upload image");
-    }
-    let { location } = response.body.postResponse;
-    return location;
-  });
-};
-
 export const editProfile = (goBack) => async (dispatch, getState) => {
   let { fullname, username, restriction, image_url } = getState().userForm;
   const { image_url: user_image_url } = getState().user;
@@ -80,7 +53,7 @@ export const editProfile = (goBack) => async (dispatch, getState) => {
   dispatch({ type: EDIT_USER_REQUEST });
 
   if (image_url && image_url !== user_image_url) {
-    image_url = await dispatch(profileImageUpload(image_url, id));
+    image_url = await dispatch(s3Upload(image_url, "profile-image/", id));
   }
 
   const data = { fullname, username, restriction, image_url };

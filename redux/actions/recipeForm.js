@@ -13,6 +13,8 @@ import {
   SUBMIT_RECIPE_FAILURE,
 } from "../constants";
 import axios from "axios";
+//import s3Upload from "../utils/s3Upload";
+
 import { parseHourInput, parseMinuteInput } from "../../utils/parseTimeInput";
 
 export const changeMedia = (value) => ({
@@ -62,9 +64,14 @@ export const categoriesChange = (value) => ({
 
 export const submitRecipe = () => async (dispatch, getState) => {
   let recipe = getState().recipeForm;
-  console.log(recipe);
+  const { id } = getState().user;
 
   dispatch({ type: SUBMIT_RECIPE_REQUEST });
+
+  // Upload recipe media to S3 Bucket and return url
+  // recipe.media_url = await dispatch(
+  //   s3Upload(recipe.media_url, "recipe-media/", id)
+  // );
 
   try {
     await axios.post("api/recipes/create", { recipe });
