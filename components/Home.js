@@ -19,6 +19,8 @@ const Home = () => {
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
         initialNumToRender={10}
+        pagingEnabled
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
