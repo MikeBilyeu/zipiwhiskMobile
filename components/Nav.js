@@ -8,7 +8,7 @@ import {
 } from "react-native-responsive-screen";
 
 import Home from "./Home";
-import Groceries from "./Groceries";
+
 import ActivityScreen from "./ActivityScreen";
 import ProfileScreen from "./Profile/ProfileScreen";
 
@@ -30,10 +30,6 @@ const Nav = () => {
 
           if (route.name === "Home") {
             iconName = focused ? "ios-home" : "ios-home-outline";
-          } else if (route.name === "Groceries") {
-            iconName = focused ? "document-text" : "document-text-outline";
-          } else if (route.name === "Bookmarks") {
-            iconName = focused ? "bookmarks" : "bookmarks-outline";
           } else if (route.name === "Activity") {
             iconName = focused ? "chatbubbles" : "chatbubbles-outline";
           } else if (route.name === "Profile") {
@@ -53,8 +49,6 @@ const Nav = () => {
       })}
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Groceries" component={Groceries} />
-      {/* <Tab.Screen name="Bookmarks" component={Bookmarks} /> */}
 
       <Tab.Screen
         name="Activity"

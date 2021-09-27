@@ -16,6 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { parseNum } from "./utils";
+import Footer from "./RecipeScreen/Footer";
 
 const RecipeCard = ({ data }) => {
   const navigation = useNavigation();
@@ -40,64 +41,28 @@ const RecipeCard = ({ data }) => {
           style={styles.image}
         />
       )}
+      <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+        {data.title}
+      </Text>
 
-      <View style={styles.recipeCardDarken}>
-        <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
-          {data.title}
-        </Text>
-        <View style={styles.userInfoContainer}>
-          <Image source={{ uri: data.user.image }} style={styles.userIcon} />
-          <Text style={styles.userInfoText}>{data.user.username}</Text>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoText}>{"Calories"}</Text>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.infoText}>{data.nutrition.calories}</Text>
-            <Ionicons
-              name="pie-chart"
-              size={wp("4%")}
-              color="#FFF"
-              style={styles.icon}
-            />
-          </View>
-        </View>
-
-        <View style={styles.line} />
-
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoText}>{"Saves"}</Text>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.infoText}>{parseNum(data.numLikes)}</Text>
-            <Ionicons
-              name="heart"
-              size={wp("4%")}
-              color="#FFF"
-              style={styles.icon}
-            />
-          </View>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoText}>{"Comments"}</Text>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.infoText}>{parseNum(data.numComments)}</Text>
-
-            <Ionicons
-              name="chatbubble-ellipses"
-              size={wp("4%")}
-              color="#FFF"
-              style={styles.icon}
-            />
-          </View>
-        </View>
-      </View>
+      <Footer
+        title={data.title}
+        numLikes={data.numLikes}
+        numComments={data.numComments}
+        userImage={data.user.image}
+        username={data.user.username}
+        id={data.user.id}
+        caption={data.caption}
+        numViews={data.numViews}
+      />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("39%"),
-    justifyContent: "center",
+    height: hp("100%"),
+    justifyContent: "space-between",
   },
   image: {
     flex: 1,
@@ -119,13 +84,10 @@ const styles = StyleSheet.create({
   },
   recipeCardDarken: {
     backgroundColor: "rgba(0,0,0,.1)",
-    borderRadius: wp("4%"),
     justifyContent: "flex-end",
-    alignContent: "center",
     paddingHorizontal: wp("2.5%"),
-    paddingVertical: wp("3%"),
-    flex: 1,
-    margin: wp("1.5%"),
+    paddingVertical: hp("5%"),
+    height: hp("30%"),
     shadowOffset: {
       width: 0,
       height: 0,
@@ -133,15 +95,18 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOpacity: 0.5,
     shadowRadius: 5,
+    borderWidth: 2,
   },
   title: {
     color: "white",
-    fontSize: wp("8%"),
+    fontSize: wp("6%"),
     fontFamily: "AvenirNextBold",
-    textAlign: "left",
-    lineHeight: wp("8%"),
+    textAlign: "center",
+    lineHeight: wp("7%"),
     fontWeight: "bold",
     marginBottom: wp("3%"),
+    marginTop: hp("5%"),
+    paddingHorizontal: wp("20%"),
   },
   infoContainer: {
     flexDirection: "row",
@@ -157,27 +122,22 @@ const styles = StyleSheet.create({
   icon: {
     marginLeft: wp("1%"),
   },
-  line: {
-    borderBottomColor: "#FFF",
-    opacity: 0.5,
-    borderBottomWidth: 0.5,
-    width: "100%",
-    marginVertical: 5,
-  },
+
   userInfoContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
     marginBottom: wp("3%"),
+    borderWidth: 2,
   },
   userIcon: {
-    width: wp("7%"),
-    height: wp("7%"),
+    width: wp("9%"),
+    height: wp("9%"),
     borderRadius: 100,
     marginRight: wp("2%"),
     alignItems: "center",
   },
-  userInfoText: {
+  infoText: {
     fontSize: wp("3.5%"),
     color: "#FFF",
     fontFamily: "AvenirNextDemiBold",

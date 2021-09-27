@@ -3,6 +3,7 @@ import { Dimensions } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Nav from "./Nav";
+import Home from "./Home";
 import RecipeScreen from "./RecipeScreen";
 import Comments from "./Comments";
 import FollowScreen from "./FollowScreen";
@@ -25,7 +26,9 @@ const HomeStack = () => {
         },
       }}
     >
-      <Stack.Screen name="Home" component={Nav} />
+      {/* <Stack.Screen name="Home" component={Nav} /> */}
+      <Stack.Screen name="Home" component={Home} />
+
       <Stack.Screen name="VisitProfile" component={VisitProfileScreen} />
       <Stack.Screen name="Recipe" component={RecipeScreen} />
       <Stack.Screen name="Comments" component={Comments} />
