@@ -43,8 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: screenHeight,
-    paddingVertical: 40,
-    marginVertical: wp("6%"),
+    paddingVertical: 35,
   },
   cardContainer: {
     width: screenWidth - 20,

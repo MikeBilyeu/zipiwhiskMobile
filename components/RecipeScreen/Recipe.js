@@ -125,8 +125,6 @@ const Recipe = ({ data, yValue }) => {
         <Ingredients data={data} />
 
         <Instructions data={data} />
-
-        <NutritionFacts data={data} />
       </View>
     </Animated.ScrollView>
   );
@@ -168,7 +166,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: wp("10%"),
     borderTopRightRadius: wp("10%"),
     paddingTop: wp("10%"),
-    paddingBottom: 10,
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",

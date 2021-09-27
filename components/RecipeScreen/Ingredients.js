@@ -20,36 +20,16 @@ const renderList = (list) => {
         <Text style={styles.ingredientAmount}>{i.amount}</Text>
         <Text style={styles.ingredientName}>{i.ingredient}</Text>
       </View>
-      <Image source={{ uri: i.image }} style={styles.ingredientImage} />
     </View>
   ));
 };
 
 const Ingredients = (props) => {
-  const [servings, setServings] = useState(props.data.recipeYield.toString());
-
   return (
     <View style={styles.container}>
-      <View style={styles.servingsContainer}>
-        <TextInput
-          style={styles.servingsInput}
-          onChangeText={(text) => setServings(text)}
-          value={servings}
-          selectionColor="#464646"
-          returnKeyType="done"
-          keyboardType="number-pad"
-        />
-        <Text pointerEvents="none" style={styles.servingsText}>
-          Servings
-        </Text>
-      </View>
-
-      <TouchableOpacity style={styles.groceryBtn}>
-        <Image
-          source={require("../../assets/cart.png")}
-          style={{ width: wp("6.5%"), height: wp("8%") }}
-        />
-      </TouchableOpacity>
+      <Text pointerEvents="none" style={styles.servingsText}>
+        {props.data.recipeYield.toString()} Servings
+      </Text>
 
       <View style={styles.listContainer}>
         {renderList(props.data.ingredientList)}
@@ -65,26 +45,7 @@ const styles = StyleSheet.create({
     marginVertical: wp("6%"),
     paddingHorizontal: wp("2%"),
   },
-  servingsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FAFAFA",
-    borderRadius: 100,
-    width: 200,
-    height: 50,
-    margin: 5,
-  },
-  servingsInput: {
-    fontSize: 30,
-    color: "#0172C4",
-    width: "100%",
-    height: 50,
-    paddingRight: 135,
-    position: "absolute",
-    fontFamily: "AvenirNextDemiBold",
-    textAlign: "right",
-  },
+
   servingsText: {
     fontSize: 18,
     fontFamily: "AvenirNextRegular",
