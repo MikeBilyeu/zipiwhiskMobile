@@ -41,12 +41,8 @@ const RecipeCard = ({ data }) => {
           style={styles.image}
         />
       )}
-      <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
-        {data.title}
-      </Text>
 
       <Footer
-        title={data.title}
         numLikes={data.numLikes}
         numComments={data.numComments}
         userImage={data.user.image}
@@ -55,6 +51,9 @@ const RecipeCard = ({ data }) => {
         caption={data.caption}
         numViews={data.numViews}
       />
+      <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+        {data.title}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -82,31 +81,17 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  recipeCardDarken: {
-    backgroundColor: "rgba(0,0,0,.1)",
-    justifyContent: "flex-end",
-    paddingHorizontal: wp("2.5%"),
-    paddingVertical: hp("5%"),
-    height: hp("30%"),
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowColor: "#000",
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    borderWidth: 2,
-  },
   title: {
     color: "white",
-    fontSize: wp("6%"),
+    fontSize: wp("7%"),
     fontFamily: "AvenirNextBold",
     textAlign: "center",
-    lineHeight: wp("7%"),
+    lineHeight: wp("8%"),
     fontWeight: "bold",
-    marginBottom: wp("3%"),
-    marginTop: hp("5%"),
-    paddingHorizontal: wp("20%"),
+    position: "absolute",
+    width: "100%",
+    bottom: hp("13%"),
+    paddingHorizontal: wp("15%"),
   },
   infoContainer: {
     flexDirection: "row",

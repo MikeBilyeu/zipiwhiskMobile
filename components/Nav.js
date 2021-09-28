@@ -7,7 +7,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import Home from "./Home";
+import Home from "./HomeScreen";
 
 import ActivityScreen from "./ActivityScreen";
 import ProfileScreen from "./Profile/ProfileScreen";

@@ -33,7 +33,7 @@ const AppConatiner = connect(mapStateToProps)((props) => {
   }
   return (
     <SafeAreaProvider style={styles.container}>
-      <StatusBar barStyle="auto" />
+      <StatusBar style="light" />
       <NavigationContainer>
         {props.auth.isAuth ? <HomeStack /> : <Auth />}
       </NavigationContainer>

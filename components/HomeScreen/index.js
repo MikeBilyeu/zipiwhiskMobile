@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
-import RecipeCard from "./RecipeCard";
-import data from "../data";
+import Header from "./Header";
+import RecipeCard from "../RecipeCard";
+import data from "../../data";
 
 const Home = () => {
   const handleLoadMore = () => console.log("load more");
@@ -10,6 +11,7 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
+      <Header />
       <FlatList
         style={styles.listContainer}
         data={data}
@@ -29,8 +31,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: "relative",
-    backgroundColor: "#fff",
+    backgroundColor: "black",
   },
   listContainer: {
     flex: 1,

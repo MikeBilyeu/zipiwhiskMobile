@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
     flex: 1,
-    paddingBottom: wp("4%"),
+    paddingBottom: wp("3%"),
     width: "100%",
   },
   footerBtnContainer: {
