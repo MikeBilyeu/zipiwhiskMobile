@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   numText: {
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("3.5%"),
+    fontSize: wp("3%"),
     color: "#313131",
   },
 });

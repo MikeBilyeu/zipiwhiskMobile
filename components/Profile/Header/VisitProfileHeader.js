@@ -18,7 +18,6 @@ const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, userProfile }) => {
       toggleDropDown={toggleDropDown}
       height={wp("55%")}
     >
-      <FollowUser username={userProfile.username} />
       <UserInfo user={userProfile}>
         <View style={{ width: wp("20%") }} />
       </UserInfo>

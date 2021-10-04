@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: wp("3.25%"),
     fontFamily: "AvenirNextRegular",
-    color: "#464646",
+    color: "#313131",
   },
   backBtn: {
     height: wp("12%"),

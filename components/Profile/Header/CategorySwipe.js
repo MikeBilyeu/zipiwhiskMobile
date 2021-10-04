@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
   },
   btn: {
     justifyContent: "center",
-    paddingVertical: wp("3.7%"),
+    paddingVertical: wp("3.2%"),
     paddingHorizontal: wp("10%"),
-    marginHorizontal: wp("3.2%"),
+    marginHorizontal: wp("2%"),
     borderRadius: 50,
     backgroundColor: "#fff",
     shadowOffset: {
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#01C481",
   },
   btnText: {
-    fontSize: wp("3.2%"),
-    fontFamily: "AvenirNextDemiBold",
+    fontSize: wp("4.2%"),
+    fontFamily: "AvenirNextRegular",
     color: "#464646",
     textAlign: "center",
   },

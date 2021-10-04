@@ -1,15 +1,19 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import RecipeCardSmall from "../RecipeCardSmall";
 import data from "../../data";
 
-const RecipeScroll = ({ paddingTop = 130 }) => {
+const RecipeScroll = () => {
   const renderItem = ({ item }) => <RecipeCardSmall item={item} />;
   return (
     <FlatList
-      style={styles.listContainer}
-      contentContainerStyle={{ paddingTop: paddingTop }}
+      style={[styles.listContainer, { flex: 1 }]}
+      contentContainerStyle={{ paddingTop: wp("45%") }}
       data={data}
       numColumns={3}
       renderItem={renderItem}
@@ -21,9 +25,9 @@ const RecipeScroll = ({ paddingTop = 130 }) => {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
-    position: "absolute",
     width: "100%",
-    paddingTop: 170,
+    //position: "absolute",
+    borderWidth: 1,
   },
 });
 
