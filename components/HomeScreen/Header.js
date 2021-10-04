@@ -11,7 +11,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Header = (props) => {
-  console.log(props);
+  console.log(props.user);
   const navigation = useNavigation();
 
   return (
@@ -28,17 +28,17 @@ const Header = (props) => {
       >
         <Ionicons
           name="search"
-          size={wp("9%")}
+          size={wp("8%")}
           color="#FFF"
           style={styles.headerBtnIcon}
         />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={null}
+        onPress={() => navigation.navigate("Profile")}
         activeOpacity={0.4}
         style={styles.headerBtn}
       >
-        <Image source={{ uri: props.image_url }} style={styles.userIcon} />
+        <Image source={{ uri: props.user.image_url }} style={styles.userIcon} />
       </TouchableOpacity>
     </LinearGradient>
   );
@@ -61,15 +61,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerBtnIcon: {
-    width: wp("9%"),
-    height: wp("9%"),
+    width: wp("8%"),
+    height: wp("8%"),
   },
   userIcon: {
-    width: wp("8.5%"),
-    height: wp("8.5%"),
+    width: wp("9%%"),
+    height: wp("9%"),
     borderRadius: 100,
-    borderWidth: 1.2,
-    borderColor: "white",
     marginRight: 5,
     backgroundColor: "#fff",
   },

@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 import ToggleFollowBtn from "../../ToggleFollowBtn";
-import NumFollows from "../../NumFollows";
+import NumFollows from "./NumFollows";
 
 const UserFollows = (props) => {
   return (

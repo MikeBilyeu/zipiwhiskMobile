@@ -6,14 +6,14 @@ import {
 } from "react-native-responsive-screen";
 
 import Header from "../Header";
-import NumFollows from "../NumFollows";
+//import NumFollows from "../NumFollows";
 
 import { userData } from "./data";
 
 function ActivityHeader() {
   return (
     <Header height={wp("17%")}>
-      <View style={styles.followContainer}>
+      {/* <View style={styles.followContainer}>
         <NumFollows
           text="Followers"
           num={userData.numFollowers}
@@ -27,7 +27,7 @@ function ActivityHeader() {
           num={userData.numFollowing}
           username={userData.username}
         />
-      </View>
+      </View> */}
     </Header>
   );
 }

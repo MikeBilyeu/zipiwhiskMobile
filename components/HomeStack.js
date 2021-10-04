@@ -9,6 +9,7 @@ import Comments from "./Comments";
 import FollowScreen from "./FollowScreen";
 import CreateRecipeScreen from "./CreateRecipeScreen/CreateRecipeScreen";
 import CameraScreen from "./CameraScreen";
+import ProfileScreen from "./Profile/ProfileScreen";
 import VisitProfileScreen from "./Profile/VisitProfileScreen";
 import ResultsScreen from "./ResultsScreen";
 import SettingsScreen from "./SettingsScreen";
@@ -28,6 +29,7 @@ const HomeStack = () => {
     >
       {/* <Stack.Screen name="Home" component={Nav} /> */}
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
 
       <Stack.Screen name="VisitProfile" component={VisitProfileScreen} />
       <Stack.Screen name="Recipe" component={RecipeScreen} />

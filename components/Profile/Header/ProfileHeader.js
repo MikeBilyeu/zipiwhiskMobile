@@ -7,29 +7,23 @@ import {
 } from "react-native-responsive-screen";
 
 import Header from "../../Header";
-import CreateRecipeBtn from "./CreateRecipeBtn";
 import UserInfo from "./UserInfo";
-import SearchBtn from "../../SearchBtn";
+import FollowContainer from "./FollowsContainer";
+import CreateRecipeBtn from "./CreateRecipeBtn";
+import CategorySwipe from "./CategorySwipe";
 
-const ProfileHeader = ({ dropDownOpen, toggleDropDown, user }) => {
+const ProfileHeader = ({ user }) => {
   const navigation = useNavigation();
   return (
-    <Header
-      dropDownOpen={dropDownOpen}
-      toggleDropDown={toggleDropDown}
-      height={wp("30%")}
-    >
+    <Header>
       <UserInfo
         user={user}
         handleImagePress={() => navigation.navigate("Settings")}
-      >
+      />
+      <FollowContainer user={user}>
         <CreateRecipeBtn />
-      </UserInfo>
-      <SearchBtn
-        dropDownOpen={dropDownOpen}
-        toggleDropDown={toggleDropDown}
-        BtnText="Saves"
-      ></SearchBtn>
+      </FollowContainer>
+      <CategorySwipe />
     </Header>
   );
 };

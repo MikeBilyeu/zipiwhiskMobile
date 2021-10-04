@@ -9,7 +9,6 @@ import {
 import Header from "../../Header";
 import UserInfo from "./UserInfo";
 import SearchBtn from "../../SearchBtn";
-import FollowUser from "./FollowUser";
 import UserFollows from "./UserFollows";
 
 const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, userProfile }) => {
@@ -23,7 +22,7 @@ const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, userProfile }) => {
       <UserInfo user={userProfile}>
         <View style={{ width: wp("20%") }} />
       </UserInfo>
-      <UserFollows user={userProfile} />
+
       <SearchBtn
         dropDownOpen={dropDownOpen}
         toggleDropDown={toggleDropDown}

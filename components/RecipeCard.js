@@ -2,10 +2,8 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
   ImageBackground,
-  Image,
 } from "react-native";
 import { Video } from "expo-av";
 import {
@@ -13,9 +11,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
-import { parseNum } from "./utils";
 import Footer from "./RecipeScreen/Footer";
 
 const RecipeCard = ({ data }) => {
@@ -92,35 +88,6 @@ const styles = StyleSheet.create({
     width: "100%",
     bottom: hp("13%"),
     paddingHorizontal: wp("15%"),
-  },
-  infoContainer: {
-    flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-between",
-    marginVertical: wp("1%"),
-  },
-  infoText: {
-    fontSize: wp("3.5%"),
-    color: "#FFF",
-    fontFamily: "AvenirNextDemiBold",
-  },
-  icon: {
-    marginLeft: wp("1%"),
-  },
-
-  userInfoContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginBottom: wp("3%"),
-    borderWidth: 2,
-  },
-  userIcon: {
-    width: wp("9%"),
-    height: wp("9%"),
-    borderRadius: 100,
-    marginRight: wp("2%"),
-    alignItems: "center",
   },
   infoText: {
     fontSize: wp("3.5%"),

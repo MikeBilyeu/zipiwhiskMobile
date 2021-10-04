@@ -1,31 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, SafeAreaView } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
 import ProfileHeader from "./Header/ProfileHeader";
-import SearchDropDown from "../SearchDropDown";
 import RecipeScroll from "./RecipeScroll";
 
 function ProfileScreen() {
-  const [dropDownOpen, setDropDownOpen] = useState(false);
-  const toggleDropDown = () => setDropDownOpen(!dropDownOpen);
-
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style="dark" />
       <View style={{ flex: 1 }}>
-        <ProfileHeader
-          toggleDropDown={toggleDropDown}
-          dropDownOpen={dropDownOpen}
-        />
-        <SearchDropDown
-          dropDownOpen={dropDownOpen}
-          setDropDownOpen={setDropDownOpen}
-          height={wp("30%")}
-          renderItemType="small"
-        />
+        <ProfileHeader />
         <RecipeScroll paddingTop={0} />
       </View>
     </SafeAreaView>
