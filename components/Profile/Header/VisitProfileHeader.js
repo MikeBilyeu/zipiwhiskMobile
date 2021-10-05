@@ -8,25 +8,23 @@ import {
 
 import Header from "../../Header";
 import UserInfo from "./UserInfo";
-import SearchBtn from "../../SearchBtn";
-import UserFollows from "./UserFollows";
+import FollowContainer from "./FollowsContainer";
+import ToggleFollowBtn from "../../ToggleFollowBtn";
 
-const VisitProfileHeader = ({ dropDownOpen, toggleDropDown, userProfile }) => {
+const VisitProfileHeader = ({ userProfile }) => {
+  console.log(userProfile);
   return (
-    <Header
-      dropDownOpen={dropDownOpen}
-      toggleDropDown={toggleDropDown}
-      height={wp("55%")}
-    >
+    <Header>
       <UserInfo user={userProfile}>
         <View style={{ width: wp("20%") }} />
       </UserInfo>
-
-      <SearchBtn
-        dropDownOpen={dropDownOpen}
-        toggleDropDown={toggleDropDown}
-        BtnText="Saves"
-      />
+      <FollowContainer user={userProfile}>
+        <ToggleFollowBtn
+          BtnStyles={{ alignSelf: "center" }}
+          id={userProfile.id}
+          following={userProfile.isFollowing}
+        />
+      </FollowContainer>
     </Header>
   );
 };

@@ -16,8 +16,6 @@ function Activity() {
         return <Follow data={item} />;
       case "like":
         return <Like data={item} />;
-      case "post":
-        return <Post data={item} />;
       case "mention":
         return <Mention data={item} />;
 
@@ -47,8 +45,12 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    paddingTop: 20,
-    width: "100%",
+    paddingTop: 50,
+    position: "absolute",
+    top: 50,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });
 

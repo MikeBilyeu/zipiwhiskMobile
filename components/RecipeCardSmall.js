@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
   container: {
     height: hp("24%"),
     width: screenWidth / 3,
+    borderWidth: 0.5,
+    borderColor: "#fff",
   },
   image: {
     flex: 1,

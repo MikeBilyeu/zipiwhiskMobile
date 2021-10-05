@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -15,7 +15,6 @@ const ToggleFollowBtn = ({
   followUser,
   unfollowUser,
 }) => {
-  console.log(following);
   const [isFollowing, setIsFollowing] = useState(following);
   const handleOnPress = () => {
     if (isFollowing) {
@@ -28,52 +27,48 @@ const ToggleFollowBtn = ({
   };
 
   return (
-    <TouchableOpacity
-      style={[isFollowing ? styles.unfollowBtn : styles.followBtn, BtnStyles]}
-      onPress={handleOnPress}
-    >
-      <Text
+    <TouchableOpacity style={[styles.btn, BtnStyles]} onPress={handleOnPress}>
+      <View
         style={[
-          isFollowing ? styles.unfollowBtnText : styles.followBtnText,
-          textStyles,
+          styles.btnIcon,
+          isFollowing
+            ? { backgroundColor: "#F44545" }
+            : { backgroundColor: "#01C481" },
         ]}
-      >
-        {following ? "Following" : "Follow"}
-      </Text>
+      />
+      <Text style={styles.btnText}>{isFollowing ? "Following" : "Follow"}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  unfollowBtn: {
-    width: wp("30%"),
-    paddingHorizontal: wp("4.5%"),
-    paddingVertical: wp("2.8%") - 1,
+  btn: {
+    flexDirection: "row",
     justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: wp("3.2%"),
+    width: wp("33%"),
+    borderRadius: 50,
     backgroundColor: "#fff",
-    borderRadius: wp("1.5%"),
-    borderWidth: 1,
-    borderColor: "#313131",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowColor: "black",
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
-  unfollowBtnText: {
+  btnText: {
     textAlign: "center",
     color: "#313131",
     fontFamily: "AvenirNextDemiBold",
     fontSize: wp("3.5%"),
   },
-  followBtn: {
-    width: wp("30%"),
-    paddingHorizontal: wp("4.5%"),
-    paddingVertical: wp("2.8%"),
-    justifyContent: "center",
-    backgroundColor: "#0172C4",
-    borderRadius: wp("1.5%"),
-  },
-  followBtnText: {
-    textAlign: "center",
-    color: "#FFF",
-    fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("3.5%"),
+  btnIcon: {
+    width: 8,
+    height: 8,
+    borderRadius: 100,
+    marginRight: 12,
   },
 });
 

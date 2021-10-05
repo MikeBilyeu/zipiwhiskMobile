@@ -69,7 +69,7 @@ const SettingsScreen = (props) => {
             handleChange={props.usernameChange}
             placeholder="Username"
             textContentType="username"
-            iconName="person"
+            iconName="at"
             autoCapitalize="none"
             error={props.userForm.usernameError}
           />
@@ -78,7 +78,7 @@ const SettingsScreen = (props) => {
             handleChange={props.fullnameChange}
             placeholder="Full Name"
             textContentType="name"
-            iconName="document-text"
+            iconName="person"
           />
           <SelectInput
             value={props.userForm.restriction}

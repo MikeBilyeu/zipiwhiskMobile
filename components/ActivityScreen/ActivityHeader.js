@@ -1,57 +1,65 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { useNavigation } from "@react-navigation/native";
 
 import Header from "../Header";
-//import NumFollows from "../NumFollows";
 
 import { userData } from "./data";
 
 function ActivityHeader() {
+  const navigation = useNavigation();
   return (
-    <Header height={wp("17%")}>
-      {/* <View style={styles.followContainer}>
-        <NumFollows
-          text="Followers"
-          num={userData.numFollowers}
-          username={userData.username}
-        />
-        <View style={styles.titleWrapper}>
-          <Text style={styles.titleText}>{"Activity"}</Text>
-        </View>
-        <NumFollows
-          text="Following"
-          num={userData.numFollowing}
-          username={userData.username}
-        />
-      </View> */}
+    <Header>
+      <View style={styles.Container}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          activeOpacity={0.4}
+          style={styles.backBtn}
+        >
+          <Image
+            source={require("../../assets/arrow.png")}
+            style={{
+              width: wp("5%"),
+              height: wp("5%"),
+              transform: [{ rotate: "-90deg" }],
+            }}
+          />
+        </TouchableOpacity>
+
+        <Text style={styles.titleText}>Activity</Text>
+
+        <View style={{ width: wp("12%"), height: wp("12%") }} />
+      </View>
     </Header>
   );
 }
 
 const styles = StyleSheet.create({
-  followContainer: {
-    flexDirection: "row",
-    flex: 1,
-    padding: 5,
-    paddingHorizontal: 10,
-  },
-  titleWrapper: {
+  Container: {
     width: "100%",
-    flex: 1,
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center",
+    paddingHorizontal: wp("5%"),
+    marginTop: 5,
   },
+
   titleText: {
     textAlign: "center",
+    fontSize: wp("5%"),
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("7%"),
     color: "#313131",
-    marginHorizontal: 10,
+  },
+
+  backBtn: {
+    height: wp("12%"),
+    width: wp("12%"),
+    alignItems: "flex-start",
+    justifyContent: "center",
   },
 });
 

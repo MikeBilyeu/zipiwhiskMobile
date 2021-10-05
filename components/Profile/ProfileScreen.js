@@ -1,18 +1,22 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, SafeAreaView } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import ProfileHeader from "./Header/ProfileHeader";
 import RecipeScroll from "./RecipeScroll";
+import ActivityBtn from "./ActivityBtn";
 
 function ProfileScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
-      <View style={{ flex: 1 }}>
-        <ProfileHeader />
-        <RecipeScroll paddingTop={0} />
-      </View>
+      <ProfileHeader />
+      <RecipeScroll paddingTop={wp("45%")} />
+      <ActivityBtn />
     </SafeAreaView>
   );
 }

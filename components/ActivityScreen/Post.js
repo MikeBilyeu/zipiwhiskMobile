@@ -5,26 +5,23 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import RecipeCard from "../RecipeCard";
+import RecipeThumbnailBtn from "./RecipethumbnailBtn";
 import UserNameBtn from "../UserNameBtn";
 import Time from "./Time";
 
 const Post = ({ data }) => {
   return (
     <View style={styles.container}>
-      <RecipeCard data={data.recipe} />
-      <View style={{ paddingHorizontal: wp("2%") }}>
-        <View style={styles.contentWrapper}>
-          <UserNameBtn
-            username={data.user.username}
-            image_url={data.user.image_url}
-            id={data.user.id}
-          />
-          <Text style={styles.text}>Posted a recipe.</Text>
-        </View>
-
-        <Time time={data.timestamp} />
+      <View style={styles.contentWrapper}>
+        <UserNameBtn
+          username={data.user.username}
+          image_url={data.user.image_url}
+          id={data.user.id}
+        />
+        <Text style={styles.text}>Posted a recipe.</Text>
+        <RecipeThumbnailBtn media_url={data.media_url} />
       </View>
+      <Time time={data.timestamp} />
     </View>
   );
 };

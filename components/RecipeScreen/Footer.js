@@ -79,7 +79,7 @@ const Footer = (props) => {
                     ? { backgroundColor: "#F44545" }
                     : { backgroundColor: "#01C481" },
                 ]}
-              ></View>
+              />
               <Text style={styles.userInfoText}>
                 {props.isFollowing ? "Following" : "Follow"}
               </Text>
