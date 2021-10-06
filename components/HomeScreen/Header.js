@@ -11,12 +11,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Header = (props) => {
-  console.log(props.user);
   const navigation = useNavigation();
 
   return (
     <LinearGradient
-      colors={["rgba(0,0,0,.5)", "transparent"]}
+      colors={["rgba(0,0,0,.4)", "transparent"]}
       start={[0, 0]}
       end={[0, 1]}
       style={styles.gradient}
@@ -28,7 +27,7 @@ const Header = (props) => {
       >
         <Ionicons
           name="search"
-          size={wp("8%")}
+          size={wp("7%")}
           color="#FFF"
           style={styles.headerBtnIcon}
         />
@@ -53,8 +52,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 2,
     width: "100%",
-    height: wp("40%"),
-    paddingTop: hp("5%"),
+    height: hp("20%"),
+    paddingTop: hp("4%"),
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -65,16 +64,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerBtnIcon: {
-    width: wp("8%"),
-    height: wp("8%"),
+    width: wp("7%"),
+    height: wp("7%"),
   },
   scrollTopBtn: {
     flex: 1,
     height: wp("15%"),
   },
   userIcon: {
-    width: wp("9%%"),
-    height: wp("9%"),
+    width: wp("10%%"),
+    height: wp("10%"),
     borderRadius: 100,
     marginRight: 5,
     backgroundColor: "#fff",

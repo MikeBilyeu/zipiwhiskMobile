@@ -97,6 +97,9 @@ const Footer = (props) => {
               </Text>
             </View>
           </TouchableOpacity>
+          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+            {props.title}
+          </Text>
           <Text style={styles.caption} numberOfLines={1} ellipsizeMode="tail">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
             dolor sit amet, consectetur adipiscing elit
@@ -122,8 +125,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    height: hp("32%"),
-    top: screenHeight - hp("32%"),
+    height: wp("70%"),
+    top: screenHeight - wp("70%"),
     width: "100%",
     position: "absolute",
   },
@@ -146,7 +149,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: wp("10%"),
     width: wp("15%"),
-    flex: 1,
+    flex: 2,
   },
   footerBtnText: {
     color: "#FFF",
@@ -163,7 +166,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     paddingHorizontal: wp("3.5%"),
-    flex: 1,
+    flex: 2,
   },
   userInfoWrapper: {
     flexDirection: "row",
@@ -188,11 +191,25 @@ const styles = StyleSheet.create({
     borderColor: "white",
     marginRight: wp("2.5%"),
   },
+  title: {
+    color: "white",
+    fontSize: wp("5%"),
+    fontFamily: "AvenirNextBold",
+    lineHeight: wp("5%"),
+    width: "100%",
+    paddingLeft: wp("3.5%"),
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
+
+    flex: 1,
+  },
   caption: {
     color: "#FFF",
     fontFamily: "AvenirNextRegular",
     fontSize: wp("3.4%"),
-    paddingHorizontal: 15,
+    paddingHorizontal: wp("4%"),
     marginRight: 50,
   },
   timeAgo: {
@@ -206,7 +223,7 @@ const styles = StyleSheet.create({
   viewsContainer: {
     position: "absolute",
     opacity: 0.3,
-    right: wp("3%"),
+    right: wp("3.5%"),
     bottom: 0,
     justifyContent: "center",
     alignItems: "center",

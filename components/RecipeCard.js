@@ -40,10 +40,8 @@ const RecipeCard = ({ data }) => {
         id={data.user.id}
         caption={data.caption}
         numViews={data.numViews}
+        title={data.title}
       />
-      <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
-        {data.title}
-      </Text>
     </TouchableOpacity>
   );
 };
@@ -70,21 +68,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-  },
-  title: {
-    color: "white",
-    fontSize: wp("5%"),
-    fontFamily: "AvenirNextBold",
-    textAlign: "center",
-    lineHeight: wp("5%"),
-    position: "absolute",
-    width: "100%",
-    bottom: hp("15%"),
-    paddingHorizontal: wp("17%"),
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.8,
-    shadowRadius: 10,
   },
   infoText: {
     fontSize: wp("3.5%"),

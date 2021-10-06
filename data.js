@@ -10,9 +10,9 @@ const data = [
       id: 10,
     },
     media_url:
-      //"https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.mp4",
-      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.jpg",
-    media_type: "image",
+      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.mp4",
+    //"https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.jpg",
+    media_type: "video",
     recipeYield: 4,
     ingredientList: [
       {
@@ -257,8 +257,8 @@ const data = [
     numComments: 52,
     title: "Black Bean Veggie Burgers",
     user: {
-      image: "https://randomuser.me/api/portraits/women/19.jpg",
-      username: "alice",
+      image: "https://randomuser.me/api/portraits/women/12.jpg",
+      username: "aliceee.92",
       id: 10,
     },
     media_url:
