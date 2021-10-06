@@ -21,7 +21,7 @@ const Header = (props) => {
       style={styles.gradient}
     >
       <TouchableOpacity
-        onPress={null}
+        onPress={() => navigation.navigate("Search")}
         activeOpacity={0.4}
         style={styles.headerBtn}
       >

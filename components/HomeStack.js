@@ -16,6 +16,7 @@ import FollowScreen from "./FollowScreen";
 
 import VisitProfileScreen from "./Profile/VisitProfileScreen";
 import ResultsScreen from "./ResultsScreen";
+import SearchScreen from "./SearchScreen";
 
 const screenWidth = Dimensions.get("screen").width;
 const Stack = createStackNavigator();
@@ -30,10 +31,16 @@ const HomeStack = () => {
         },
       }}
     >
-      {/* <Stack.Screen name="Home" component={Nav} /> */}
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Activity" component={ActivityScreen} />
+      <Stack.Screen
+        name="Search"
+        options={{
+          animationEnabled: false,
+        }}
+        component={SearchScreen}
+      />
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
       <Stack.Screen name="Camera" component={CameraScreen} />

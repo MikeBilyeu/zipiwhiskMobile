@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingVertical: wp("2%"),
+    maxHeight: 60,
   },
   btn: {
     justifyContent: "center",

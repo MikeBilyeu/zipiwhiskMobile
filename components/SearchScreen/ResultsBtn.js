@@ -31,13 +31,13 @@ const ResultsBtn = (props) => {
         resultsDisplay={props.resultsDisplay}
         setResultsDisplay={props.setResultsDisplay}
       />
-      {currentRoute === "Home" && (
-        <Btn
-          btnName="Accounts"
-          resultsDisplay={props.resultsDisplay}
-          setResultsDisplay={props.setResultsDisplay}
-        />
-      )}
+
+      <Btn
+        btnName="Accounts"
+        resultsDisplay={props.resultsDisplay}
+        setResultsDisplay={props.setResultsDisplay}
+      />
+
       <View style={styles.bottomLine} />
     </View>
   );
