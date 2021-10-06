@@ -15,7 +15,7 @@ function ProfileScreen() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
       <ProfileHeader />
-      <RecipeScroll paddingTop={wp("45%")} />
+      <RecipeScroll paddingTop={hp("22%")} />
       <ActivityBtn />
     </SafeAreaView>
   );

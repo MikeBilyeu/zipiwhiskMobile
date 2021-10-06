@@ -17,11 +17,7 @@ import Footer from "./RecipeScreen/Footer";
 const RecipeCard = ({ data }) => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate("Recipe", { data: data })}
-      activeOpacity={1}
-      style={styles.container}
-    >
+    <TouchableOpacity onPress={null} activeOpacity={1} style={styles.container}>
       {data.media_type === "video" ? (
         <Video
           source={{ uri: data.media_url }}

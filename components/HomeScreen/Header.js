@@ -34,6 +34,10 @@ const Header = (props) => {
         />
       </TouchableOpacity>
       <TouchableOpacity
+        style={styles.scrollTopBtn}
+        onPress={props.handleScrollTop}
+      ></TouchableOpacity>
+      <TouchableOpacity
         onPress={() => navigation.navigate("Profile")}
         activeOpacity={0.4}
         style={styles.headerBtn}
@@ -63,6 +67,10 @@ const styles = StyleSheet.create({
   headerBtnIcon: {
     width: wp("8%"),
     height: wp("8%"),
+  },
+  scrollTopBtn: {
+    flex: 1,
+    height: wp("15%"),
   },
   userIcon: {
     width: wp("9%%"),
