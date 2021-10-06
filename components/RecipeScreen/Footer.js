@@ -23,8 +23,20 @@ const screenHeight = Dimensions.get("screen").height;
 const Footer = (props) => {
   const [saved, setSaved] = useState(false);
   const navigation = useNavigation();
+
+  let footerOpacityInterpolate =
+    props.yValue &&
+    props.yValue.interpolate({
+      inputRange: [175, 280],
+      outputRange: [1, 0],
+    });
+  const animatedFooterStyle = props.yValue && {
+    transform: [{ translateY: props.yValue }],
+    opacity: footerOpacityInterpolate,
+  };
+
   return (
-    <Animated.View style={[styles.footerConatiner, props.styles]}>
+    <Animated.View style={[styles.footerConatiner, animatedFooterStyle]}>
       <LinearGradient
         colors={["rgba(0,0,0,.8)", "transparent"]}
         start={[0, 1]}
@@ -40,7 +52,7 @@ const Footer = (props) => {
             <Ionicons
               name="heart"
               size={wp("7%")}
-              color={saved ? "#DE4949" : "#FFF"}
+              color={saved ? "#FF2121" : "#FFF"}
               style={styles.footerBtnIcon}
             />
             <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
@@ -110,8 +122,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    height: wp("63%"),
-    marginTop: screenHeight - wp("63%"),
+    height: hp("32%"),
+    top: screenHeight - hp("32%"),
     width: "100%",
     position: "absolute",
   },
@@ -120,7 +132,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
     flex: 1,
-    paddingBottom: wp("3%"),
+    paddingBottom: hp("2.5%"),
     width: "100%",
   },
   footerBtnContainer: {
@@ -139,7 +151,7 @@ const styles = StyleSheet.create({
   footerBtnText: {
     color: "#FFF",
     fontFamily: "AvenirNextRegular",
-    fontSize: wp("3.8%"),
+    fontSize: wp("3.4%"),
   },
   footerBtnIcon: {
     width: wp("7%"),
@@ -150,7 +162,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingHorizontal: 12,
+    paddingHorizontal: wp("3.5%"),
     flex: 1,
   },
   userInfoWrapper: {
@@ -160,13 +172,13 @@ const styles = StyleSheet.create({
   userInfoText: {
     color: "#FFF",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("3.8%"),
+    fontSize: wp("3.4%"),
   },
   followingIcon: {
-    width: 8,
-    height: 8,
+    width: wp("1.8%"),
+    height: wp("1.8%"),
     borderRadius: 100,
-    marginHorizontal: 12,
+    marginHorizontal: wp("3.5%"),
   },
   userIcon: {
     width: wp("8.5%"),
@@ -174,12 +186,12 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 1.2,
     borderColor: "white",
-    marginRight: 5,
+    marginRight: wp("2.5%"),
   },
   caption: {
     color: "#FFF",
     fontFamily: "AvenirNextRegular",
-    fontSize: wp("3.8%"),
+    fontSize: wp("3.4%"),
     paddingHorizontal: 15,
     marginRight: 50,
   },
@@ -188,15 +200,14 @@ const styles = StyleSheet.create({
     opacity: 0.3,
     fontFamily: "AvenirNextRegular",
     fontSize: wp("3.4%"),
-    paddingHorizontal: 10,
     textAlign: "center",
-    marginTop: 5,
+    marginTop: hp("1%"),
   },
   viewsContainer: {
     position: "absolute",
     opacity: 0.3,
-    right: 15,
-    bottom: 10,
+    right: wp("3%"),
+    bottom: 0,
     justifyContent: "center",
     alignItems: "center",
   },

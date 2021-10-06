@@ -10,12 +10,10 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { useNavigation } from "@react-navigation/native";
 
 import Footer from "./RecipeScreen/Footer";
 
 const RecipeCard = ({ data }) => {
-  const navigation = useNavigation();
   return (
     <TouchableOpacity onPress={null} activeOpacity={1} style={styles.container}>
       {data.media_type === "video" ? (
@@ -75,15 +73,18 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "white",
-    fontSize: wp("7%"),
+    fontSize: wp("5%"),
     fontFamily: "AvenirNextBold",
     textAlign: "center",
-    lineHeight: wp("8%"),
-    fontWeight: "bold",
+    lineHeight: wp("5%"),
     position: "absolute",
     width: "100%",
-    bottom: hp("13%"),
-    paddingHorizontal: wp("15%"),
+    bottom: hp("15%"),
+    paddingHorizontal: wp("17%"),
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
   },
   infoText: {
     fontSize: wp("3.5%"),

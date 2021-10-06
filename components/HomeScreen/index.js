@@ -1,17 +1,20 @@
 import React, { useState, useRef } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Animated } from "react-native";
+import { useKeepAwake } from "expo-keep-awake";
 
 import Header from "./Header";
 import RecipeCard from "../RecipeCard";
+import RecipeScroll from "../RecipeScreen/RecipeScroll";
 import data from "../../data";
 
 const Home = () => {
+  useKeepAwake();
   const [isScrollable, setIsScrollable] = useState(true);
+  const yValue = useRef(new Animated.Value(0)).current;
   const handleLoadMore = () => console.log("load more");
   const renderItem = ({ item }) => <RecipeCard data={item} />;
-  const flatListRef = React.useRef();
+  const flatListRef = useRef();
   const toTop = () => {
-    // use current
     flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
   };
 
@@ -32,6 +35,7 @@ const Home = () => {
         showsVerticalScrollIndicator={false}
         scrollEnabled={isScrollable}
       />
+      {!isScrollable && <RecipeScroll data={data[2]} yValue={yValue} />}
     </View>
   );
 };

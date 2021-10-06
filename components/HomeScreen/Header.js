@@ -16,7 +16,7 @@ const Header = (props) => {
 
   return (
     <LinearGradient
-      colors={["rgba(0,0,0,.8)", "transparent"]}
+      colors={["rgba(0,0,0,.5)", "transparent"]}
       start={[0, 0]}
       end={[0, 1]}
       style={styles.gradient}

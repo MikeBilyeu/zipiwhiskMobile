@@ -1,9 +1,17 @@
 import React from "react";
-import { StyleSheet, Image, TouchableOpacity, Animated } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+} from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+
+const screenHeight = Dimensions.get("screen").height;
 
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -12,8 +20,18 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 const Header = (props) => {
   const navigation = useNavigation();
 
+  let headerOpacityInterpolate = props.yValue.interpolate({
+    inputRange: [screenHeight - 100, screenHeight - 50],
+    outputRange: [1, 0],
+  });
+
+  const animatedHeaderStyle = {
+    transform: [{ translateY: props.yValue }],
+    opacity: headerOpacityInterpolate,
+  };
+
   return (
-    <Animated.View style={[styles.headerConatiner, props.styles]}>
+    <Animated.View style={[styles.headerConatiner, animatedHeaderStyle]}>
       <LinearGradient
         colors={["rgba(0,0,0,.2)", "transparent"]}
         start={[0, 0]}

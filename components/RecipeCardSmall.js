@@ -24,7 +24,7 @@ const RecipeCardSmall = ({ item }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Recipe", { data: item })}
+      onPress={() => navigation.push("Recipe", { data: item })}
       activeOpacity={1}
       style={styles.container}
     >

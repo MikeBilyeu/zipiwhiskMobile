@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
   },
   num: {
     fontFamily: "AvenirNextBold",
-    fontSize: wp("3.5%"),
+    fontSize: wp("4.2%"),
     color: "#313131",
   },
   numText: {
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("3%"),
+    fontSize: wp("3.5%"),
     color: "#313131",
   },
 });

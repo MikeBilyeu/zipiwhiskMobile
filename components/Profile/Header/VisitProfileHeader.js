@@ -12,7 +12,6 @@ import FollowContainer from "./FollowsContainer";
 import ToggleFollowBtn from "../../ToggleFollowBtn";
 
 const VisitProfileHeader = ({ userProfile }) => {
-  console.log(userProfile);
   return (
     <Header>
       <UserInfo user={userProfile}>

@@ -47,10 +47,9 @@ const styles = StyleSheet.create({
   },
 
   servingsText: {
-    fontSize: 18,
+    fontSize: wp("5%"),
     fontFamily: "AvenirNextRegular",
     color: "#313131",
-    marginLeft: 20,
   },
   groceryBtn: {
     alignSelf: "flex-start",

@@ -10,7 +10,9 @@ import {
 import { Video } from "expo-av";
 import { useKeepAwake } from "expo-keep-awake";
 
-import Recipe from "./Recipe";
+import RecipeScroll from "./RecipeScroll";
+import Footer from "./Footer";
+import Header from "./Header";
 const screenHeight = Dimensions.get("screen").height;
 
 const RecipeScreen = ({
@@ -38,7 +40,6 @@ const RecipeScreen = ({
 
   return (
     <View style={styles.container}>
-      <StatusBar hidden />
       {data.media_type === "video" ? (
         <Animated.View style={[styles.full, animatedScaleStyle]}>
           <Video
@@ -58,7 +59,17 @@ const RecipeScreen = ({
         </Animated.View>
       )}
 
-      <Recipe data={data} yValue={yValue} />
+      <RecipeScroll data={data} yValue={yValue}>
+        <Header yValue={yValue} />
+        <Footer
+          username={data.user.username}
+          numLikes={data.numLikes}
+          numComments={data.numComments}
+          userImage={data.user.image}
+          id={data.user.id}
+          yValue={yValue}
+        />
+      </RecipeScroll>
     </View>
   );
 };

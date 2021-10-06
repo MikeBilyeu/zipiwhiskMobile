@@ -1,6 +1,5 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -13,7 +12,6 @@ import ActivityBtn from "./ActivityBtn";
 function ProfileScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
       <ProfileHeader />
       <RecipeScroll paddingTop={hp("22%")} />
       <ActivityBtn />

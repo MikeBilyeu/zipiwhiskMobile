@@ -14,55 +14,13 @@ import {
 } from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import Header from "./Header";
-import Footer from "./Footer";
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
-import NutritionFacts from "./NutritionFacts";
 
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
-const Recipe = ({ data, yValue }) => {
-  const onShare = async () => {
-    try {
-      const result = await Share.share({
-        message: `${data.title} | ZipiWhisk`,
-        url: null,
-      });
-
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
-  let headerOpacityInterpolate = yValue.interpolate({
-    inputRange: [screenHeight - 100, screenHeight - 50],
-    outputRange: [1, 0],
-  });
-
-  let footerOpacityInterpolate = yValue.interpolate({
-    inputRange: [175, 280],
-    outputRange: [1, 0],
-  });
-  const animatedFooterStyle = {
-    transform: [{ translateY: yValue }],
-    opacity: footerOpacityInterpolate,
-  };
-  const animatedHeaderStyle = {
-    transform: [{ translateY: yValue }],
-    opacity: headerOpacityInterpolate,
-  };
-
+const Recipe = ({ data, yValue, children }) => {
   let scaleInterpolate = yValue.interpolate({
     inputRange: [-201, -200, 0, 1],
     outputRange: [1.2, 1.2, 1, 1],
@@ -82,30 +40,8 @@ const Recipe = ({ data, yValue }) => {
       )}
       style={[styles.RecipeScrollView, animatedScaleStyle]}
     >
-      <Header styles={animatedHeaderStyle} onShare={onShare} />
-      <Footer
-        title={data.title}
-        numLikes={data.numLikes}
-        numComments={data.numComments}
-        userImage={data.user.image}
-        id={data.user.id}
-        styles={animatedFooterStyle}
-      />
+      {children}
 
-      <View pointerEvents="none" style={[styles.titleContainer]}>
-        <Text style={styles.titleText} ellipsizeMode={"tail"} numberOfLines={2}>
-          {data.title}
-        </Text>
-        <Image
-          source={require("../../assets/whiteArrow.png")}
-          style={{
-            transform: [{ rotate: "-90deg" }],
-            width: wp("4%"),
-            height: wp("4%"),
-            opacity: 0.3,
-          }}
-        />
-      </View>
       <View style={[styles.recipeScrollConatiner]}>
         <Image
           source={require("../../assets/line.png")}
@@ -138,7 +74,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-
   titleContainer: {
     flex: 1,
     alignItems: "center",
@@ -166,6 +101,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: wp("10%"),
     borderTopRightRadius: wp("10%"),
     paddingTop: wp("10%"),
+    marginTop: screenHeight - hp("6%"),
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",
@@ -183,7 +119,7 @@ const styles = StyleSheet.create({
   },
 
   timeText: {
-    fontSize: wp("4.5%"),
+    fontSize: wp("5%"),
     fontFamily: "AvenirNextRegular",
     color: "#313131",
   },

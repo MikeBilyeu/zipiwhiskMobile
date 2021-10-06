@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, SafeAreaView } from "react-native";
@@ -21,9 +20,8 @@ const VisitProfileScreen = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
       <VisitProfileHeader />
-      <RecipeScroll paddingTop={wp("30%")} />
+      <RecipeScroll paddingTop={hp("14%")} />
     </SafeAreaView>
   );
 };

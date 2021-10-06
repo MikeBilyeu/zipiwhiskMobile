@@ -20,20 +20,20 @@ const UserInfo = (props) => {
         <Image
           source={require("../../../assets/arrow.png")}
           style={{
-            width: wp("5%"),
-            height: wp("5%"),
+            width: wp("4%"),
+            height: wp("4%"),
             transform: [{ rotate: "-90deg" }],
           }}
         />
       </TouchableOpacity>
       <View style={styles.usernameContainer}>
-        <Text style={styles.usernameText}>{props.user.username}</Text>
+        <Text style={styles.usernameText}>@{props.user.username}</Text>
         <Text style={styles.fullNameText}>{props.user.fullname}</Text>
       </View>
       <UserImageBtn
         handleImagePress={props.handleImagePress}
         uri={props.user.image_url}
-        styles={{ width: wp("12%"), height: wp("12%") }}
+        styles={{ width: wp("13%"), height: wp("13%") }}
       />
     </View>
   );
@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
     color: "#313131",
   },
   backBtn: {
-    height: wp("12%"),
-    width: wp("12%"),
+    height: wp("13%"),
+    width: wp("13%"),
     alignItems: "flex-start",
     justifyContent: "center",
   },
