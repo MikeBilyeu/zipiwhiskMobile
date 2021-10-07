@@ -10,7 +10,11 @@ const renderCategories = (categories, selected, setSelected) =>
   categories.map((categoryName) => (
     <TouchableOpacity
       style={[styles.btn, categoryName === selected && styles.btnSelected]}
-      onPress={() => setSelected(categoryName)}
+      onPress={() => {
+        categoryName === selected
+          ? setSelected(null)
+          : setSelected(categoryName);
+      }}
       key={categoryName}
     >
       <Text
@@ -25,7 +29,7 @@ const renderCategories = (categories, selected, setSelected) =>
   ));
 
 const CategorySwipe = (props) => {
-  const [selected, setSelected] = useState("All Categories");
+  const [selected, setSelected] = useState(null);
   return (
     <ScrollView
       horizontal={true}
@@ -33,14 +37,7 @@ const CategorySwipe = (props) => {
       style={styles.container}
     >
       {renderCategories(
-        [
-          "All Categories",
-          "Breakfast",
-          "Lunch/Dinner",
-          "Snack",
-          "Dessert",
-          "Beverage",
-        ],
+        ["Breakfast", "Lunch/Dinner", "Snack", "Dessert", "Beverage"],
         selected,
         setSelected
       )}

@@ -1,27 +1,53 @@
 import React, { useState } from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView, FlatList } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
+import Header from "../Header";
 import SearchBar from "./SearchBar";
-import DropDownResults from "./DropDownResults";
+import ResultsBtn from "./ResultsBtn";
 import CategorySwipe from "../Profile/Header/CategorySwipe";
+import Users from "../FollowScreen/Users";
+import RecipeCardSmall from "../RecipeCardSmall";
+import data from "../../data";
 
+const renderRecipes = ({ item }) => <RecipeCardSmall item={item} />;
+
+const renderUsers = ({ item }) => (
+  <Users
+    username={item.username}
+    image={item.image}
+    Following={item.Following}
+  />
+);
 const SearchScreen = ({}) => {
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState("");
+  const [resultsDisplay, setResultsDisplay] = useState("Recipes");
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBar
-        isFocused={isFocused}
-        setIsFocused={setIsFocused}
-        search={search}
-        setSearch={setSearch}
+      <Header>
+        <SearchBar
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
+          search={search}
+          setSearch={setSearch}
+        />
+
+        {resultsDisplay == "Recipes" && <CategorySwipe />}
+      </Header>
+      <FlatList
+        key={resultsDisplay}
+        keyboardShouldPersistTaps={"always"}
+        style={styles.listContainer}
+        numColumns={resultsDisplay == "Recipes" ? 3 : 1}
+        data={resultsDisplay === "Recipes" ? data : accounts}
+        renderItem={resultsDisplay === "Recipes" ? renderRecipes : renderUsers}
+        keyExtractor={(item) => item.id.toString()}
       />
-      <DropDownResults />
     </SafeAreaView>
   );
 };
@@ -31,6 +57,31 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  listContainer: {
+    flex: 1,
+    position: "absolute",
+    top: 50,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingTop: hp("14.5%"),
+    borderWidth: 1,
+  },
 });
 
 export default SearchScreen;
+
+const accounts = [
+  {
+    id: 4980232190484,
+    image: "https://randomuser.me/api/portraits/men/5.jpg",
+    username: "billybob",
+    following: false,
+  },
+  {
+    id: 498042390484,
+    image: "https://randomuser.me/api/portraits/men/52.jpg",
+    username: "bill",
+    following: false,
+  },
+];

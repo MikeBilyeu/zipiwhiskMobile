@@ -44,8 +44,8 @@ const DropDownResults = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     flex: 1,
+    borderWidth: 1,
   },
   listContainer: {
     flex: 1,
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+    borderWidth: 1,
   },
 });
 

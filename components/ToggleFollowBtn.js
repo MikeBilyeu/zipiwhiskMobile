@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: wp("3.2%"),
-    width: wp("33%"),
+    paddingVertical: wp("2.5%"),
+    width: wp("30%"),
     borderRadius: 50,
     backgroundColor: "#fff",
     shadowOffset: {
@@ -65,10 +65,10 @@ const styles = StyleSheet.create({
     fontSize: wp("3.5%"),
   },
   btnIcon: {
-    width: 8,
-    height: 8,
+    width: wp("1.6%"),
+    height: wp("1.6%"),
     borderRadius: 100,
-    marginRight: 12,
+    marginRight: wp("2.5%"),
   },
 });
 

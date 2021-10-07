@@ -18,8 +18,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 const SearchBar = (props) => {
   const navigation = useNavigation();
   const handleSubmit = () => {
-    props.setDropDownOpen(false);
-    navigation.navigate("Results", { search: props.search });
+    // navigation.navigate("Results", { search: props.search });
+
+    return null;
   };
   return (
     <View style={styles.searchWrapper}>
@@ -50,14 +51,18 @@ const SearchBar = (props) => {
           />
         )}
       </Animated.View>
-      {props.isFocused && (
-        <TouchableOpacity
-          style={styles.cancelBtn}
-          onPress={() => Keyboard.dismiss()}
-        >
+      <TouchableOpacity
+        style={styles.cancelBtn}
+        onPress={() => {
+          props.isFocused ? Keyboard.dismiss() : navigation.navigate("Home");
+        }}
+      >
+        {props.isFocused ? (
           <Text style={styles.cancelText}>Cancel</Text>
-        </TouchableOpacity>
-      )}
+        ) : (
+          <Ionicons name="ios-close" size={wp("7.5%")} color="#313131" />
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -65,7 +70,9 @@ const SearchBar = (props) => {
 const styles = StyleSheet.create({
   searchWrapper: {
     width: "100%",
+    paddingLeft: wp("2%"),
     flexDirection: "row",
+    marginVertical: hp("1%"),
   },
   searchBar: {
     flex: 1,
@@ -78,7 +85,7 @@ const styles = StyleSheet.create({
     left: wp("4.5%"),
   },
   searchText: {
-    height: wp("13%"),
+    height: wp("12%"),
     paddingLeft: wp("12%"),
     paddingRight: wp("12%"),
     fontFamily: "AvenirNextRegular",
@@ -88,15 +95,17 @@ const styles = StyleSheet.create({
   clearTextIcon: {
     position: "absolute",
     right: 0,
-    paddingRight: wp("6%"),
-    paddingLeft: wp("6%"),
+    paddingRight: wp("4.5%"),
+    paddingLeft: wp("7%"),
     paddingVertical: wp("3.5%"),
   },
   cancelBtn: {
     alignItems: "center",
     justifyContent: "center",
-    paddingLeft: wp("6%"),
-    paddingRight: wp("3%"),
+    paddingLeft: wp("4.5%"),
+    paddingRight: wp("4.5%"),
+    width: wp("24%"),
+    paddingTop: wp("1%"),
   },
   cancelText: {
     fontFamily: "AvenirNextRegular",
