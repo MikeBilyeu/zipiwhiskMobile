@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, SafeAreaView, FlatList, View } from "react-native";
 
 import ActivityHeader from "./ActivityHeader";
 import Follow from "./Follow";
@@ -25,7 +25,7 @@ function Activity() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ActivityHeader />
       <FlatList
         style={styles.listContainer}
@@ -34,7 +34,7 @@ function Activity() {
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

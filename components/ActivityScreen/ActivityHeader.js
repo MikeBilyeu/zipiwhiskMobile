@@ -8,8 +8,6 @@ import { useNavigation } from "@react-navigation/native";
 
 import Header from "../Header";
 
-import { userData } from "./data";
-
 function ActivityHeader() {
   const navigation = useNavigation();
   return (
