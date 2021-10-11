@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   servingsText: {
     fontSize: wp("5%"),
     fontFamily: "AvenirNextRegular",
-    color: "#313131",
+    color: "#fff",
   },
   groceryBtn: {
     alignSelf: "flex-start",
@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
   ingredientAmount: {
     fontSize: wp("7.5%"),
     fontFamily: "AvenirNextBold",
-    color: "#313131",
+    color: "#fff",
   },
   ingredientName: {
     marginTop: wp("2%"),
     fontSize: wp("6%"),
     fontFamily: "AvenirNextRegular",
-    color: "#313131",
+    color: "#fff",
   },
 });
 

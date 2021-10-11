@@ -8,7 +8,7 @@ import {
 
 import Footer from "./RecipeScreen/Footer";
 
-const RecipeCard = ({ data, handleSinglePress }) => {
+const RecipeCard = ({ data, handleSinglePress, toggleRecipe }) => {
   const [saved, setSaved] = useState(false);
 
   const [isTerminated, setTerminated] = useState(false);
@@ -104,21 +104,24 @@ const RecipeCard = ({ data, handleSinglePress }) => {
         <ImageBackground
           source={{ uri: data.media_url }}
           style={styles.image}
+          blurRadius={toggleRecipe ? 3 : 0}
         />
       )}
 
-      <Footer
-        numLikes={data.numLikes}
-        numComments={data.numComments}
-        userImage={data.user.image}
-        username={data.user.username}
-        id={data.user.id}
-        caption={data.caption}
-        numViews={data.numViews}
-        title={data.title}
-        saved={saved}
-        setSaved={setSaved}
-      />
+      {!toggleRecipe && (
+        <Footer
+          numLikes={data.numLikes}
+          numComments={data.numComments}
+          userImage={data.user.image}
+          username={data.user.username}
+          id={data.user.id}
+          caption={data.caption}
+          numViews={data.numViews}
+          title={data.title}
+          saved={saved}
+          setSaved={setSaved}
+        />
+      )}
     </View>
   );
 };

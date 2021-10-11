@@ -42,8 +42,8 @@ const Instructions = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: screenHeight,
-    paddingVertical: 35,
+    height: hp("90%"),
+    paddingVertical: hp("2%"),
   },
   cardContainer: {
     width: screenWidth - 20,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal: 10,
     paddingVertical: 40,
-    backgroundColor: "#FFF",
+    backgroundColor: "rgba(0,0,0,.7)",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.4,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     lineHeight: wp("10%"),
     fontFamily: "AvenirNextRegular",
     textAlign: "center",
-    color: "#313131",
+    color: "#fff",
   },
   cardNum: {
     textAlign: "center",

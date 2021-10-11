@@ -33,6 +33,7 @@ const Recipe = ({ data, yValue, children, setToggleRecipe }) => {
 
   return (
     <Animated.ScrollView
+      showsVerticalScrollIndicator={false}
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: yValue } } }],
         {
@@ -44,17 +45,8 @@ const Recipe = ({ data, yValue, children, setToggleRecipe }) => {
       {children}
       <TouchableWithoutFeedback onPress={() => setToggleRecipe(false)}>
         <View style={[styles.recipeScrollConatiner]}>
-          <Image
-            source={require("../../assets/line.png")}
-            style={{
-              width: wp("15%"),
-              height: wp("1%"),
-              position: "absolute",
-              top: wp("8%"),
-            }}
-          />
           <View style={styles.timeContainer}>
-            <Ionicons name="timer-outline" size={wp("6%")} color={"#464646"} />
+            <Ionicons name="timer-outline" size={wp("6%")} color={"#fff"} />
 
             <Text style={styles.timeText}>1Hr 30Min</Text>
           </View>
@@ -75,35 +67,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-  },
-  titleContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-end",
-    paddingBottom: wp("3%"),
-    height: wp("30%"),
-    marginTop: screenHeight - wp("30%"),
-    marginBottom: wp("3%"),
-  },
-  titleText: {
-    color: "#FFF",
-    fontSize: wp("8%"),
-    lineHeight: wp("8%"),
-    fontFamily: "AvenirNextBold",
-    textAlign: "center",
-    width: screenWidth - wp("30%"),
-    marginBottom: wp("2%"),
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.8,
-    shadowRadius: 10,
+    backgroundColor: "rgba(0,0,0,.8)",
   },
   recipeScrollConatiner: {
-    backgroundColor: "#FFF",
-    borderTopLeftRadius: wp("10%"),
-    borderTopRightRadius: wp("10%"),
     paddingTop: wp("10%"),
-    marginTop: screenHeight - hp("6%"),
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",
@@ -123,7 +90,7 @@ const styles = StyleSheet.create({
   timeText: {
     fontSize: wp("5%"),
     fontFamily: "AvenirNextRegular",
-    color: "#313131",
+    color: "#fff",
   },
 });
 
