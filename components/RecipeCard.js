@@ -1,10 +1,5 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, ImageBackground, PanResponder } from "react-native";
 import { Video } from "expo-av";
 import {
   widthPercentageToDP as wp,
@@ -13,9 +8,89 @@ import {
 
 import Footer from "./RecipeScreen/Footer";
 
-const RecipeCard = ({ data }) => {
+const RecipeCard = ({ data, handleSinglePress }) => {
+  const [saved, setSaved] = useState(false);
+
+  const [isTerminated, setTerminated] = useState(false);
+  const [touchStartTime, setTouchStartTime] = useState(0);
+  const [lastTap, setLastTap] = useState(0);
+
+  const [longPressTimer, setLongPressTimer] = useState(0);
+  const [singlePressTimer, setSinglePressTimer] = useState(0);
+
+  const DOUBLE_PRESS_DELAY = 200;
+  const LONG_PRESS_DELAY = 700;
+
+  const cancelLongPressTimer = () => {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      setLongPressTimer(0);
+    }
+  };
+
+  const cancelSinglePressTimer = () => {
+    if (singlePressTimer) {
+      clearTimeout(singlePressTimer);
+      setSinglePressTimer(0);
+    }
+  };
+
+  const handleTap = (event, gestureState) => {
+    cancelSinglePressTimer();
+
+    const timeNow = Date.now();
+    if (lastTap && timeNow - lastTap < DOUBLE_PRESS_DELAY) {
+      console.log("Handle double press");
+      setSaved(true);
+    } else {
+      setLastTap(timeNow);
+
+      const timeout = setTimeout(() => {
+        setLastTap(0);
+        console.log("Handle single press");
+        handleSinglePress();
+      }, DOUBLE_PRESS_DELAY);
+
+      setSinglePressTimer(timeout);
+    }
+  };
+
+  const handlePressOut = (event, gestureState) => {
+    const elapsedTime = Date.now() - touchStartTime;
+    if (elapsedTime > LONG_PRESS_DELAY) {
+      console.log("Handle long press");
+    } else {
+      handleTap(event, gestureState); // handles the single or double click
+    }
+    setTouchStartTime(0);
+  };
+
+  const responder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponder: () => true,
+
+    onPanResponderStart: () => {
+      cancelLongPressTimer();
+
+      const timeout = setTimeout(() => {
+        if (!isTerminated) {
+          setTouchStartTime(Date.now());
+        }
+      });
+
+      setLongPressTimer(timeout);
+    },
+
+    onPanResponderRelease: (event, gestureState) => {
+      handlePressOut(event, gestureState);
+    },
+
+    onPanResponderTerminate: () => {
+      setTerminated(true);
+    },
+  });
   return (
-    <TouchableOpacity onPress={null} activeOpacity={1} style={styles.container}>
+    <View style={styles.container} {...responder.panHandlers}>
       {data.media_type === "video" ? (
         <Video
           source={{ uri: data.media_url }}
@@ -41,8 +116,10 @@ const RecipeCard = ({ data }) => {
         caption={data.caption}
         numViews={data.numViews}
         title={data.title}
+        saved={saved}
+        setSaved={setSaved}
       />
-    </TouchableOpacity>
+    </View>
   );
 };
 

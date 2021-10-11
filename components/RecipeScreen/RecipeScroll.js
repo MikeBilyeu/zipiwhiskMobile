@@ -7,6 +7,7 @@ import {
   Dimensions,
   Animated,
   Share,
+  TouchableWithoutFeedback,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -20,7 +21,7 @@ import Instructions from "./Instructions";
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 
-const Recipe = ({ data, yValue, children }) => {
+const Recipe = ({ data, yValue, children, setToggleRecipe }) => {
   let scaleInterpolate = yValue.interpolate({
     inputRange: [-201, -200, 0, 1],
     outputRange: [1.2, 1.2, 1, 1],
@@ -41,27 +42,28 @@ const Recipe = ({ data, yValue, children }) => {
       style={[styles.RecipeScrollView, animatedScaleStyle]}
     >
       {children}
+      <TouchableWithoutFeedback onPress={() => setToggleRecipe(false)}>
+        <View style={[styles.recipeScrollConatiner]}>
+          <Image
+            source={require("../../assets/line.png")}
+            style={{
+              width: wp("15%"),
+              height: wp("1%"),
+              position: "absolute",
+              top: wp("8%"),
+            }}
+          />
+          <View style={styles.timeContainer}>
+            <Ionicons name="timer-outline" size={wp("6%")} color={"#464646"} />
 
-      <View style={[styles.recipeScrollConatiner]}>
-        <Image
-          source={require("../../assets/line.png")}
-          style={{
-            width: wp("15%"),
-            height: wp("1%"),
-            position: "absolute",
-            top: wp("8%"),
-          }}
-        />
-        <View style={styles.timeContainer}>
-          <Ionicons name="timer-outline" size={wp("6%")} color={"#464646"} />
+            <Text style={styles.timeText}>1Hr 30Min</Text>
+          </View>
 
-          <Text style={styles.timeText}>1Hr 30Min</Text>
+          <Ingredients data={data} />
+
+          <Instructions data={data} />
         </View>
-
-        <Ingredients data={data} />
-
-        <Instructions data={data} />
-      </View>
+      </TouchableWithoutFeedback>
     </Animated.ScrollView>
   );
 };

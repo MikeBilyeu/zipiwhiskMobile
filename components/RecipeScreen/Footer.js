@@ -21,7 +21,6 @@ import { parseNum } from "../utils";
 const screenHeight = Dimensions.get("screen").height;
 
 const Footer = (props) => {
-  const [saved, setSaved] = useState(false);
   const navigation = useNavigation();
 
   let footerOpacityInterpolate =
@@ -45,14 +44,14 @@ const Footer = (props) => {
       >
         <View style={styles.footerBtnContainer}>
           <TouchableOpacity
-            onPress={() => setSaved(!saved)}
+            onPress={() => props.setSaved(!props.saved)}
             activeOpacity={0.4}
             style={styles.footerBtn}
           >
             <Ionicons
               name="heart"
               size={wp("7%")}
-              color={saved ? "#FF2121" : "#FFF"}
+              color={props.saved ? "#FF2121" : "#FFF"}
               style={styles.footerBtnIcon}
             />
             <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>

@@ -9,15 +9,27 @@ import data from "../../data";
 
 const Home = () => {
   useKeepAwake();
-  const [isScrollable, setIsScrollable] = useState(true);
-  const yValue = useRef(new Animated.Value(0)).current;
+  const [toggleRecipe, setToggleRecipe] = useState(false);
+  const [recipeIndex, setRecipeIndex] = useState(null);
   const handleLoadMore = () => console.log("load more");
-  const renderItem = ({ item }) => <RecipeCard data={item} />;
+  const yValue = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef();
   const toTop = () => {
     flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
   };
 
+  const renderItem = (props) => {
+    return (
+      <RecipeCard
+        data={props.item}
+        handleSinglePress={() => {
+          setToggleRecipe(!toggleRecipe);
+          setRecipeIndex(props.index);
+        }}
+        toggleRecipe={toggleRecipe}
+      />
+    );
+  };
   return (
     <View style={styles.container}>
       <Header handleScrollTop={toTop} />
@@ -33,9 +45,15 @@ const Home = () => {
         initialNumToRender={10}
         pagingEnabled
         showsVerticalScrollIndicator={false}
-        scrollEnabled={isScrollable}
+        scrollEnabled={!toggleRecipe}
       />
-      {!isScrollable && <RecipeScroll data={data[2]} yValue={yValue} />}
+      {toggleRecipe && recipeIndex !== null && (
+        <RecipeScroll
+          data={data[recipeIndex]}
+          yValue={yValue}
+          setToggleRecipe={setToggleRecipe}
+        />
+      )}
     </View>
   );
 };
