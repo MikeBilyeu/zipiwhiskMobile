@@ -11,22 +11,10 @@ import Footer from "./RecipeScreen/Footer";
 const RecipeCard = ({ data, handleSinglePress, toggleRecipe }) => {
   const [saved, setSaved] = useState(false);
 
-  const [isTerminated, setTerminated] = useState(false);
-  const [touchStartTime, setTouchStartTime] = useState(0);
   const [lastTap, setLastTap] = useState(0);
-
-  const [longPressTimer, setLongPressTimer] = useState(0);
   const [singlePressTimer, setSinglePressTimer] = useState(0);
 
   const DOUBLE_PRESS_DELAY = 200;
-  const LONG_PRESS_DELAY = 700;
-
-  const cancelLongPressTimer = () => {
-    if (longPressTimer) {
-      clearTimeout(longPressTimer);
-      setLongPressTimer(0);
-    }
-  };
 
   const cancelSinglePressTimer = () => {
     if (singlePressTimer) {
@@ -39,15 +27,16 @@ const RecipeCard = ({ data, handleSinglePress, toggleRecipe }) => {
     cancelSinglePressTimer();
 
     const timeNow = Date.now();
+
     if (lastTap && timeNow - lastTap < DOUBLE_PRESS_DELAY) {
-      console.log("Handle double press");
+      //DOUBLE PRESS
       setSaved(true);
     } else {
       setLastTap(timeNow);
 
       const timeout = setTimeout(() => {
         setLastTap(0);
-        console.log("Handle single press");
+        //SINGLE PRESS
         handleSinglePress();
       }, DOUBLE_PRESS_DELAY);
 
@@ -56,37 +45,15 @@ const RecipeCard = ({ data, handleSinglePress, toggleRecipe }) => {
   };
 
   const handlePressOut = (event, gestureState) => {
-    const elapsedTime = Date.now() - touchStartTime;
-    if (elapsedTime > LONG_PRESS_DELAY) {
-      console.log("Handle long press");
-    } else {
-      handleTap(event, gestureState); // handles the single or double click
-    }
-    setTouchStartTime(0);
+    handleTap(event, gestureState); // handles the single or double click
   };
 
   const responder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponder: () => true,
 
-    onPanResponderStart: () => {
-      cancelLongPressTimer();
-
-      const timeout = setTimeout(() => {
-        if (!isTerminated) {
-          setTouchStartTime(Date.now());
-        }
-      });
-
-      setLongPressTimer(timeout);
-    },
-
     onPanResponderRelease: (event, gestureState) => {
       handlePressOut(event, gestureState);
-    },
-
-    onPanResponderTerminate: () => {
-      setTerminated(true);
     },
   });
   return (
