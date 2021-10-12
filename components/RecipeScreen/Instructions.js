@@ -37,7 +37,7 @@ const renderCardNum = (list) => {
         width: wp("1.3%"),
         height: wp("1.3%"),
         borderRadius: 50,
-        backgroundColor: "rgba(255,255,255, .5)",
+        backgroundColor: "rgba(255,255,255,.5)",
         marginHorizontal: wp("1%"),
       }}
     />
@@ -64,7 +64,7 @@ const Instructions = (props) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: hp("65%"),
+    height: hp("90%"),
     alignItems: "center",
     marginBottom: hp("3%"),
   },

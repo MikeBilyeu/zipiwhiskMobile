@@ -33,7 +33,7 @@ const Home = () => {
   };
   return (
     <View style={styles.container}>
-      <Header handleScrollTop={toTop} />
+      {!toggleRecipe && <Header handleScrollTop={toTop} />}
       <FlatList
         ref={flatListRef}
         style={styles.listContainer}

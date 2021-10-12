@@ -7,7 +7,7 @@ import {
   Dimensions,
   Animated,
   Share,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -43,15 +43,18 @@ const Recipe = ({ data, yValue, children, setToggleRecipe }) => {
       style={[styles.RecipeScrollView, animatedScaleStyle]}
     >
       {children}
-      <TouchableWithoutFeedback onPress={() => setToggleRecipe(false)}>
-        <View style={[styles.recipeScrollConatiner]}>
-          {/* <Text style={styles.timeText}>1Hr 30Min</Text> */}
 
-          <Ingredients data={data} />
+      <View style={[styles.recipeScrollConatiner]}>
+        <TouchableOpacity
+          style={styles.cancelBtn}
+          onPress={() => setToggleRecipe(false)}
+        >
+          <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
+        </TouchableOpacity>
+        <Ingredients data={data} />
 
-          <Instructions data={data} />
-        </View>
-      </TouchableWithoutFeedback>
+        <Instructions data={data} />
+      </View>
     </Animated.ScrollView>
   );
 };
@@ -66,13 +69,22 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,.6)",
   },
   recipeScrollConatiner: {
-    paddingTop: hp("8%"),
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -15 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
+  },
+  cancelBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: wp("20%"),
+    height: wp("15%"),
+
+    top: hp("5%"),
+    right: 0,
+    position: "absolute",
   },
 
   timeContainer: {
