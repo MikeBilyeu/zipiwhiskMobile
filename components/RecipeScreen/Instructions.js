@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, ScrollView, Text, View, Dimensions } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -15,7 +15,6 @@ const renderList = (list) => {
       style={styles.cardContainer}
       onStartShouldSetResponder={() => true}
     >
-      <Text style={styles.cardTitle}>Instructions</Text>
       <View>
         <ScrollView
           bounces="false"
@@ -29,14 +28,14 @@ const renderList = (list) => {
   ));
 };
 
-const renderCardNum = (list) => {
+const renderCardNum = (list, cardNum) => {
   return list.map((step, index) => (
     <View
       style={{
         width: wp("1.3%"),
         height: wp("1.3%"),
         borderRadius: 50,
-        backgroundColor: "rgba(255,255,255,.2)",
+        backgroundColor: index === cardNum ? "#fff" : "rgba(255,255,255,.2)",
         marginHorizontal: wp("1%"),
       }}
     />
@@ -44,6 +43,7 @@ const renderCardNum = (list) => {
 };
 
 const Instructions = (props) => {
+  const [cardNum, setCardNum] = useState(0);
   return (
     <View style={styles.wrapper}>
       <ScrollView
@@ -51,11 +51,18 @@ const Instructions = (props) => {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         style={styles.container}
+        onMomentumScrollEnd={(event) => {
+          setCardNum(
+            Math.round(
+              parseFloat(event.nativeEvent.contentOffset.x / screenWidth)
+            )
+          );
+        }}
       >
         {renderList(props.data.instructions)}
       </ScrollView>
       <View style={styles.cardNumContainer}>
-        {renderCardNum(props.data.instructions)}
+        {renderCardNum(props.data.instructions, cardNum)}
       </View>
     </View>
   );
@@ -73,8 +80,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 10,
     borderRadius: 25,
-    paddingHorizontal: 10,
-    paddingVertical: hp("2%"),
+    paddingHorizontal: wp("7%"),
+    paddingVertical: hp("4%"),
+    paddingTop: hp("8%"),
     marginVertical: hp("3%"),
     backgroundColor: "rgba(0,0,0,.7)",
     shadowColor: "#000",
@@ -92,8 +100,8 @@ const styles = StyleSheet.create({
     width: screenWidth - 20,
   },
   cardText: {
-    fontSize: wp("8%"),
-    lineHeight: wp("10%"),
+    fontSize: wp("6%"),
+    lineHeight: wp("9%"),
     fontFamily: "AvenirNextRegular",
     textAlign: "center",
     color: "#fff",
