@@ -4,6 +4,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { StatusBar } from "expo-status-bar";
 
 import Header from "../Header";
 import SearchBar from "./SearchBar";
@@ -29,6 +30,7 @@ const SearchScreen = ({}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style="dark" />
       <Header>
         <SearchBar
           isFocused={isFocused}

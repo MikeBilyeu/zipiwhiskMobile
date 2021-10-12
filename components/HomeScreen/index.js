@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { StyleSheet, View, FlatList, Animated } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
+import { StatusBar } from "expo-status-bar";
 
 import Header from "./Header";
 import RecipeCard from "../RecipeCard";
@@ -33,6 +34,7 @@ const Home = () => {
   };
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       {!toggleRecipe && <Header handleScrollTop={toTop} />}
       <FlatList
         ref={flatListRef}
