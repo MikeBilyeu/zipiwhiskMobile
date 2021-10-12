@@ -25,7 +25,6 @@ const renderList = (list) => {
           <Text style={styles.cardText}>{step}</Text>
         </ScrollView>
       </View>
-      {/* <Text style={styles.cardNum}>Step {index + 1}</Text> */}
     </View>
   ));
 };
@@ -37,7 +36,7 @@ const renderCardNum = (list) => {
         width: wp("1.3%"),
         height: wp("1.3%"),
         borderRadius: 50,
-        backgroundColor: "rgba(255,255,255,.5)",
+        backgroundColor: "rgba(255,255,255,.2)",
         marginHorizontal: wp("1%"),
       }}
     />
@@ -76,6 +75,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal: 10,
     paddingVertical: hp("2%"),
+    marginVertical: hp("3%"),
     backgroundColor: "rgba(0,0,0,.7)",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: hp("1%"),
+    top: hp("-2%"),
   },
   cardNum: {
     textAlign: "center",
