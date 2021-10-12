@@ -15,7 +15,8 @@ const Home = () => {
   const yValue = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef();
   const toTop = () => {
-    flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
+    !toggleRecipe &&
+      flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
   };
 
   const renderItem = (props) => {

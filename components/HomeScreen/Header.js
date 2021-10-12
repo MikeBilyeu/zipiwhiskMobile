@@ -15,10 +15,11 @@ const Header = (props) => {
 
   return (
     <LinearGradient
-      colors={["rgba(0,0,0,.4)", "transparent"]}
+      colors={["rgba(0,0,0,.6)", "transparent"]}
       start={[0, 0]}
       end={[0, 1]}
       style={styles.gradient}
+      onPress={() => console.log("pressed")}
     >
       <TouchableOpacity
         onPress={() => navigation.navigate("Search")}
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 2,
     width: "100%",
-    height: hp("20%"),
+    height: hp("15%"),
     paddingTop: hp("4%"),
     flexDirection: "row",
     justifyContent: "space-between",

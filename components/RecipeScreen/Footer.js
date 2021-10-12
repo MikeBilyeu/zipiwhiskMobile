@@ -5,7 +5,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Animated,
   Dimensions,
 } from "react-native";
 import {
@@ -23,119 +22,100 @@ const screenHeight = Dimensions.get("screen").height;
 const Footer = (props) => {
   const navigation = useNavigation();
 
-  let footerOpacityInterpolate =
-    props.yValue &&
-    props.yValue.interpolate({
-      inputRange: [175, 280],
-      outputRange: [1, 0],
-    });
-  const animatedFooterStyle = props.yValue && {
-    transform: [{ translateY: props.yValue }],
-    opacity: footerOpacityInterpolate,
-  };
-
   return (
-    <Animated.View style={[styles.footerConatiner, animatedFooterStyle]}>
-      <LinearGradient
-        colors={["rgba(0,0,0,.8)", "transparent"]}
-        start={[0, 1]}
-        end={[0, 0]}
-        style={styles.gradientWrapper}
-      >
-        <View style={styles.footerBtnContainer}>
-          <TouchableOpacity
-            onPress={() => props.setSaved(!props.saved)}
-            activeOpacity={0.4}
-            style={styles.footerBtn}
-          >
-            <Ionicons
-              name="heart"
-              size={wp("7%")}
-              color={props.saved ? "#FF2121" : "#FFF"}
-              style={styles.footerBtnIcon}
-            />
-            <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
-          </TouchableOpacity>
+    <LinearGradient
+      colors={["rgba(0,0,0,.8)", "transparent"]}
+      start={[0, 1]}
+      end={[0, 0]}
+      style={styles.gradientWrapper}
+    >
+      <View style={styles.footerBtnContainer}>
+        <TouchableOpacity
+          onPress={() => props.setSaved(!props.saved)}
+          activeOpacity={0.4}
+          style={styles.footerBtn}
+        >
+          <Ionicons
+            name="heart"
+            size={wp("7%")}
+            color={props.saved ? "#FF2121" : "#FFF"}
+            style={styles.footerBtnIcon}
+          />
+          <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("Comments", { title: props.title })
-            }
-            activeOpacity={0.4}
-            style={styles.footerBtn}
-          >
-            <Ionicons
-              name="chatbubble-ellipses"
-              size={wp("7%")}
-              color="#FFF"
-              style={styles.footerBtnIcon}
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Comments", { title: props.title })
+          }
+          activeOpacity={0.4}
+          style={styles.footerBtn}
+        >
+          <Ionicons
+            name="chatbubble-ellipses"
+            size={wp("7%")}
+            color="#FFF"
+            style={styles.footerBtnIcon}
+          />
+          <Text style={styles.footerBtnText}>
+            {parseNum(props.numComments)}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.push("VisitProfile", { id: props.id })}
+          activeOpacity={0.4}
+          style={styles.userContainer}
+        >
+          <Image source={{ uri: props.userImage }} style={styles.userIcon} />
+          <View style={styles.userInfoWrapper}>
+            <Text style={styles.userInfoText}>{props.username}</Text>
+            <View
+              style={[
+                styles.followingIcon,
+                props.isFollowing
+                  ? { backgroundColor: "#F44545" }
+                  : { backgroundColor: "#01C481" },
+              ]}
             />
-            <Text style={styles.footerBtnText}>
-              {parseNum(props.numComments)}
+            <Text style={styles.userInfoText}>
+              {props.isFollowing ? "Following" : "Follow"}
             </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.push("VisitProfile", { id: props.id })}
-            activeOpacity={0.4}
-            style={styles.userContainer}
-          >
-            <Image source={{ uri: props.userImage }} style={styles.userIcon} />
-            <View style={styles.userInfoWrapper}>
-              <Text style={styles.userInfoText}>{props.username}</Text>
-              <View
-                style={[
-                  styles.followingIcon,
-                  props.isFollowing
-                    ? { backgroundColor: "#F44545" }
-                    : { backgroundColor: "#01C481" },
-                ]}
-              />
-              <Text style={styles.userInfoText}>
-                {props.isFollowing ? "Following" : "Follow"}
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
-            {props.title}
-          </Text>
-          <Text style={styles.caption} numberOfLines={1} ellipsizeMode="tail">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit
-          </Text>
-          <Text style={styles.timeAgo}>1 day ago</Text>
-          <View style={styles.viewsContainer}>
-            <Ionicons
-              name="eye"
-              size={wp("5%")}
-              color="#FFF"
-              style={styles.viewsIcon}
-            />
-            <Text style={styles.viewsText}>5.2k</Text>
           </View>
+        </TouchableOpacity>
+        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+          {props.title}
+        </Text>
+        <Text style={styles.caption} numberOfLines={1} ellipsizeMode="tail">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit
+        </Text>
+        <Text style={styles.timeAgo}>1 day ago</Text>
+        <View style={styles.viewsContainer}>
+          <Ionicons
+            name="eye"
+            size={wp("5%")}
+            color="#FFF"
+            style={styles.viewsIcon}
+          />
+          <Text style={styles.viewsText}>5.2k</Text>
         </View>
-      </LinearGradient>
-    </Animated.View>
+      </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  footerConatiner: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    height: wp("70%"),
-    top: screenHeight - wp("70%"),
-    width: "100%",
-    position: "absolute",
-  },
   gradientWrapper: {
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
     flex: 1,
     paddingBottom: hp("2.5%"),
+    height: wp("70%"),
+    top: screenHeight - wp("70%"),
     width: "100%",
+    position: "absolute",
   },
   footerBtnContainer: {
     height: "100%",

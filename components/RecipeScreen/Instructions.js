@@ -10,7 +10,11 @@ const screenHeight = Dimensions.get("screen").height;
 
 const renderList = (list) => {
   return list.map((step, index) => (
-    <View key={index} style={styles.cardContainer}>
+    <View
+      key={index}
+      style={styles.cardContainer}
+      onStartShouldSetResponder={() => true}
+    >
       <Text style={styles.cardTitle}>Instructions</Text>
       <View>
         <ScrollView
@@ -21,30 +25,50 @@ const renderList = (list) => {
           <Text style={styles.cardText}>{step}</Text>
         </ScrollView>
       </View>
-      <Text style={styles.cardNum}>Step {index + 1}</Text>
+      {/* <Text style={styles.cardNum}>Step {index + 1}</Text> */}
     </View>
+  ));
+};
+
+const renderCardNum = (list) => {
+  return list.map((step, index) => (
+    <View
+      style={{
+        width: wp("1.3%"),
+        height: wp("1.3%"),
+        borderRadius: 50,
+        backgroundColor: "rgba(255,255,255, .5)",
+        marginHorizontal: wp("1%"),
+      }}
+    />
   ));
 };
 
 const Instructions = (props) => {
   return (
-    <ScrollView
-      horizontal={true}
-      pagingEnabled
-      showsHorizontalScrollIndicator={false}
-      style={styles.container}
-    >
-      {renderList(props.data.instructions)}
-    </ScrollView>
+    <View style={styles.wrapper}>
+      <ScrollView
+        horizontal={true}
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        style={styles.container}
+      >
+        {renderList(props.data.instructions)}
+      </ScrollView>
+      <View style={styles.cardNumContainer}>
+        {renderCardNum(props.data.instructions)}
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: hp("90%"),
-    paddingVertical: hp("5%"),
+  wrapper: {
+    height: hp("65%"),
+    alignItems: "center",
+    marginBottom: hp("3%"),
   },
+
   cardContainer: {
     width: screenWidth - 20,
     justifyContent: "center",
@@ -67,13 +91,18 @@ const styles = StyleSheet.create({
     top: wp("6%"),
     width: screenWidth - 20,
   },
-  cardScroll: {},
   cardText: {
     fontSize: wp("8%"),
     lineHeight: wp("10%"),
     fontFamily: "AvenirNextRegular",
     textAlign: "center",
     color: "#fff",
+  },
+  cardNumContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: hp("1%"),
   },
   cardNum: {
     textAlign: "center",
