@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     alignItems: "center",
-    marginVertical: wp("6%"),
+    marginVertical: hp("10%"),
     paddingHorizontal: wp("2%"),
   },
 

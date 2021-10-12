@@ -45,11 +45,7 @@ const Recipe = ({ data, yValue, children, setToggleRecipe }) => {
       {children}
       <TouchableWithoutFeedback onPress={() => setToggleRecipe(false)}>
         <View style={[styles.recipeScrollConatiner]}>
-          <View style={styles.timeContainer}>
-            <Ionicons name="timer-outline" size={wp("6%")} color={"#fff"} />
-
-            <Text style={styles.timeText}>1Hr 30Min</Text>
-          </View>
+          {/* <Text style={styles.timeText}>1Hr 30Min</Text> */}
 
           <Ingredients data={data} />
 
@@ -67,10 +63,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(0,0,0,.8)",
+    backgroundColor: "rgba(0,0,0,.6)",
   },
   recipeScrollConatiner: {
-    paddingTop: wp("10%"),
+    paddingTop: hp("8%"),
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: hp("90%"),
-    paddingVertical: hp("2%"),
+    paddingVertical: hp("5%"),
   },
   cardContainer: {
     width: screenWidth - 20,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 25,
     paddingHorizontal: 10,
-    paddingVertical: 40,
+    paddingVertical: hp("2%"),
     backgroundColor: "rgba(0,0,0,.7)",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     textAlign: "center",
-    color: "#B7B7B7",
+    color: "#464646",
     fontSize: wp("3%"),
     fontFamily: "AvenirNextRegular",
     position: "absolute",
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   cardNum: {
     textAlign: "center",
-    color: "#B7B7B7",
+    color: "#464646",
     fontSize: wp("3%"),
     fontFamily: "AvenirNextRegular",
     position: "absolute",
