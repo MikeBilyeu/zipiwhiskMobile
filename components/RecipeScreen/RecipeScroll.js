@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
-  Animated,
-  Share,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Animated, Share, Pressable } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -17,9 +8,6 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
-
-const screenWidth = Dimensions.get("screen").width;
-const screenHeight = Dimensions.get("screen").height;
 
 const Recipe = ({ data, yValue, children, setToggleRecipe }) => {
   let scaleInterpolate = yValue.interpolate({
@@ -32,30 +20,41 @@ const Recipe = ({ data, yValue, children, setToggleRecipe }) => {
   };
 
   return (
-    <Animated.ScrollView
-      showsVerticalScrollIndicator={false}
-      onScroll={Animated.event(
-        [{ nativeEvent: { contentOffset: { y: yValue } } }],
-        {
-          useNativeDriver: true,
-        }
-      )}
-      style={[styles.RecipeScrollView, animatedScaleStyle]}
-    >
-      {children}
+    <>
+      <Pressable
+        style={({ pressed }) => [
+          { opacity: pressed ? 0.5 : 1 },
+          styles.cancelBtn,
+        ]}
+        onPress={() => setToggleRecipe(false)}
+        hitSlop={{
+          top: 100,
+          bottom: 30,
+          left: 30,
+          right: 30,
+        }}
+      >
+        <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
+      </Pressable>
+      <Animated.ScrollView
+        showsVerticalScrollIndicator={false}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: yValue } } }],
+          {
+            useNativeDriver: true,
+          }
+        )}
+        style={[styles.RecipeScrollView, animatedScaleStyle]}
+      >
+        {children}
 
-      <View style={[styles.recipeScrollConatiner]}>
-        <TouchableOpacity
-          style={styles.cancelBtn}
-          onPress={() => setToggleRecipe(false)}
-        >
-          <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
-        </TouchableOpacity>
-        <Ingredients data={data} />
+        <View style={[styles.recipeScrollConatiner]}>
+          <Ingredients data={data} />
 
-        <Instructions data={data} />
-      </View>
-    </Animated.ScrollView>
+          <Instructions data={data} />
+        </View>
+      </Animated.ScrollView>
+    </>
   );
 };
 
@@ -79,12 +78,12 @@ const styles = StyleSheet.create({
   cancelBtn: {
     justifyContent: "center",
     alignItems: "center",
-    width: wp("20%"),
-    height: wp("15%"),
 
-    top: hp("5%"),
-    right: 0,
+    zIndex: 10,
+    top: hp("7%"),
+    right: wp("5%"),
     position: "absolute",
+    borderColor: "#fff",
   },
 
   timeContainer: {

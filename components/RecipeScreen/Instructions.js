@@ -71,7 +71,7 @@ const Instructions = (props) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: hp("90%"),
+    height: hp("85%"),
     alignItems: "center",
     marginBottom: hp("3%"),
   },
