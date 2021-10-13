@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Image,
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   Dimensions,
 } from "react-native";
 import {
@@ -30,10 +30,10 @@ const Footer = (props) => {
       style={styles.gradientWrapper}
     >
       <View style={styles.footerBtnContainer}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => props.setSaved(!props.saved)}
-          activeOpacity={0.4}
           style={styles.footerBtn}
+          hitSlop={{ right: 10 }}
         >
           <Ionicons
             name="heart"
@@ -42,14 +42,14 @@ const Footer = (props) => {
             style={styles.footerBtnIcon}
           />
           <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           onPress={() =>
             navigation.navigate("Comments", { title: props.title })
           }
-          activeOpacity={0.4}
           style={styles.footerBtn}
+          hitSlop={{ right: 10 }}
         >
           <Ionicons
             name="chatbubble-ellipses"
@@ -60,36 +60,58 @@ const Footer = (props) => {
           <Text style={styles.footerBtnText}>
             {parseNum(props.numComments)}
           </Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
-          onPress={() => navigation.push("VisitProfile", { id: props.id })}
-          activeOpacity={0.4}
-          style={styles.userContainer}
-        >
-          <Image source={{ uri: props.userImage }} style={styles.userIcon} />
-          <View style={styles.userInfoWrapper}>
+        <View style={styles.userContainer}>
+          <Pressable
+            onPress={() => navigation.push("VisitProfile", { id: props.id })}
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.5 : 1 },
+              styles.userWrapper,
+            ]}
+          >
+            <Image source={{ uri: props.userImage }} style={styles.userIcon} />
             <Text style={styles.userInfoText}>{props.username}</Text>
-            <View
-              style={[
-                styles.followingIcon,
-                props.isFollowing
-                  ? { backgroundColor: "#F44545" }
-                  : { backgroundColor: "#01C481" },
-              ]}
-            />
+          </Pressable>
+          <View
+            style={[
+              styles.followingIcon,
+              props.isFollowing
+                ? { backgroundColor: "#F44545" }
+                : { backgroundColor: "#01C481" },
+            ]}
+          />
+          <Pressable
+            style={styles.toggleFollowBtn}
+            onPress={() => console.log("toggle follow")}
+            hitSlop={{
+              left: wp("5.3%"),
+              right: wp("5.5%"),
+            }}
+          >
             <Text style={styles.userInfoText}>
               {props.isFollowing ? "Following" : "Follow"}
             </Text>
-          </View>
-        </TouchableOpacity>
+          </Pressable>
+        </View>
+
         <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
           {props.title}
         </Text>
-        <Text style={styles.caption} numberOfLines={1} ellipsizeMode="tail">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit
-        </Text>
+        <Pressable
+          style={styles.captionBtn}
+          hitSlop={{ top: hp("1%"), bottom: hp("3%") }}
+          onPress={() => console.log("toggle full caption btn")}
+        >
+          <Text
+            style={styles.captionText}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit
+          </Text>
+        </Pressable>
         <Text style={styles.timeAgo}>1 day ago</Text>
         <View style={styles.viewsContainer}>
           <Ionicons
@@ -144,24 +166,34 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingHorizontal: wp("3.5%"),
     flex: 2,
   },
-  userInfoWrapper: {
+
+  userWrapper: {
     flexDirection: "row",
     alignItems: "center",
+    paddingHorizontal: wp("3.5%"),
+    height: "100%",
   },
+
   userInfoText: {
     color: "#FFF",
     fontFamily: "AvenirNextDemiBold",
     fontSize: wp("3.4%"),
   },
+
   followingIcon: {
     width: wp("1.8%"),
     height: wp("1.8%"),
     borderRadius: 100,
-    marginHorizontal: wp("3.5%"),
+    marginRight: wp("3.5%"),
   },
+
+  toggleFollowBtn: {
+    height: "100%",
+    justifyContent: "center",
+  },
+
   userIcon: {
     width: wp("8.5%"),
     height: wp("8.5%"),
@@ -184,13 +216,16 @@ const styles = StyleSheet.create({
 
     flex: 1,
   },
-  caption: {
-    color: "#FFF",
-    fontFamily: "AvenirNextRegular",
-    fontSize: wp("3.4%"),
+  captionBtn: {
     paddingHorizontal: wp("4%"),
     marginRight: 50,
   },
+  captionText: {
+    color: "#FFF",
+    fontFamily: "AvenirNextRegular",
+    fontSize: wp("3.4%"),
+  },
+
   timeAgo: {
     color: "#FFF",
     opacity: 0.3,
