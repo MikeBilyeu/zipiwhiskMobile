@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Image, Pressable } from "react-native";
 import { connect } from "react-redux";
 import {
   widthPercentageToDP as wp,
@@ -19,12 +19,14 @@ const Header = (props) => {
       start={[0, 0]}
       end={[0, 1]}
       style={styles.gradient}
-      onPress={() => console.log("pressed")}
     >
-      <TouchableOpacity
+      <Pressable
         onPress={() => navigation.navigate("Search")}
-        activeOpacity={0.4}
-        style={styles.headerBtn}
+        hitSlop={{ bottom: 15 }}
+        style={({ pressed }) => [
+          { opacity: pressed ? 0.5 : 1 },
+          styles.headerBtn,
+        ]}
       >
         <Ionicons
           name="search"
@@ -32,18 +34,22 @@ const Header = (props) => {
           color="#FFF"
           style={styles.headerBtnIcon}
         />
-      </TouchableOpacity>
-      <TouchableOpacity
+      </Pressable>
+      <Pressable
         style={styles.scrollTopBtn}
+        hitSlop={{ bottom: 15 }}
         onPress={props.handleScrollTop}
-      ></TouchableOpacity>
-      <TouchableOpacity
+      />
+      <Pressable
         onPress={() => navigation.navigate("Profile")}
-        activeOpacity={0.4}
-        style={styles.headerBtn}
+        hitSlop={{ bottom: 15 }}
+        style={({ pressed }) => [
+          { opacity: pressed ? 0.5 : 1 },
+          styles.headerBtn,
+        ]}
       >
         <Image source={{ uri: props.user.image_url }} style={styles.userIcon} />
-      </TouchableOpacity>
+      </Pressable>
     </LinearGradient>
   );
 };
@@ -53,13 +59,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 2,
     width: "100%",
-    height: hp("15%"),
+    height: hp("20%"),
     paddingTop: hp("4%"),
     flexDirection: "row",
     justifyContent: "space-between",
   },
   headerBtn: {
-    width: wp("15%"),
+    width: wp("20%"),
     height: wp("15%"),
     justifyContent: "center",
     alignItems: "center",
@@ -73,10 +79,9 @@ const styles = StyleSheet.create({
     height: wp("15%"),
   },
   userIcon: {
-    width: wp("10%%"),
+    width: wp("10%"),
     height: wp("10%"),
     borderRadius: 100,
-    marginRight: 5,
   },
 });
 
