@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Image,
@@ -21,6 +21,7 @@ const screenHeight = Dimensions.get("screen").height;
 
 const Footer = (props) => {
   const navigation = useNavigation();
+  const [isFollowing, setIsFollowing] = useState(false);
 
   return (
     <LinearGradient
@@ -73,33 +74,31 @@ const Footer = (props) => {
             <Image source={{ uri: props.userImage }} style={styles.userIcon} />
             <Text style={styles.userInfoText}>{props.username}</Text>
           </Pressable>
-          <View
-            style={[
-              styles.followingIcon,
-              props.isFollowing
-                ? { backgroundColor: "#F44545" }
-                : { backgroundColor: "#01C481" },
-            ]}
-          />
-          <Pressable
-            style={styles.toggleFollowBtn}
-            onPress={() => console.log("toggle follow")}
-            hitSlop={{
-              left: wp("5.3%"),
-              right: wp("5.5%"),
-            }}
-          >
-            <Text style={styles.userInfoText}>
-              {props.isFollowing ? "Following" : "Follow"}
-            </Text>
-          </Pressable>
+          {!isFollowing && (
+            <>
+              <View style={[styles.followIcon]} />
+              <Pressable
+                style={styles.followBtn}
+                onPress={() => setIsFollowing(true)}
+                hitSlop={{
+                  left: wp("5.3%"),
+                  right: wp("5.5%"),
+                }}
+              >
+                <Text style={styles.userInfoText}>Follow</Text>
+              </Pressable>
+            </>
+          )}
         </View>
 
         <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
           {props.title}
         </Text>
         <Pressable
-          style={styles.captionBtn}
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1 },
+            styles.captionBtn,
+          ]}
           hitSlop={{ top: hp("1%"), bottom: hp("3%") }}
           onPress={() => console.log("toggle full caption btn")}
         >
@@ -182,14 +181,15 @@ const styles = StyleSheet.create({
     fontSize: wp("3.4%"),
   },
 
-  followingIcon: {
+  followIcon: {
     width: wp("1.8%"),
     height: wp("1.8%"),
     borderRadius: 100,
     marginRight: wp("3.5%"),
+    backgroundColor: "#01C481",
   },
 
-  toggleFollowBtn: {
+  followBtn: {
     height: "100%",
     justifyContent: "center",
   },

@@ -32,7 +32,7 @@ const ToggleFollowBtn = ({
         style={[
           styles.btnIcon,
           isFollowing
-            ? { backgroundColor: "#F44545" }
+            ? { backgroundColor: "#FF2121" }
             : { backgroundColor: "#01C481" },
         ]}
       />
