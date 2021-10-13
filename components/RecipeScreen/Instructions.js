@@ -31,6 +31,7 @@ const renderList = (list) => {
 const renderCardNum = (list, cardNum) => {
   return list.map((step, index) => (
     <View
+      key={index}
       style={{
         width: wp("1.3%"),
         height: wp("1.3%"),

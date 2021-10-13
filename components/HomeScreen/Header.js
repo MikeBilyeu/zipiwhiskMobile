@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     height: wp("10%"),
     borderRadius: 100,
     marginRight: 5,
-    backgroundColor: "#fff",
   },
 });
 
