@@ -34,7 +34,7 @@ const Footer = (props) => {
         <Pressable
           onPress={() => props.setSaved(!props.saved)}
           style={styles.footerBtn}
-          hitSlop={{ right: 10 }}
+          hitSlop={{ top: 50, right: 20 }}
         >
           <Ionicons
             name="heart"
@@ -50,7 +50,7 @@ const Footer = (props) => {
             navigation.navigate("Comments", { title: props.title })
           }
           style={styles.footerBtn}
-          hitSlop={{ right: 10 }}
+          hitSlop={{ right: 20 }}
         >
           <Ionicons
             name="chatbubble-ellipses"
@@ -132,9 +132,10 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
     flex: 1,
+    paddingTop: hp("2%"),
     paddingBottom: hp("2.5%"),
-    height: wp("70%"),
-    top: screenHeight - wp("70%"),
+    height: wp("72%"),
+    top: screenHeight - wp("72%"),
     width: "100%",
     position: "absolute",
   },
