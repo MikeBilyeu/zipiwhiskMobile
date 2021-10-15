@@ -1,19 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useRef } from "react";
-import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  Animated,
-  Dimensions,
-} from "react-native";
-import { Video } from "expo-av";
+import React, { useState } from "react";
 import { useKeepAwake } from "expo-keep-awake";
 
+import RecipeCard from "../RecipeCard";
 import RecipeScroll from "./RecipeScroll";
-import Footer from "./Footer";
 import Header from "./Header";
-const screenHeight = Dimensions.get("screen").height;
 
 const RecipeScreen = ({
   route: {
@@ -21,72 +12,21 @@ const RecipeScreen = ({
   },
 }) => {
   useKeepAwake();
-  const yValue = useRef(new Animated.Value(0)).current;
-
-  let scaleInterpolate = yValue.interpolate({
-    inputRange: [-201, -200, 0, 1],
-    outputRange: [1.1, 1.1, 1, 1],
-  });
-
-  let opacityInterpolate = yValue.interpolate({
-    inputRange: [-200, 0, screenHeight, screenHeight + 50],
-    outputRange: [0.8, 1, 1, 0],
-  });
-
-  const animatedScaleStyle = {
-    transform: [{ scale: scaleInterpolate }],
-    opacity: opacityInterpolate,
-  };
-
+  const [toggleRecipe, setToggleRecipe] = useState(false);
   return (
-    <View style={styles.container}>
-      {data.media_type === "video" ? (
-        <Animated.View style={[styles.full, animatedScaleStyle]}>
-          <Video
-            source={{ uri: data.media_url }}
-            style={styles.full}
-            resizeMode="cover"
-            isLooping
-            shouldPlay
-          />
-        </Animated.View>
-      ) : (
-        <Animated.View style={[styles.full, animatedScaleStyle]}>
-          <ImageBackground
-            source={{ uri: data.media_url }}
-            style={styles.full}
-          />
-        </Animated.View>
+    <>
+      <StatusBar style="light" />
+      {!toggleRecipe && <Header />}
+      <RecipeCard
+        data={data}
+        handleSinglePress={() => setToggleRecipe(!toggleRecipe)}
+        toggleRecipe={toggleRecipe}
+      />
+      {toggleRecipe && (
+        <RecipeScroll data={data} setToggleRecipe={setToggleRecipe} />
       )}
-
-      <RecipeScroll data={data} yValue={yValue}>
-        <Header yValue={yValue} />
-        <Footer
-          username={data.user.username}
-          numLikes={data.numLikes}
-          numComments={data.numComments}
-          userImage={data.user.image}
-          id={data.user.id}
-          yValue={yValue}
-        />
-      </RecipeScroll>
-    </View>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: "relative",
-    backgroundColor: "#fff",
-  },
-  full: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-});
 
 export default RecipeScreen;

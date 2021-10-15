@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { StyleSheet, View, FlatList, Animated } from "react-native";
+import { FlatList } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
 import { StatusBar } from "expo-status-bar";
 
@@ -13,7 +13,7 @@ const Home = () => {
   const [toggleRecipe, setToggleRecipe] = useState(false);
   const [recipeIndex, setRecipeIndex] = useState(null);
   const handleLoadMore = () => console.log("load more");
-  const yValue = useRef(new Animated.Value(0)).current;
+
   const flatListRef = useRef();
   const toTop = () => {
     !toggleRecipe &&
@@ -33,12 +33,11 @@ const Home = () => {
     );
   };
   return (
-    <View style={styles.container}>
+    <>
       <StatusBar style="light" />
       {!toggleRecipe && <Header handleScrollTop={toTop} />}
       <FlatList
         ref={flatListRef}
-        style={styles.listContainer}
         data={data}
         numColumns={1}
         renderItem={renderItem}
@@ -53,23 +52,11 @@ const Home = () => {
       {toggleRecipe && recipeIndex !== null && (
         <RecipeScroll
           data={data[recipeIndex]}
-          yValue={yValue}
           setToggleRecipe={setToggleRecipe}
         />
       )}
-    </View>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "black",
-  },
-  listContainer: {
-    flex: 1,
-    width: "100%",
-  },
-});
 
 export default Home;

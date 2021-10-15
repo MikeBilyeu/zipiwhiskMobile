@@ -119,7 +119,7 @@ const Footer = (props) => {
             color="#FFF"
             style={styles.viewsIcon}
           />
-          <Text style={styles.viewsText}>5.2k</Text>
+          <Text style={styles.viewsText}>52.1k</Text>
         </View>
       </View>
     </LinearGradient>

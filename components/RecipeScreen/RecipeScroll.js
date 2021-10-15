@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { StyleSheet, View, Animated, Share, Pressable } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -9,7 +9,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 
-const Recipe = ({ data, yValue, children, setToggleRecipe }) => {
+const Recipe = ({ data, children, setToggleRecipe }) => {
+  const yValue = useRef(new Animated.Value(0)).current;
+
   let scaleInterpolate = yValue.interpolate({
     inputRange: [-201, -200, 0, 1],
     outputRange: [1.2, 1.2, 1, 1],
@@ -65,9 +67,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(0,0,0,.6)",
+    backgroundColor: "rgba(0,0,0,.8)",
   },
   recipeScrollConatiner: {
+    paddingTop: hp("8%"),
     alignItems: "center",
     justifyContent: "space-around",
     shadowColor: "#000",

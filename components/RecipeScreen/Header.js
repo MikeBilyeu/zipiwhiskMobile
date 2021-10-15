@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  Animated,
+  View,
   Dimensions,
 } from "react-native";
 import {
@@ -20,18 +20,8 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 const Header = (props) => {
   const navigation = useNavigation();
 
-  let headerOpacityInterpolate = props.yValue.interpolate({
-    inputRange: [screenHeight - 100, screenHeight - 50],
-    outputRange: [1, 0],
-  });
-
-  const animatedHeaderStyle = {
-    transform: [{ translateY: props.yValue }],
-    opacity: headerOpacityInterpolate,
-  };
-
   return (
-    <Animated.View style={[styles.headerConatiner, animatedHeaderStyle]}>
+    <View style={styles.headerConatiner}>
       <LinearGradient
         colors={["rgba(0,0,0,.2)", "transparent"]}
         start={[0, 0]}
@@ -48,21 +38,8 @@ const Header = (props) => {
             style={styles.headerBtnIcon}
           />
         </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={props.onShare}
-          activeOpacity={0.4}
-          style={styles.headerBtn}
-        >
-          <Ionicons
-            name="share-outline"
-            size={wp("6%")}
-            color="#FFF"
-            style={styles.footerBtnIcon}
-          />
-        </TouchableOpacity>
       </LinearGradient>
-    </Animated.View>
+    </View>
   );
 };
 
@@ -71,6 +48,7 @@ const styles = StyleSheet.create({
     height: wp("40%"),
     width: "100%",
     position: "absolute",
+    zIndex: 1,
   },
   gradient: {
     height: wp("40%"),

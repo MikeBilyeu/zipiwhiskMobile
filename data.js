@@ -264,36 +264,105 @@ const data = [
     media_url:
       "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1593983807/Recipes/s0odyvjiko4yuisb8iwm.jpg",
     media_type: "photo",
-    recipeYield: 4,
+    recipeYield: 6,
     ingredientList: [
       {
-        amount: "¼ cup",
-        ingredient: "All-purpose flour",
+        amount: "2",
+        ingredient:
+          "(14 ounce) cans black beans, drained, rinsed, and patted dry",
         image:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrmaF1M32DN3r7ciBu7pGxbv_jGrBq-6vlfc8F_JZlyJY8lfcFK59_LaCp0Ac_p52crRxruIi5&usqp=CAc",
       },
       {
-        amount: "1 Tbsp + 2 tsp",
-        ingredient: "Vegatable oil ",
+        amount: "1 Tbsp",
+        ingredient: "Extra virgin olive oil",
         image:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3WIIweap2Y7yXbnNS8qTVs5kI_HRDX9WlpzYTy8M12YBFwR20vfVL2zpRwc4&usqp=CAc",
       },
       {
-        amount: "1 cup",
-        ingredient: "Red wine",
+        amount: "¾ cup",
+        ingredient: "Finely chopped bell pepper",
         image: "https://images.heb.com/is/image/HEBGrocery/000538201",
       },
       {
-        amount: "2",
-        ingredient: "Bay leaves",
+        amount: "1 cup",
+        ingredient: "Finely chopped yellow onion",
         image:
           "https://upload.wikimedia.org/wikipedia/commons/3/37/Indian_bay_leaf_-_tejpatta_-_indisches_Lorbeerblatt.jpg",
       },
+      {
+        amount: "3",
+        ingredient: "Garlic cloves, minced (about 1 Tablespoon)",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/136010121?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "1½ tsp",
+        ingredient: "Ground cumin",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/204100025?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "1 tsp",
+        ingredient: "Chili powder",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "½ tsp",
+        ingredient: "Garlic powder",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "¼ tsp",
+        ingredient: "Smoked paprika",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "½ cup",
+        ingredient: "bread crumbs or oat flour",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "½ cup",
+        ingredient: "Feta cheese",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "2",
+        ingredient: "Large eggs",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "1 Tbsp",
+        ingredient: "Worcestershire sauce",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "2 Tbsp",
+        ingredient: "Ketchup, mayo, or BBQ sauce",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
+      {
+        amount: "1",
+        ingredient: "pinch salt & pepper",
+        image:
+          "https://images.albertsons-media.com/is/image/ABS/960123341?$ecom-pdp-desktop$&defaultImage=Not_Available&defaultImage=Not_Available",
+      },
     ],
     instructions: [
-      `Combine the flour and pepper in a bowl, add the beef and toss to coat well. `,
-      `Heat 3 teaspoons of the oil in a large pot. Add the beef a few pieces at a time; do not overcrowd. Cook, turning the pieces until beef is browned on all sides, about 5 minutes per batch; add more oil as needed between batches.`,
-      `Remove the beef from the pot and add the vinegar and wine. Cook over medium-high heat, scraping the pan with a wooden spoon to loosen any browned bits. Add the beef, beef broth and bay leaves. Bring to a boil, then reduce to a slow simmer.`,
+      `Preheat oven to 325°F (163°C). Spread beans evenly onto a lined baking sheet and bake for 15 minutes until slightly dried out.`,
+      `Meanwhile, sauté olive oil, chopped pepper, onion, and garlic over medium heat until peppers and onions are soft, about 5-6 minutes. Gently blot some of the moisture out. Place in a large bowl or in a food processor with the remaining ingredients (cumin, chili powder, garlic powder, smoked paprika, bread crumbs, cheese, eggs, worcestershire, ketchup, salt, and pepper). Stir or pulse everything together, then add the black beans. Mash with a fork or pulse the mixture, leaving some larger chunks of beans.`,
+      `Form into patties– about 1/3 cup of mixture in each.`,
+      `Place patties on a parchment paper lined baking sheet and bake at 375°F (191°C) for 10 minutes on each side, 20 minutes total.`,
+      `Serve with your favorite toppings. Store leftovers in the refrigerator for up to 5 days.`,
     ],
     nutrition: {
       calories: 275,

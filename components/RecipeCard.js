@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
   container: {
     height: hp("100%"),
     justifyContent: "space-between",
+    backgroundColor: "black",
   },
   image: {
     flex: 1,
