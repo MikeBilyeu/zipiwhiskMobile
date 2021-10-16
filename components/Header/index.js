@@ -1,6 +1,10 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const Header = (props) => {
   return (
@@ -21,7 +25,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingBottom: 15,
+    paddingBottom: hp("1%"),
   },
 });
 

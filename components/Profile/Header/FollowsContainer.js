@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
+    height: hp("7%"),
     paddingHorizontal: wp("4%"),
-    marginVertical: wp("2%"),
   },
 });
 

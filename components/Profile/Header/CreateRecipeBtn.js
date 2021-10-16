@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Image, Pressable, StyleSheet } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -9,16 +9,19 @@ import { useNavigation } from "@react-navigation/native";
 const CreateRecipeBtn = () => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() => navigation.navigate("CreateRecipe")}
-      activeOpacity={0.5}
-      style={styles.createRecipeBtn}
+      hitSlop={15}
+      style={({ pressed }) => [
+        { opacity: pressed ? 0.5 : 1 },
+        styles.createRecipeBtn,
+      ]}
     >
       <Image
         style={{ width: wp("7%"), height: wp("7%") }}
         source={require("../../../assets/createRecipe.png")}
       />
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

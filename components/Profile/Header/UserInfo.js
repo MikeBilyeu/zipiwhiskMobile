@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Pressable,
+} from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -12,10 +19,13 @@ const UserInfo = (props) => {
   const navigation = useNavigation();
   return (
     <View style={styles.userInfoContainer}>
-      <TouchableOpacity
+      <Pressable
+        style={({ pressed }) => [
+          { opacity: pressed ? 0.5 : 1 },
+          styles.backBtn,
+        ]}
+        hitSlop={20}
         onPress={() => navigation.goBack()}
-        activeOpacity={0.4}
-        style={styles.backBtn}
       >
         <Image
           source={require("../../../assets/arrow.png")}
@@ -25,7 +35,7 @@ const UserInfo = (props) => {
             transform: [{ rotate: "-90deg" }],
           }}
         />
-      </TouchableOpacity>
+      </Pressable>
       <View style={styles.usernameContainer}>
         <Text style={styles.usernameText}>@{props.user.username}</Text>
         <Text style={styles.fullNameText}>{props.user.fullname}</Text>
@@ -46,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: wp("5%"),
-    marginTop: 5,
+    paddingVertical: hp("1%"),
   },
   usernameContainer: {
     alignItems: "center",

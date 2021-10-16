@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, Text, Pressable } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -9,8 +9,12 @@ import { useNavigation } from "@react-navigation/native";
 const NumFollows = ({ text, num, username }) => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity
-      style={styles.numWrapper}
+    <Pressable
+      style={({ pressed }) => [
+        { opacity: pressed ? 0.5 : 1 },
+        styles.numWrapper,
+      ]}
+      hitSlop={{ left: 15, right: 15 }}
       onPress={() =>
         navigation.push("Follows", {
           screen: text,
@@ -21,7 +25,7 @@ const NumFollows = ({ text, num, username }) => {
     >
       <Text style={styles.num}>{num}</Text>
       <Text style={styles.numText}>{text}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -29,6 +33,7 @@ const styles = StyleSheet.create({
   numWrapper: {
     justifyContent: "center",
     alignItems: "center",
+    height: "100%",
   },
   num: {
     fontFamily: "AvenirNextBold",

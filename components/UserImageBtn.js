@@ -1,14 +1,18 @@
 import React from "react";
-import { TouchableOpacity, Image } from "react-native";
+import { Image, Pressable } from "react-native";
 import defaultImage from "../assets/userImage.png";
 
 const UserImageBtn = (props) => (
-  <TouchableOpacity onPress={props.handleImagePress} activeOpacity={0.5}>
+  <Pressable
+    onPress={props.handleImagePress}
+    style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }]}
+    hitSlop={20}
+  >
     <Image
       style={[{ borderRadius: 50 }, props.styles]}
       source={props.uri ? { uri: props.uri } : defaultImage}
     />
-  </TouchableOpacity>
+  </Pressable>
 );
 
 export default UserImageBtn;

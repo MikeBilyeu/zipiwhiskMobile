@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, ScrollView, Text } from "react-native";
+import { StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -8,13 +8,18 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const renderCategories = (categories, selected, setSelected) =>
   categories.map((categoryName) => (
-    <TouchableOpacity
-      style={[styles.btn, categoryName === selected && styles.btnSelected]}
+    <Pressable
       onPress={() => {
         categoryName === selected
           ? setSelected(null)
           : setSelected(categoryName);
       }}
+      hitSlop={15}
+      style={({ pressed }) => [
+        { opacity: pressed ? 0.5 : 1 },
+        styles.btn,
+        categoryName === selected && styles.btnSelected,
+      ]}
       key={categoryName}
     >
       <Text
@@ -25,7 +30,7 @@ const renderCategories = (categories, selected, setSelected) =>
       >
         {categoryName}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   ));
 
 const CategorySwipe = (props) => {
@@ -48,7 +53,7 @@ const CategorySwipe = (props) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingVertical: wp("2%"),
+    paddingVertical: hp("1%"),
     maxHeight: 60,
   },
   btn: {
