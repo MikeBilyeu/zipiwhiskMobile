@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   backBtn: {
     height: wp("13%"),
     width: wp("13%"),
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
   },
 });

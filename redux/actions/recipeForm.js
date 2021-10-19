@@ -1,12 +1,10 @@
 import {
   MEDIA_CHANGE,
+  CAPTION_CHANGE,
   RECIPE_NAME_CHANGE,
   SERVINGS_CHANGE,
   INGREDIENTS_CHANGE,
   INSTRUCTIONS_CHANGE,
-  TIME_HR_CHANGE,
-  TIME_MIN_CHANGE,
-  KEYWORDS_CHANGE,
   CATEGORIES_CHANGE,
   SUBMIT_RECIPE_REQUEST,
   SUBMIT_RECIPE_SUCCESS,
@@ -15,10 +13,13 @@ import {
 import axios from "axios";
 //import s3Upload from "../utils/s3Upload";
 
-import { parseHourInput, parseMinuteInput } from "../../utils/parseTimeInput";
-
 export const changeMedia = (value) => ({
   type: MEDIA_CHANGE,
+  payload: value,
+});
+
+export const captionChange = (value) => ({
+  type: CAPTION_CHANGE,
   payload: value,
 });
 
@@ -39,21 +40,6 @@ export const ingredientsChange = (value) => ({
 
 export const instructionsChange = (value) => ({
   type: INSTRUCTIONS_CHANGE,
-  payload: value,
-});
-
-export const timeHrChange = (value) => ({
-  type: TIME_HR_CHANGE,
-  payload: value,
-});
-
-export const timeMinChange = (value) => ({
-  type: TIME_MIN_CHANGE,
-  payload: value,
-});
-
-export const keywordsChange = (value) => ({
-  type: KEYWORDS_CHANGE,
   payload: value,
 });
 

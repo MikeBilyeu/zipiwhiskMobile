@@ -16,13 +16,11 @@ import {
 
 import {
   changeMedia,
+  captionChange,
   recipeNameChange,
   servingsChange,
   ingredientsChange,
   instructionsChange,
-  timeHrChange,
-  timeMinChange,
-  keywordsChange,
   categoriesChange,
   submitRecipe,
 } from "../../redux/actions/recipeForm";
@@ -30,7 +28,6 @@ import {
 import ScreenHeader from "../ScreenHeader";
 import MediaInput from "./MediaInput";
 import Input from "./Input";
-import TimeInput from "./TimeInput";
 import Categories from "./Categories";
 
 const CreateRecipeScreen = (props) => {
@@ -70,6 +67,14 @@ const CreateRecipeScreen = (props) => {
             handleOnChange={props.changeMedia}
           />
           <Input
+            name="Caption"
+            placeholder="Add a caption..."
+            returnKeyType="next"
+            value={props.recipeForm.caption}
+            setValue={props.captionChange}
+            onFocus={() => setInputFocused(true)}
+          />
+          <Input
             name="Recipe Name"
             placeholder="Add a recipe name..."
             returnKeyType="next"
@@ -103,25 +108,6 @@ const CreateRecipeScreen = (props) => {
             value={props.recipeForm.instructions}
             setValue={props.instructionsChange}
             multiline={true}
-            onFocus={() => setInputFocused(true)}
-          />
-          <TimeInput
-            name="Total Time"
-            placeholder="00"
-            keyboardType="number-pad"
-            timeHrValue={props.recipeForm.timeHours}
-            timeMinValue={props.recipeForm.timeMins}
-            timeHrChange={props.timeHrChange}
-            timeMinChange={props.timeMinChange}
-            onFocus={() => setInputFocused(true)}
-            maxLength={2}
-          />
-          <Input
-            name="Keywords"
-            placeholder="Add keywords..."
-            info="(separate with comma)"
-            value={props.recipeForm.keywords}
-            setValue={props.keywordsChange}
             onFocus={() => setInputFocused(true)}
           />
           <Categories
@@ -179,13 +165,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   changeMedia,
+  captionChange,
   recipeNameChange,
   servingsChange,
   ingredientsChange,
   instructionsChange,
-  timeHrChange,
-  timeMinChange,
-  keywordsChange,
   categoriesChange,
   submitRecipe,
 };
