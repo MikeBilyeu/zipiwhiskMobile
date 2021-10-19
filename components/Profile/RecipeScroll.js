@@ -1,12 +1,24 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import RecipeCardSmall from "../RecipeCardSmall";
 import data from "../../data";
 
 const RecipeScroll = (props) => {
+  const navigation = useNavigation();
+
   const renderItem = ({ index, item }) => (
-    <RecipeCardSmall item={item} index={index} />
+    <RecipeCardSmall
+      item={item}
+      handlePress={() =>
+        navigation.push("Recipe", {
+          index,
+          title: "Saved Recipes",
+          subTitle: null,
+        })
+      }
+    />
   );
   return (
     <FlatList

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Image, Pressable } from "react-native";
+import { StyleSheet, Image, Pressable, Text } from "react-native";
 import { connect } from "react-redux";
 import {
   widthPercentageToDP as wp,
@@ -40,6 +40,7 @@ const Header = (props) => {
         hitSlop={{ bottom: 15 }}
         onPress={props.handleScrollTop}
       />
+
       <Pressable
         onPress={() => navigation.navigate("Profile")}
         hitSlop={{ bottom: 15 }}

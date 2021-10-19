@@ -16,8 +16,8 @@ const FollowScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScreenHeader
-        title={props.route.params.screen}
-        subTitle={`${props.route.params.num} - ${props.route.params.username}`}
+        title={`@${props.route.params.username}`}
+        subTitle={`${props.route.params.screen} (${props.route.params.num})`}
       />
       <FlatList
         style={styles.listContainer}

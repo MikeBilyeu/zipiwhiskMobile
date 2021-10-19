@@ -5,16 +5,14 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 
 import Header from "../Header";
 import SearchBar from "./SearchBar";
-import ResultsBtn from "./ResultsBtn";
 import CategorySwipe from "../Profile/Header/CategorySwipe";
 import Users from "../FollowScreen/Users";
 import RecipeCardSmall from "../RecipeCardSmall";
 import data from "../../data";
-
-const renderRecipes = ({ item }) => <RecipeCardSmall item={item} />;
 
 const renderUsers = ({ item }) => (
   <Users
@@ -24,9 +22,23 @@ const renderUsers = ({ item }) => (
   />
 );
 const SearchScreen = ({}) => {
+  const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState("");
   const [resultsDisplay, setResultsDisplay] = useState("Recipes");
+
+  const renderRecipes = ({ index, item }) => (
+    <RecipeCardSmall
+      item={item}
+      handlePress={() =>
+        navigation.push("Recipe", {
+          index,
+          title: search || "Search",
+          subTitle: search ? "Search" : null,
+        })
+      }
+    />
+  );
 
   return (
     <SafeAreaView style={styles.container}>

@@ -1,9 +1,6 @@
 import React from "react";
 import {
   StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
   ImageBackground,
   Dimensions,
   Pressable,
@@ -14,20 +11,16 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { useNavigation } from "@react-navigation/native";
+
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { parseNum } from "./utils";
 
 const screenWidth = Dimensions.get("screen").width;
 
-const RecipeCardSmall = ({ item, index }) => {
-  const navigation = useNavigation();
+const RecipeCardSmall = ({ item, handlePress }) => {
   return (
-    <Pressable
-      onPress={() => navigation.push("Recipe", { index })}
-      style={styles.container}
-    >
+    <Pressable onPress={handlePress} style={styles.container}>
       {item.media_type === "video" ? (
         <Video
           source={{ uri: item.media_url }}

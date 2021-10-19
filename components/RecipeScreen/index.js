@@ -29,7 +29,12 @@ const RecipeScreen = (props) => {
   return (
     <>
       <StatusBar style="light" />
-      {!toggleRecipe && <Header title="Saved Recipes" />}
+      {!toggleRecipe && (
+        <Header
+          title={props.route.params.title}
+          subTitle={props.route.params.subTitle}
+        />
+      )}
       <FlatList
         data={data}
         numColumns={1}

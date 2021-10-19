@@ -35,6 +35,15 @@ const Header = (props) => {
         <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
           {props.title}
         </Text>
+        {props.subTitle && (
+          <Text
+            style={styles.subTitleText}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {props.subTitle}
+          </Text>
+        )}
       </View>
     </LinearGradient>
   );
