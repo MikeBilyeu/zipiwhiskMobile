@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Image, Pressable } from "react-native";
+import { StyleSheet, Image, Pressable, Text, View } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -8,7 +8,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Header = () => {
+const Header = (props) => {
   const navigation = useNavigation();
 
   return (
@@ -31,6 +31,11 @@ const Header = () => {
           style={styles.headerBtnIcon}
         />
       </Pressable>
+      <View style={styles.titleWrapper}>
+        <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
+          {props.title}
+        </Text>
+      </View>
     </LinearGradient>
   );
 };
@@ -43,17 +48,38 @@ const styles = StyleSheet.create({
     height: hp("20%"),
     paddingTop: hp("4%"),
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   headerBtn: {
     width: wp("20%"),
     height: wp("15%"),
     justifyContent: "center",
     alignItems: "center",
+    position: "absolute",
+    left: 0,
+    top: hp("5%"),
   },
   headerBtnIcon: {
     width: wp("4%"),
     height: wp("4%"),
+  },
+  titleWrapper: {
+    height: wp("15%"),
+    justifyContent: "center",
+    marginTop: hp("1%"),
+  },
+  titleText: {
+    textAlign: "center",
+    fontFamily: "AvenirNextDemiBold",
+    fontSize: wp("5%"),
+    color: "#fff",
+    marginBottom: 2,
+  },
+  subTitleText: {
+    textAlign: "center",
+    fontFamily: "AvenirNextRegular",
+    fontSize: wp("3.5"),
+    color: "#fff",
   },
 });
 

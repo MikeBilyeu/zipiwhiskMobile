@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Dimensions,
+  Pressable,
 } from "react-native";
 import { Video } from "expo-av";
 
@@ -20,12 +21,11 @@ import { parseNum } from "./utils";
 
 const screenWidth = Dimensions.get("screen").width;
 
-const RecipeCardSmall = ({ item }) => {
+const RecipeCardSmall = ({ item, index }) => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity
-      onPress={() => navigation.push("Recipe", { data: item })}
-      activeOpacity={1}
+    <Pressable
+      onPress={() => navigation.push("Recipe", { index })}
       style={styles.container}
     >
       {item.media_type === "video" ? (
@@ -53,7 +53,7 @@ const RecipeCardSmall = ({ item }) => {
           style={styles.icon}
         />
       </View> */}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

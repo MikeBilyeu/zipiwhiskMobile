@@ -5,7 +5,9 @@ import RecipeCardSmall from "../RecipeCardSmall";
 import data from "../../data";
 
 const RecipeScroll = (props) => {
-  const renderItem = ({ item }) => <RecipeCardSmall item={item} />;
+  const renderItem = ({ index, item }) => (
+    <RecipeCardSmall item={item} index={index} />
+  );
   return (
     <FlatList
       style={styles.listContainer}

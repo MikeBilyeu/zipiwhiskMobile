@@ -15,11 +15,7 @@ const renderCategories = (categories, selected, setSelected) =>
           : setSelected(categoryName);
       }}
       hitSlop={15}
-      style={({ pressed }) => [
-        { opacity: pressed ? 0.5 : 1 },
-        styles.btn,
-        categoryName === selected && styles.btnSelected,
-      ]}
+      style={[styles.btn, categoryName === selected && styles.btnSelected]}
       key={categoryName}
     >
       <Text

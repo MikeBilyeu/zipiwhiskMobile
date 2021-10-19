@@ -11,7 +11,7 @@ import data from "../../data";
 const Home = () => {
   useKeepAwake();
   const [toggleRecipe, setToggleRecipe] = useState(false);
-  const [recipeIndex, setRecipeIndex] = useState(null);
+  const [recipeIndex, setRecipeIndex] = useState(0);
   const handleLoadMore = () => console.log("load more");
 
   const flatListRef = useRef();
@@ -20,18 +20,16 @@ const Home = () => {
       flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
   };
 
-  const renderItem = (props) => {
-    return (
-      <RecipeCard
-        data={props.item}
-        handleSinglePress={() => {
-          setToggleRecipe(!toggleRecipe);
-          setRecipeIndex(props.index);
-        }}
-        toggleRecipe={toggleRecipe}
-      />
-    );
-  };
+  const renderItem = (props) => (
+    <RecipeCard
+      data={props.item}
+      handleSinglePress={() => {
+        setToggleRecipe(!toggleRecipe);
+        setRecipeIndex(props.index);
+      }}
+      toggleRecipe={toggleRecipe}
+    />
+  );
   return (
     <>
       <StatusBar style="light" />

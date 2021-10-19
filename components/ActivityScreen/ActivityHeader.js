@@ -51,6 +51,10 @@ const styles = StyleSheet.create({
     fontSize: wp("5%"),
     fontFamily: "AvenirNextDemiBold",
     color: "#313131",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
 
   backBtn: {
