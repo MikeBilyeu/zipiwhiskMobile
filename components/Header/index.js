@@ -9,9 +9,13 @@ import {
 const Header = (props) => {
   return (
     <LinearGradient
-      colors={["rgba(255,255,255,0)", "rgba(255,255,255,1)"]}
+      colors={[
+        "rgba(255,255,255,0)",
+        "rgba(255,255,255,.9)",
+        "rgba(255,255,255,1)",
+      ]}
       start={[0, 1]}
-      end={[0, 0.8]}
+      end={[0, 0.2]}
       style={styles.gradientWrapper}
     >
       {props.children}

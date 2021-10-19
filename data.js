@@ -127,8 +127,7 @@ const data = [
       id: 10,
     },
     media_url:
-      //"https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620512318/Recipes/pexels-kampus-production-6603824.mp4",
-      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620512318/Recipes/pexels-kampus-production-6603824.jpg",
+      "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1593983807/Recipes/spipqzx6wsmjgwbzjrpy.jpg",
     media_type: "image",
     recipeYield: 4,
     ingredientList: [
@@ -195,7 +194,7 @@ const data = [
       id: 10,
     },
     media_url:
-      "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1602904544/Recipes/fpx1wp8y8asygg8oymfx.jpg",
+      "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1602904544/Recipes/cjr3bfuxw0vderdmnmmx.jpg",
     media_type: "photo",
     recipeYield: 4,
     ingredientList: [
@@ -398,8 +397,7 @@ const data = [
       id: 10,
     },
     media_url:
-      //"https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.mp4",
-      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.jpg",
+      "https://res.cloudinary.com/mikebilyeuimg/image/upload/c_scale,h_1500,q_auto:good/v1593983807/Recipes/bx1g2dpnw4ecbssxsfgl.jpg",
     media_type: "image",
     recipeYield: 4,
     ingredientList: [
