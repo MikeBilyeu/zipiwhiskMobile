@@ -22,13 +22,23 @@ const screenHeight = Dimensions.get("screen").height;
 const Footer = (props) => {
   const navigation = useNavigation();
   const [isFollowing, setIsFollowing] = useState(false);
+  const [fullCaption, setFullCaption] = useState(false);
+  const [captionHeight, setCaptionHeight] = useState(0);
 
   return (
     <LinearGradient
-      colors={["rgba(0,0,0,.8)", "transparent"]}
+      colors={["rgba(0,0,0,.9)", "transparent"]}
       start={[0, 1]}
       end={[0, 0]}
-      style={styles.gradientWrapper}
+      style={[
+        styles.gradientWrapper,
+        {
+          height: fullCaption ? wp("72%") + captionHeight : wp("72%"),
+          top: fullCaption
+            ? screenHeight - (wp("72%") + captionHeight)
+            : screenHeight - wp("72%"),
+        },
+      ]}
     >
       <View style={styles.footerBtnContainer}>
         <Pressable
@@ -95,20 +105,30 @@ const Footer = (props) => {
           {props.title}
         </Text>
         <Pressable
-          style={({ pressed }) => [
-            { opacity: pressed ? 0.5 : 1 },
-            styles.captionBtn,
-          ]}
-          hitSlop={{ top: hp("1%"), bottom: hp("3%") }}
-          onPress={() => console.log("toggle full caption btn")}
+          style={styles.captionBtn}
+          hitSlop={{ top: 32, bottom: 500, right: 500, left: 500 }}
+          onPress={() => setFullCaption(!fullCaption)}
+          onLayout={(event) => {
+            let { height } = event.nativeEvent.layout;
+            setCaptionHeight(height);
+          }}
         >
           <Text
             style={styles.captionText}
-            numberOfLines={1}
+            numberOfLines={fullCaption ? 20 : 1}
             ellipsizeMode="tail"
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit
+            dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
+            ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </Text>
         </Pressable>
         <Text style={styles.timeAgo}>1 day ago</Text>
@@ -224,6 +244,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontFamily: "AvenirNextRegular",
     fontSize: wp("3.4%"),
+    lineHeight: wp("4%"),
   },
 
   timeAgo: {
