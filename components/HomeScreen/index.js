@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
 import { StatusBar } from "expo-status-bar";
 
@@ -31,7 +31,7 @@ const Home = () => {
     />
   );
   return (
-    <>
+    <View style={{ backgroundColor: "#000" }}>
       <StatusBar style="light" />
       {!toggleRecipe && <Header handleScrollTop={toTop} />}
       <FlatList
@@ -53,7 +53,7 @@ const Home = () => {
           setToggleRecipe={setToggleRecipe}
         />
       )}
-    </>
+    </View>
   );
 };
 

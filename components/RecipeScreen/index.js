@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { useKeepAwake } from "expo-keep-awake";
-import { FlatList, Dimensions } from "react-native";
+import { FlatList, Dimensions, View } from "react-native";
 
 import RecipeCard from "../RecipeCard";
 import RecipeScroll from "./RecipeScroll";
@@ -27,7 +27,7 @@ const RecipeScreen = (props) => {
   );
 
   return (
-    <>
+    <View style={{ backgroundColor: "#000" }}>
       <StatusBar style="light" />
       {!toggleRecipe && (
         <Header
@@ -59,7 +59,7 @@ const RecipeScreen = (props) => {
           setToggleRecipe={setToggleRecipe}
         />
       )}
-    </>
+    </View>
   );
 };
 
