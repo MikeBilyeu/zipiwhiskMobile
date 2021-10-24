@@ -56,9 +56,10 @@ const Footer = (props) => {
         </Pressable>
 
         <Pressable
-          onPress={() =>
-            navigation.navigate("Comments", { title: props.title })
-          }
+          onPress={() => {
+            console.log("Open Comments");
+            props.setOpenComments(true);
+          }}
           style={styles.footerBtn}
           hitSlop={{ right: 20 }}
         >

@@ -6,11 +6,13 @@ import { StatusBar } from "expo-status-bar";
 import Header from "./Header";
 import RecipeCard from "../RecipeCard";
 import RecipeScroll from "../RecipeScreen/RecipeScroll";
+import Comments from "../RecipeScreen/Comments";
 import data from "../../data";
 
 const Home = () => {
   useKeepAwake();
   const [toggleRecipe, setToggleRecipe] = useState(false);
+  const [openComments, setOpenComments] = useState(false);
   const [recipeIndex, setRecipeIndex] = useState(0);
   const handleLoadMore = () => console.log("load more");
 
@@ -28,6 +30,8 @@ const Home = () => {
         setRecipeIndex(props.index);
       }}
       toggleRecipe={toggleRecipe}
+      openComments={openComments}
+      setOpenComments={setOpenComments}
     />
   );
   return (
@@ -45,7 +49,7 @@ const Home = () => {
         initialNumToRender={10}
         pagingEnabled
         showsVerticalScrollIndicator={false}
-        scrollEnabled={!toggleRecipe}
+        scrollEnabled={!toggleRecipe || !openComments}
       />
       {toggleRecipe && recipeIndex !== null && (
         <RecipeScroll
@@ -53,6 +57,7 @@ const Home = () => {
           setToggleRecipe={setToggleRecipe}
         />
       )}
+      {openComments && <Comments />}
     </View>
   );
 };

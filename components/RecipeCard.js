@@ -8,7 +8,13 @@ import {
 
 import Footer from "./RecipeScreen/Footer";
 
-const RecipeCard = ({ data, handleSinglePress, toggleRecipe }) => {
+const RecipeCard = ({
+  data,
+  handleSinglePress,
+  openComments,
+  setOpenComments,
+  toggleRecipe,
+}) => {
   const [saved, setSaved] = useState(false);
 
   const [lastTap, setLastTap] = useState(0);
@@ -45,16 +51,15 @@ const RecipeCard = ({ data, handleSinglePress, toggleRecipe }) => {
   };
 
   const handlePressOut = (event, gestureState) => {
-    handleTap(event, gestureState); // handles the single or double click
+    openComments ? setOpenComments(false) : handleTap(event, gestureState); // handles the single or double click
   };
 
   const responder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponder: () => true,
 
-    onPanResponderRelease: (event, gestureState) => {
-      handlePressOut(event, gestureState);
-    },
+    onPanResponderRelease: (event, gestureState) =>
+      handlePressOut(event, gestureState),
   });
   return (
     <View style={styles.container} {...responder.panHandlers}>
@@ -87,6 +92,8 @@ const RecipeCard = ({ data, handleSinglePress, toggleRecipe }) => {
           title={data.title}
           saved={saved}
           setSaved={setSaved}
+          handleCommentPress={setOpenComments}
+          setOpenComments={setOpenComments}
         />
       )}
     </View>

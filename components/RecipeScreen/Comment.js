@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,13 +6,20 @@ import {
   Text,
   Image,
   TouchableWithoutFeedback,
+  Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import moment from "moment";
 
 const Comment = ({ c }) => {
   const navigation = useNavigation();
+  const [liked, setLiked] = useState(c.liked);
   return (
     <View
       key={c.id.toString()}
@@ -42,24 +49,34 @@ const Comment = ({ c }) => {
       </View>
 
       <View style={styles.commentInfoContainer}>
-        <Text style={[styles.infoText, { color: "#B7B7B7" }]}>
+        <Text style={[styles.infoText, { color: "rgba(255,255,255, .3)" }]}>
           {moment(c.created_at).fromNow()}
         </Text>
-        {c.numLikes > 0 && (
-          <TouchableOpacity style={{ flexDirection: "row" }}>
-            <Image
-              source={
-                c.liked
-                  ? require("../../assets/redLike.png")
-                  : require("../../assets/greyLike.png")
-              }
-              style={{ width: 10, height: 10, marginHorizontal: 5 }}
-            />
+
+        <Pressable
+          onPress={() => setLiked(!liked)}
+          style={{
+            flexDirection: "row",
+          }}
+          hitSlop={10}
+        >
+          <Ionicons
+            name="heart"
+            size={wp("2.75%")}
+            color={liked ? "#FF2121" : "#464646"}
+            style={{
+              width: wp("3%"),
+              height: wp("3%"),
+              marginHorizontal: wp("1%"),
+            }}
+          />
+          {c.numLikes > 0 && (
             <Text style={styles.infoText}>
               {c.numLikes} Like{c.numLikes > 1 ? "s" : ""}
             </Text>
-          </TouchableOpacity>
-        )}
+          )}
+        </Pressable>
+
         <TouchableOpacity style={styles.replyBtn}>
           <Text style={[styles.infoText, styles.replyBtnText]}>Reply</Text>
         </TouchableOpacity>
@@ -73,16 +90,16 @@ const Comment = ({ c }) => {
 
 const styles = StyleSheet.create({
   userCommentContainer: {
-    marginVertical: 10,
+    marginVertical: hp("2%"),
   },
   userCommentContainerChild: {
-    marginLeft: 20,
-    marginVertical: 5,
+    marginLeft: wp("5%"),
+    marginVertical: wp("1%"),
   },
   userImage: {
-    height: 30,
-    width: 30,
-    margin: 5,
+    height: wp("8%"),
+    width: wp("8%"),
+    margin: wp("2%"),
     marginLeft: 0,
     resizeMode: "stretch",
     borderRadius: 100,
@@ -92,24 +109,24 @@ const styles = StyleSheet.create({
   },
   commentWrapperText: {
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: hp("1%"),
     flex: 1,
   },
   commentText: {
-    color: "#313131",
+    color: "#FFF",
     fontFamily: "AvenirNextRegular",
-    fontSize: 15,
-    lineHeight: 18,
+    fontSize: wp("3.4%"),
+    lineHeight: wp("4%"),
   },
   commentInfoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 5,
+    marginTop: hp("1%"),
   },
   infoText: {
-    fontSize: 13,
+    fontSize: wp("3%"),
     fontFamily: "AvenirNextRegular",
-    color: "#707070",
+    color: "#fff",
   },
 });
 

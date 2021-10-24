@@ -11,7 +11,6 @@ import ActivityScreen from "./ActivityScreen";
 
 import Nav from "./Nav";
 import RecipeScreen from "./RecipeScreen";
-import Comments from "./Comments";
 import FollowScreen from "./FollowScreen";
 
 import VisitProfileScreen from "./Profile/VisitProfileScreen";
@@ -47,7 +46,6 @@ const HomeStack = () => {
 
       <Stack.Screen name="VisitProfile" component={VisitProfileScreen} />
       <Stack.Screen name="Recipe" component={RecipeScreen} />
-      <Stack.Screen name="Comments" component={Comments} />
       <Stack.Screen name="Results" component={ResultsScreen} />
       <Stack.Screen name="Follows" component={FollowScreen} />
     </Stack.Navigator>
