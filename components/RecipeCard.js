@@ -80,7 +80,7 @@ const RecipeCard = ({
         />
       )}
 
-      {!toggleRecipe && (
+      {!toggleRecipe && !openComments && (
         <Footer
           numLikes={data.numLikes}
           numComments={data.numComments}

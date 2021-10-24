@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: hp("75%"),
     zIndex: 2,
-    backgroundColor: "#000",
+    backgroundColor: "rgba(0,0,0,.97)",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
   },
