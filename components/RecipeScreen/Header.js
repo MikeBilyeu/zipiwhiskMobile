@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   titleText: {
     textAlign: "center",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("5%"),
+    fontSize: wp("4%"),
     color: "#fff",
     marginBottom: 2,
   },
