@@ -39,9 +39,11 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
   },
   title: {
-    color: "#fff",
     textAlign: "center",
-    marginBottom: hp("3%"),
+    fontFamily: "AvenirNextDemiBold",
+    fontSize: wp("4%"),
+    color: "#fff",
+    marginBottom: hp("1%"),
   },
 });
 
