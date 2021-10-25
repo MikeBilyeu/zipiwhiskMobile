@@ -19,6 +19,7 @@ const Home = () => {
   const flatListRef = useRef();
   const toTop = () => {
     !toggleRecipe &&
+      !openComments &&
       flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
   };
 

@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: hp("3%"),
     width: "100%",
-    height: hp("75%"),
+    height: hp("80%"),
     zIndex: 2,
     backgroundColor: "rgba(0,0,0,.97)",
     borderTopLeftRadius: 30,
