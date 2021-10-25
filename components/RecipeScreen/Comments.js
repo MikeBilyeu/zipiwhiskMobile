@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, FlatList, Text } from "react-native";
+import { StyleSheet, View, ScrollView, FlatList, Text } from "react-native";
 
 import Input from "./Input";
 import Comment from "./Comment";
@@ -13,27 +13,41 @@ const renderComment = ({ item }) => <Comment c={item} />;
 
 const Comments = (props) => {
   return (
-    <View style={styles.wrapper}>
-      <Text style={styles.title}>Comments</Text>
-      <FlatList
-        data={data[0].comments}
-        renderItem={renderComment}
-        keyExtractor={(item) => item.id.toString()}
-      />
+    <>
+      <ScrollView
+        style={styles.container}
+        bounces={false}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.wrapper}>
+          <Text style={styles.title}>Comments</Text>
+          <FlatList
+            data={data[0].comments}
+            renderItem={renderComment}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        </View>
+      </ScrollView>
       <Input />
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     position: "absolute",
-    bottom: 0,
+    bottom: hp("12%"),
+    width: "100%",
+    height: hp("55%"),
+    zIndex: 2,
+    borderColor: "#fff",
+    paddingTop: 6,
+  },
+
+  wrapper: {
+    marginTop: hp("60%"),
     paddingHorizontal: 10,
     paddingVertical: hp("3%"),
-    width: "100%",
-    height: hp("80%"),
-    zIndex: 2,
     backgroundColor: "rgba(0,0,0,.97)",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,

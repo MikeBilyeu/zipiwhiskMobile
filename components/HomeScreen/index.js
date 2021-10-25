@@ -50,7 +50,7 @@ const Home = () => {
         initialNumToRender={10}
         pagingEnabled
         showsVerticalScrollIndicator={false}
-        scrollEnabled={!toggleRecipe || !openComments}
+        scrollEnabled={!openComments}
       />
       {toggleRecipe && recipeIndex !== null && (
         <RecipeScroll

@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.25,
     borderColor: "rgba(256,256,256,.1)",
     backgroundColor: "#000",
+    zIndex: 3,
   },
   inputContainer: {
     flexDirection: "row",
