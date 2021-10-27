@@ -1,56 +1,99 @@
-import React from "react";
-import { StyleSheet, View, ScrollView, FlatList, Text } from "react-native";
-
-import Input from "./Input";
-import Comment from "./Comment";
-import data from "../../data.js";
+import React, { useRef } from "react";
+import {
+  StyleSheet,
+  View,
+  PanResponder,
+  FlatList,
+  Text,
+  Animated,
+} from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
+import Input from "./Input";
+import Comment from "./Comment";
+import Animations from "./Animations";
+import data from "../../data.js";
+
 const renderComment = ({ item }) => <Comment c={item} />;
 
 const Comments = (props) => {
+  const pan = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
+  let panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: (e, g) => {
+        pan.setOffset({
+          x: 0,
+          y: 0,
+        });
+      },
+      onPanResponderMove: (e, gesture) => {
+        // Prevent over pull down
+        if (gesture.dy > 0) {
+          return Animated.event([null, { dy: pan.y }], {
+            useNativeDriver: false,
+          })(e, gesture);
+        }
+      },
+      onPanResponderRelease: (e, { dy, vy }) => {
+        // Swipe velocity threshold
+        if (vy > 1 || dy > hp("35%")) {
+          Animated.decay(pan, {
+            velocity: { x: 0, y: vy > 1 ? 14 : 9 },
+            deceleration: 0.97,
+            useNativeDriver: true,
+          }).start(() => props.setOpenComments(false));
+        } else {
+          pan.flattenOffset();
+          Animated.spring(pan.y, {
+            toValue: 0,
+            friction: 9,
+            useNativeDriver: true,
+          }).start(() => {
+            pan.setValue({ x: 0, y: 0 });
+          });
+        }
+      },
+    })
+  ).current;
+
+  //Only use panResponder when displaying categories
+  let panHandlers = panResponder.panHandlers;
+
+  //useEffect(() => Animations(dropDownOpen, pan, mount, setMount));
   return (
     <>
-      <ScrollView
-        style={styles.container}
-        bounces={false}
-        showsVerticalScrollIndicator={false}
+      <Animated.View
+        style={[styles.wrapper, { transform: [{ translateY: pan.y }] }]}
+        {...panHandlers}
       >
-        <View style={styles.wrapper}>
-          <Text style={styles.title}>Comments</Text>
-          <FlatList
-            data={data[0].comments}
-            renderItem={renderComment}
-            keyExtractor={(item) => item.id.toString()}
-          />
-        </View>
-      </ScrollView>
-      <Input />
+        <Text style={styles.title}>Comments</Text>
+        <FlatList
+          data={data[0].comments}
+          renderItem={renderComment}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </Animated.View>
+      <Input style={{ transform: [{ translateY: pan.y }] }} />
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    position: "absolute",
-    bottom: hp("12%"),
-    width: "100%",
-    height: hp("55%"),
-    zIndex: 2,
-    borderColor: "#fff",
-    paddingTop: 6,
-  },
-
   wrapper: {
-    marginTop: hp("60%"),
     paddingHorizontal: 10,
     paddingVertical: hp("3%"),
-    backgroundColor: "rgba(0,0,0,.97)",
+    backgroundColor: "rgba(0,0,0,1)",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: hp("75%"),
+    zIndex: 2,
   },
   title: {
     textAlign: "center",

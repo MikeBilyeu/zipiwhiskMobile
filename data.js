@@ -61,7 +61,7 @@ const data = [
         comment: "Nice, I'm sharing this recipe with everyone.",
         user: {
           id: 10,
-          username: "zipiwhiskuser943",
+          username: "whskuser943",
           image: "https://randomuser.me/api/portraits/men/55.jpg",
         },
         parent_comment_id: null,
@@ -76,14 +76,14 @@ const data = [
           "I made this last night and Loved it! Combine the flour and pepper in a bowl, add the beef and toss to coat well.",
         user: {
           id: 10,
-          username: "mikeb",
+          username: "makaii99",
           image: "https://randomuser.me/api/portraits/men/4.jpg",
         },
         parent_comment_id: null,
         childComments: [
           {
             id: 7987987897897,
-            comment: `@mikeb I'm gonna make this ASAP, Combine the flour and pepper in a bowl, add the beef and toss to coat well.`,
+            comment: `@makaii99 I'm gonna make this ASAP, Combine the flour and pepper in a bowl, add the beef and toss to coat well.`,
             user: {
               id: 10,
               username: "joe94",

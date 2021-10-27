@@ -5,6 +5,7 @@ import {
   TextInput,
   Image,
   Pressable,
+  Animated,
   Text,
 } from "react-native";
 import { connect } from "react-redux";
@@ -18,7 +19,13 @@ const Input = (props) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <View style={[styles.wrapper, { bottom: isFocused ? hp("38.5%") : 0 }]}>
+    <Animated.View
+      style={[
+        styles.wrapper,
+        { bottom: isFocused ? hp("38.5%") : 0 },
+        props.style,
+      ]}
+    >
       <View style={styles.inputContainer}>
         <Image source={{ uri: props.user.image_url }} style={styles.icon} />
         <TextInput
@@ -39,7 +46,7 @@ const Input = (props) => {
           <Text style={styles.postBtnText}>Post</Text>
         </Pressable>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

@@ -56,11 +56,11 @@ const Footer = (props) => {
         </Pressable>
 
         <Pressable
-          onPress={() => {
-            console.log("Open Comments");
-            props.setOpenComments(true);
-          }}
-          style={styles.footerBtn}
+          onPress={() => props.setOpenComments(true)}
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1 },
+            styles.footerBtn,
+          ]}
           hitSlop={{ right: 20 }}
         >
           <Ionicons

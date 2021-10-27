@@ -58,7 +58,7 @@ const Home = () => {
           setToggleRecipe={setToggleRecipe}
         />
       )}
-      {openComments && <Comments />}
+      {openComments && <Comments setOpenComments={setOpenComments} />}
     </View>
   );
 };
