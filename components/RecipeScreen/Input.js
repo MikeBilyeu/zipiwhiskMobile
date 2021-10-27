@@ -33,7 +33,8 @@ const Input = (props) => {
           onChangeText={(text) => setText(text)}
           value={text}
           clearButtonMode="never"
-          selectionColor="#464646"
+          selectionColor="#fff"
+          placeholderTextColor="#464646"
           placeholder="Add a Comment..."
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -88,8 +89,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "AvenirNextRegular",
     height: hp("6.5%"),
-    paddingLeft: 50,
-    paddingRight: 10,
+    paddingLeft: wp("15%"),
+    paddingRight: wp("15%"),
     textAlign: "left",
   },
   postBtn: {

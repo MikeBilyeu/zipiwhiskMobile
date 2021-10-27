@@ -20,9 +20,15 @@ import moment from "moment";
 const Comment = ({ c }) => {
   const navigation = useNavigation();
   const [liked, setLiked] = useState(c.liked);
+  const [numLikes, setNumLikes] = useState(c.numLikes);
+
+  const handleLikePress = () => {
+    setLiked(!liked);
+    liked ? setNumLikes(numLikes - 1) : setNumLikes(numLikes + 1);
+  };
+
   return (
     <View
-      key={c.id.toString()}
       style={[
         styles.userCommentContainer,
         c.parent_comment_id && styles.userCommentContainerChild,
@@ -41,7 +47,7 @@ const Comment = ({ c }) => {
               style={[styles.commentText, { fontFamily: "AvenirNextDemiBold" }]}
               onPress={() => navigation.navigate("VisitProfile")}
             >
-              {c.user.username + " "}
+              {c.user.username + "  "}
             </Text>
             {c.comment}
           </Text>
@@ -54,47 +60,50 @@ const Comment = ({ c }) => {
         </Text>
 
         <Pressable
-          onPress={() => setLiked(!liked)}
+          onPress={handleLikePress}
           style={{
             flexDirection: "row",
+            width: wp("25%"),
+            alignItems: "center",
           }}
           hitSlop={10}
         >
           <Ionicons
             name="heart"
-            size={wp("2.75%")}
+            size={wp("3%")}
             color={liked ? "#FF2121" : "#464646"}
             style={{
               width: wp("3%"),
-              height: wp("3%"),
-              marginHorizontal: wp("1%"),
+              height: wp("4%"),
+              marginRight: wp("1%"),
             }}
           />
-          {c.numLikes > 0 && (
+          {numLikes > 0 && (
             <Text style={styles.infoText}>
-              {c.numLikes} Like{c.numLikes > 1 ? "s" : ""}
+              {numLikes} Like{numLikes > 1 ? "s" : ""}
             </Text>
           )}
         </Pressable>
 
-        <TouchableOpacity style={styles.replyBtn}>
-          <Text style={[styles.infoText, styles.replyBtnText]}>Reply</Text>
+        <TouchableOpacity>
+          <Text style={styles.infoText}>Reply</Text>
         </TouchableOpacity>
       </View>
       {c.childComments &&
         !c.parent_comment_id &&
-        c.childComments.map((item) => <Comment c={item} />)}
+        c.childComments.map((item) => <Comment key={item.id} c={item} />)}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   userCommentContainer: {
-    marginVertical: hp("2%"),
+    marginVertical: hp("2.5%"),
   },
   userCommentContainerChild: {
     marginLeft: wp("5%"),
-    marginVertical: wp("1%"),
+    marginTop: wp("1%"),
+    marginBottom: 0,
   },
   userImage: {
     height: wp("8%"),
@@ -121,6 +130,7 @@ const styles = StyleSheet.create({
   commentInfoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     marginTop: hp("1%"),
   },
   infoText: {

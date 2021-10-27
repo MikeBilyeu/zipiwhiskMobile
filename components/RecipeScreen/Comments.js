@@ -20,6 +20,7 @@ import data from "../../data.js";
 const renderComment = ({ item }) => <Comment c={item} />;
 
 const Comments = (props) => {
+  console.log("render comments");
   const pan = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
   let panResponder = useRef(
     PanResponder.create({
@@ -39,13 +40,17 @@ const Comments = (props) => {
         }
       },
       onPanResponderRelease: (e, { dy, vy }) => {
+        console.log(dy, vy);
         // Swipe velocity threshold
         if (vy > 1 || dy > hp("35%")) {
           Animated.decay(pan, {
-            velocity: { x: 0, y: vy > 1 ? 14 : 9 },
-            deceleration: 0.97,
+            velocity: { x: 0, y: 10 },
+            deceleration: 0.9847,
             useNativeDriver: true,
-          }).start(() => props.setOpenComments(false));
+          }).start(() => {
+            console.log("closed");
+            props.setOpenComments(false);
+          });
         } else {
           pan.flattenOffset();
           Animated.spring(pan.y, {
