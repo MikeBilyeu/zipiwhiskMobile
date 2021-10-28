@@ -119,38 +119,38 @@ CREATE TABLE recipes_categories (
     PRIMARY KEY(recipe_id, category)
 );
 
--- CREATE TABLE ingredients (
---      id INT AUTO_INCREMENT PRIMARY KEY,
---      name VARCHAR(255) UNIQUE NOT NULL,
---      created_at TIMESTAMP DEFAULT NOW()
--- );
+CREATE TABLE ingredients (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     name VARCHAR(255) UNIQUE NOT NULL,
+     created_at TIMESTAMP DEFAULT NOW()
+);
 
--- CREATE TABLE ing_images (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     image_url VARCHAR(255) NOT NULL
--- );
+CREATE TABLE ing_images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image_url VARCHAR(255) NOT NULL
+);
 
--- CREATE TABLE ingredients_ing_images (
---     ing_image_id INT NOT NULL,
---     ingredient_id INT NOT NULL,
---     FOREIGN KEY (ing_image_id) 
---         REFERENCES ing_images(id) ON DELETE CASCADE,
---     FOREIGN KEY (ingredient_id) 
---         REFERENCES ingredients(id) ON DELETE CASCADE,
---     PRIMARY KEY (ing_image_id, ingredient_id)
--- );
+CREATE TABLE ingredients_ing_images (
+    ing_image_id INT NOT NULL,
+    ingredient_id INT NOT NULL,
+    FOREIGN KEY (ing_image_id) 
+        REFERENCES ing_images(id) ON DELETE CASCADE,
+    FOREIGN KEY (ingredient_id) 
+        REFERENCES ingredients(id) ON DELETE CASCADE,
+    PRIMARY KEY (ing_image_id, ingredient_id)
+);
 
--- CREATE TABLE recipes_ingredients (
---     recipe_id INT NOT NULL,
---     ingredient_id INT NOT NULL,
---     amount VARCHAR(255),
---     ingredient_order INT NOT NULL,
---     FOREIGN KEY (recipe_id) 
---         REFERENCES recipes(id) ON DELETE CASCADE,
---     FOREIGN KEY (ingredient_id) 
---         REFERENCES ingredients(id) ON DELETE CASCADE,
---     PRIMARY KEY(recipe_id, ingredient_id)
--- );
+CREATE TABLE recipes_ingredients (
+    recipe_id INT NOT NULL,
+    ingredient_id INT NOT NULL,
+    amount VARCHAR(255),
+    ingredient_order INT NOT NULL,
+    FOREIGN KEY (recipe_id) 
+        REFERENCES recipes(id) ON DELETE CASCADE,
+    FOREIGN KEY (ingredient_id) 
+        REFERENCES ingredients(id) ON DELETE CASCADE,
+    PRIMARY KEY(recipe_id, ingredient_id)
+);
 
 CREATE TABLE keywords (
     id INT AUTO_INCREMENT PRIMARY KEY,

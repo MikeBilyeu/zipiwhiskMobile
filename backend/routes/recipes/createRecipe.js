@@ -16,18 +16,16 @@ module.exports = async (req, res) => {
     keywords,
   } = req.body.recipe;
 
-  const recipe = {
+  const recipes = {
     media_type,
     recipe_name,
     yield: parseInt(servings),
     total_time_min: parseInt(timeHours * 60 + timeMins),
     instructions,
-    ingredients,
   };
 
-  //res.status(201).send(`ok`);
   try {
-    pool.query("INSERT INTO recipes SET ?", recipe, (err, { insertId }) => {
+    pool.query("INSERT INTO recipes SET ?", recipes, (err, { insertId }) => {
       if (err) throw err;
       pool.query(
         "INSERT INTO users_recipes (user_id, recipe_id) VALUES (?, ?)",
@@ -38,28 +36,13 @@ module.exports = async (req, res) => {
             .filter((c) => c.selected)
             .forEach((c) => {
               pool.query(
-                "INSERT INTO recipes_categories (recipe_id, category) VALUES (?, ?)",
+                "INSERT INTO recipes_categories (recipe_id, category) VALUES (?, ?);",
                 [insertId, c.name],
                 (err) => {
                   if (err) throw err;
                 }
               );
             });
-
-          keywords
-            .split(",")
-            .map((item) => item.trim())
-            .forEach((k, i) => {
-              pool.query(
-                // `INSERT IGNORE INTO keywords (keyword) VALUES (?)`,
-                `INSERT INTO keywords (keyword) VALUES (?) ON DUPLICATE KEY UPDATE id=id;`,
-                k,
-                (err) => {
-                  if (err) throw err;
-                }
-              );
-            });
-
           res.status(201).send(`recipe added with ID: ${insertId}`);
         }
       );
