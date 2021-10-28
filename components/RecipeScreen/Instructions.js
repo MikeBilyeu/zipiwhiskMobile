@@ -59,7 +59,8 @@ const Instructions = (props) => {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         style={styles.container}
-        onMomentumScrollEnd={(event) => {
+        scrollEventThrottle={250}
+        onScroll={(event) => {
           setCardNum(
             Math.round(
               parseFloat(event.nativeEvent.contentOffset.x / screenWidth)

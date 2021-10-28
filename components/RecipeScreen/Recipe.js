@@ -16,7 +16,7 @@ const Recipe = ({ data, children, setToggleRecipe }) => {
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 500,
+      duration: 200,
       useNativeDriver: true,
       easing: Easing.ease,
     }).start();
