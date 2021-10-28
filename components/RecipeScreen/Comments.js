@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import {
   StyleSheet,
-  View,
   PanResponder,
   FlatList,
   Text,
   Animated,
+  Easing,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -19,56 +19,53 @@ import Animations from "./Animations";
 const renderComment = ({ item }) => <Comment c={item} />;
 
 const Comments = (props) => {
-  console.log("render comments");
-  const pan = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
-  let panResponder = useRef(
+  const yValue = useRef(new Animated.Value(hp("75%"))).current;
+
+  const slideOpen = Animated.timing(yValue, {
+    toValue: 0,
+    duration: 250,
+    useNativeDriver: true,
+  }).start();
+
+  useEffect(() => slideOpen, []);
+
+  const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
-      onPanResponderGrant: (e, g) => {
-        pan.setOffset({
-          x: 0,
-          y: 0,
-        });
-      },
       onPanResponderMove: (e, gesture) => {
-        // Prevent over pull down
+        // Prevent over pull up
         if (gesture.dy > 0) {
-          return Animated.event([null, { dy: pan.y }], {
+          return Animated.event([null, { dy: yValue }], {
             useNativeDriver: false,
           })(e, gesture);
         }
       },
       onPanResponderRelease: (e, { dy, vy }) => {
-        console.log(dy, vy);
         // Swipe velocity threshold
-        if (vy > 1 || dy > hp("35%")) {
-          Animated.decay(pan, {
-            velocity: { x: 0, y: 10 },
-            deceleration: 0.9847,
+        if (vy > 0.35 || dy > hp("35%")) {
+          Animated.timing(yValue, {
+            toValue: hp("75%"),
+            duration: 350 - vy * 100,
             useNativeDriver: true,
           }).start(() => props.setOpenComments(false));
         } else {
-          pan.flattenOffset();
-          Animated.spring(pan.y, {
+          Animated.spring(yValue, {
             toValue: 0,
             friction: 9,
             useNativeDriver: true,
-          }).start(() => {
-            pan.setValue({ x: 0, y: 0 });
-          });
+          }).start();
         }
       },
     })
   ).current;
 
-  //Only use panResponder when displaying categories
-  let panHandlers = panResponder.panHandlers;
+  const panHandlers = panResponder.panHandlers;
 
   //useEffect(() => Animations(dropDownOpen, pan, mount, setMount));
   return (
     <>
       <Animated.View
-        style={[styles.wrapper, { transform: [{ translateY: pan.y }] }]}
+        style={[styles.wrapper, , { transform: [{ translateY: yValue }] }]}
         {...panHandlers}
       >
         <Text style={styles.title}>Comments</Text>
@@ -78,7 +75,7 @@ const Comments = (props) => {
           keyExtractor={(item) => item.id.toString()}
         />
       </Animated.View>
-      <Input style={{ transform: [{ translateY: pan.y }] }} />
+      <Input style={{ transform: [{ translateY: yValue }] }} />
     </>
   );
 };

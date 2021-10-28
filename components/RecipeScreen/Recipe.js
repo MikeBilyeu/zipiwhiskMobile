@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { StyleSheet, View, Animated, Share, Pressable } from "react-native";
+import React, { useRef, useEffect } from "react";
+import { StyleSheet, Animated, Easing, Pressable } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -11,6 +11,20 @@ import Instructions from "./Instructions";
 
 const Recipe = ({ data, children, setToggleRecipe }) => {
   const yValue = useRef(new Animated.Value(0)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+      easing: Easing.ease,
+    }).start();
+  };
+
+  useEffect(() => {
+    fadeIn();
+  }, []);
 
   let scaleInterpolate = yValue.interpolate({
     inputRange: [-201, -200, 0, 1],
@@ -38,6 +52,7 @@ const Recipe = ({ data, children, setToggleRecipe }) => {
       >
         <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
       </Pressable>
+
       <Animated.ScrollView
         showsVerticalScrollIndicator={false}
         onScroll={Animated.event(
@@ -46,61 +61,51 @@ const Recipe = ({ data, children, setToggleRecipe }) => {
             useNativeDriver: true,
           }
         )}
-        style={[styles.RecipeScrollView, animatedScaleStyle]}
+        style={[
+          styles.RecipeScrollView,
+          animatedScaleStyle,
+          {
+            opacity: fadeAnim,
+          },
+        ]}
       >
         {children}
 
-        <View style={[styles.recipeScrollConatiner]}>
+        <Pressable
+          style={styles.recipeScrollConatiner}
+          onPress={() => setToggleRecipe(false)}
+        >
           <Ingredients data={data} />
 
           <Instructions data={data} />
-        </View>
+        </Pressable>
       </Animated.ScrollView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  cancelBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 2,
+    top: hp("6%"),
+    right: wp("6%"),
+    position: "absolute",
+  },
   RecipeScrollView: {
+    backgroundColor: "rgba(0,0,0,.7)",
     position: "absolute",
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(0,0,0,.8)",
+    zIndex: 1,
   },
   recipeScrollConatiner: {
-    paddingTop: hp("8%"),
+    paddingTop: hp("12%"),
     alignItems: "center",
     justifyContent: "space-around",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: -15 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-  },
-  cancelBtn: {
-    justifyContent: "center",
-    alignItems: "center",
-
-    zIndex: 10,
-    top: hp("7%"),
-    right: wp("5%"),
-    position: "absolute",
-    borderColor: "#fff",
-  },
-
-  timeContainer: {
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginVertical: wp("8%"),
-    marginBottom: wp("6%"),
-    height: wp("13%"),
-  },
-
-  timeText: {
-    fontSize: wp("5%"),
-    fontFamily: "AvenirNextRegular",
-    color: "#fff",
   },
 });
 

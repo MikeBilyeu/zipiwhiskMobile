@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, ScrollView, Text, View, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  Text,
+  View,
+  Dimensions,
+  Pressable,
+} from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -46,7 +53,7 @@ const renderCardNum = (list, cardNum) => {
 const Instructions = (props) => {
   const [cardNum, setCardNum] = useState(0);
   return (
-    <View style={styles.wrapper}>
+    <Pressable style={styles.wrapper} onPress={null}>
       <ScrollView
         horizontal={true}
         pagingEnabled
@@ -65,7 +72,7 @@ const Instructions = (props) => {
       <View style={styles.cardNumContainer}>
         {renderCardNum(props.data.instructions, cardNum)}
       </View>
-    </View>
+    </Pressable>
   );
 };
 
