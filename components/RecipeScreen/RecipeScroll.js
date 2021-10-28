@@ -53,6 +53,8 @@ const RecipeScroll = (props) => {
         showsVerticalScrollIndicator={false}
         scrollEnabled={!openComments}
         initialScrollIndex={props.initalScroll || 0}
+        scrollsToTop={!toggleRecipe && !openComments}
+        onScrollToTop={() => setRecipeIndex(0)}
         onMomentumScrollEnd={(event) => {
           setRecipeIndex(
             Math.round(
