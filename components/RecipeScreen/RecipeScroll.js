@@ -1,107 +1,85 @@
-import React, { useRef } from "react";
-import { StyleSheet, View, Animated, Share, Pressable } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { StatusBar } from "expo-status-bar";
+import React, { useRef, useState, cloneElement } from "react";
+import { useKeepAwake } from "expo-keep-awake";
+import { FlatList, Dimensions, View } from "react-native";
 
-import Ingredients from "./Ingredients";
-import Instructions from "./Instructions";
+import RecipeCard from "../RecipeCard";
+import Recipe from "./Recipe";
+import Comments from "./Comments";
 
-const Recipe = ({ data, children, setToggleRecipe }) => {
-  const yValue = useRef(new Animated.Value(0)).current;
+const screenHeight = Dimensions.get("screen").height;
 
-  let scaleInterpolate = yValue.interpolate({
-    inputRange: [-201, -200, 0, 1],
-    outputRange: [1.2, 1.2, 1, 1],
-  });
+const RecipeScroll = (props) => {
+  useKeepAwake();
+  const [toggleRecipe, setToggleRecipe] = useState(false);
+  const [openComments, setOpenComments] = useState(false);
+  const [recipeIndex, setRecipeIndex] = useState(props.initalScroll || 0);
 
-  const animatedScaleStyle = {
-    transform: [{ scale: scaleInterpolate }],
+  const handleLoadMore = () => console.log("load more");
+
+  const flatListRef = useRef();
+  const handleScrollTop = () => {
+    !toggleRecipe &&
+      !openComments &&
+      flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
   };
 
+  const renderItem = (props) => (
+    <RecipeCard
+      data={props.item}
+      handleSinglePress={() => setToggleRecipe(!toggleRecipe)}
+      toggleRecipe={toggleRecipe}
+      openComments={openComments}
+      setOpenComments={setOpenComments}
+    />
+  );
+
   return (
-    <>
-      <Pressable
-        style={({ pressed }) => [
-          { opacity: pressed ? 0.5 : 1 },
-          styles.cancelBtn,
-        ]}
-        onPress={() => setToggleRecipe(false)}
-        hitSlop={{
-          top: 100,
-          bottom: 30,
-          left: 30,
-          right: 30,
-        }}
-      >
-        <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
-      </Pressable>
-      <Animated.ScrollView
+    <View style={{ backgroundColor: "#000" }}>
+      <StatusBar style="light" />
+
+      {!toggleRecipe && cloneElement(props.children, { handleScrollTop })}
+
+      <FlatList
+        ref={flatListRef}
+        data={props.data}
+        numColumns={1}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        initialNumToRender={10}
+        pagingEnabled
         showsVerticalScrollIndicator={false}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: yValue } } }],
-          {
-            useNativeDriver: true,
-          }
-        )}
-        style={[styles.RecipeScrollView, animatedScaleStyle]}
-      >
-        {children}
-
-        <View style={[styles.recipeScrollConatiner]}>
-          <Ingredients data={data} />
-
-          <Instructions data={data} />
-        </View>
-      </Animated.ScrollView>
-    </>
+        scrollEnabled={!openComments}
+        initialScrollIndex={props.initalScroll || 0}
+        onMomentumScrollEnd={(event) => {
+          setRecipeIndex(
+            Math.round(
+              parseFloat(event.nativeEvent.contentOffset.y / screenHeight)
+            )
+          );
+        }}
+        getItemLayout={(data, index) => ({
+          length: screenHeight,
+          offset: screenHeight * index,
+          index,
+        })}
+      />
+      {toggleRecipe && recipeIndex !== null && (
+        <Recipe
+          data={props.data[recipeIndex]}
+          setToggleRecipe={setToggleRecipe}
+        />
+      )}
+      {openComments && (
+        <Comments
+          setOpenComments={setOpenComments}
+          comments={props.data[recipeIndex].comments}
+        />
+      )}
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  RecipeScrollView: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "rgba(0,0,0,.8)",
-  },
-  recipeScrollConatiner: {
-    paddingTop: hp("8%"),
-    alignItems: "center",
-    justifyContent: "space-around",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: -15 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-  },
-  cancelBtn: {
-    justifyContent: "center",
-    alignItems: "center",
-
-    zIndex: 10,
-    top: hp("7%"),
-    right: wp("5%"),
-    position: "absolute",
-    borderColor: "#fff",
-  },
-
-  timeContainer: {
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginVertical: wp("8%"),
-    marginBottom: wp("6%"),
-    height: wp("13%"),
-  },
-
-  timeText: {
-    fontSize: wp("5%"),
-    fontFamily: "AvenirNextRegular",
-    color: "#fff",
-  },
-});
-
-export default Recipe;
+export default RecipeScroll;

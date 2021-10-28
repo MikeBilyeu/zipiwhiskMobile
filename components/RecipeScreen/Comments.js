@@ -15,7 +15,6 @@ import {
 import Input from "./Input";
 import Comment from "./Comment";
 import Animations from "./Animations";
-import data from "../../data.js";
 
 const renderComment = ({ item }) => <Comment c={item} />;
 
@@ -47,10 +46,7 @@ const Comments = (props) => {
             velocity: { x: 0, y: 10 },
             deceleration: 0.9847,
             useNativeDriver: true,
-          }).start(() => {
-            console.log("closed");
-            props.setOpenComments(false);
-          });
+          }).start(() => props.setOpenComments(false));
         } else {
           pan.flattenOffset();
           Animated.spring(pan.y, {
@@ -77,7 +73,7 @@ const Comments = (props) => {
       >
         <Text style={styles.title}>Comments</Text>
         <FlatList
-          data={data[0].comments}
+          data={props.comments}
           renderItem={renderComment}
           keyExtractor={(item) => item.id.toString()}
         />
