@@ -79,34 +79,22 @@ const Instructions = (props) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: hp("85%"),
+    height: hp("86%"),
     alignItems: "center",
-    marginBottom: hp("3%"),
   },
-
   cardContainer: {
     width: screenWidth - 20,
     justifyContent: "center",
     marginHorizontal: 10,
     borderRadius: 25,
     paddingHorizontal: wp("7%"),
-    paddingVertical: hp("4%"),
-    paddingTop: hp("8%"),
-    marginVertical: hp("3%"),
+    paddingVertical: hp("5%"),
+    marginBottom: hp("6%"),
     backgroundColor: "rgba(0,0,0,.7)",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.4,
     shadowRadius: 10,
-  },
-  cardTitle: {
-    textAlign: "center",
-    color: "#464646",
-    fontSize: wp("3%"),
-    fontFamily: "AvenirNextRegular",
-    position: "absolute",
-    top: wp("6%"),
-    width: screenWidth - 20,
   },
   cardText: {
     fontSize: wp("6%"),
@@ -119,17 +107,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    top: hp("-2%"),
+    top: hp("-3.5%"),
   },
-  cardNum: {
-    textAlign: "center",
-    color: "#464646",
-    fontSize: wp("3%"),
-    fontFamily: "AvenirNextRegular",
-    position: "absolute",
-    bottom: wp("6%"),
-    width: screenWidth - 20,
-  },
+  cardScroll: {},
 });
 
 export default Instructions;
