@@ -21,13 +21,14 @@ const renderComment = ({ item }) => <Comment c={item} />;
 const Comments = (props) => {
   const yValue = useRef(new Animated.Value(hp("75%"))).current;
 
-  const slideOpen = Animated.timing(yValue, {
-    toValue: 0,
-    duration: 250,
-    useNativeDriver: true,
-  }).start();
+  const slideIn = () =>
+    Animated.timing(yValue, {
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
 
-  useEffect(() => slideOpen, []);
+  useEffect(slideIn, []);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -65,7 +66,7 @@ const Comments = (props) => {
   return (
     <>
       <Animated.View
-        style={[styles.wrapper, , { transform: [{ translateY: yValue }] }]}
+        style={[styles.wrapper, { transform: [{ translateY: yValue }] }]}
         {...panHandlers}
       >
         <Text style={styles.title}>Comments</Text>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
   Image,
@@ -6,6 +6,7 @@ import {
   Text,
   Pressable,
   Dimensions,
+  Animated,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -24,126 +25,153 @@ const Footer = (props) => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [fullCaption, setFullCaption] = useState(false);
   const [captionHeight, setCaptionHeight] = useState(0);
+  const yValue = useRef(new Animated.Value(wp("72%"))).current;
+
+  const slideOpen = () =>
+    Animated.timing(yValue, {
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
+
+  const opacityInterpolate = yValue.interpolate({
+    inputRange: [0, wp("72%")],
+    outputRange: [1, 0],
+  });
+
+  useEffect(slideOpen, []);
 
   return (
-    <LinearGradient
-      colors={["rgba(0,0,0,.9)", "transparent"]}
-      start={[0, 1]}
-      end={[0, 0]}
-      style={[
-        styles.gradientWrapper,
-        {
-          height: fullCaption ? wp("72%") + captionHeight : wp("72%"),
-          top: fullCaption
-            ? screenHeight - (wp("72%") + captionHeight)
-            : screenHeight - wp("72%"),
-        },
-      ]}
+    <Animated.View
+      style={{
+        transform: [{ translateY: yValue }],
+        opacity: opacityInterpolate,
+      }}
     >
-      <View style={styles.footerBtnContainer}>
-        <Pressable
-          onPress={() => props.setSaved(!props.saved)}
-          style={styles.footerBtn}
-          hitSlop={{ top: 50, right: 20 }}
-        >
-          <Ionicons
-            name="heart"
-            size={wp("7%")}
-            color={props.saved ? "#FF2121" : "#FFF"}
-            style={styles.footerBtnIcon}
-          />
-          <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => props.setOpenComments(true)}
-          style={({ pressed }) => [
-            { opacity: pressed ? 0.5 : 1 },
-            styles.footerBtn,
-          ]}
-          hitSlop={{ right: 20 }}
-        >
-          <Ionicons
-            name="chatbubble-ellipses"
-            size={wp("7%")}
-            color="#FFF"
-            style={styles.footerBtnIcon}
-          />
-          <Text style={styles.footerBtnText}>
-            {parseNum(props.numComments)}
-          </Text>
-        </Pressable>
-
-        <View style={styles.userContainer}>
+      <LinearGradient
+        colors={["rgba(0,0,0,.9)", "transparent"]}
+        start={[0, 1]}
+        end={[0, 0]}
+        style={[
+          styles.gradientWrapper,
+          {
+            height: fullCaption ? wp("72%") + captionHeight : wp("72%"),
+            top: fullCaption
+              ? screenHeight - (wp("72%") + captionHeight)
+              : screenHeight - wp("72%"),
+          },
+        ]}
+      >
+        <View style={styles.footerBtnContainer}>
           <Pressable
-            onPress={() => navigation.push("VisitProfile", { id: props.id })}
+            onPress={() => props.setSaved(!props.saved)}
+            style={styles.footerBtn}
+            hitSlop={{ top: 50, right: 20 }}
+          >
+            <Ionicons
+              name="heart"
+              size={wp("7%")}
+              color={props.saved ? "#FF2121" : "#FFF"}
+              style={styles.footerBtnIcon}
+            />
+            <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
+          </Pressable>
+
+          <Pressable
+            onPress={() => props.setOpenComments(true)}
             style={({ pressed }) => [
               { opacity: pressed ? 0.5 : 1 },
-              styles.userWrapper,
+              styles.footerBtn,
             ]}
+            hitSlop={{ right: 20 }}
           >
-            <Image source={{ uri: props.userImage }} style={styles.userIcon} />
-            <Text style={styles.userInfoText}>{props.username}</Text>
+            <Ionicons
+              name="chatbubble-ellipses"
+              size={wp("7%")}
+              color="#FFF"
+              style={styles.footerBtnIcon}
+            />
+            <Text style={styles.footerBtnText}>
+              {parseNum(props.numComments)}
+            </Text>
           </Pressable>
-          {!isFollowing && (
-            <>
-              <View style={[styles.followIcon]} />
-              <Pressable
-                style={styles.followBtn}
-                onPress={() => setIsFollowing(true)}
-                hitSlop={{
-                  left: wp("5.3%"),
-                  right: wp("5.5%"),
-                }}
-              >
-                <Text style={styles.userInfoText}>Follow</Text>
-              </Pressable>
-            </>
-          )}
-        </View>
 
-        <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
-          {props.title}
-        </Text>
-        <Pressable
-          style={styles.captionBtn}
-          hitSlop={{ top: 32, bottom: 500, right: 500, left: 500 }}
-          onPress={() => setFullCaption(!fullCaption)}
-          onLayout={(event) => {
-            let { height } = event.nativeEvent.layout;
-            setCaptionHeight(height);
-          }}
-        >
-          <Text
-            style={styles.captionText}
-            numberOfLines={fullCaption ? 20 : 1}
-            ellipsizeMode="tail"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          <View style={styles.userContainer}>
+            <Pressable
+              onPress={() => navigation.push("VisitProfile", { id: props.id })}
+              style={({ pressed }) => [
+                { opacity: pressed ? 0.5 : 1 },
+                styles.userWrapper,
+              ]}
+            >
+              <Image
+                source={{ uri: props.userImage }}
+                style={styles.userIcon}
+              />
+              <Text style={styles.userInfoText}>{props.username}</Text>
+            </Pressable>
+            {!isFollowing && (
+              <>
+                <View style={[styles.followIcon]} />
+                <Pressable
+                  style={styles.followBtn}
+                  onPress={() => setIsFollowing(true)}
+                  hitSlop={{
+                    left: wp("5.3%"),
+                    right: wp("5.5%"),
+                  }}
+                >
+                  <Text style={styles.userInfoText}>Follow</Text>
+                </Pressable>
+              </>
+            )}
+          </View>
+
+          <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+            {props.title}
           </Text>
-        </Pressable>
-        <Text style={styles.timeAgo}>1 day ago</Text>
-        <View style={styles.viewsContainer}>
-          <Ionicons
-            name="eye"
-            size={wp("5%")}
-            color="#FFF"
-            style={styles.viewsIcon}
-          />
-          <Text style={styles.viewsText}>52.1k</Text>
+          <Pressable
+            style={styles.captionBtn}
+            hitSlop={{ top: 32, bottom: 500, right: 500, left: 500 }}
+            onPress={() => setFullCaption(!fullCaption)}
+            onLayout={(event) => {
+              let { height } = event.nativeEvent.layout;
+              setCaptionHeight(height);
+            }}
+          >
+            <Text
+              style={styles.captionText}
+              numberOfLines={fullCaption ? 20 : 1}
+              ellipsizeMode="tail"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit.
+            </Text>
+          </Pressable>
+          <Text style={styles.timeAgo}>1 day ago</Text>
+          <View style={styles.viewsContainer}>
+            <Ionicons
+              name="eye"
+              size={wp("5%")}
+              color="#FFF"
+              style={styles.viewsIcon}
+            />
+            <Text style={styles.viewsText}>52.1k</Text>
+          </View>
         </View>
-      </View>
-    </LinearGradient>
+      </LinearGradient>
+    </Animated.View>
   );
 };
 

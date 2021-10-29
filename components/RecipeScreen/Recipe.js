@@ -10,53 +10,78 @@ import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 
 const Recipe = ({ data, children, setToggleRecipe }) => {
-  const yValue = useRef(new Animated.Value(0)).current;
+  const yValueScale = useRef(new Animated.Value(0)).current;
+  const yValue = useRef(new Animated.Value(hp("100%"))).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  const fadeIn = () => {
+  const slideIn = () =>
+    Animated.timing(yValue, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+
+  const fadeIn = () =>
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 200,
+      duration: 300,
       useNativeDriver: true,
-      easing: Easing.ease,
     }).start();
-  };
 
-  useEffect(() => {
-    fadeIn();
-  }, []);
+  const fadeOut = () =>
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 50,
+      useNativeDriver: true,
+    }).start(() => setToggleRecipe(false));
 
-  let scaleInterpolate = yValue.interpolate({
+  useEffect(fadeIn, []);
+  useEffect(slideIn, []);
+
+  let scaleInterpolate = yValueScale.interpolate({
     inputRange: [-201, -200, 0, 1],
     outputRange: [1.2, 1.2, 1, 1],
   });
 
   const animatedScaleStyle = {
-    transform: [{ scale: scaleInterpolate }],
+    transform: [{ scale: scaleInterpolate }, { translateY: yValue }],
   };
 
   return (
     <>
-      <Pressable
-        style={({ pressed }) => [
-          { opacity: pressed ? 0.5 : 1 },
-          styles.cancelBtn,
-        ]}
-        onPress={() => setToggleRecipe(false)}
-        hitSlop={{
-          top: 100,
-          bottom: 30,
-          left: 30,
-          right: 30,
+      <Animated.View
+        style={{
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: "rgba(0,0,0,.7)",
+          opacity: fadeAnim,
         }}
       >
-        <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
-      </Pressable>
+        <Pressable
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1 },
+            styles.cancelBtn,
+          ]}
+          onPress={fadeOut}
+          hitSlop={{
+            top: 100,
+            bottom: 30,
+            left: 30,
+            right: 30,
+          }}
+        >
+          <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
+        </Pressable>
+      </Animated.View>
 
       <Animated.ScrollView
         showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
         onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: yValue } } }],
+          [{ nativeEvent: { contentOffset: { y: yValueScale } } }],
           {
             useNativeDriver: true,
           }
@@ -64,17 +89,12 @@ const Recipe = ({ data, children, setToggleRecipe }) => {
         style={[
           styles.RecipeScrollView,
           animatedScaleStyle,
-          {
-            opacity: fadeAnim,
-          },
+          { opacity: fadeAnim },
         ]}
       >
         {children}
 
-        <Pressable
-          style={styles.recipeScrollConatiner}
-          onPress={() => setToggleRecipe(false)}
-        >
+        <Pressable style={styles.recipeScrollConatiner} onPress={fadeOut}>
           <Ingredients data={data} />
 
           <Instructions data={data} />
@@ -94,7 +114,6 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   RecipeScrollView: {
-    backgroundColor: "rgba(0,0,0,.7)",
     position: "absolute",
     top: 0,
     bottom: 0,
