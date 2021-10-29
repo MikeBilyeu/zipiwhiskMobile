@@ -24,7 +24,7 @@ const renderList = (list) => {
     >
       <View>
         <ScrollView
-          bounces="false"
+          bounces={false}
           nestedScrollEnabled={true}
           style={styles.cardScroll}
         >

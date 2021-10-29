@@ -73,6 +73,7 @@ const Comments = (props) => {
           data={props.comments}
           renderItem={renderComment}
           keyExtractor={(item) => item.id.toString()}
+          bounces={false}
         />
       </Animated.View>
       <Input style={{ transform: [{ translateY: yValue }] }} />
