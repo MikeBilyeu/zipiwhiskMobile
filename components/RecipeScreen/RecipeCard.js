@@ -6,7 +6,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import Footer from "./RecipeScreen/Footer";
+import Footer from "./Footer";
 
 const RecipeCard = ({
   data,
@@ -16,7 +16,6 @@ const RecipeCard = ({
   toggleRecipe,
 }) => {
   const [saved, setSaved] = useState(false);
-
   const [lastTap, setLastTap] = useState(0);
   const [singlePressTimer, setSinglePressTimer] = useState(0);
 
@@ -70,7 +69,7 @@ const RecipeCard = ({
           resizeMode="cover"
           isLooping
           shouldPlay
-          isMuted
+          isMuted={false}
         />
       ) : (
         <ImageBackground

@@ -3,7 +3,7 @@ import React, { useRef, useState, cloneElement } from "react";
 import { useKeepAwake } from "expo-keep-awake";
 import { FlatList, Dimensions, View } from "react-native";
 
-import RecipeCard from "../RecipeCard";
+import RecipeCard from "./RecipeCard";
 import Recipe from "./Recipe";
 import Comments from "./Comments";
 
