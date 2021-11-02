@@ -4,7 +4,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const renderCategories = (categories, selected, setSelected) =>
   categories.map((categoryName) => (
@@ -50,11 +49,11 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingVertical: hp("1%"),
-    maxHeight: 60,
+    maxHeight: 65,
   },
   btn: {
     justifyContent: "center",
-    paddingVertical: wp("3.2%"),
+    paddingVertical: wp("3%"),
     paddingHorizontal: wp("10%"),
     marginHorizontal: wp("2%"),
     borderRadius: 50,

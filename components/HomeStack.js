@@ -9,7 +9,6 @@ import CreateRecipeScreen from "./CreateRecipeScreen/CreateRecipeScreen";
 import CameraScreen from "./CameraScreen";
 import ActivityScreen from "./ActivityScreen";
 
-import Nav from "./Nav";
 import RecipeScreen from "./RecipeScreen";
 import FollowScreen from "./FollowScreen";
 

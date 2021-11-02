@@ -59,10 +59,7 @@ const styles = StyleSheet.create({
     paddingVertical: hp("1%"),
   },
   usernameContainer: {
-    alignItems: "center",
     justifyContent: "space-between",
-    height: wp("8%"),
-    flex: 1,
   },
   usernameText: {
     textAlign: "center",
@@ -81,7 +78,7 @@ const styles = StyleSheet.create({
   backBtn: {
     height: wp("13%"),
     width: wp("13%"),
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
   },
 });
