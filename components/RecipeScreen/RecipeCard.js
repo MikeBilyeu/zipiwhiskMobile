@@ -15,7 +15,7 @@ const RecipeCard = ({
   setOpenComments,
   toggleRecipe,
 }) => {
-  const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(data.saved);
   const [lastTap, setLastTap] = useState(0);
   const [singlePressTimer, setSinglePressTimer] = useState(0);
 

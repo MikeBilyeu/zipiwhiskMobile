@@ -3,6 +3,7 @@ const data = [
     id: 49802390484,
     numLikes: 1500,
     numComments: 21,
+    saved: true,
     title: "Peanut Butter Banana Smoothie",
     user: {
       image: "https://randomuser.me/api/portraits/men/54.jpg",
@@ -254,6 +255,7 @@ const data = [
     id: 193229390423,
     numLikes: 16903,
     numComments: 52,
+    saved: true,
     title: "Black Bean Veggie Burgers",
     user: {
       image: "https://randomuser.me/api/portraits/women/12.jpg",

@@ -4,6 +4,8 @@ import {
   ImageBackground,
   Dimensions,
   Pressable,
+  View,
+  Text,
 } from "react-native";
 import { Video } from "expo-av";
 
@@ -37,25 +39,28 @@ const RecipeCardSmall = ({ item, handlePress }) => {
         />
       )}
 
-      {/* <View>
-        <Text style={styles.infoText}>{parseNum(item.numLikes)}</Text>
+      <View style={styles.footerBtn}>
         <Ionicons
           name="heart"
-          size={wp("3%")}
-          color="#FFF"
-          style={styles.icon}
+          size={wp("4%")}
+          color={item.saved ? "#FF2121" : "#FFF"}
+          style={styles.footerBtnIcon}
         />
-      </View> */}
+        <Text style={styles.footerBtnText}>{parseNum(item.numLikes)}</Text>
+      </View>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("24%"),
+    height: hp("20%"),
     width: screenWidth / 3,
     borderWidth: 0.5,
     borderColor: "#fff",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingBottom: hp("1%"),
   },
   image: {
     flex: 1,
@@ -75,13 +80,27 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  infoText: {
-    fontSize: wp("3.5%"),
-    color: "#FFF",
-    fontFamily: "AvenirNextDemiBold",
+  footerBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: wp("12%"),
+    width: wp("12%"),
+    backgroundColor: "rgba(0,0,0,.2)",
+    borderRadius: 100,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
   },
-  icon: {
-    marginLeft: wp("1%"),
+  footerBtnText: {
+    color: "#FFF",
+    fontFamily: "AvenirNextRegular",
+    fontSize: wp("3%"),
+  },
+  footerBtnIcon: {
+    width: wp("4%"),
+    height: wp("4%"),
+    marginBottom: 4,
   },
 });
 

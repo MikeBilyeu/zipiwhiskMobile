@@ -217,20 +217,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 2,
   },
-
   userWrapper: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: wp("3.5%"),
     height: "100%",
   },
-
   userInfoText: {
     color: "#FFF",
     fontFamily: "AvenirNextDemiBold",
     fontSize: wp("3.4%"),
   },
-
   followIcon: {
     width: wp("1.8%"),
     height: wp("1.8%"),
@@ -243,7 +240,6 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
   },
-
   userIcon: {
     width: wp("8.5%"),
     height: wp("8.5%"),
@@ -275,7 +271,6 @@ const styles = StyleSheet.create({
     fontSize: wp("3.4%"),
     lineHeight: wp("4%"),
   },
-
   timeAgo: {
     color: "#FFF",
     opacity: 0.3,
