@@ -1,4 +1,5 @@
 import React from "react";
+import { Dimensions } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import Home from "./HomeScreen";
@@ -9,7 +10,12 @@ const Tab = createMaterialTopTabNavigator();
 
 const Nav = () => {
   return (
-    <Tab.Navigator initialRouteName="Home" tabBar={() => null}>
+    <Tab.Navigator
+      backBehavior="initialRoute"
+      initialLayout={{ width: Dimensions.get("window").width }}
+      initialRouteName="Home"
+      tabBar={() => null}
+    >
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
