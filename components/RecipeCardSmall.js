@@ -54,9 +54,9 @@ const RecipeCardSmall = ({ item, handlePress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("20%"),
+    height: hp("22%"),
     width: screenWidth / 3,
-    borderWidth: 0.5,
+    borderWidth: 0,
     borderColor: "#fff",
     justifyContent: "flex-end",
     alignItems: "center",

@@ -57,6 +57,7 @@ const SearchScreen = ({}) => {
         key={resultsDisplay}
         keyboardShouldPersistTaps={"always"}
         style={styles.listContainer}
+        contentContainerStyle={{ paddingTop: hp("14.5%") }}
         numColumns={resultsDisplay == "Recipes" ? 3 : 1}
         data={resultsDisplay === "Recipes" ? data : accounts}
         renderItem={resultsDisplay === "Recipes" ? renderRecipes : renderUsers}
@@ -78,7 +79,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    paddingTop: hp("14.5%"),
   },
 });
 
