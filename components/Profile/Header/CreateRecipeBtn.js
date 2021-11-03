@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet } from "react-native";
+import { connect } from "react-redux";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,11 +8,13 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const CreateRecipeBtn = () => {
+const CreateRecipeBtn = (props) => {
   const navigation = useNavigation();
   return (
     <Pressable
-      onPress={() => navigation.navigate("CreateRecipe")}
+      onPress={() =>
+        navigation.navigate(props.media_url ? "CreateRecipe" : "Camera")
+      }
       hitSlop={28}
       style={({ pressed }) => [
         { opacity: pressed ? 0.5 : 1 },
@@ -37,4 +40,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateRecipeBtn;
+const mapStateToProps = (state) => ({
+  media_url: state.recipeForm.media_url,
+});
+
+export default connect(mapStateToProps)(CreateRecipeBtn);

@@ -39,7 +39,11 @@ const CreateRecipeScreen = (props) => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={10}
       >
-        <ScreenHeader title="Create Recipe" subTitle="Recipe Info">
+        <ScreenHeader
+          title="Create Recipe"
+          subTitle="Recipe Info"
+          goBackScreen="Home"
+        >
           {inputFocused ? (
             <TouchableOpacity
               style={styles.headerBtn}

@@ -1,38 +1,37 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, Text, View, Pressable, SafeAreaView } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-function ScreenHeader(props) {
+const ScreenHeader = (props) => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.headerContainer}>
       <View style={styles.headerWrapper}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          activeOpacity={0.4}
-          style={styles.headerBtn}
+        <Pressable
+          onPress={() =>
+            props.goBackScreen
+              ? navigation.navigate(props.goBackScreen)
+              : navigation.goBack()
+          }
+          hitSlop={{ bottom: 15 }}
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1, alignItems: "flex-start" },
+            styles.headerBtn,
+          ]}
         >
-          <Image
-            source={require("../assets/arrow.png")}
-            style={{
-              width: wp("4%"),
-              height: wp("4%"),
-              transform: [{ rotate: "-90deg" }],
-              marginRight: wp("7%"),
-            }}
+          <Ionicons
+            name="chevron-back"
+            size={wp("8%")}
+            color="#313131"
+            style={{ paddingRight: wp("7%") }}
           />
-        </TouchableOpacity>
+        </Pressable>
+
         <View style={styles.titleWrapper}>
           <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
             {props.title}
@@ -43,7 +42,7 @@ function ScreenHeader(props) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -69,7 +68,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 3,
   },
-
   titleWrapper: {
     flex: 6,
     height: 60,

@@ -10,9 +10,8 @@ import {
 
 const initialState = {
   id: null,
-  media_url:
-    "file:///Users/Bilyeu/Library/Developer/CoreSimulator/Devices/25FF060A-F7CD-4C77-944F-99BEC79F6F35/data/Containers/Data/Application/D68D1413-1B03-480B-BE1B-D36D74DFAD2D/Library/Caches/ExponentExperienceData/%2540anonymous%252Fzipiwhisknative-3fb95155-5d04-4b8a-8e04-90842a839399/ImagePicker/E0410727-E816-4EC0-95FD-3AA3731A1B6D.jpg",
-  media_type: "image",
+  media_url: "",
+  media_type: "",
   caption: "Simple recipe!",
   recipe_name: "Banana Bread",
   servings: "10",

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -14,6 +7,7 @@ import {
 
 import UserImageBtn from "../../UserImageBtn";
 import { useNavigation } from "@react-navigation/native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const UserInfo = (props) => {
   const navigation = useNavigation();
@@ -27,14 +21,7 @@ const UserInfo = (props) => {
         hitSlop={20}
         onPress={() => navigation.goBack()}
       >
-        <Image
-          source={require("../../../assets/arrow.png")}
-          style={{
-            width: wp("4%"),
-            height: wp("4%"),
-            transform: [{ rotate: "-90deg" }],
-          }}
-        />
+        <Ionicons name="chevron-back" size={wp("8%")} color="#313131" />
       </Pressable>
       <View style={styles.usernameContainer}>
         <Text style={styles.usernameText}>@{props.user.username}</Text>
