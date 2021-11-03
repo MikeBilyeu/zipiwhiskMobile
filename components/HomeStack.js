@@ -2,8 +2,8 @@ import React from "react";
 import { Dimensions } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Home from "./HomeScreen";
-import ProfileScreen from "./Profile/ProfileScreen";
+import Nav from "./Nav";
+
 import SettingsScreen from "./SettingsScreen";
 import CreateRecipeScreen from "./CreateRecipeScreen/CreateRecipeScreen";
 import CameraScreen from "./CameraScreen";
@@ -14,7 +14,6 @@ import FollowScreen from "./FollowScreen";
 
 import VisitProfileScreen from "./Profile/VisitProfileScreen";
 import ResultsScreen from "./ResultsScreen";
-import SearchScreen from "./SearchScreen";
 
 const screenWidth = Dimensions.get("screen").width;
 const Stack = createStackNavigator();
@@ -29,16 +28,9 @@ const HomeStack = () => {
         },
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Home" component={Nav} />
+
       <Stack.Screen name="Activity" component={ActivityScreen} />
-      <Stack.Screen
-        name="Search"
-        options={{
-          animationEnabled: false,
-        }}
-        component={SearchScreen}
-      />
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />
       <Stack.Screen name="Camera" component={CameraScreen} />
