@@ -1,8 +1,8 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useRef, useState, cloneElement } from "react";
 import { useKeepAwake } from "expo-keep-awake";
 import { FlatList, Dimensions, View } from "react-native";
 
+import FocusAwareStatusBar from "../FocusAwareStatusBar";
 import RecipeCard from "./RecipeCard";
 import Recipe from "./Recipe";
 import Comments from "./Comments";
@@ -36,8 +36,7 @@ const RecipeScroll = (props) => {
 
   return (
     <View style={{ backgroundColor: "#000" }}>
-      <StatusBar style="light" />
-
+      <FocusAwareStatusBar style="light" />
       {!toggleRecipe && cloneElement(props.children, { handleScrollTop })}
 
       <FlatList

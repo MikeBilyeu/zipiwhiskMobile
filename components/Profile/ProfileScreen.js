@@ -4,7 +4,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { StatusBar } from "expo-status-bar";
 
 import ProfileHeader from "./Header/ProfileHeader";
 import RecipeScroll from "./RecipeScroll";
@@ -13,7 +12,6 @@ import ActivityBtn from "./ActivityBtn";
 function ProfileScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
       <ProfileHeader />
       <RecipeScroll paddingTop={hp("22%")} />
       <ActivityBtn />

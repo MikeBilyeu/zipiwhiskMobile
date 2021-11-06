@@ -5,7 +5,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { StatusBar } from "expo-status-bar";
 
 import { getUserProfile } from "../../redux/actions/userProfile";
 
@@ -21,7 +20,6 @@ const VisitProfileScreen = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
       <VisitProfileHeader />
       <RecipeScroll paddingTop={hp("14%")} />
     </SafeAreaView>
