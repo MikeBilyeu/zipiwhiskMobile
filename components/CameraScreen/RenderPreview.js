@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
+  Pressable,
   StatusBar,
   ImageBackground,
 } from "react-native";
@@ -40,21 +40,28 @@ const RenderPreview = (props) => {
       )}
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
+        <Pressable
           onPress={() =>
             props.changeMedia({ media_url: null, media_type: null })
           }
-          activeOpacity={0.4}
-          style={[styles.btn, { left: 0 }]}
+          style={({ pressed }) => [
+            styles.btn,
+            { left: 0, opacity: pressed ? 0.5 : 1 },
+          ]}
+          hitSlop={25}
         >
-          <Ionicons name="ios-close" size={wp("8%")} color="#FFF" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.nextBtn}
+          <Ionicons name="ios-close" size={wp("6.5%")} color="#FFF" />
+        </Pressable>
+        <Pressable
+          style={({ pressed }) => [
+            styles.nextBtn,
+            { opacity: pressed ? 0.5 : 1 },
+          ]}
           onPress={() => navigation.navigate("CreateRecipe")}
+          hitSlop={25}
         >
           <Text style={styles.nextBtnText}>Continue</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );
@@ -69,8 +76,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    marginHorizontal: wp("5%"),
-    marginVertical: hp("5%"),
+    marginHorizontal: wp("3%"),
+    marginVertical: hp("3%"),
   },
   preview: {
     flex: 1,
@@ -87,7 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
-    backgroundColor: "rgba(0,0,0,.5)",
+    backgroundColor: "rgba(0,0,0,.3)",
     borderRadius: 50,
   },
   nextBtn: {
@@ -97,8 +104,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 150,
     alignSelf: "flex-end",
-    backgroundColor: "rgba(0,0,0,.5)",
-    marginBottom: wp("5%"),
+    backgroundColor: "rgba(0,0,0,.3)",
+    marginBottom: wp("4%"),
   },
   nextBtnText: {
     color: "white",

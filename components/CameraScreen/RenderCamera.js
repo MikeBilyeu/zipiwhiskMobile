@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { StyleSheet, View, TouchableOpacity, StatusBar } from "react-native";
+import { StyleSheet, View, Pressable, StatusBar } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -34,69 +34,72 @@ const RenderCamera = (props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Camera ref={cameraRef} style={styles.camera} type={type} flashMode={flash}>
       <StatusBar hidden />
-      <Camera
-        ref={cameraRef}
-        style={styles.camera}
-        type={type}
-        flashMode={flash}
-      >
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            activeOpacity={0.4}
-            style={[styles.btn, { left: 0 }]}
-          >
-            <Ionicons name="ios-close" size={wp("9%")} color="#FFF" />
-          </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <Pressable
+          onPress={() => navigation.goBack()}
+          hitSlop={25}
+          style={({ pressed }) => [
+            styles.btn,
+            { left: 0, opacity: pressed ? 0.5 : 1 },
+          ]}
+        >
+          <Ionicons name="ios-close" size={wp("6.5%")} color="#FFF" />
+        </Pressable>
 
-          <TouchableOpacity
-            onPress={() => {
-              setFlash(
-                flash === Camera.Constants.FlashMode.off
-                  ? Camera.Constants.FlashMode.on
-                  : Camera.Constants.FlashMode.off
-              );
-            }}
-            activeOpacity={0.4}
-            style={[styles.btn, { right: null, left: null }]}
-          >
-            <Ionicons name={flashIconName} size={wp("9%")} color="#FFF" />
-          </TouchableOpacity>
+        <Pressable
+          onPress={() => {
+            setFlash(
+              flash === Camera.Constants.FlashMode.off
+                ? Camera.Constants.FlashMode.on
+                : Camera.Constants.FlashMode.off
+            );
+          }}
+          hitSlop={25}
+          style={({ pressed }) => [
+            styles.btn,
+            { right: null, left: null, opacity: pressed ? 0.5 : 1 },
+          ]}
+        >
+          <Ionicons name={flashIconName} size={wp("6.5%")} color="#FFF" />
+        </Pressable>
 
-          <TouchableOpacity
-            onPress={pickImage}
-            activeOpacity={0.4}
-            style={[styles.btn, { left: 0, bottom: 0 }]}
-          >
-            <Ionicons name="library" size={wp("9%")} color="#FFF" />
-          </TouchableOpacity>
+        <Pressable
+          onPress={pickImage}
+          hitSlop={25}
+          style={({ pressed }) => [
+            styles.btn,
+            { left: 0, bottom: 0, opacity: pressed ? 0.5 : 1 },
+          ]}
+        >
+          <Ionicons name="library" size={wp("6.5%")} color="#FFF" />
+        </Pressable>
 
-          <TouchableOpacity
-            style={styles.CaptureBtnOuter}
-            onPress={async () => {
-              if (cameraRef) {
-                let photo = await cameraRef.current.takePictureAsync();
-                props.changeMedia({
-                  media_url: photo.uri,
-                  media_type: "image",
-                });
-              }
-            }}
-          >
-            <View style={styles.CaptureBtn} />
-          </TouchableOpacity>
-        </View>
-      </Camera>
-    </View>
+        <Pressable
+          style={({ pressed }) => [
+            styles.CaptureBtnOuter,
+            { opacity: pressed ? 0.5 : 1 },
+          ]}
+          hitSlop={15}
+          onPress={async () => {
+            if (cameraRef) {
+              let photo = await cameraRef.current.takePictureAsync();
+              props.changeMedia({
+                media_url: photo.uri,
+                media_type: "image",
+              });
+            }
+          }}
+        >
+          <View style={styles.CaptureBtn} />
+        </Pressable>
+      </View>
+    </Camera>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   camera: {
     flex: 1,
   },
@@ -104,8 +107,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    marginHorizontal: wp("5%"),
-    marginVertical: hp("5%"),
+    marginHorizontal: wp("3%"),
+    marginVertical: hp("3%"),
   },
   CaptureBtnOuter: {
     alignSelf: "flex-end",
@@ -113,15 +116,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 3,
     borderColor: "rgba(250,250,250,.95)",
-    width: wp("20%") + 10,
-    height: wp("20%") + 10,
-
+    width: wp("19%") + 10,
+    height: wp("19%") + 10,
     borderRadius: 100,
   },
 
   CaptureBtn: {
-    width: wp("20%"),
-    height: wp("20%"),
+    width: wp("19%"),
+    height: wp("19%"),
     borderRadius: 100,
     backgroundColor: "rgba(250,250,250,.5)",
   },
