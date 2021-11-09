@@ -16,8 +16,8 @@ const FollowScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScreenHeader
-        title={`@${props.route.params.username}`}
-        subTitle={`${props.route.params.screen} (${props.route.params.num})`}
+        subTitle={`@${props.route.params.username}`}
+        title={`${props.route.params.screen} (${props.route.params.num})`}
       />
       <FlatList
         style={styles.listContainer}
@@ -53,13 +53,13 @@ const data = [
     Following: false,
   },
   {
-    id: 10,
+    id: 9,
     username: "jess99",
     image: "https://randomuser.me/api/portraits/women/10.jpg",
     Following: false,
   },
   {
-    id: 10,
+    id: 5,
     username: "jackie93",
     image: "https://randomuser.me/api/portraits/women/20.jpg",
     Following: false,

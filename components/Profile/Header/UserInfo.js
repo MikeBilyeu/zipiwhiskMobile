@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -21,7 +21,7 @@ const UserInfo = (props) => {
         hitSlop={20}
         onPress={() => navigation.goBack()}
       >
-        <Ionicons name="chevron-back" size={wp("8%")} color="#313131" />
+        <Ionicons name="chevron-back" size={wp("6.5%")} color="#313131" />
       </Pressable>
       <View style={styles.usernameContainer}>
         <Text style={styles.usernameText}>@{props.user.username}</Text>

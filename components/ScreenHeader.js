@@ -26,7 +26,7 @@ const ScreenHeader = (props) => {
         >
           <Ionicons
             name="chevron-back"
-            size={wp("8%")}
+            size={wp("6.5%")}
             color="#313131"
             style={{ paddingRight: wp("7%") }}
           />

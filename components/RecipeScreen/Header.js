@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Image, Pressable, Text, View } from "react-native";
+import { StyleSheet, Pressable, Text, View } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,6 +7,7 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Header = (props) => {
   const navigation = useNavigation();
@@ -26,10 +27,7 @@ const Header = (props) => {
           styles.headerBtn,
         ]}
       >
-        <Image
-          source={require("../../assets/whiteArrow.png")}
-          style={styles.headerBtnIcon}
-        />
+        <Ionicons name="chevron-back" size={wp("6.5%")} color="#fff" />
       </Pressable>
       <View style={styles.titleWrapper}>
         <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">

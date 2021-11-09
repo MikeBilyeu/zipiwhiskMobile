@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Header from "../Header";
 
@@ -13,20 +14,21 @@ function ActivityHeader() {
   return (
     <Header>
       <View style={styles.Container}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => navigation.goBack()}
-          activeOpacity={0.4}
-          style={styles.backBtn}
+          hitSlop={{ bottom: 15 }}
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1, alignItems: "flex-start" },
+            styles.backBtn,
+          ]}
         >
-          <Image
-            source={require("../../assets/arrow.png")}
-            style={{
-              width: wp("5%"),
-              height: wp("5%"),
-              transform: [{ rotate: "-90deg" }],
-            }}
+          <Ionicons
+            name="chevron-back"
+            size={wp("6.5%")}
+            color="#313131"
+            style={{ paddingRight: wp("7%") }}
           />
-        </TouchableOpacity>
+        </Pressable>
 
         <Text style={styles.titleText}>Activity</Text>
 
