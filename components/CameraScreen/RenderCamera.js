@@ -94,6 +94,26 @@ const RenderCamera = (props) => {
         >
           <View style={styles.CaptureBtn} />
         </Pressable>
+        <Pressable
+          onPress={() => {
+            setType(
+              type === Camera.Constants.Type.back
+                ? Camera.Constants.Type.front
+                : Camera.Constants.Type.back
+            );
+          }}
+          hitSlop={25}
+          style={({ pressed }) => [
+            styles.btn,
+            { right: 0, bottom: 0, opacity: pressed ? 0.5 : 1 },
+          ]}
+        >
+          <Ionicons
+            name="camera-reverse-outline"
+            size={wp("6.5%")}
+            color="#FFF"
+          />
+        </Pressable>
       </View>
     </Camera>
   );
@@ -119,6 +139,7 @@ const styles = StyleSheet.create({
     width: wp("19%") + 10,
     height: wp("19%") + 10,
     borderRadius: 100,
+    marginBottom: hp("5%"),
   },
 
   CaptureBtn: {

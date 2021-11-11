@@ -32,10 +32,9 @@ const Input = (props) => {
         onChangeText={(text) => props.setValue(text)}
         placeholderTextColor="#E2E2E2"
         scrollEnabled={false}
-        onContentSizeChange={(event) => {
-          console.log(event.nativeEvent.contentSize.height);
-          setHeight(event.nativeEvent.contentSize.height);
-        }}
+        onContentSizeChange={(event) =>
+          setHeight(event.nativeEvent.contentSize.height)
+        }
         {...props}
       />
     </View>
