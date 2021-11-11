@@ -4,9 +4,9 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Keyboard,
-  TouchableOpacity,
   View,
   Text,
+  Pressable,
 } from "react-native";
 import { connect } from "react-redux";
 import {
@@ -37,7 +37,6 @@ const CreateRecipeScreen = (props) => {
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={10}
       >
         <ScreenHeader
           title="Create Recipe"
@@ -45,39 +44,48 @@ const CreateRecipeScreen = (props) => {
           goBackScreen="Home"
         >
           {inputFocused ? (
-            <TouchableOpacity
-              style={styles.headerBtn}
+            <Pressable
+              style={({ pressed }) => [
+                styles.headerBtn,
+                { opacity: pressed ? 0.5 : 1 },
+              ]}
               onPress={() => {
                 setInputFocused(false);
                 Keyboard.dismiss();
               }}
             >
               <Text style={styles.headerBtnText}>Done</Text>
-            </TouchableOpacity>
+            </Pressable>
           ) : (
-            <TouchableOpacity
-              onPress={props.submitRecipe}
-              activeOpacity={0.4}
-              style={styles.headerBtn}
+            <Pressable
+              onPress={() => props.submitRecipe}
+              style={({ pressed }) => [
+                styles.headerBtn,
+                { opacity: pressed ? 0.5 : 1 },
+              ]}
             >
               <Text style={styles.headerBtnText}>Post</Text>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </ScreenHeader>
         <ScrollView style={styles.listContainer}>
-          <MediaInput
-            media_url={props.recipeForm.media_url}
-            media_type={props.recipeForm.media_type}
-            handleOnChange={props.changeMedia}
-          />
-          <Input
-            name="Caption"
-            placeholder="Add a caption..."
-            returnKeyType="next"
-            value={props.recipeForm.caption}
-            setValue={props.captionChange}
-            onFocus={() => setInputFocused(true)}
-          />
+          <View style={styles.captionContainer}>
+            <MediaInput
+              media_url={props.recipeForm.media_url}
+              media_type={props.recipeForm.media_type}
+              handleOnChange={props.changeMedia}
+            />
+            <Input
+              placeholder="Add a caption..."
+              returnKeyType="next"
+              value={props.recipeForm.caption}
+              setValue={props.captionChange}
+              multiline={true}
+              onFocus={() => setInputFocused(true)}
+              captionInput={true}
+            />
+          </View>
+
           <Input
             name="Recipe Name"
             placeholder="Add a recipe name..."
@@ -130,7 +138,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   headerBtn: {
-    height: 60,
+    height: hp("7%"),
     justifyContent: "center",
     alignItems: "center",
     flex: 3,
@@ -140,23 +148,11 @@ const styles = StyleSheet.create({
     fontSize: wp("4%"),
     color: "#0172C4",
   },
-  image: {
-    backgroundColor: "#F2F2F2",
-    width: 300,
-    height: 175,
-    borderRadius: 10,
-    margin: 10,
-    alignSelf: "center",
-  },
-  cameraIconContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F2F2F2",
-    width: 300,
-    height: 175,
-    borderRadius: 10,
-    margin: 10,
-    alignSelf: "center",
+  captionContainer: {
+    flexDirection: "row",
+    borderBottomWidth: 0.25,
+    borderColor: "#E3E3E3",
+    marginVertical: hp(".5%"),
   },
   listContainer: {
     flex: 1,

@@ -1,6 +1,10 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View, Image } from "react-native";
+import { StyleSheet, Image, Pressable } from "react-native";
 import { Video } from "expo-av";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -10,7 +14,14 @@ const MediaInput = ({ media_url, media_type, handleOnChange }) => {
     navigation.navigate("Camera");
   };
   return (
-    <TouchableOpacity style={styles.container} onPress={handleOnPress}>
+    <Pressable
+      style={({ pressed }) => [
+        styles.container,
+        { opacity: pressed ? 0.5 : 1 },
+      ]}
+      onPress={handleOnPress}
+      hitSlop={25}
+    >
       {media_type === "image" ? (
         <Image source={{ uri: media_url }} style={styles.image} />
       ) : media_type === "video" ? (
@@ -23,36 +34,30 @@ const MediaInput = ({ media_url, media_type, handleOnChange }) => {
           isMuted
         />
       ) : (
-        <View style={styles.cameraIconContainer}>
-          <Ionicons name="camera-outline" size={35} color="#313131" />
-        </View>
+        <Ionicons name="camera-outline" size={wp("6.5%")} color="#313131" />
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomWidth: 0.5,
-    borderColor: "#E3E3E3",
-  },
-  image: {
-    backgroundColor: "#F2F2F2",
-    width: 300,
-    height: 175,
-    borderRadius: 10,
-    margin: 10,
-    alignSelf: "center",
-  },
-  cameraIconContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(200,200,200, .1)",
-    width: 300,
-    height: 175,
+    backgroundColor: "rgba(0,0,0, .05)",
+    width: wp("30%"),
+    height: wp("30%"),
+    borderRadius: wp("5%"),
+    margin: wp("3%"),
+    marginRight: wp("2.5%"),
+  },
+
+  image: {
+    backgroundColor: "#F2F2F2",
+    width: wp("30%"),
+    height: wp("30%"),
     borderRadius: 10,
-    margin: 10,
-    alignSelf: "center",
+    margin: wp("5%"),
   },
 });
 

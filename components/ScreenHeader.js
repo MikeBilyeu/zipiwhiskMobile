@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerBtn: {
-    height: 60,
+    height: hp("7%"),
     justifyContent: "center",
     alignItems: "center",
     flex: 3,
