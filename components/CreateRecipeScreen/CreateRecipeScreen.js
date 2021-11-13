@@ -29,15 +29,16 @@ import ScreenHeader from "../ScreenHeader";
 import MediaInput from "./MediaInput";
 import Input from "./Input";
 import Categories from "./Categories";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const CreateRecipeScreen = (props) => {
   const [inputFocused, setInputFocused] = useState();
   return (
-    <View style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <SafeAreaView style={{ flex: 1 }}>
         <ScreenHeader
           title="Create Recipe"
           subTitle="Recipe Info"
@@ -127,8 +128,8 @@ const CreateRecipeScreen = (props) => {
             setValue={props.categoriesChange}
           />
         </ScrollView>
-      </KeyboardAvoidingView>
-    </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -156,6 +157,12 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
+    position: "absolute",
+    paddingTop: hp("11%"),
+    top: hp("5%"),
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });
 

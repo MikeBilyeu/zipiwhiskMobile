@@ -13,7 +13,7 @@ function ActivityHeader() {
   const navigation = useNavigation();
   return (
     <Header>
-      <View style={styles.Container}>
+      <View style={styles.container}>
         <Pressable
           onPress={() => navigation.goBack()}
           hitSlop={{ bottom: 15 }}
@@ -39,7 +39,7 @@ function ActivityHeader() {
 }
 
 const styles = StyleSheet.create({
-  Container: {
+  container: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",

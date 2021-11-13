@@ -6,11 +6,12 @@ import {
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Header from "./Header";
 
 const ScreenHeader = (props) => {
   const navigation = useNavigation();
   return (
-    <SafeAreaView style={styles.headerContainer}>
+    <Header>
       <View style={styles.headerWrapper}>
         <Pressable
           onPress={() =>
@@ -40,27 +41,17 @@ const ScreenHeader = (props) => {
         </View>
         {props.children || <View style={styles.headerBtn} />}
       </View>
-    </SafeAreaView>
+    </Header>
   );
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    zIndex: 1,
-    height: hp("12%"),
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#fff",
-    borderBottomWidth: 0.25,
-    borderBottomColor: "#E3E3E3",
-  },
   headerWrapper: {
+    height: hp("10%"),
     width: "100%",
-    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    flex: 1,
+    flexDirection: "row",
   },
   headerBtn: {
     height: hp("7%"),
@@ -75,30 +66,20 @@ const styles = StyleSheet.create({
   },
   titleText: {
     textAlign: "center",
-    fontFamily: "AvenirNextDemiBold",
     fontSize: wp("5%"),
+    fontFamily: "AvenirNextDemiBold",
     color: "#313131",
-    marginBottom: 2,
+    marginBottom: hp(".5%"),
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   subTitleText: {
     textAlign: "center",
     fontFamily: "AvenirNextRegular",
     fontSize: wp("3.5"),
     color: "#313131",
-  },
-  btnText: {
-    color: "#313131",
-    fontFamily: "AvenirNextRegular",
-    fontSize: wp("4%"),
-  },
-  saveBtnText: {
-    color: "#0172C4",
-    fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("4%"),
-  },
-  saveBtnTextLoading: {
-    color: "#313131",
-    fontFamily: "AvenirNextRegular",
   },
 });
 

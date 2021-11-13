@@ -1,10 +1,11 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Header = (props) => {
   return (
