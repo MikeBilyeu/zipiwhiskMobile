@@ -1,5 +1,10 @@
 import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, SafeAreaView, FlatList } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
 import ScreenHeader from "../ScreenHeader";
 import Users from "./Users";
 
@@ -14,7 +19,7 @@ const renderUsers = ({ item }) => (
 
 const FollowScreen = (props) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScreenHeader
         subTitle={`@${props.route.params.username}`}
         title={`${props.route.params.screen} (${props.route.params.num})`}
@@ -25,7 +30,7 @@ const FollowScreen = (props) => {
         renderItem={renderUsers}
         keyExtractor={(item) => item.id.toString()}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -38,8 +43,12 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    paddingTop: 20,
-    width: "100%",
+    position: "absolute",
+    paddingTop: hp("11%"),
+    top: hp("5%"),
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });
 

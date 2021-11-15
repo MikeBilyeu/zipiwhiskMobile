@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp("5%"),
     marginTop: 5,
   },
-
   titleText: {
     textAlign: "center",
     fontSize: wp("5%"),
@@ -58,7 +57,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 2,
   },
-
   backBtn: {
     height: wp("12%"),
     width: wp("12%"),

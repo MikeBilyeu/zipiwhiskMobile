@@ -7,6 +7,7 @@ import {
   View,
   Text,
   Pressable,
+  SafeAreaView,
 } from "react-native";
 import { connect } from "react-redux";
 import {
@@ -29,7 +30,6 @@ import ScreenHeader from "../ScreenHeader";
 import MediaInput from "./MediaInput";
 import Input from "./Input";
 import Categories from "./Categories";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const CreateRecipeScreen = (props) => {
   const [inputFocused, setInputFocused] = useState();
