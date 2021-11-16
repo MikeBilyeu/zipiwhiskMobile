@@ -1,4 +1,6 @@
 import React, { useRef, useState, cloneElement } from "react";
+import { connect } from "react-redux";
+import { setOpenComments } from "../../redux/actions/recipe";
 import { useKeepAwake } from "expo-keep-awake";
 import { FlatList, Dimensions, View } from "react-native";
 
@@ -12,7 +14,6 @@ const screenHeight = Dimensions.get("screen").height;
 const RecipeScroll = (props) => {
   useKeepAwake();
   const [toggleRecipe, setToggleRecipe] = useState(false);
-  const [openComments, setOpenComments] = useState(false);
   const [recipeIndex, setRecipeIndex] = useState(props.initalScroll || 0);
 
   const handleLoadMore = () => console.log("load more");
@@ -20,17 +21,17 @@ const RecipeScroll = (props) => {
   const flatListRef = useRef();
   const handleScrollTop = () => {
     !toggleRecipe &&
-      !openComments &&
+      !props.openComments &&
       flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
   };
 
-  const renderItem = (props) => (
+  const renderItem = ({ item }) => (
     <RecipeCard
-      data={props.item}
+      data={item}
       handleSinglePress={() => setToggleRecipe(!toggleRecipe)}
       toggleRecipe={toggleRecipe}
-      openComments={openComments}
-      setOpenComments={setOpenComments}
+      openComments={props.openComments}
+      setOpenComments={props.setOpenComments}
     />
   );
 
@@ -50,9 +51,9 @@ const RecipeScroll = (props) => {
         initialNumToRender={10}
         pagingEnabled
         showsVerticalScrollIndicator={false}
-        scrollEnabled={!openComments}
+        scrollEnabled={!props.openComments}
         initialScrollIndex={props.initalScroll || 0}
-        scrollsToTop={!toggleRecipe && !openComments}
+        scrollsToTop={!toggleRecipe && !props.openComments}
         onScrollToTop={() => setRecipeIndex(0)}
         onMomentumScrollEnd={(event) => {
           setRecipeIndex(
@@ -73,9 +74,9 @@ const RecipeScroll = (props) => {
           setToggleRecipe={setToggleRecipe}
         />
       )}
-      {openComments && (
+      {props.openComments && (
         <Comments
-          setOpenComments={setOpenComments}
+          setOpenComments={props.setOpenComments}
           comments={props.data[recipeIndex].comments}
         />
       )}
@@ -83,4 +84,8 @@ const RecipeScroll = (props) => {
   );
 };
 
-export default RecipeScroll;
+const mapStateToProps = (state) => ({
+  openComments: state.recipe.openComments,
+});
+
+export default connect(mapStateToProps, { setOpenComments })(RecipeScroll);

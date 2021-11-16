@@ -1,5 +1,7 @@
 import React from "react";
 import { StyleSheet, Pressable, Text, View } from "react-native";
+import { connect } from "react-redux";
+import { setOpenComments } from "../../redux/actions/recipe";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -12,6 +14,11 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 const Header = (props) => {
   const navigation = useNavigation();
 
+  const handleBackPress = () => {
+    props.setOpenComments(false);
+    navigation.goBack();
+  };
+
   return (
     <LinearGradient
       colors={["rgba(0,0,0,.6)", "transparent"]}
@@ -20,7 +27,7 @@ const Header = (props) => {
       style={styles.gradient}
     >
       <Pressable
-        onPress={() => navigation.goBack()}
+        onPress={handleBackPress}
         hitSlop={{ bottom: 15, right: 15 }}
         style={({ pressed }) => [
           { opacity: pressed ? 0.5 : 1 },
@@ -90,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default connect(null, { setOpenComments })(Header);

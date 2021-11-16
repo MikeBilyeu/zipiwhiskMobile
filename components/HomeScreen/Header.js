@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { StyleSheet, Image, Pressable, Animated } from "react-native";
 import { connect } from "react-redux";
+import { setOpenComments } from "../../redux/actions/recipe";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -13,6 +14,16 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 const Header = (props) => {
   const navigation = useNavigation();
   const yValue = useRef(new Animated.Value(hp("-13%"))).current;
+
+  const handleSearchPress = () => {
+    props.setOpenComments(false);
+    navigation.navigate("Search");
+  };
+
+  const handleProfilePress = () => {
+    props.setOpenComments(false);
+    navigation.navigate("Profile");
+  };
 
   const slideIn = () =>
     Animated.timing(yValue, {
@@ -43,7 +54,7 @@ const Header = (props) => {
         style={styles.gradient}
       >
         <Pressable
-          onPress={() => navigation.navigate("Search")}
+          onPress={handleSearchPress}
           hitSlop={{ bottom: 15 }}
           style={({ pressed }) => [
             { opacity: pressed ? 0.5 : 1 },
@@ -64,7 +75,7 @@ const Header = (props) => {
         />
 
         <Pressable
-          onPress={() => navigation.navigate("Profile")}
+          onPress={handleProfilePress}
           hitSlop={{ bottom: 15 }}
           style={({ pressed }) => [
             { opacity: pressed ? 0.5 : 1 },
@@ -115,4 +126,4 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   user: state.user,
 });
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { setOpenComments })(Header);

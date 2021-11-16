@@ -1,5 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
+import { connect } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Nav from "./Nav";
@@ -17,10 +18,11 @@ import VisitProfileScreen from "./Profile/VisitProfileScreen";
 const screenWidth = Dimensions.get("screen").width;
 const Stack = createStackNavigator();
 
-const HomeStack = () => {
+const HomeStack = (props) => {
   return (
     <Stack.Navigator
       screenOptions={{
+        gestureEnabled: !props.openComments,
         headerShown: false,
         gestureResponseDistance: {
           horizontal: screenWidth,
@@ -40,4 +42,7 @@ const HomeStack = () => {
   );
 };
 
-export default HomeStack;
+const mapStateToProps = (state) => ({
+  openComments: state.recipe.openComments,
+});
+export default connect(mapStateToProps)(HomeStack);
