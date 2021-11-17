@@ -21,7 +21,7 @@ const VisitProfileScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <VisitProfileHeader />
-      <RecipeScroll paddingTop={hp("14%")} />
+      <RecipeScroll paddingTop={hp("16%")} />
     </SafeAreaView>
   );
 };

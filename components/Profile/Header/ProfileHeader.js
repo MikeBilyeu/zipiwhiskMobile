@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 import {
@@ -16,14 +17,16 @@ const ProfileHeader = ({ user }) => {
   const navigation = useNavigation();
   return (
     <Header>
-      <UserInfo
-        user={user}
-        handleImagePress={() => navigation.navigate("Settings")}
-      />
-      <FollowContainer user={user}>
-        <CreateRecipeBtn />
-      </FollowContainer>
-      <CategorySwipe />
+      <View style={{ width: "100%", height: hp("22%") }}>
+        <UserInfo
+          user={user}
+          handleImagePress={() => navigation.navigate("Settings")}
+        />
+        <FollowContainer user={user}>
+          <CreateRecipeBtn />
+        </FollowContainer>
+        <CategorySwipe />
+      </View>
     </Header>
   );
 };

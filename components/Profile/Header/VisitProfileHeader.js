@@ -14,16 +14,18 @@ import ToggleFollowBtn from "../../ToggleFollowBtn";
 const VisitProfileHeader = ({ userProfile }) => {
   return (
     <Header>
-      <UserInfo user={userProfile}>
-        <View style={{ width: wp("20%") }} />
-      </UserInfo>
-      <FollowContainer user={userProfile}>
-        <ToggleFollowBtn
-          BtnStyles={{ alignSelf: "center" }}
-          id={userProfile.id}
-          following={userProfile.isFollowing}
-        />
-      </FollowContainer>
+      <View style={{ height: hp("15%"), width: "100%" }}>
+        <UserInfo user={userProfile}>
+          <View style={{ width: wp("20%") }} />
+        </UserInfo>
+        <FollowContainer user={userProfile}>
+          <ToggleFollowBtn
+            BtnStyles={{ alignSelf: "center" }}
+            id={userProfile.id}
+            following={userProfile.isFollowing}
+          />
+        </FollowContainer>
+      </View>
     </Header>
   );
 };

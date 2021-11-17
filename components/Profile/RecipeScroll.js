@@ -1,6 +1,10 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import RecipeCardSmall from "../RecipeCardSmall";
 import data from "../../data";
@@ -37,7 +41,7 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     position: "absolute",
-    top: 50,
+    top: hp("5%"),
     bottom: 0,
     left: 0,
     right: 0,

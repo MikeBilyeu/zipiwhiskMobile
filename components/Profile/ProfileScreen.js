@@ -9,16 +9,13 @@ import ProfileHeader from "./Header/ProfileHeader";
 import RecipeScroll from "./RecipeScroll";
 import ActivityBtn from "./ActivityBtn";
 
-function ProfileScreen() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <ProfileHeader />
-      <RecipeScroll paddingTop={hp("22%")} />
-      <ActivityBtn />
-    </SafeAreaView>
-  );
-}
-
+const ProfileScreen = () => (
+  <SafeAreaView style={styles.container}>
+    <ProfileHeader />
+    <RecipeScroll paddingTop={hp("23%")} />
+    <ActivityBtn />
+  </SafeAreaView>
+);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
