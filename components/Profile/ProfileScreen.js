@@ -12,7 +12,7 @@ import ActivityBtn from "./ActivityBtn";
 const ProfileScreen = () => (
   <SafeAreaView style={styles.container}>
     <ProfileHeader />
-    <RecipeScroll paddingTop={hp("23%")} />
+    <RecipeScroll paddingTop={hp("24%")} />
     <ActivityBtn />
   </SafeAreaView>
 );
