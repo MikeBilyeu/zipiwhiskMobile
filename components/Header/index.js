@@ -5,24 +5,21 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-const Header = (props) => {
-  return (
-    <LinearGradient
-      colors={[
-        "rgba(255,255,255,0)",
-        "rgba(255,255,255,.9)",
-        "rgba(255,255,255,1)",
-      ]}
-      start={[0, 1]}
-      end={[0, 0.2]}
-      style={styles.gradientWrapper}
-    >
-      {props.children}
-    </LinearGradient>
-  );
-};
+const Header = (props) => (
+  <LinearGradient
+    colors={[
+      "rgba(255,255,255,0)",
+      "rgba(255,255,255,.9)",
+      "rgba(255,255,255,1)",
+    ]}
+    start={[0, 1]}
+    end={[0, 0.2]}
+    style={styles.gradientWrapper}
+  >
+    {props.children}
+  </LinearGradient>
+);
 
 const styles = StyleSheet.create({
   gradientWrapper: {

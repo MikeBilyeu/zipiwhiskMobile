@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, Animated, Easing, Pressable } from "react-native";
+import { StyleSheet, Animated, Pressable } from "react-native";
+import { BlurView } from "expo-blur";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -56,25 +57,26 @@ const Recipe = ({ data, children, setToggleRecipe }) => {
           bottom: 0,
           left: 0,
           right: 0,
-          backgroundColor: "rgba(0,0,0,.7)",
           opacity: fadeAnim,
         }}
       >
-        <Pressable
-          style={({ pressed }) => [
-            { opacity: pressed ? 0.5 : 1 },
-            styles.cancelBtn,
-          ]}
-          onPress={fadeOut}
-          hitSlop={{
-            top: 100,
-            bottom: 30,
-            left: 30,
-            right: 30,
-          }}
-        >
-          <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
-        </Pressable>
+        <BlurView intensity={100} tint={"dark"} style={{ flex: 1 }}>
+          <Pressable
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.5 : 1 },
+              styles.cancelBtn,
+            ]}
+            onPress={fadeOut}
+            hitSlop={{
+              top: 100,
+              bottom: 30,
+              left: 30,
+              right: 30,
+            }}
+          >
+            <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
+          </Pressable>
+        </BlurView>
       </Animated.View>
 
       <Animated.ScrollView

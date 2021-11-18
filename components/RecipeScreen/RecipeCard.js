@@ -75,7 +75,6 @@ const RecipeCard = ({
         <ImageBackground
           source={{ uri: data.media_url }}
           style={styles.image}
-          blurRadius={toggleRecipe ? 3 : 0}
         />
       )}
 
