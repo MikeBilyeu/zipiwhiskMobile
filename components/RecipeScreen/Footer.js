@@ -104,10 +104,17 @@ const Footer = (props) => {
                 styles.userWrapper,
               ]}
             >
-              <Image
-                source={{ uri: props.userImage }}
-                style={styles.userIcon}
-              />
+              <View
+                style={{
+                  alignItems: "center",
+                  width: wp("15%"),
+                }}
+              >
+                <Image
+                  source={{ uri: props.userImage }}
+                  style={styles.userIcon}
+                />
+              </View>
               <Text style={styles.userInfoText}>{props.username}</Text>
             </Pressable>
             {!isFollowing && (
@@ -217,10 +224,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 2,
   },
+  userIcon: {
+    width: wp("10%"),
+    height: wp("10%"),
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#fff",
+  },
   userWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: wp("3.5%"),
+    paddingRight: wp("3.5%"),
     height: "100%",
   },
   userInfoText: {
@@ -235,18 +249,9 @@ const styles = StyleSheet.create({
     marginRight: wp("3.5%"),
     backgroundColor: "#01C481",
   },
-
   followBtn: {
     height: "100%",
     justifyContent: "center",
-  },
-  userIcon: {
-    width: wp("8.5%"),
-    height: wp("8.5%"),
-    borderRadius: 100,
-    borderWidth: 1.2,
-    borderColor: "white",
-    marginRight: wp("2.5%"),
   },
   title: {
     color: "white",

@@ -73,7 +73,6 @@ const Header = (props) => {
           hitSlop={{ bottom: 15 }}
           onPress={props.handleScrollTop}
         />
-
         <Pressable
           onPress={handleProfilePress}
           hitSlop={{ bottom: 15 }}
@@ -120,6 +119,8 @@ const styles = StyleSheet.create({
     width: wp("10%"),
     height: wp("10%"),
     borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#fff",
   },
 });
 
