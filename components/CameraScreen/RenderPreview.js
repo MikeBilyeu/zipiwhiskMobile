@@ -17,7 +17,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 
-import { changeMedia } from "../../redux/actions/recipeForm";
+import { imageChange, videoChange } from "../../redux/actions/recipeForm";
 
 const RenderPreview = (props) => {
   const navigation = useNavigation();
@@ -27,12 +27,12 @@ const RenderPreview = (props) => {
       <StatusBar hidden />
       {props.recipeForm.media_type === "image" ? (
         <ImageBackground
-          source={{ uri: props.recipeForm.media_url }}
+          source={{ uri: props.recipeForm.image_url }}
           style={styles.preview}
         />
       ) : (
         <Video
-          source={{ uri: props.recipeForm.media_url }}
+          source={{ uri: props.recipeForm.video_urls[0] }}
           style={styles.preview}
           resizeMode="cover"
           isLooping
@@ -42,9 +42,10 @@ const RenderPreview = (props) => {
 
       <View style={styles.buttonContainer}>
         <Pressable
-          onPress={() =>
-            props.changeMedia({ media_url: null, media_type: null })
-          }
+          onPress={() => {
+            props.imageChange({ image_url: "", media_type: null });
+            props.videoChange({ video_urls: [], media_type: null });
+          }}
           style={({ pressed }) => [
             styles.btn,
             { left: 0, opacity: pressed ? 0.5 : 1 },
@@ -99,7 +100,6 @@ const styles = StyleSheet.create({
     borderRadius: 150,
     alignSelf: "flex-end",
     backgroundColor: "rgba(0,0,0,.9)",
-    //marginBottom: wp("4%"),
     marginRight: wp("3%"),
   },
   nextBtnText: {
@@ -113,4 +113,6 @@ const mapStateToProps = (state) => ({
   recipeForm: state.recipeForm,
 });
 
-export default connect(mapStateToProps, { changeMedia })(RenderPreview);
+export default connect(mapStateToProps, { imageChange, videoChange })(
+  RenderPreview
+);

@@ -31,12 +31,7 @@ const CameraScreen = (props) => {
     return <Text>No access to camera or photos</Text>;
   }
 
-  return props.recipeForm.media_url &&
-    props.recipeForm.media_type == "image" ? (
-    <RenderPreview />
-  ) : (
-    <RenderCamera />
-  );
+  return props.recipeForm.image_url ? <RenderPreview /> : <RenderCamera />;
 };
 
 const mapStateToProps = (state) => ({

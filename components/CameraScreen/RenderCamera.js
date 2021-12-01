@@ -16,7 +16,7 @@ import * as ImagePicker from "expo-image-picker";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
-import { changeMedia } from "../../redux/actions/recipeForm";
+import { imageChange, videoChange } from "../../redux/actions/recipeForm";
 
 const RenderCamera = (props) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -39,7 +39,12 @@ const RenderCamera = (props) => {
     });
 
     if (!result.cancelled) {
-      props.changeMedia({ media_url: result.uri, media_type: result.type });
+      if (result.type == "image") {
+        props.imageChange({ image_url: result.uri, media_type: result.type });
+      }
+      if (result.type == "video") {
+        props.videoChange({ video_urls: [result.uri], mediaType: result.type });
+      }
     }
   };
 
@@ -47,8 +52,8 @@ const RenderCamera = (props) => {
     if (cameraRef) {
       if (mediaType === "image") {
         let photo = await cameraRef.current.takePictureAsync();
-        props.changeMedia({
-          media_url: photo.uri,
+        props.imageChange({
+          image_url: photo.uri,
           media_type: "image",
         });
       } else {
@@ -58,8 +63,8 @@ const RenderCamera = (props) => {
         } else {
           setIsRecording(true);
           let video = await cameraRef.current.recordAsync();
-          props.changeMedia({
-            media_url: video.uri,
+          props.videoChange({
+            video_urls: [...props.recipeForm.video_urls, video.uri],
             media_type: "video",
           });
         }
@@ -229,4 +234,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { changeMedia })(RenderCamera);
+const mapStateToProps = (state) => ({
+  recipeForm: state.recipeForm,
+});
+
+export default connect(mapStateToProps, { imageChange, videoChange })(
+  RenderCamera
+);

@@ -1,5 +1,6 @@
 import {
-  MEDIA_CHANGE,
+  IMAGE_CHANGE,
+  VIDEO_CHANGE,
   CAPTION_CHANGE,
   RECIPE_NAME_CHANGE,
   SERVINGS_CHANGE,
@@ -13,8 +14,12 @@ import {
 import axios from "axios";
 //import s3Upload from "../utils/s3Upload";
 
-export const changeMedia = (value) => ({
-  type: MEDIA_CHANGE,
+export const imageChange = (value) => ({
+  type: IMAGE_CHANGE,
+  payload: value,
+});
+export const videoChange = (value) => ({
+  type: VIDEO_CHANGE,
   payload: value,
 });
 

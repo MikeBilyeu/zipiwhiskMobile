@@ -1,5 +1,6 @@
 import {
-  MEDIA_CHANGE,
+  IMAGE_CHANGE,
+  VIDEO_CHANGE,
   CAPTION_CHANGE,
   RECIPE_NAME_CHANGE,
   SERVINGS_CHANGE,
@@ -10,7 +11,8 @@ import {
 
 const initialState = {
   id: null,
-  media_url: "",
+  image_url: "",
+  video_urls: [],
   media_type: "",
   caption: "Simple recipe!",
   recipe_name: "Banana Bread",
@@ -34,10 +36,16 @@ const recipeFormReducer = (state = initialState, action) => {
       return { ...state, recipe_name: action.payload };
     case CAPTION_CHANGE:
       return { ...state, caption: action.payload };
-    case MEDIA_CHANGE:
+    case IMAGE_CHANGE:
       return {
         ...state,
-        media_url: action.payload.media_url,
+        image_url: action.payload.image_url,
+        media_type: action.payload.media_type,
+      };
+    case VIDEO_CHANGE:
+      return {
+        ...state,
+        video_urls: action.payload.video_urls,
         media_type: action.payload.media_type,
       };
     case SERVINGS_CHANGE:
