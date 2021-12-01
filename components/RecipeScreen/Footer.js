@@ -71,7 +71,7 @@ const Footer = (props) => {
             <Ionicons
               name="heart"
               size={wp("7%")}
-              color={props.saved ? "#FF2121" : "#FFF"}
+              color={props.saved ? "#FF0000" : "#FFF"}
               style={styles.footerBtnIcon}
             />
             <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>

@@ -43,7 +43,7 @@ const RecipeCardSmall = ({ item, handlePress }) => {
         <Ionicons
           name="heart"
           size={wp("4%")}
-          color={item.saved ? "#FF2121" : "#FFF"}
+          color={item.saved ? "#FF0000" : "#FFF"}
           style={styles.footerBtnIcon}
         />
         <Text style={styles.footerBtnText}>{parseNum(item.numLikes)}</Text>

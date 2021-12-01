@@ -6,6 +6,7 @@ import {
   Pressable,
   StatusBar,
   ImageBackground,
+  SafeAreaView,
 } from "react-native";
 import { Video } from "expo-av";
 import {
@@ -22,7 +23,7 @@ const RenderPreview = (props) => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar hidden />
       {props.recipeForm.media_type === "image" ? (
         <ImageBackground
@@ -60,10 +61,10 @@ const RenderPreview = (props) => {
           onPress={() => navigation.navigate("CreateRecipe")}
           hitSlop={25}
         >
-          <Text style={styles.nextBtnText}>Continue</Text>
+          <Text style={styles.nextBtnText}>Next</Text>
         </Pressable>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -71,17 +72,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "center",
-    marginHorizontal: wp("3%"),
-    marginVertical: hp("3%"),
+    justifyContent: "flex-end",
   },
   preview: {
-    flex: 1,
-    width: "100%",
     top: 0,
     bottom: 0,
     left: 0,
@@ -94,22 +90,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
-    backgroundColor: "rgba(0,0,0,.3)",
-    borderRadius: 50,
   },
   nextBtn: {
-    height: wp("13%"),
-    width: wp("75%"),
+    height: wp("10%"),
+    width: wp("30%"),
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 150,
     alignSelf: "flex-end",
-    backgroundColor: "rgba(0,0,0,.3)",
-    marginBottom: wp("4%"),
+    backgroundColor: "rgba(0,0,0,.9)",
+    //marginBottom: wp("4%"),
+    marginRight: wp("3%"),
   },
   nextBtnText: {
     color: "white",
-    fontSize: wp("4.5%"),
+    fontSize: wp("4%"),
     fontFamily: "AvenirNextDemiBold",
   },
 });
