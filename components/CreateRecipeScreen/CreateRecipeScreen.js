@@ -16,7 +16,6 @@ import {
 } from "react-native-responsive-screen";
 
 import {
-  changeMedia,
   captionChange,
   recipeNameChange,
   servingsChange,
@@ -71,11 +70,7 @@ const CreateRecipeScreen = (props) => {
         </ScreenHeader>
         <ScrollView style={styles.listContainer}>
           <View style={styles.captionContainer}>
-            <MediaInput
-              media_url={props.recipeForm.media_url}
-              media_type={props.recipeForm.media_type}
-              handleOnChange={props.changeMedia}
-            />
+            <MediaInput />
             <Input
               placeholder="Add a caption..."
               returnKeyType="next"
@@ -171,7 +166,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  changeMedia,
   captionChange,
   recipeNameChange,
   servingsChange,

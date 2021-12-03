@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     backgroundColor: "rgba(0,0,0,.9)",
     marginRight: wp("3%"),
+    marginBottom: hp("2%"),
   },
   nextBtnText: {
     color: "white",

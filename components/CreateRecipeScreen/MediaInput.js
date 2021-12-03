@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Image, Pressable } from "react-native";
+import { connect } from "react-redux";
 import { Video } from "expo-av";
 import {
   widthPercentageToDP as wp,
@@ -8,7 +9,7 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
-const MediaInput = ({ media_url, media_type, handleOnChange }) => {
+const MediaInput = (props) => {
   const navigation = useNavigation();
   const handleOnPress = () => {
     navigation.navigate("Camera");
@@ -22,11 +23,14 @@ const MediaInput = ({ media_url, media_type, handleOnChange }) => {
       onPress={handleOnPress}
       hitSlop={25}
     >
-      {media_type === "image" ? (
-        <Image source={{ uri: media_url }} style={styles.image} />
-      ) : media_type === "video" ? (
+      {props.recipeForm.media_type === "image" ? (
+        <Image
+          source={{ uri: props.recipeForm.image_url }}
+          style={styles.image}
+        />
+      ) : props.recipeForm.media_type === "video" ? (
         <Video
-          source={{ uri: media_url }}
+          source={{ uri: props.recipeForm.video_urls[0] }}
           style={styles.image}
           resizeMode="cover"
           isLooping
@@ -61,4 +65,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MediaInput;
+const mapStateToProps = (state) => ({ recipeForm: state.recipeForm });
+
+export default connect(mapStateToProps)(MediaInput);
