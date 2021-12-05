@@ -12,7 +12,7 @@ import axios from "axios";
 import Auth from "./components/AuthScreen/Auth";
 import HomeStack from "./components/HomeStack";
 
-axios.defaults.baseURL = "http://127.0.0.1:3000";
+axios.defaults.baseURL = "http://192.168.1.100:3000";
 
 checkAuthToken();
 

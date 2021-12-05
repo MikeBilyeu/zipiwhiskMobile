@@ -43,6 +43,7 @@ const RenderPreview = (props) => {
       <View style={styles.buttonContainer}>
         <Pressable
           onPress={() => {
+            props.setRenderPreview(false);
             props.imageChange({ image_url: "", media_type: null });
             props.videoChange({ video_urls: [], media_type: null });
           }}

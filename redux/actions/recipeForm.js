@@ -1,4 +1,5 @@
 import {
+  MEDIA_TYPE_CHANGE,
   IMAGE_CHANGE,
   VIDEO_CHANGE,
   CAPTION_CHANGE,
@@ -13,6 +14,11 @@ import {
 } from "../constants";
 import axios from "axios";
 //import s3Upload from "../utils/s3Upload";
+
+export const mediaTypeChange = (value) => ({
+  type: MEDIA_TYPE_CHANGE,
+  payload: value,
+});
 
 export const imageChange = (value) => ({
   type: IMAGE_CHANGE,

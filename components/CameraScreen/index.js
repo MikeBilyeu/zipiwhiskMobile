@@ -10,6 +10,7 @@ import RenderPreview from "./RenderPreview";
 const CameraScreen = (props) => {
   const [hasCameraPermission, setCameraPermission] = useState(null);
   const [hasLibraryPermission, setLibraryPermission] = useState(null);
+  const [renderPreview, setRenderPreview] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -31,7 +32,11 @@ const CameraScreen = (props) => {
     return <Text>No access to camera or photos</Text>;
   }
 
-  return props.recipeForm.image_url ? <RenderPreview /> : <RenderCamera />;
+  return props.recipeForm.image_url || renderPreview ? (
+    <RenderPreview setRenderPreview={setRenderPreview} />
+  ) : (
+    <RenderCamera setRenderPreview={setRenderPreview} />
+  );
 };
 
 const mapStateToProps = (state) => ({

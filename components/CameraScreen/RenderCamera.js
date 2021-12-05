@@ -16,12 +16,15 @@ import * as ImagePicker from "expo-image-picker";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
-import { imageChange, videoChange } from "../../redux/actions/recipeForm";
+import {
+  imageChange,
+  videoChange,
+  mediaTypeChange,
+} from "../../redux/actions/recipeForm";
 
 const RenderCamera = (props) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-  const [mediaType, setMediaType] = useState("image");
   const [isRecording, setIsRecording] = useState(false);
   useEffect(() => {}, [isRecording]);
   const flashIconName =
@@ -40,21 +43,20 @@ const RenderCamera = (props) => {
 
     if (!result.cancelled) {
       if (result.type == "image") {
-        props.imageChange({ image_url: result.uri, media_type: result.type });
+        props.imageChange({ image_url: result.uri });
       }
       if (result.type == "video") {
-        props.videoChange({ video_urls: [result.uri], mediaType: result.type });
+        props.videoChange({ video_urls: [result.uri] });
       }
     }
   };
 
   const handelOnPress = async () => {
     if (cameraRef) {
-      if (mediaType === "image") {
+      if (props.recipeForm.media_type === "image") {
         let photo = await cameraRef.current.takePictureAsync();
         props.imageChange({
           image_url: photo.uri,
-          media_type: "image",
         });
       } else {
         if (isRecording) {
@@ -65,7 +67,6 @@ const RenderCamera = (props) => {
           let video = await cameraRef.current.recordAsync();
           props.videoChange({
             video_urls: [...props.recipeForm.video_urls, video.uri],
-            media_type: "video",
           });
         }
       }
@@ -140,28 +141,49 @@ const RenderCamera = (props) => {
             >
               <Ionicons name="library" size={wp("6.5%")} color="#FFF" />
             </Pressable>
-            <Pressable
-              onPress={() =>
-                setMediaType(mediaType == "image" ? "video" : "image")
-              }
-              hitSlop={25}
-              style={({ pressed }) => [styles.btn, { right: 0, bottom: 0 }]}
-            >
-              <Ionicons
-                name={mediaType === "image" ? "camera" : "videocam"}
-                size={wp("6.5%")}
-                color="#fff"
-              />
-              <Text
-                style={{
-                  color: "white",
-                  fontFamily: "AvenirNextDemiBold",
-                  fontSize: wp("3.5%"),
-                }}
+
+            {props.recipeForm.video_urls[0] ? (
+              <Pressable
+                style={({ pressed }) => [
+                  styles.previewBtn,
+                  { opacity: pressed ? 0.5 : 1, right: 0, bottom: 0 },
+                ]}
+                onPress={() => props.setRenderPreview(true)}
+                hitSlop={25}
               >
-                {mediaType[0].toUpperCase() + mediaType.substring(1)}
-              </Text>
-            </Pressable>
+                <Text style={styles.previewBtnText}>Preview</Text>
+              </Pressable>
+            ) : (
+              <Pressable
+                onPress={() =>
+                  props.mediaTypeChange(
+                    props.recipeForm.media_type == "image" ? "video" : "image"
+                  )
+                }
+                hitSlop={25}
+                style={({ pressed }) => [styles.btn, { right: 0, bottom: 0 }]}
+              >
+                <Ionicons
+                  name={
+                    props.recipeForm.media_type === "image"
+                      ? "camera"
+                      : "videocam"
+                  }
+                  size={wp("6.5%")}
+                  color="#fff"
+                />
+                <Text
+                  style={{
+                    color: "white",
+                    fontFamily: "AvenirNextDemiBold",
+                    fontSize: wp("3.5%"),
+                  }}
+                >
+                  {props.recipeForm.media_type[0].toUpperCase() +
+                    props.recipeForm.media_type.substring(1)}
+                </Text>
+              </Pressable>
+            )}
           </>
         )}
 
@@ -169,7 +191,8 @@ const RenderCamera = (props) => {
           style={({ pressed }) => [
             styles.CaptureBtnOuter,
             {
-              opacity: pressed && mediaType === "image" ? 0.5 : 1,
+              opacity:
+                pressed && props.recipeForm.media_type === "image" ? 0.5 : 1,
               borderColor: isRecording ? "#FF0000" : "rgba(250,250,250,.95)",
             },
           ]}
@@ -179,7 +202,7 @@ const RenderCamera = (props) => {
           <View
             style={[
               styles.CaptureBtn,
-              mediaType == "video" && styles.CaptureBtnVideo,
+              props.recipeForm.media_type == "video" && styles.CaptureBtnVideo,
             ]}
           />
         </Pressable>
@@ -211,7 +234,7 @@ const styles = StyleSheet.create({
     width: wp("19%") + 10,
     height: wp("19%") + 10,
     borderRadius: 100,
-    marginBottom: hp("5%"),
+    marginBottom: hp("9%"),
   },
   CaptureBtn: {
     width: wp("19%"),
@@ -232,12 +255,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
   },
+  previewBtn: {
+    position: "absolute",
+    height: wp("10%"),
+    width: wp("30%"),
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 150,
+    alignSelf: "flex-end",
+    backgroundColor: "rgba(0,0,0,.9)",
+    marginRight: wp("3%"),
+    marginBottom: hp("2%"),
+  },
+  previewBtnText: {
+    color: "white",
+    fontSize: wp("4%"),
+    fontFamily: "AvenirNextDemiBold",
+  },
 });
 
 const mapStateToProps = (state) => ({
   recipeForm: state.recipeForm,
 });
 
-export default connect(mapStateToProps, { imageChange, videoChange })(
-  RenderCamera
-);
+export default connect(mapStateToProps, {
+  imageChange,
+  videoChange,
+  mediaTypeChange,
+})(RenderCamera);
