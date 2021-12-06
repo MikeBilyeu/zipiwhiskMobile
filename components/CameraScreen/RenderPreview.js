@@ -39,13 +39,12 @@ const RenderPreview = (props) => {
           shouldPlay
         />
       )}
-
       <View style={styles.buttonContainer}>
         <Pressable
           onPress={() => {
             props.setRenderPreview(false);
-            props.imageChange({ image_url: "", media_type: null });
-            props.videoChange({ video_urls: [], media_type: null });
+            props.imageChange({ image_url: "" });
+            props.videoChange({ video_urls: [] });
           }}
           style={({ pressed }) => [
             styles.btn,
@@ -56,7 +55,15 @@ const RenderPreview = (props) => {
           <Ionicons name="ios-close" size={wp("6.5%")} color="#FFF" />
         </Pressable>
         <Pressable
+          onPress={() => console.log("save")}
+          hitSlop={25}
+          style={({ pressed }) => [styles.btn, { right: null, left: null }]}
+        >
+          <Ionicons name="download-outline" size={wp("6.5%")} color="#FFF" />
+        </Pressable>
+        <Pressable
           style={({ pressed }) => [
+            styles.btn,
             styles.nextBtn,
             { opacity: pressed ? 0.5 : 1 },
           ]}
@@ -77,7 +84,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
   preview: {
     top: 0,
@@ -96,6 +103,7 @@ const styles = StyleSheet.create({
   nextBtn: {
     height: wp("10%"),
     width: wp("30%"),
+    right: 0,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 150,

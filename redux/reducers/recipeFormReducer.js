@@ -43,13 +43,11 @@ const recipeFormReducer = (state = initialState, action) => {
       return {
         ...state,
         image_url: action.payload.image_url,
-        media_type: "image",
       };
     case VIDEO_CHANGE:
       return {
         ...state,
         video_urls: action.payload.video_urls,
-        media_type: "video",
       };
     case SERVINGS_CHANGE:
       return { ...state, servings: action.payload };
