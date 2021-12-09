@@ -141,6 +141,19 @@ const RenderCamera = (props) => {
             >
               <Ionicons name="library" size={wp("6.5%")} color="#FFF" />
             </Pressable>
+            {props.recipeForm.video_urls[0] && (
+              <Pressable
+                style={({ pressed }) => [
+                  styles.btn,
+                  styles.editBtn,
+                  { opacity: pressed ? 0.5 : 1 },
+                ]}
+                onPress={() => props.setRenderEdit(true)}
+                hitSlop={25}
+              >
+                <Text style={styles.editBtnText}>Edit</Text>
+              </Pressable>
+            )}
 
             {props.recipeForm.video_urls[0] ? (
               <Pressable
@@ -270,6 +283,22 @@ const styles = StyleSheet.create({
   previewBtnText: {
     color: "white",
     fontSize: wp("4%"),
+    fontFamily: "AvenirNextDemiBold",
+  },
+  editBtn: {
+    height: wp("9%"),
+    width: wp("22%"),
+    left: wp("3%"),
+    bottom: hp("9%") + (wp("5%") + 5),
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 150,
+    alignSelf: "flex-end",
+    backgroundColor: "rgba(255,255,255,.9)",
+  },
+  editBtnText: {
+    color: "black",
+    fontSize: wp("3.5%"),
     fontFamily: "AvenirNextDemiBold",
   },
 });

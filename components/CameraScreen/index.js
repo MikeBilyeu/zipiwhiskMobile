@@ -6,11 +6,13 @@ import { connect } from "react-redux";
 
 import RenderCamera from "./RenderCamera";
 import RenderPreview from "./RenderPreview";
+import VideoEdit from "./VideoEdit";
 
 const CameraScreen = (props) => {
   const [hasCameraPermission, setCameraPermission] = useState(null);
   const [hasLibraryPermission, setLibraryPermission] = useState(null);
   const [renderPreview, setRenderPreview] = useState(false);
+  const [renderEdit, setRenderEdit] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -32,10 +34,15 @@ const CameraScreen = (props) => {
     return <Text>No access to camera or photos</Text>;
   }
 
-  return props.recipeForm.image_url || renderPreview ? (
+  return renderEdit ? (
+    <VideoEdit setRenderEdit={setRenderEdit} />
+  ) : props.recipeForm.image_url || renderPreview ? (
     <RenderPreview setRenderPreview={setRenderPreview} />
   ) : (
-    <RenderCamera setRenderPreview={setRenderPreview} />
+    <RenderCamera
+      setRenderPreview={setRenderPreview}
+      setRenderEdit={setRenderEdit}
+    />
   );
 };
 

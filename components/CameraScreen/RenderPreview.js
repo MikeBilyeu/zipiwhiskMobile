@@ -16,6 +16,7 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
+import * as MediaLibrary from "expo-media-library";
 
 import { imageChange, videoChange } from "../../redux/actions/recipeForm";
 
@@ -43,8 +44,9 @@ const RenderPreview = (props) => {
         <Pressable
           onPress={() => {
             props.setRenderPreview(false);
-            props.imageChange({ image_url: "" });
-            props.videoChange({ video_urls: [] });
+            if (props.recipeForm.media_type === "image") {
+              props.imageChange({ image_url: "" });
+            }
           }}
           style={({ pressed }) => [
             styles.btn,
@@ -52,10 +54,24 @@ const RenderPreview = (props) => {
           ]}
           hitSlop={25}
         >
-          <Ionicons name="ios-close" size={wp("6.5%")} color="#FFF" />
+          <Ionicons
+            name={
+              props.recipeForm.media_type === "image"
+                ? "ios-close"
+                : "chevron-back"
+            }
+            size={wp("6.5%")}
+            color="#FFF"
+          />
         </Pressable>
         <Pressable
-          onPress={() => console.log("save")}
+          onPress={async () => {
+            await MediaLibrary.saveToLibraryAsync(
+              props.recipeForm.media_type === "image"
+                ? props.recipeForm.image_url
+                : props.recipeForm.video_urls[0]
+            );
+          }}
           hitSlop={25}
           style={({ pressed }) => [styles.btn, { right: null, left: null }]}
         >
@@ -103,14 +119,13 @@ const styles = StyleSheet.create({
   nextBtn: {
     height: wp("10%"),
     width: wp("30%"),
-    right: 0,
+    right: wp("3%"),
+    bottom: hp("2%"),
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 150,
     alignSelf: "flex-end",
     backgroundColor: "rgba(0,0,0,.9)",
-    marginRight: wp("3%"),
-    marginBottom: hp("2%"),
   },
   nextBtnText: {
     color: "white",
