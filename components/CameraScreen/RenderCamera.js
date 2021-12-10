@@ -13,7 +13,6 @@ import {
 } from "react-native-responsive-screen";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 import {
@@ -21,6 +20,7 @@ import {
   videoChange,
   mediaTypeChange,
 } from "../../redux/actions/recipeForm";
+import CamBtn from "./CamBtn";
 
 const RenderCamera = (props) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -73,6 +73,20 @@ const RenderCamera = (props) => {
     }
   };
 
+  const handleFlashPress = () =>
+    setFlash(
+      flash === Camera.Constants.FlashMode.off
+        ? Camera.Constants.FlashMode.on
+        : Camera.Constants.FlashMode.off
+    );
+
+  const handleFlipCamPress = () =>
+    setType(
+      type === Camera.Constants.Type.back
+        ? Camera.Constants.Type.front
+        : Camera.Constants.Type.back
+    );
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Camera
@@ -86,65 +100,30 @@ const RenderCamera = (props) => {
       <View style={styles.buttonContainer}>
         {!isRecording && (
           <>
-            <Pressable
+            <CamBtn
               onPress={() => navigation.goBack()}
-              hitSlop={25}
-              style={({ pressed }) => [
-                styles.btn,
-                { left: 0, opacity: pressed ? 0.5 : 1 },
-              ]}
-            >
-              <Ionicons name="chevron-back" size={wp("6.5%")} color="#FFF" />
-            </Pressable>
-
-            <Pressable
-              onPress={() => {
-                setFlash(
-                  flash === Camera.Constants.FlashMode.off
-                    ? Camera.Constants.FlashMode.on
-                    : Camera.Constants.FlashMode.off
-                );
-              }}
-              hitSlop={25}
-              style={({ pressed }) => [styles.btn, { right: null, left: null }]}
-            >
-              <Ionicons name={flashIconName} size={wp("6.5%")} color="#FFF" />
-            </Pressable>
-
-            <Pressable
-              onPress={() => {
-                setType(
-                  type === Camera.Constants.Type.back
-                    ? Camera.Constants.Type.front
-                    : Camera.Constants.Type.back
-                );
-              }}
-              hitSlop={25}
-              style={({ pressed }) => [
-                styles.btn,
-                { right: 0, top: 0, opacity: pressed ? 0.5 : 1 },
-              ]}
-            >
-              <Ionicons
-                name="camera-reverse-outline"
-                size={wp("6.5%")}
-                color="#FFF"
-              />
-            </Pressable>
-            <Pressable
+              styles={{ left: 0 }}
+              icon="chevron-back"
+            />
+            <CamBtn
+              onPress={handleFlashPress}
+              styles={{ right: null, left: null }}
+              icon={flashIconName}
+            />
+            <CamBtn
+              onPress={handleFlashPress}
+              styles={{ right: 0, top: 0 }}
+              icon="camera-reverse-outline"
+            />
+            <CamBtn
               onPress={pickImage}
-              hitSlop={25}
-              style={({ pressed }) => [
-                styles.btn,
-                { left: 0, bottom: 0, opacity: pressed ? 0.5 : 1 },
-              ]}
-            >
-              <Ionicons name="library" size={wp("6.5%")} color="#FFF" />
-            </Pressable>
+              styles={{ left: 0, bottom: 0 }}
+              icon="library"
+            />
+
             {props.recipeForm.video_urls[0] && (
               <Pressable
                 style={({ pressed }) => [
-                  styles.btn,
                   styles.editBtn,
                   { opacity: pressed ? 0.5 : 1 },
                 ]}
@@ -167,24 +146,19 @@ const RenderCamera = (props) => {
                 <Text style={styles.previewBtnText}>Preview</Text>
               </Pressable>
             ) : (
-              <Pressable
+              <CamBtn
                 onPress={() =>
                   props.mediaTypeChange(
                     props.recipeForm.media_type == "image" ? "video" : "image"
                   )
                 }
-                hitSlop={25}
-                style={({ pressed }) => [styles.btn, { right: 0, bottom: 0 }]}
+                styles={{ right: 0, bottom: 0 }}
+                icon={
+                  props.recipeForm.media_type === "image"
+                    ? "camera"
+                    : "videocam"
+                }
               >
-                <Ionicons
-                  name={
-                    props.recipeForm.media_type === "image"
-                      ? "camera"
-                      : "videocam"
-                  }
-                  size={wp("6.5%")}
-                  color="#fff"
-                />
                 <Text
                   style={{
                     color: "white",
@@ -195,7 +169,7 @@ const RenderCamera = (props) => {
                   {props.recipeForm.media_type[0].toUpperCase() +
                     props.recipeForm.media_type.substring(1)}
                 </Text>
-              </Pressable>
+              </CamBtn>
             )}
           </>
         )}
@@ -261,13 +235,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: "#FF0000",
   },
-  btn: {
-    width: wp("15%"),
-    height: wp("15%"),
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-  },
   previewBtn: {
     position: "absolute",
     height: wp("10%"),
@@ -286,6 +253,7 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextDemiBold",
   },
   editBtn: {
+    position: "absolute",
     height: wp("9%"),
     width: wp("22%"),
     left: wp("3%"),
