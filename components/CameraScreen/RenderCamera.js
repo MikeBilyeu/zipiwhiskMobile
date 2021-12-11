@@ -111,7 +111,7 @@ const RenderCamera = (props) => {
               icon={flashIconName}
             />
             <CamBtn
-              onPress={handleFlashPress}
+              onPress={handleFlipCamPress}
               styles={{ right: 0, top: 0 }}
               icon="camera-reverse-outline"
             />

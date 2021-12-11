@@ -21,6 +21,23 @@ import { imageChange, videoChange } from "../../redux/actions/recipeForm";
 const VideoEdit = (props) => {
   const [videoIndex, setVideoIndex] = useState(0);
 
+  const renderMiniPreview = (videos) => {
+    return videos.map((url, index) => (
+      <Pressable onPress={() => setVideoIndex(index)}>
+        <Video
+          key={index}
+          source={{ uri: url }}
+          style={[
+            styles.miniPreview,
+            { borderWidth: index === videoIndex && 2 },
+          ]}
+          resizeMode="cover"
+          shouldPlay={false}
+        />
+      </Pressable>
+    ));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden />
@@ -31,7 +48,13 @@ const VideoEdit = (props) => {
         isLooping
         shouldPlay
       />
+      <View style={styles.miniPreviewContainer}>
+        {renderMiniPreview(props.recipeForm.video_urls)}
+      </View>
       <View style={styles.buttonContainer}>
+        <Text style={styles.numText}>{`${videoIndex + 1}/${
+          props.recipeForm.video_urls.length
+        }`}</Text>
         <Pressable
           style={({ pressed }) => [
             styles.btn,
@@ -51,11 +74,36 @@ const VideoEdit = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#000",
+  },
+  miniPreviewContainer: {
+    paddingHorizontal: hp("2%"),
+    backgroundColor: "rgba(0,0,0, .5)",
+    position: "absolute",
+    width: wp("100%"),
+    height: hp("13%"),
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  miniPreview: {
+    width: wp("9%"),
+    height: wp("14%"),
+    borderColor: "white",
+    borderRadius: wp("1%"),
+    marginHorizontal: wp("1%"),
   },
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
+    marginTop: hp("13%"),
+  },
+  numText: {
+    color: "#fff",
+    fontSize: wp("3.5%"),
+    fontSize: wp("4%"),
+    fontFamily: "AvenirNextDemiBold",
+    marginTop: hp("2%"),
   },
   preview: {
     top: 0,
