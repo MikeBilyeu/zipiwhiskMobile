@@ -16,16 +16,31 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { connect } from "react-redux";
 import * as MediaLibrary from "expo-media-library";
 
-import { imageChange, videoChange } from "../../redux/actions/recipeForm";
+import { videoChange } from "../../redux/actions/recipeForm";
+import CamBtn from "./CamBtn";
 
 const VideoEdit = (props) => {
   const [videoIndex, setVideoIndex] = useState(0);
 
+  const handleDelete = () => {
+    props.videoChange({
+      video_urls: [
+        ...props.recipeForm.video_urls.slice(0, videoIndex),
+        ...props.recipeForm.video_urls.slice(videoIndex + 1),
+      ],
+    });
+    if (props.recipeForm.video_urls.length == 1) {
+      props.setRenderEdit(false);
+    }
+    if (videoIndex !== 0) {
+      setVideoIndex(videoIndex - 1);
+    }
+  };
+
   const renderMiniPreview = (videos) => {
     return videos.map((url, index) => (
-      <Pressable onPress={() => setVideoIndex(index)}>
+      <Pressable key={index} onPress={() => setVideoIndex(index)}>
         <Video
-          key={index}
           source={{ uri: url }}
           style={[
             styles.miniPreview,
@@ -55,6 +70,19 @@ const VideoEdit = (props) => {
         <Text style={styles.numText}>{`${videoIndex + 1}/${
           props.recipeForm.video_urls.length
         }`}</Text>
+
+        <CamBtn
+          onPress={handleDelete}
+          styles={{
+            bottom: hp("12%"),
+            backgroundColor: "rgba(255,255,255,.7)",
+            borderRadius: 100,
+            paddingLeft: wp(".6%"),
+          }}
+          icon="ios-trash-outline"
+          color="#000"
+        />
+
         <Pressable
           style={({ pressed }) => [
             styles.btn,
@@ -141,6 +169,4 @@ const mapStateToProps = (state) => ({
   recipeForm: state.recipeForm,
 });
 
-export default connect(mapStateToProps, { imageChange, videoChange })(
-  VideoEdit
-);
+export default connect(mapStateToProps, { videoChange })(VideoEdit);

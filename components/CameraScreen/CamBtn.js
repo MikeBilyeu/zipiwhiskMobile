@@ -14,7 +14,11 @@ const CamBtn = (props) => {
         { opacity: pressed ? 0.5 : 1 },
       ]}
     >
-      <Ionicons name={props.icon} size={wp("6.5%")} color="#FFF" />
+      <Ionicons
+        name={props.icon}
+        size={wp("6.5%")}
+        color={props.color || "#FFF"}
+      />
       {props.children}
     </Pressable>
   );
