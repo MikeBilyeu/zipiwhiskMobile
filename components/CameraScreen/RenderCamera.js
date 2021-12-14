@@ -26,6 +26,7 @@ const RenderCamera = (props) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const [isRecording, setIsRecording] = useState(false);
+  const [isLongPress, setIsLongPress] = useState(false);
   useEffect(() => {}, [isRecording]);
   const flashIconName =
     flash === Camera.Constants.FlashMode.off
@@ -70,6 +71,14 @@ const RenderCamera = (props) => {
           });
         }
       }
+    }
+  };
+
+  const handlePressOut = () => {
+    if (isLongPress) {
+      cameraRef.current.stopRecording();
+      setIsRecording(false);
+      setIsLongPress(false);
     }
   };
 
@@ -185,6 +194,8 @@ const RenderCamera = (props) => {
           ]}
           hitSlop={15}
           onPressIn={handelOnPress}
+          onLongPress={() => setIsLongPress(true)}
+          onPressOut={handlePressOut}
         >
           <View
             style={[
