@@ -39,7 +39,11 @@ const VideoEdit = (props) => {
 
   const renderMiniPreview = (videos) => {
     return videos.map((url, index) => (
-      <Pressable key={index} onPress={() => setVideoIndex(index)}>
+      <Pressable
+        key={index}
+        onPress={() => setVideoIndex(index)}
+        hitSlop={{ top: 25, bottom: 25 }}
+      >
         <Video
           source={{ uri: url }}
           style={[
@@ -105,7 +109,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
   },
   miniPreviewContainer: {
-    paddingHorizontal: hp("2%"),
     backgroundColor: "rgba(0,0,0, .5)",
     position: "absolute",
     width: wp("100%"),
@@ -118,7 +121,7 @@ const styles = StyleSheet.create({
     height: wp("14%"),
     borderColor: "white",
     borderRadius: wp("1%"),
-    marginHorizontal: wp("1%"),
+    marginHorizontal: wp("1.5%"),
   },
   buttonContainer: {
     flex: 1,
