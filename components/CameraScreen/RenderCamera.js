@@ -103,6 +103,7 @@ const RenderCamera = (props) => {
         style={styles.camera}
         type={type}
         flashMode={flash}
+        videoStabilizationMode={Camera.Constants.VideoStabilization.cinematic}
       >
         <StatusBar hidden />
       </Camera>
