@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, FlatList, View } from "react-native";
-
+import { StyleSheet, FlatList, View } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import ActivityHeader from "./ActivityHeader";
 import Follow from "./Follow";
 import Post from "./Post";
@@ -25,7 +25,7 @@ function Activity() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <ActivityHeader />
       <FlatList
         style={styles.listContainer}

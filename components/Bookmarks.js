@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  FlatList,
-  Image,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList, Image } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import { LinearGradient } from "expo-linear-gradient";
 
 import RecipeCard from "./RecipeCard";
@@ -34,7 +28,7 @@ function Bookmarks() {
   const renderItem = ({ item }) => <RecipeCard data={item} />;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <View style={{ flex: 1 }}>
         <Header />
         <FlatList

@@ -7,8 +7,8 @@ import {
   View,
   Text,
   Pressable,
-  SafeAreaView,
 } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import {
   widthPercentageToDP as wp,
@@ -37,7 +37,7 @@ const CreateRecipeScreen = (props) => {
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }} forceInset={{ top: "always" }}>
         <ScreenHeader
           title="Create Recipe"
           subTitle="Recipe Info"

@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  StatusBar,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, Text, View, Pressable, StatusBar } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import { Video } from "expo-av";
 import {
   widthPercentageToDP as wp,
@@ -58,7 +52,7 @@ const VideoEdit = (props) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <StatusBar hidden />
       <Video
         source={{ uri: props.recipeForm.video_urls[videoIndex] }}

@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -10,7 +11,7 @@ import RecipeScroll from "./RecipeScroll";
 import ActivityBtn from "./ActivityBtn";
 
 const ProfileScreen = () => (
-  <SafeAreaView style={styles.container}>
+  <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
     <ProfileHeader />
     <RecipeScroll paddingTop={hp("24%")} />
     <ActivityBtn />

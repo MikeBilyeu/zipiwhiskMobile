@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, FlatList } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -19,7 +20,7 @@ const renderUsers = ({ item }) => (
 
 const FollowScreen = (props) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <ScreenHeader
         subTitle={`@${props.route.params.username}`}
         title={`${props.route.params.screen} (${props.route.params.num})`}

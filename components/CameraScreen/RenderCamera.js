@@ -1,12 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Pressable,
-  StatusBar,
-  Text,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, View, Pressable, StatusBar, Text } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -97,7 +91,7 @@ const RenderCamera = (props) => {
     );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }} forceInset={{ top: "always" }}>
       <Camera
         ref={cameraRef}
         style={styles.camera}

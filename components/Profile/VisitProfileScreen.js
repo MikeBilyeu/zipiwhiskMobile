@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -19,7 +20,7 @@ const VisitProfileScreen = (props) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <VisitProfileHeader />
       <RecipeScroll paddingTop={hp("16%")} />
     </SafeAreaView>

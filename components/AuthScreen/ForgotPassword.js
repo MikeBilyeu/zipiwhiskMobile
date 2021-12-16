@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

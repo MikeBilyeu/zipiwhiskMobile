@@ -2,12 +2,12 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  SafeAreaView,
   TouchableWithoutFeedback,
   Keyboard,
   Image,
   View,
 } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 
 import {
   widthPercentageToDP as wp,
@@ -16,7 +16,7 @@ import {
 import image from "../../assets/zipiwhisk.png";
 
 const AuthScreenWrapper = (props) => (
-  <SafeAreaView style={styles.container}>
+  <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.inner}>
         <Image

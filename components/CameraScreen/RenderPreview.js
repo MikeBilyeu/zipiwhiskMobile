@@ -6,8 +6,8 @@ import {
   Pressable,
   StatusBar,
   ImageBackground,
-  SafeAreaView,
 } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import { Video } from "expo-av";
 import {
   widthPercentageToDP as wp,
@@ -24,7 +24,7 @@ const RenderPreview = (props) => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <StatusBar hidden />
       {props.recipeForm.media_type === "image" ? (
         <ImageBackground
