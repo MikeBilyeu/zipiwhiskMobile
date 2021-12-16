@@ -73,19 +73,21 @@ const Header = (props) => {
           hitSlop={{ bottom: 15 }}
           onPress={props.handleScrollTop}
         />
-        <Pressable
-          onPress={handleProfilePress}
-          hitSlop={{ bottom: 15 }}
-          style={({ pressed }) => [
-            { opacity: pressed ? 0.5 : 1 },
-            styles.headerBtn,
-          ]}
-        >
-          <Image
-            source={{ uri: props.user.image_url }}
-            style={styles.userIcon}
-          />
-        </Pressable>
+        {props.user.image_url ? (
+          <Pressable
+            onPress={handleProfilePress}
+            hitSlop={{ bottom: 15 }}
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.5 : 1 },
+              styles.headerBtn,
+            ]}
+          >
+            <Image
+              source={{ uri: props.user.image_url }}
+              style={styles.userIcon}
+            />
+          </Pressable>
+        ) : null}
       </LinearGradient>
     </Animated.View>
   );
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 1,
     borderColor: "#fff",
+    backgroundColor: "#000",
   },
 });
 
