@@ -73,21 +73,21 @@ const Header = (props) => {
           hitSlop={{ bottom: 15 }}
           onPress={props.handleScrollTop}
         />
-        {props.user.image_url ? (
-          <Pressable
-            onPress={handleProfilePress}
-            hitSlop={{ bottom: 15 }}
-            style={({ pressed }) => [
-              { opacity: pressed ? 0.5 : 1 },
-              styles.headerBtn,
-            ]}
-          >
-            <Image
-              source={{ uri: props.user.image_url }}
-              style={styles.userIcon}
-            />
-          </Pressable>
-        ) : null}
+        <Pressable
+          onPress={handleProfilePress}
+          hitSlop={{ bottom: 15 }}
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1 },
+            styles.headerBtn,
+          ]}
+        >
+          <Ionicons
+            name="person-outline"
+            size={wp("7%")}
+            color="#FFF"
+            style={styles.headerBtnIcon}
+          />
+        </Pressable>
       </LinearGradient>
     </Animated.View>
   );
@@ -117,17 +117,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: wp("15%"),
   },
-  userIcon: {
-    width: wp("10%"),
-    height: wp("10%"),
-    borderRadius: 100,
-    borderWidth: 1,
-    borderColor: "#fff",
-    backgroundColor: "#000",
-  },
 });
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-export default connect(mapStateToProps, { setOpenComments })(Header);
+export default connect(null, { setOpenComments })(Header);
