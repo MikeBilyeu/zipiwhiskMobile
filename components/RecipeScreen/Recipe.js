@@ -74,7 +74,7 @@ const Recipe = ({ data, children, setToggleRecipe }) => {
               right: 30,
             }}
           >
-            <Ionicons name="ios-close" size={wp("7.5%")} color="#fff" />
+            <Ionicons name="close" size={wp("7.5%")} color="#fff" />
           </Pressable>
         </BlurView>
       </Animated.View>

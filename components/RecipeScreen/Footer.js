@@ -24,7 +24,7 @@ const Footer = (props) => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [fullCaption, setFullCaption] = useState(false);
   const [captionHeight, setCaptionHeight] = useState(0);
-  const yValue = useRef(new Animated.Value(wp("90%"))).current;
+  const yValue = useRef(new Animated.Value(wp("82%"))).current;
 
   const slideOpen = () =>
     Animated.timing(yValue, {
@@ -34,7 +34,7 @@ const Footer = (props) => {
     }).start();
 
   const opacityInterpolate = yValue.interpolate({
-    inputRange: [0, wp("90%")],
+    inputRange: [0, wp("82%")],
     outputRange: [1, 0],
   });
 
@@ -54,10 +54,10 @@ const Footer = (props) => {
         style={[
           styles.gradientWrapper,
           {
-            height: fullCaption ? wp("90%") + captionHeight : wp("90%"),
+            height: fullCaption ? wp("820%") + captionHeight : wp("82%"),
             top: fullCaption
-              ? screenHeight - (wp("90%") + captionHeight)
-              : screenHeight - wp("90%"),
+              ? screenHeight - (wp("82%") + captionHeight)
+              : screenHeight - wp("82%"),
           },
         ]}
       >
@@ -65,7 +65,7 @@ const Footer = (props) => {
           <Pressable
             onPress={() => props.setSaved(!props.saved)}
             style={styles.footerBtn}
-            hitSlop={{ right: 20 }}
+            hitSlop={{ top: 25, right: 20 }}
           >
             <Ionicons
               name={props.saved ? "heart" : "heart-outline"}
@@ -96,13 +96,16 @@ const Footer = (props) => {
           <Pressable
             onPress={() => props.handleSinglePress()}
             style={({ pressed }) => [
-              { opacity: pressed ? 0.5 : 1 },
               styles.footerBtn,
+              {
+                opacity: pressed ? 0.5 : 1,
+                flex: 1.5,
+              },
             ]}
-            hitSlop={{ top: 25, right: 20 }}
+            hitSlop={{ right: 20 }}
           >
             <Ionicons
-              name="reader-outline"
+              name="list-outline"
               size={wp("7%")}
               color={"#FFF"}
               style={styles.footerBtnIcon}
@@ -201,8 +204,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: hp("2%"),
     paddingBottom: hp("2.5%"),
-    height: wp("90%"),
-    top: screenHeight - wp("90%"),
+    height: wp("82%"),
+    top: screenHeight - wp("82%"),
     width: "100%",
     position: "absolute",
   },
