@@ -16,7 +16,8 @@ const CameraScreen = (props) => {
 
   useEffect(() => {
     (async () => {
-      const { status: cameraStatus } = await Camera.requestPermissionsAsync();
+      const { status: cameraStatus } =
+        await Camera.requestCameraPermissionsAsync();
       setCameraPermission(cameraStatus === "granted");
 
       if (Platform.OS !== "web") {

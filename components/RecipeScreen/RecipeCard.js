@@ -54,8 +54,8 @@ const RecipeCard = ({
   };
 
   const responder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onMoveShouldSetPanResponder: () => true,
+    onStartShouldSetPanResponder: () => false,
+    onMoveShouldSetPanResponder: () => false,
 
     onPanResponderRelease: (event, gestureState) =>
       handlePressOut(event, gestureState),
@@ -92,6 +92,7 @@ const RecipeCard = ({
           setSaved={setSaved}
           handleCommentPress={setOpenComments}
           setOpenComments={setOpenComments}
+          handleSinglePress={handleSinglePress}
         />
       )}
     </View>

@@ -15,7 +15,6 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
 import { parseNum } from "../utils";
 
 const screenHeight = Dimensions.get("screen").height;
@@ -25,7 +24,7 @@ const Footer = (props) => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [fullCaption, setFullCaption] = useState(false);
   const [captionHeight, setCaptionHeight] = useState(0);
-  const yValue = useRef(new Animated.Value(wp("72%"))).current;
+  const yValue = useRef(new Animated.Value(wp("90%"))).current;
 
   const slideOpen = () =>
     Animated.timing(yValue, {
@@ -35,7 +34,7 @@ const Footer = (props) => {
     }).start();
 
   const opacityInterpolate = yValue.interpolate({
-    inputRange: [0, wp("72%")],
+    inputRange: [0, wp("90%")],
     outputRange: [1, 0],
   });
 
@@ -55,10 +54,10 @@ const Footer = (props) => {
         style={[
           styles.gradientWrapper,
           {
-            height: fullCaption ? wp("72%") + captionHeight : wp("72%"),
+            height: fullCaption ? wp("90%") + captionHeight : wp("90%"),
             top: fullCaption
-              ? screenHeight - (wp("72%") + captionHeight)
-              : screenHeight - wp("72%"),
+              ? screenHeight - (wp("90%") + captionHeight)
+              : screenHeight - wp("90%"),
           },
         ]}
       >
@@ -66,17 +65,16 @@ const Footer = (props) => {
           <Pressable
             onPress={() => props.setSaved(!props.saved)}
             style={styles.footerBtn}
-            hitSlop={{ top: 50, right: 20 }}
+            hitSlop={{ right: 20 }}
           >
             <Ionicons
-              name="heart"
+              name={props.saved ? "heart" : "heart-outline"}
               size={wp("7%")}
               color={props.saved ? "#FF0000" : "#FFF"}
               style={styles.footerBtnIcon}
             />
             <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
           </Pressable>
-
           <Pressable
             onPress={() => props.setOpenComments(true)}
             style={({ pressed }) => [
@@ -86,7 +84,7 @@ const Footer = (props) => {
             hitSlop={{ right: 20 }}
           >
             <Ionicons
-              name="chatbubble-ellipses"
+              name="chatbox-outline"
               size={wp("7%")}
               color="#FFF"
               style={styles.footerBtnIcon}
@@ -95,7 +93,21 @@ const Footer = (props) => {
               {parseNum(props.numComments)}
             </Text>
           </Pressable>
-
+          <Pressable
+            onPress={() => props.handleSinglePress()}
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.5 : 1 },
+              styles.footerBtn,
+            ]}
+            hitSlop={{ top: 25, right: 20 }}
+          >
+            <Ionicons
+              name="reader-outline"
+              size={wp("7%")}
+              color={"#FFF"}
+              style={styles.footerBtnIcon}
+            />
+          </Pressable>
           <View style={styles.userContainer}>
             <Pressable
               onPress={() => navigation.push("VisitProfile", { id: props.id })}
@@ -133,7 +145,6 @@ const Footer = (props) => {
               </>
             )}
           </View>
-
           <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
             {props.title}
           </Text>
@@ -190,8 +201,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: hp("2%"),
     paddingBottom: hp("2.5%"),
-    height: wp("72%"),
-    top: screenHeight - wp("72%"),
+    height: wp("90%"),
+    top: screenHeight - wp("90%"),
     width: "100%",
     position: "absolute",
   },
