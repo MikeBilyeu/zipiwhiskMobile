@@ -49,12 +49,12 @@ const Footer = (props) => {
     >
       <LinearGradient
         colors={["rgba(0,0,0,.9)", "transparent"]}
-        start={[0, 1]}
+        start={[0, 0.9]}
         end={[0, 0]}
         style={[
           styles.gradientWrapper,
           {
-            height: fullCaption ? wp("820%") + captionHeight : wp("82%"),
+            height: fullCaption ? wp("82%") + captionHeight : wp("82%"),
             top: fullCaption
               ? screenHeight - (wp("82%") + captionHeight)
               : screenHeight - wp("82%"),

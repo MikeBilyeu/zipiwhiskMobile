@@ -8,13 +8,11 @@ import {
 
 import ProfileHeader from "./Header/ProfileHeader";
 import RecipeScroll from "./RecipeScroll";
-import ActivityBtn from "./ActivityBtn";
 
 const ProfileScreen = () => (
   <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
     <ProfileHeader />
     <RecipeScroll paddingTop={hp("24%")} />
-    <ActivityBtn />
   </SafeAreaView>
 );
 const styles = StyleSheet.create({

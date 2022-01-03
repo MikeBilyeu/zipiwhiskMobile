@@ -14,30 +14,19 @@ const ActivityBtn = () => {
     <Pressable
       onPress={() => navigation.navigate("Activity")}
       style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }, styles.btn]}
-      hitSlop={{ top: 10, bottom: 25, left: 25, right: 10 }}
+      hitSlop={25}
     >
-      <BlurView intensity={95} tint={"dark"} style={styles.blur}>
-        <Ionicons
-          name="chatbubble-ellipses-outline"
-          size={wp("7%")}
-          color="#fff"
-        />
-      </BlurView>
+      <Ionicons name="people-outline" size={wp("7%")} color="#000" />
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   btn: {
-    borderRadius: 50,
-    position: "absolute",
-    bottom: hp("2%"),
     left: wp("2%"),
     overflow: "hidden",
-  },
-  blur: {
-    width: wp("16%"),
-    height: wp("16%"),
+    width: wp("15%"),
+    height: wp("15%"),
     justifyContent: "center",
     alignItems: "center",
   },

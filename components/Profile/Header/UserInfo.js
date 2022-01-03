@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, Image } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -8,6 +8,7 @@ import {
 import UserImageBtn from "../../UserImageBtn";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import ActivityBtn from "../ActivityBtn";
 
 const UserInfo = (props) => {
   const navigation = useNavigation();
@@ -23,15 +24,26 @@ const UserInfo = (props) => {
       >
         <Ionicons name="chevron-back" size={wp("6.5%")} color="#313131" />
       </Pressable>
-      <View style={styles.usernameContainer}>
-        <Text style={styles.usernameText}>@{props.user.username}</Text>
-        <Text style={styles.fullNameText}>{props.user.fullname}</Text>
-      </View>
-      <UserImageBtn
-        handleImagePress={props.handleImagePress}
-        uri={props.user.image_url}
-        styles={{ width: wp("13%"), height: wp("13%") }}
-      />
+      <Pressable
+        onPress={props.handleImagePress}
+        style={({ pressed }) => [
+          { opacity: pressed ? 0.5 : 1 },
+          styles.userContainer,
+        ]}
+        hitSlop={25}
+      >
+        <Image
+          style={[{ borderRadius: 50, width: wp("9%"), height: wp("9%") }]}
+          source={
+            props.user.image_url ? { uri: props.user.image_url } : defaultImage
+          }
+        />
+        <View style={styles.usernameWrapper}>
+          <Text style={styles.usernameText}>@{props.user.username}</Text>
+          <Text style={styles.fullNameText}>{props.user.fullname}</Text>
+        </View>
+      </Pressable>
+      <ActivityBtn />
     </View>
   );
 };
@@ -45,8 +57,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp("5%"),
     paddingVertical: hp("1%"),
   },
-  usernameContainer: {
-    justifyContent: "space-between",
+  userContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  usernameWrapper: {
+    justifyContent: "center",
+    marginLeft: wp("2%"),
   },
   usernameText: {
     textAlign: "center",
