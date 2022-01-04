@@ -14,7 +14,9 @@ const RecipeScroll = (props) => {
 
   const renderItem = ({ index, item }) => (
     <RecipeCardSmall
-      item={item}
+      title={item.title}
+      media_url={item.media_url}
+      media_type={item.media_type}
       handlePress={() =>
         navigation.push("Recipe", {
           index,

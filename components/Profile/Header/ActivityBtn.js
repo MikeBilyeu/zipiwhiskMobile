@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Pressable } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { BlurView } from "expo-blur";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

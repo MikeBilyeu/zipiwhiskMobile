@@ -17,7 +17,7 @@ const ProfileHeader = ({ user }) => {
   const navigation = useNavigation();
   return (
     <Header>
-      <View style={{ width: "100%", height: hp("24%") }}>
+      <View style={{ width: "100%", height: hp("26%") }}>
         <UserInfo
           user={user}
           handleImagePress={() => navigation.navigate("Settings")}

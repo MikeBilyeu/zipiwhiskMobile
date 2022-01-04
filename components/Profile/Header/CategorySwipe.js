@@ -34,7 +34,7 @@ const CategorySwipe = (props) => {
     <ScrollView
       horizontal={true}
       showsHorizontalScrollIndicator={false}
-      style={styles.container}
+      contentContainerStyle={styles.container}
     >
       {renderCategories(
         ["Breakfast", "Lunch/Dinner", "Snack", "Dessert", "Beverage"],
@@ -47,23 +47,26 @@ const CategorySwipe = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     paddingVertical: hp("1%"),
-    maxHeight: 65,
+    alignItems: "center",
+    height: hp("8%"),
+    maxHeight: 70,
   },
   btn: {
+    height: hp("6%"),
+    maxHeight: 45,
     justifyContent: "center",
-    paddingVertical: wp("3%"),
-    paddingHorizontal: wp("10%"),
+    paddingTop: hp(".25%"),
+    paddingHorizontal: wp("9%"),
     marginHorizontal: wp("2%"),
-    borderRadius: 50,
+    borderRadius: 100,
     backgroundColor: "#fff",
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowColor: "black",
-    shadowOpacity: 0.2,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
     shadowRadius: 2,
   },
   btnSelected: {

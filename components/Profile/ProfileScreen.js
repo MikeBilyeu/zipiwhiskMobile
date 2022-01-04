@@ -12,7 +12,7 @@ import RecipeScroll from "./RecipeScroll";
 const ProfileScreen = () => (
   <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
     <ProfileHeader />
-    <RecipeScroll paddingTop={hp("24%")} />
+    <RecipeScroll paddingTop={hp("26%")} />
   </SafeAreaView>
 );
 const styles = StyleSheet.create({

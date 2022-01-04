@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 
 import FocusAwareStatusBar from "../FocusAwareStatusBar";
@@ -30,7 +27,9 @@ const SearchScreen = ({}) => {
 
   const renderRecipes = ({ index, item }) => (
     <RecipeCardSmall
-      item={item}
+      title={item.title}
+      media_url={item.media_url}
+      media_type={item.media_type}
       handlePress={() =>
         navigation.push("Recipe", {
           index,

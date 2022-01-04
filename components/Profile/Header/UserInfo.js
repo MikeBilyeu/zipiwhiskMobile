@@ -5,10 +5,9 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import UserImageBtn from "../../UserImageBtn";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import ActivityBtn from "../ActivityBtn";
+import ActivityBtn from "./ActivityBtn";
 
 const UserInfo = (props) => {
   const navigation = useNavigation();
