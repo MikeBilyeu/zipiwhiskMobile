@@ -8,6 +8,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import ActivityBtn from "./ActivityBtn";
+import defaultImage from "../../../assets/userImage.png";
 
 const UserInfo = (props) => {
   const navigation = useNavigation();
