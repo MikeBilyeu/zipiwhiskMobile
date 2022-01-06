@@ -7,7 +7,6 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import ActivityBtn from "./ActivityBtn";
 import defaultImage from "../../../assets/userImage.png";
 
 const UserInfo = (props) => {
@@ -33,7 +32,13 @@ const UserInfo = (props) => {
         hitSlop={25}
       >
         <Image
-          style={[{ borderRadius: 50, width: wp("9%"), height: wp("9%") }]}
+          style={[
+            {
+              borderRadius: 50,
+              width: wp("9%"),
+              height: wp("9%"),
+            },
+          ]}
           source={
             props.user.image_url ? { uri: props.user.image_url } : defaultImage
           }
@@ -43,7 +48,7 @@ const UserInfo = (props) => {
           <Text style={styles.fullNameText}>{props.user.fullname}</Text>
         </View>
       </Pressable>
-      <ActivityBtn />
+      {props.children}
     </View>
   );
 };
@@ -56,6 +61,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: wp("5%"),
     paddingVertical: hp("1%"),
+  },
+  backBtn: {
+    height: wp("13%"),
+    width: wp("13%"),
+    alignItems: "flex-start",
+    justifyContent: "center",
   },
   userContainer: {
     flexDirection: "row",
@@ -79,12 +90,6 @@ const styles = StyleSheet.create({
     fontSize: wp("3.25%"),
     fontFamily: "AvenirNextRegular",
     color: "#313131",
-  },
-  backBtn: {
-    height: wp("13%"),
-    width: wp("13%"),
-    alignItems: "flex-start",
-    justifyContent: "center",
   },
 });
 

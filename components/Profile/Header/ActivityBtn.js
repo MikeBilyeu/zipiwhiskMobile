@@ -22,8 +22,6 @@ const ActivityBtn = () => {
 
 const styles = StyleSheet.create({
   btn: {
-    left: wp("2%"),
-    overflow: "hidden",
     width: wp("15%"),
     height: wp("15%"),
     justifyContent: "center",

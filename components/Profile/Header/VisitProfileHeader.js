@@ -16,7 +16,7 @@ const VisitProfileHeader = ({ userProfile }) => {
     <Header>
       <View style={{ height: hp("15%"), width: "100%" }}>
         <UserInfo user={userProfile}>
-          <View style={{ width: wp("20%") }} />
+          <View style={{ width: wp("15%") }} />
         </UserInfo>
         <FollowContainer user={userProfile}>
           <ToggleFollowBtn

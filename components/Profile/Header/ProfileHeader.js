@@ -12,6 +12,7 @@ import UserInfo from "./UserInfo";
 import FollowContainer from "./FollowsContainer";
 import CreateRecipeBtn from "./CreateRecipeBtn";
 import CategorySwipe from "./CategorySwipe";
+import ActivityBtn from "./ActivityBtn";
 
 const ProfileHeader = ({ user }) => {
   const navigation = useNavigation();
@@ -21,7 +22,9 @@ const ProfileHeader = ({ user }) => {
         <UserInfo
           user={user}
           handleImagePress={() => navigation.navigate("Settings")}
-        />
+        >
+          <ActivityBtn />
+        </UserInfo>
         <FollowContainer user={user}>
           <CreateRecipeBtn />
         </FollowContainer>
