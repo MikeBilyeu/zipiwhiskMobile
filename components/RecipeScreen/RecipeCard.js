@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, ImageBackground, PanResponder } from "react-native";
+import { StyleSheet, ImageBackground, Pressable } from "react-native";
 import { Video } from "expo-av";
 import {
   widthPercentageToDP as wp,
@@ -19,7 +19,7 @@ const RecipeCard = ({
   const [lastTap, setLastTap] = useState(0);
   const [singlePressTimer, setSinglePressTimer] = useState(0);
 
-  const DOUBLE_PRESS_DELAY = 200;
+  const DOUBLE_PRESS_DELAY = 250;
 
   const cancelSinglePressTimer = () => {
     if (singlePressTimer) {
@@ -28,7 +28,7 @@ const RecipeCard = ({
     }
   };
 
-  const handleTap = (event, gestureState) => {
+  const handleTap = () => {
     cancelSinglePressTimer();
 
     const timeNow = Date.now();
@@ -42,26 +42,24 @@ const RecipeCard = ({
       const timeout = setTimeout(() => {
         setLastTap(0);
         //SINGLE PRESS
-        handleSinglePress();
+        console.log("single press");
       }, DOUBLE_PRESS_DELAY);
 
       setSinglePressTimer(timeout);
     }
   };
 
-  const handlePressOut = (event, gestureState) => {
-    openComments ? setOpenComments(false) : handleTap(event, gestureState); // handles the single or double click
+  const handlePressOut = () => {
+    openComments ? setOpenComments(false) : handleTap(); // handles the single or double press
   };
 
-  const responder = PanResponder.create({
-    onStartShouldSetPanResponder: () => false,
-    onMoveShouldSetPanResponder: () => false,
-
-    onPanResponderRelease: (event, gestureState) =>
-      handlePressOut(event, gestureState),
-  });
   return (
-    <View style={styles.container} {...responder.panHandlers}>
+    <Pressable
+      onPress={handlePressOut}
+      onLongPress={() => !openComments && handleSinglePress()}
+      delayLongPress={250}
+      style={styles.container}
+    >
       {data.media_type === "video" ? (
         <Video
           source={{ uri: data.media_url }}
@@ -95,7 +93,7 @@ const RecipeCard = ({
           handleSinglePress={handleSinglePress}
         />
       )}
-    </View>
+    </Pressable>
   );
 };
 
