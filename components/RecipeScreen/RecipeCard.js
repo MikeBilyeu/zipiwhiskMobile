@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, ImageBackground, Pressable } from "react-native";
 import { Video } from "expo-av";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-
+import Ionicons from "@expo/vector-icons/Ionicons";
 import Footer from "./Footer";
 
 const RecipeCard = ({
@@ -18,6 +18,8 @@ const RecipeCard = ({
   const [saved, setSaved] = useState(data.saved);
   const [lastTap, setLastTap] = useState(0);
   const [singlePressTimer, setSinglePressTimer] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const video = useRef(null);
 
   const DOUBLE_PRESS_DELAY = 250;
 
@@ -42,7 +44,10 @@ const RecipeCard = ({
       const timeout = setTimeout(() => {
         setLastTap(0);
         //SINGLE PRESS
-        console.log("single press");
+        if (data.media_type === "video") {
+          isPlaying ? video.current.pauseAsync() : video.current.playAsync();
+          setIsPlaying(!isPlaying);
+        }
       }, DOUBLE_PRESS_DELAY);
 
       setSinglePressTimer(timeout);
@@ -62,6 +67,7 @@ const RecipeCard = ({
     >
       {data.media_type === "video" ? (
         <Video
+          ref={video}
           source={{ uri: data.media_url }}
           style={styles.video}
           resizeMode="cover"
@@ -73,6 +79,14 @@ const RecipeCard = ({
         <ImageBackground
           source={{ uri: data.media_url }}
           style={styles.image}
+        />
+      )}
+      {!isPlaying && (
+        <Ionicons
+          name="pause-circle-outline"
+          size={wp("25%")}
+          color="#FFF"
+          style={styles.pauseIcon}
         />
       )}
 
@@ -102,6 +116,12 @@ const styles = StyleSheet.create({
     height: hp("100%"),
     justifyContent: "space-between",
     backgroundColor: "black",
+  },
+  pauseIcon: {
+    position: "absolute",
+    opacity: 0.5,
+    top: "40%",
+    left: "37.5%",
   },
   image: {
     flex: 1,
