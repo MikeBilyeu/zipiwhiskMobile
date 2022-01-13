@@ -148,9 +148,9 @@ const data = [
       id: 10,
     },
     media_url:
-      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_50/v1620928855/Recipes/pexels-shvets-production-7199062_1.mp4",
-    //"https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.jpg",
-    media_type: "video",
+      //"https://res.cloudinary.com/mikebilyeuimg/video/upload/q_50/v1620928855/Recipes/pexels-shvets-production-7199062_1.mp4",
+      "https://res.cloudinary.com/mikebilyeuimg/video/upload/q_75/v1620928855/Recipes/pexels-shvets-production-7199062_1.jpg",
+    media_type: "image",
     recipeYield: 4,
     ingredientList: [
       {
@@ -196,6 +196,34 @@ const data = [
     comments: [
       {
         id: 96675000333,
+        comment: "Nice, I'm sharing this recipe with everyone.",
+        user: {
+          id: 10,
+          username: "whskuser943",
+          image: "https://randomuser.me/api/portraits/men/55.jpg",
+        },
+        parent_comment_id: null,
+        childComments: null,
+        numLikes: 4,
+        liked: true,
+        created_at: "2021-01-19T19:58:38-05:00",
+      },
+      {
+        id: 9000333,
+        comment: "Nice, I'm sharing this recipe with everyone.",
+        user: {
+          id: 10,
+          username: "whskuser943",
+          image: "https://randomuser.me/api/portraits/men/55.jpg",
+        },
+        parent_comment_id: null,
+        childComments: null,
+        numLikes: 4,
+        liked: true,
+        created_at: "2021-01-19T19:58:38-05:00",
+      },
+      {
+        id: 966700333,
         comment: "Nice, I'm sharing this recipe with everyone.",
         user: {
           id: 10,

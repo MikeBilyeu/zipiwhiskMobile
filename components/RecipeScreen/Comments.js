@@ -5,8 +5,9 @@ import {
   FlatList,
   Text,
   Animated,
-  Easing,
+  View,
 } from "react-native";
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -14,7 +15,6 @@ import {
 
 import Input from "./Input";
 import Comment from "./Comment";
-import Animations from "./Animations";
 
 const renderComment = ({ item }) => <Comment c={item} />;
 
@@ -32,7 +32,8 @@ const Comments = (props) => {
 
   const panResponder = useRef(
     PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponder: () => true,
+
       onPanResponderMove: (e, gesture) => {
         // Prevent over pull up
         if (gesture.dy > 0) {
@@ -41,9 +42,9 @@ const Comments = (props) => {
           })(e, gesture);
         }
       },
-      onPanResponderRelease: (e, { dy, vy }) => {
-        // Swipe velocity threshold
-        if (vy > 0.35 || dy > hp("35%")) {
+      onPanResponderRelease: (e, { dx, dy, vy }) => {
+        // Swipe velocity threshold or tap
+        if (vy > 0.35 || dy > hp("35%") || (dx == 0 && dy === 0)) {
           Animated.timing(yValue, {
             toValue: hp("75%"),
             duration: 350 - vy * 100,
@@ -62,33 +63,39 @@ const Comments = (props) => {
 
   const panHandlers = panResponder.panHandlers;
 
-  //useEffect(() => Animations(dropDownOpen, pan, mount, setMount));
   return (
-    <>
+    <View style={styles.outer} {...panHandlers}>
       <Animated.View
         style={[styles.wrapper, { transform: [{ translateY: yValue }] }]}
-        {...panHandlers}
       >
         <Text style={styles.title}>Comments</Text>
+
         <FlatList
           data={props.comments}
           renderItem={renderComment}
           keyExtractor={(item) => item.id.toString()}
-          bounces={false}
+          bounces={true}
+          contentContainerStyle={styles.list}
         />
       </Animated.View>
       <Input style={{ transform: [{ translateY: yValue }] }} />
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  outer: {
+    position: "absolute",
+    width: "100%",
+    height: hp("87%"),
+    bottom: 0,
+  },
   wrapper: {
-    paddingHorizontal: 10,
-    paddingVertical: hp("3%"),
+    paddingTop: hp("4%"),
+    paddingBottom: hp("12%"),
     backgroundColor: "rgba(0,0,0,1)",
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    borderTopLeftRadius: wp("10%"),
+    borderTopRightRadius: wp("10%"),
     position: "absolute",
     bottom: 0,
     width: "100%",
@@ -100,7 +107,10 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextDemiBold",
     fontSize: wp("4%"),
     color: "#fff",
-    marginBottom: hp("1%"),
+    marginBottom: hp("2%"),
+  },
+  list: {
+    paddingHorizontal: wp("2%"),
   },
 });
 

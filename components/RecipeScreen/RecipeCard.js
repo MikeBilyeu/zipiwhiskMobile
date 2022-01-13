@@ -54,13 +54,9 @@ const RecipeCard = ({
     }
   };
 
-  const handlePressOut = () => {
-    openComments ? setOpenComments(false) : handleTap(); // handles the single or double press
-  };
-
   return (
     <Pressable
-      onPress={handlePressOut}
+      onPress={() => handleTap()}
       onLongPress={() => !openComments && handleSinglePress()}
       delayLongPress={250}
       style={styles.container}

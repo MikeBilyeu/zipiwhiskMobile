@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, Image, Pressable, Animated } from "react-native";
+import { StyleSheet, Pressable, Animated } from "react-native";
 import { connect } from "react-redux";
 import { setOpenComments } from "../../redux/actions/recipe";
 import {

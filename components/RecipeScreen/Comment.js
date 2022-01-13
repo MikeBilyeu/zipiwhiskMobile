@@ -28,7 +28,7 @@ const Comment = ({ c }) => {
   };
 
   return (
-    <View
+    <Pressable
       style={[
         styles.userCommentContainer,
         c.parent_comment_id && styles.userCommentContainerChild,
@@ -92,13 +92,13 @@ const Comment = ({ c }) => {
       {c.childComments &&
         !c.parent_comment_id &&
         c.childComments.map((item) => <Comment key={item.id} c={item} />)}
-    </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   userCommentContainer: {
-    marginVertical: hp("2.5%"),
+    paddingVertical: hp("2.5%"),
   },
   userCommentContainerChild: {
     marginLeft: wp("5%"),
