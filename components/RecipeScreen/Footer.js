@@ -24,7 +24,7 @@ const Footer = (props) => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [fullCaption, setFullCaption] = useState(false);
   const [captionHeight, setCaptionHeight] = useState(0);
-  const yValue = useRef(new Animated.Value(wp("82%"))).current;
+  const yValue = useRef(new Animated.Value(wp("90%"))).current;
 
   const slideOpen = () =>
     Animated.timing(yValue, {
@@ -34,7 +34,7 @@ const Footer = (props) => {
     }).start();
 
   const opacityInterpolate = yValue.interpolate({
-    inputRange: [0, wp("82%")],
+    inputRange: [0, wp("90%")],
     outputRange: [1, 0],
   });
 
@@ -54,10 +54,10 @@ const Footer = (props) => {
         style={[
           styles.gradientWrapper,
           {
-            height: fullCaption ? wp("82%") + captionHeight : wp("82%"),
+            height: fullCaption ? wp("90%") + captionHeight : wp("90%"),
             top: fullCaption
-              ? screenHeight - (wp("82%") + captionHeight)
-              : screenHeight - wp("82%"),
+              ? screenHeight - (wp("90%") + captionHeight)
+              : screenHeight - wp("90%"),
           },
         ]}
       >
@@ -204,8 +204,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: hp("2%"),
     paddingBottom: hp("2.5%"),
-    height: wp("82%"),
-    top: screenHeight - wp("82%"),
+    height: wp("90%"),
+    top: screenHeight - wp("90%"),
     width: "100%",
     position: "absolute",
   },
