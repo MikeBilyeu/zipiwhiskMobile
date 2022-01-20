@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   wrapper: {
-    paddingTop: hp("4%"),
+    paddingTop: hp("2.5%"),
     paddingBottom: hp("12%"),
     backgroundColor: "rgba(0,0,0,1)",
-    borderTopLeftRadius: wp("10%"),
-    borderTopRightRadius: wp("10%"),
+    borderTopLeftRadius: wp("5%"),
+    borderTopRightRadius: wp("5%"),
     position: "absolute",
     bottom: 0,
     width: "100%",
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("4%"),
+    fontSize: wp("3.5%"),
     color: "#fff",
     marginBottom: hp("2%"),
   },
