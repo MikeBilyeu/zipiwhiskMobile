@@ -13,7 +13,6 @@ import {
 } from "react-native-responsive-screen";
 
 const screenWidth = Dimensions.get("screen").width;
-const screenHeight = Dimensions.get("screen").height;
 
 const renderList = (list) => {
   return list.map((step, index) => (
@@ -24,11 +23,14 @@ const renderList = (list) => {
     >
       <View>
         <ScrollView
-          bounces={false}
+          bounces={true}
           nestedScrollEnabled={true}
-          style={styles.cardScroll}
+          contentContainerStyle={styles.cardScroll}
+          indicatorStyle={"white"}
         >
-          <Text style={styles.cardText}>{step}</Text>
+          <Pressable>
+            <Text style={styles.cardText}>{step}</Text>
+          </Pressable>
         </ScrollView>
       </View>
     </View>
@@ -57,8 +59,8 @@ const Instructions = (props) => {
       <ScrollView
         horizontal={true}
         pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        style={styles.container}
+        indicatorStyle={"white"}
+        contentContainerStyle={styles.container}
         scrollEventThrottle={250}
         onScroll={(event) => {
           setCardNum(
@@ -86,15 +88,16 @@ const styles = StyleSheet.create({
     width: screenWidth - 20,
     justifyContent: "center",
     marginHorizontal: 10,
-    borderRadius: 25,
-    paddingHorizontal: wp("7%"),
+    borderRadius: wp("10%"),
+    paddingHorizontal: wp("2%"),
     paddingVertical: hp("5%"),
     marginBottom: hp("6%"),
     backgroundColor: "rgba(0,0,0,.7)",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
+    shadowOpacity: 1,
+    shadowRadius: hp("1.5%"),
+    marginVertical: hp("2.5%"),
   },
   cardText: {
     fontSize: wp("6%"),
@@ -109,7 +112,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     top: hp("-3.5%"),
   },
-  cardScroll: {},
+  cardScroll: {
+    paddingHorizontal: wp("4%"),
+  },
 });
 
 export default Instructions;
