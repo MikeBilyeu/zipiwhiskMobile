@@ -69,14 +69,17 @@ const Comments = (props) => {
         style={[styles.wrapper, { transform: [{ translateY: yValue }] }]}
       >
         <Text style={styles.title}>Comments</Text>
-
-        <FlatList
-          data={props.comments}
-          renderItem={renderComment}
-          keyExtractor={(item) => item.id.toString()}
-          bounces={true}
-          contentContainerStyle={styles.list}
-        />
+        {props.comments.length ? (
+          <FlatList
+            data={props.comments}
+            renderItem={renderComment}
+            keyExtractor={(item) => item.id.toString()}
+            bounces={true}
+            contentContainerStyle={styles.list}
+          />
+        ) : (
+          <Text style={styles.noCommentText}>No comments yet.</Text>
+        )}
       </Animated.View>
       <Input style={{ transform: [{ translateY: yValue }] }} />
     </View>
@@ -111,6 +114,13 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingHorizontal: wp("2%"),
+  },
+  noCommentText: {
+    color: "rgba(200,200,200,.1)",
+    textAlign: "center",
+    fontFamily: "AvenirNextBold",
+    fontSize: wp("5.5%"),
+    marginTop: hp("7.5%"),
   },
 });
 
