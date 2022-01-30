@@ -2,7 +2,7 @@ import React, { useRef, useState, cloneElement } from "react";
 import { connect } from "react-redux";
 import { setOpenComments } from "../../redux/actions/recipe";
 import { useKeepAwake } from "expo-keep-awake";
-import { FlatList, Dimensions, View } from "react-native";
+import { FlatList, Dimensions, View, Animated } from "react-native";
 
 import FocusAwareStatusBar from "../FocusAwareStatusBar";
 import RecipeCard from "./RecipeCard";
@@ -15,8 +15,17 @@ const RecipeScroll = (props) => {
   useKeepAwake();
   const [toggleRecipe, setToggleRecipe] = useState(false);
   const [recipeIndex, setRecipeIndex] = useState(props.initalScroll || 0);
+  const [initialYValue, setInitialYValue] = useState(0);
 
+  const handleIndexChange = (i) => {
+    setInitialYValue(0);
+    setRecipeIndex(i);
+  };
   const handleLoadMore = () => console.log("load more");
+  const handleCloseRecipe = (lastYValue) => {
+    setToggleRecipe(false);
+    setInitialYValue(lastYValue);
+  };
 
   const flatListRef = useRef();
   const handleScrollTop = () => {
@@ -54,9 +63,9 @@ const RecipeScroll = (props) => {
         scrollEnabled={!props.openComments}
         initialScrollIndex={props.initalScroll || 0}
         scrollsToTop={!toggleRecipe && !props.openComments}
-        onScrollToTop={() => setRecipeIndex(0)}
+        onScrollToTop={() => handleIndexChange(0)}
         onMomentumScrollEnd={(event) => {
-          setRecipeIndex(
+          handleIndexChange(
             Math.round(
               parseFloat(event.nativeEvent.contentOffset.y / screenHeight)
             )
@@ -72,6 +81,9 @@ const RecipeScroll = (props) => {
         <Recipe
           data={props.data[recipeIndex]}
           setToggleRecipe={setToggleRecipe}
+          handleCloseRecipe={handleCloseRecipe}
+          initialYValue={initialYValue}
+          setInitialYValue={setInitialYValue}
         />
       )}
       {props.openComments && (

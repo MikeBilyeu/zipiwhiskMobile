@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, Animated, Pressable } from "react-native";
 import { BlurView } from "expo-blur";
 import {
@@ -10,10 +10,11 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 
-const Recipe = ({ data, children, setToggleRecipe }) => {
-  const yValueScale = useRef(new Animated.Value(0)).current;
+const Recipe = ({ data, children, initialYValue, handleCloseRecipe }) => {
   const yValue = useRef(new Animated.Value(hp("100%"))).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const yValueScale = useRef(new Animated.Value(0)).current;
+  const [lastYValue, setLastYValue] = useState(0);
 
   const slideIn = () =>
     Animated.timing(yValue, {
@@ -34,13 +35,13 @@ const Recipe = ({ data, children, setToggleRecipe }) => {
       toValue: 0,
       duration: 50,
       useNativeDriver: true,
-    }).start(() => setToggleRecipe(false));
+    }).start(handleCloseRecipe(lastYValue));
 
   useEffect(fadeIn, []);
   useEffect(slideIn, []);
 
   let scaleInterpolate = yValueScale.interpolate({
-    inputRange: [-201, -200, 0, 1],
+    inputRange: [-201, -200, 0, 2000],
     outputRange: [1.2, 1.2, 1, 1],
   });
 
@@ -82,6 +83,13 @@ const Recipe = ({ data, children, setToggleRecipe }) => {
       <Animated.ScrollView
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
+        contentOffset={{ y: initialYValue }}
+        onScrollEndDrag={(event) => {
+          setLastYValue(event.nativeEvent.contentOffset.y);
+        }}
+        onMomentumScrollEnd={(event) => {
+          setLastYValue(event.nativeEvent.contentOffset.y);
+        }}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: yValueScale } } }],
           {
@@ -95,10 +103,8 @@ const Recipe = ({ data, children, setToggleRecipe }) => {
         ]}
       >
         {children}
-
         <Pressable style={styles.recipeScrollConatiner} onPress={fadeOut}>
           <Ingredients data={data} />
-
           <Instructions data={data} />
         </Pressable>
       </Animated.ScrollView>
