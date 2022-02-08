@@ -21,7 +21,7 @@ const RecipeCard = ({
   const [isPlaying, setIsPlaying] = useState(true);
   const video = useRef(null);
 
-  const DOUBLE_PRESS_DELAY = 250;
+  const DOUBLE_PRESS_DELAY = 200;
 
   const cancelSinglePressTimer = () => {
     if (singlePressTimer) {
@@ -44,10 +44,7 @@ const RecipeCard = ({
       const timeout = setTimeout(() => {
         setLastTap(0);
         //SINGLE PRESS
-        if (data.media_type === "video") {
-          isPlaying ? video.current.pauseAsync() : video.current.playAsync();
-          setIsPlaying(!isPlaying);
-        }
+        !openComments && handleSinglePress();
       }, DOUBLE_PRESS_DELAY);
 
       setSinglePressTimer(timeout);
@@ -57,7 +54,12 @@ const RecipeCard = ({
   return (
     <Pressable
       onPress={() => handleTap()}
-      onLongPress={() => !openComments && handleSinglePress()}
+      onLongPress={() => {
+        if (data.media_type === "video") {
+          isPlaying ? video.current.pauseAsync() : video.current.playAsync();
+          setIsPlaying(!isPlaying);
+        }
+      }}
       delayLongPress={250}
       style={styles.container}
     >

@@ -5,10 +5,10 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
+import RecipeHeader from "./RecipeHeader";
 
 const Recipe = ({ data, children, initialYValue, handleCloseRecipe }) => {
   const yValue = useRef(new Animated.Value(hp("100%"))).current;
@@ -35,7 +35,7 @@ const Recipe = ({ data, children, initialYValue, handleCloseRecipe }) => {
       toValue: 0,
       duration: 50,
       useNativeDriver: true,
-    }).start(handleCloseRecipe(lastYValue));
+    }).start(() => handleCloseRecipe(lastYValue));
 
   useEffect(fadeIn, []);
   useEffect(slideIn, []);
@@ -51,6 +51,8 @@ const Recipe = ({ data, children, initialYValue, handleCloseRecipe }) => {
 
   return (
     <>
+      <RecipeHeader fadeAnim={fadeAnim} />
+
       <Animated.View
         style={{
           position: "absolute",
@@ -61,23 +63,7 @@ const Recipe = ({ data, children, initialYValue, handleCloseRecipe }) => {
           opacity: fadeAnim,
         }}
       >
-        <BlurView intensity={100} tint={"dark"} style={{ flex: 1 }}>
-          <Pressable
-            style={({ pressed }) => [
-              { opacity: pressed ? 0.5 : 1 },
-              styles.cancelBtn,
-            ]}
-            onPress={fadeOut}
-            hitSlop={{
-              top: 100,
-              bottom: 30,
-              left: 30,
-              right: 30,
-            }}
-          >
-            <Ionicons name="close" size={wp("7.5%")} color="#fff" />
-          </Pressable>
-        </BlurView>
+        <BlurView intensity={100} tint={"dark"} style={{ flex: 1 }} />
       </Animated.View>
 
       <Animated.ScrollView
@@ -113,14 +99,6 @@ const Recipe = ({ data, children, initialYValue, handleCloseRecipe }) => {
 };
 
 const styles = StyleSheet.create({
-  cancelBtn: {
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 2,
-    top: hp("6%"),
-    right: wp("6%"),
-    position: "absolute",
-  },
   RecipeScrollView: {
     position: "absolute",
     top: 0,
