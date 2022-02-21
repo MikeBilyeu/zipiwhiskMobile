@@ -11,6 +11,15 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT NOW()
 );
 
+CREATE TABLE verifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    token varchar(255) NOT NULL,
+    verified BOOLEAN DEFAULT 0, 
+    updated_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
 -- CREATE TABLE restrictions (
 --     id INT AUTO_INCREMENT PRIMARY KEY,
 --     restriction VARCHAR(255) UNIQUE NOT NULL

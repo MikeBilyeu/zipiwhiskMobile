@@ -8,6 +8,8 @@ router.get(
   require("./getUser")
 );
 
+router.get("/verify/:uniqueString", require("./verify"));
+
 router.post("/register", require("./createUser"));
 
 router.post(

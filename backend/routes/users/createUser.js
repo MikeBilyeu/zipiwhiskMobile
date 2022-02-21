@@ -1,10 +1,14 @@
 const pool = require("../../config/db");
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
+const emailVerification = require("./emailVerification");
+const { v4: uuidv4 } = require("uuid");
 //const validateRegisterInput = require("../../validation/register");
 
 module.exports = async ({ body: { username, email, password } }, res) => {
   email = email.toLowerCase();
   username = username.toLowerCase();
+  const uniqueString = uuidv4();
 
   // //VALIDATION
   //   const errors = validateRegisterInput({ username, email, password });
@@ -29,7 +33,7 @@ module.exports = async ({ body: { username, email, password } }, res) => {
   });
 
   pool.query(
-    "SELECT * FROM users WHER username = ?",
+    "SELECT * FROM users WHERE username = ?",
     username,
     (error, results) => {
       try {
@@ -66,7 +70,22 @@ module.exports = async ({ body: { username, email, password } }, res) => {
         (error, results) => {
           try {
             if (error) throw error;
-            res.status(201).send(`User added with ID: ${results.insertId}`);
+
+            pool.query(
+              "INSERT INTO verifications (email, token) VALUES (?, ?)",
+              [email, uniqueString],
+              (error, results) => {
+                try {
+                  if (error) throw error;
+                  emailVerification(email, uniqueString);
+                  res
+                    .status(201)
+                    .send(`User added with ID: ${results.insertId}`);
+                } catch (err) {
+                  res.status(400).json(err);
+                }
+              }
+            );
           } catch (err) {
             res.status(400).json(err);
           }
