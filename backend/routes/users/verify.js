@@ -3,7 +3,6 @@ const pool = require("../../config/db");
 module.exports = async (req, res) => {
   console.log(req.params.uniqueString);
   const { uniqueString } = req.params;
-  //return res.status(200).end();
 
   try {
     pool.query(

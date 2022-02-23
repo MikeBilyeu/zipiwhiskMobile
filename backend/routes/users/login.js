@@ -46,10 +46,21 @@ module.exports = async ({ query: { username, password } }, res) => {
             },
             (err, token) => {
               if (err) throw err;
-              res.status(200).json({
-                success: true,
-                token: "Bearer " + token,
-              });
+              // Check email verification
+
+              pool.query(
+                "SELECT * FROM verifications WHERE user_id = ? AND verified = 1",
+                user.id,
+                async (err, results) => {
+                  if (err) throw err;
+                  if (results[0]) {
+                    return res.status(200).json({
+                      success: true,
+                      token: "Bearer " + token,
+                    });
+                  }
+                }
+              );
             }
           );
         } else {

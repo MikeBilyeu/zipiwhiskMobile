@@ -12,12 +12,13 @@ CREATE TABLE users (
 );
 
 CREATE TABLE verifications (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    token varchar(255) NOT NULL,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) NOT NULL,
     verified BOOLEAN DEFAULT 0, 
     updated_at TIMESTAMP,
-    created_at TIMESTAMP DEFAULT NOW()
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (user_id)
+        REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- CREATE TABLE restrictions (

@@ -63,24 +63,23 @@ module.exports = async ({ body: { username, email, password } }, res) => {
   pool.query("INSERT INTO users SET ?", user, (error, results) => {
     try {
       if (error) throw error;
+      const user_id = results.insertId;
 
       pool.query(
         "INSERT INTO users_restrictions (user_id) VALUES (?)",
-        results.insertId,
+        user_id,
         (error, results) => {
           try {
             if (error) throw error;
 
             pool.query(
-              "INSERT INTO verifications (email, token) VALUES (?, ?)",
-              [email, uniqueString],
+              "INSERT INTO verifications (user_id, token) VALUES (?, ?)",
+              [user_id, uniqueString],
               (error, results) => {
                 try {
                   if (error) throw error;
                   emailVerification(email, uniqueString);
-                  res
-                    .status(201)
-                    .send(`User added with ID: ${results.insertId}`);
+                  res.status(201).send(`User added with ID: ${user_id}`);
                 } catch (err) {
                   res.status(400).json(err);
                 }
