@@ -13,10 +13,13 @@ import {
 import { checkUsername } from "./user";
 import { authLogin } from "./login";
 
-export const signupEmailChange = (value) => ({
-  type: SIGNUP_EMAIL_CHANGE,
-  payload: value,
-});
+export const signupEmailChange = (value) => (dispatch) => {
+  dispatch({
+    type: SIGNUP_EMAIL_CHANGE,
+    payload: value,
+  });
+  dispatch(checkEmail(value));
+};
 
 export const signupUsernameChange = (value) => (dispatch) => {
   dispatch({

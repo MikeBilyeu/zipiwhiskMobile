@@ -1,18 +1,17 @@
 const pool = require("../../config/db");
 
 module.exports = async (req, res) => {
-  console.log(req.params.uniqueString);
   const { uniqueString } = req.params;
 
   try {
     pool.query(
       `UPDATE verifications SET verified = 1 WHERE token = ?`,
       [uniqueString],
-      async (error, results, fields) => {
+      async (error, results) => {
         try {
           if (error) throw error;
-          return res.redirect("/");
-          //return res.status(200).end();
+
+          return res.status(200).send("Email Verified!");
         } catch (err) {
           console.log(err);
           return res.status(400);

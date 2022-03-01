@@ -9,7 +9,7 @@ import { useFonts } from "expo-font";
 import { checkAuthToken } from "./utils/checkAuthToken";
 import axios from "axios";
 
-import Auth from "./components/AuthScreen/Auth";
+import AuthStack from "./components/AuthStack";
 import HomeStack from "./components/HomeStack";
 
 axios.defaults.baseURL = "http://localhost:3000";
@@ -35,7 +35,11 @@ const AppConatiner = connect(mapStateToProps)((props) => {
     <SafeAreaProvider style={styles.container}>
       <StatusBar style="dark" />
       <NavigationContainer>
-        {props.auth.isAuth ? <HomeStack /> : <Auth />}
+        {props.auth.isAuth && props.auth.isVerified ? (
+          <HomeStack />
+        ) : (
+          <AuthStack />
+        )}
       </NavigationContainer>
     </SafeAreaProvider>
   );

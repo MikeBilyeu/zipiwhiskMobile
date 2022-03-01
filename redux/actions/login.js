@@ -46,7 +46,9 @@ export const authLogin = (username, password) => async (dispatch, getState) => {
 
     // Add token to auth header for future requests
     setAuthToken(token);
+
     const decodedToken = jwt_decode(token);
+
     dispatch(setCurrentUser(decodedToken));
   } catch ({ response: { data } }) {
     dispatch({ type: LOGIN_FAILURE });

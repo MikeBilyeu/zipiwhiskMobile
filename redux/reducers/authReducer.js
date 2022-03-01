@@ -2,23 +2,25 @@ import {
   LOGIN_REQEUST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  IS_VERIFIED,
   LOGOUT,
 } from "../constants";
 
 const initialState = {
   isAuth: false,
-  isLoading: false,
+  isVerified: false,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQEUST:
-      return { ...state, isLoading: true };
+      return initialState;
     case LOGIN_SUCCESS:
-      return { isAuth: true, isLoading: false };
-
+      return { ...state, isAuth: true };
+    case IS_VERIFIED:
+      return { ...state, isVerified: true };
     case LOGOUT:
-      return { ...state, isAuth: false };
+      return initialState;
     default:
       return state;
   }

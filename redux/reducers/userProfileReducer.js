@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   isLoading: true,
+  isVerified: false,
   id: null,
   username: "",
   fullname: "",

@@ -1,7 +1,7 @@
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOING_FAILURE,
+  LOGIN_FAILURE,
   LOGIN_USERNAME_CHANGE,
   LOGIN_USERNAME_ERROR,
   LOGIN_PASSWORD_CHANGE,
@@ -22,6 +22,8 @@ const loginReducer = (state = initialState, action) => {
       return initialState;
     case LOGIN_REQUEST:
       return { ...state, isLoading: true };
+    case LOGIN_FAILURE:
+      return { ...state, isLoading: false };
     case LOGIN_USERNAME_CHANGE:
       return {
         ...state,

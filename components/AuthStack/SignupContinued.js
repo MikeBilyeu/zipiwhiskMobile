@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Text } from "react-native";
 import {
@@ -16,6 +16,13 @@ import Or from "./Or";
 
 function SignupContinued(props) {
   const signupDisabled = props.signup.isLoading || !props.signup.password;
+  console.log(props.signup);
+  const handleSignup = () => {
+    props.registerUser();
+    props.navigation.navigate("VerifyEmail", {
+      email: props.signup.email.toLowerCase(),
+    });
+  };
 
   return (
     <AuthScreenWrapper headerText="Signup">
@@ -36,7 +43,7 @@ function SignupContinued(props) {
             ? "Loading..."
             : "Signup"
         }
-        handleOnPress={props.registerUser}
+        handleOnPress={handleSignup}
         disabled={signupDisabled}
       />
       <Or />

@@ -10,6 +10,12 @@ router.get(
 
 router.get("/verify/:uniqueString", require("./verify"));
 
+router.get(
+  "/isVerified",
+  passport.authenticate("jwt", { session: false }),
+  require("./isVerified")
+);
+
 router.post("/register", require("./createUser"));
 
 router.post(

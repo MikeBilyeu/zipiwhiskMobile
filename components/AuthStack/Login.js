@@ -22,6 +22,13 @@ const Login = (props) => {
     props.login.usernameError ||
     props.login.passwordError;
 
+  const handleLogin = async () => {
+    await props.authLogin();
+    if (props.auth.isAuth && !props.auth.isVerified) {
+      props.navigation.navigate("VerifyEmail");
+    }
+  };
+
   return (
     <AuthScreenWrapper headerText="Login">
       <Input
@@ -55,7 +62,7 @@ const Login = (props) => {
 
       <Btn
         text={props.login.isLoading ? "logging in..." : "Login"}
-        handleOnPress={props.authLogin}
+        handleOnPress={handleLogin}
         disabled={loginDisabled}
       />
 
@@ -86,6 +93,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   login: state.login,
+  auth: state.auth,
 });
 
 const mapDispatchToProps = {

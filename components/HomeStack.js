@@ -30,7 +30,6 @@ const HomeStack = (props) => {
       }}
     >
       <Stack.Screen name="Home" component={Nav} />
-
       <Stack.Screen name="Activity" component={ActivityScreen} />
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} />

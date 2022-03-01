@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import {
   signupEmailChange,
   signupUsernameChange,
-  checkEmail,
 } from "../../redux/actions/signup";
-import { checkUsername } from "../../redux/actions/user";
 
 import AuthScreenWrapper from "./AuthScreenWrapper";
 import Input from "../Input";
@@ -21,8 +19,7 @@ const Signup = (props) => {
     props.signup.usernameError ||
     props.signup.emailError;
 
-  const handleContinuePress = async () => {
-    await props.checkEmail();
+  const handleContinuePress = () => {
     props.navigation.navigate("SignupContinued");
   };
 
@@ -65,7 +62,5 @@ const mapStateToProps = (state) => ({ signup: state.signup });
 const mapDispatchToProps = {
   signupEmailChange,
   signupUsernameChange,
-  checkEmail,
-  checkUsername,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
