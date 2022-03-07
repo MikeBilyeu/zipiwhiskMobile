@@ -8,6 +8,7 @@ import store from "./redux/store";
 import { useFonts } from "expo-font";
 import { checkAuthToken } from "./utils/checkAuthToken";
 import axios from "axios";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import AuthStack from "./components/AuthStack";
 import HomeStack from "./components/HomeStack";
@@ -15,6 +16,8 @@ import HomeStack from "./components/HomeStack";
 axios.defaults.baseURL = "http://localhost:3000";
 
 checkAuthToken();
+
+const Stack = createStackNavigator();
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -35,11 +38,18 @@ const AppConatiner = connect(mapStateToProps)((props) => {
     <SafeAreaProvider style={styles.container}>
       <StatusBar style="dark" />
       <NavigationContainer>
-        {props.auth.isAuth && props.auth.isVerified ? (
-          <HomeStack />
-        ) : (
-          <AuthStack />
-        )}
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            gestureEnabled: false,
+          }}
+        >
+          {props.auth.isAuth && props.auth.isVerified ? (
+            <Stack.Screen name="Home" component={HomeStack} />
+          ) : (
+            <Stack.Screen name="Auth" component={AuthStack} />
+          )}
+        </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
   );
