@@ -11,11 +11,6 @@ import VerifyEmail from "./VerifyEmail";
 const Stack = createStackNavigator();
 
 const Auth = (props) => {
-  useEffect(() => {
-    console.log("render");
-  });
-  console.log(props.auth);
-
   return (
     <Stack.Navigator
       screenOptions={{

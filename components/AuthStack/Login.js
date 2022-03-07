@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
@@ -13,6 +13,7 @@ import Input from "../Input";
 import Btn from "./Btn";
 import NavBtn from "./NavBtn";
 import Or from "./Or";
+import { isLoading } from "expo-font";
 
 const Login = (props) => {
   const loginDisabled =
@@ -22,11 +23,14 @@ const Login = (props) => {
     props.login.usernameError ||
     props.login.passwordError;
 
-  const handleLogin = async () => {
-    await props.authLogin();
-    if (props.auth.isAuth && !props.auth.isVerified) {
+  useEffect(() => {
+    if (props.auth.isAuth && !props.auth.isVerified && !props.auth.isLoading) {
       props.navigation.navigate("VerifyEmail");
     }
+  }, [props.auth.isLoading]);
+
+  const handleLogin = () => {
+    props.authLogin();
   };
 
   return (

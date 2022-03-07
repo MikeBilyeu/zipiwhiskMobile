@@ -14,19 +14,17 @@ import Btn from "./Btn";
 import NavBtn from "./NavBtn";
 import Or from "./Or";
 
-function SignupContinued(props) {
+const SignupContinued = (props) => {
   const signupDisabled = props.signup.isLoading || !props.signup.password;
-  console.log(props.signup);
+
   const handleSignup = () => {
     props.registerUser();
-    props.navigation.navigate("VerifyEmail", {
-      email: props.signup.email.toLowerCase(),
-    });
+    props.navigation.navigate("VerifyEmail");
   };
 
   return (
     <AuthScreenWrapper headerText="Signup">
-      <Text style={styles.header}>{props.signup.email.toLowerCase()}</Text>
+      <Text style={styles.header}>{props.signup.email?.toLowerCase()}</Text>
       <Input
         value={props.signup.password}
         handleChange={props.signupPasswordChange}
@@ -54,7 +52,7 @@ function SignupContinued(props) {
       />
     </AuthScreenWrapper>
   );
-}
+};
 
 const styles = StyleSheet.create({
   header: {

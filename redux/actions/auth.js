@@ -4,6 +4,9 @@ import {
   LOGIN_FAILURE,
   LOGOUT,
   IS_VERIFIED,
+  VERIFY_REQUEST,
+  VERIFY_SUCCESS,
+  VERIFY_FAILURE,
 } from "../constants";
 import { getUser } from "./user";
 import * as SecureStore from "expo-secure-store";
@@ -21,14 +24,17 @@ export const setCurrentUser = (decodedToken) => async (dispatch) => {
     if (isAuth) {
       dispatch(getUser());
 
-      await axios.get("api/users/isVerified");
-
-      dispatch({ type: IS_VERIFIED });
       dispatch({
         type: LOGIN_SUCCESS,
       });
+
+      dispatch({ type: VERIFY_REQUEST });
+      await axios.get("api/users/isVerified");
+
+      dispatch({ type: VERIFY_SUCCESS });
     }
   } catch (err) {
+    dispatch({ type: VERIFY_FAILURE });
     dispatch({ type: LOGIN_FAILURE });
   }
 };
