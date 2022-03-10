@@ -59,7 +59,7 @@ const Instructions = (props) => {
       <ScrollView
         horizontal={true}
         pagingEnabled
-        indicatorStyle={"white"}
+        showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.container}
         scrollEventThrottle={250}
         onScroll={(event) => {

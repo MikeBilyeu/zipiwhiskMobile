@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -15,6 +14,7 @@ const renderList = (list) =>
       </View>
     </View>
   ));
+
 const Ingredients = (props) => {
   return (
     <>
