@@ -68,7 +68,10 @@ const CreateRecipeScreen = (props) => {
             </Pressable>
           )}
         </ScreenHeader>
-        <ScrollView style={styles.listContainer}>
+        <ScrollView
+          style={styles.listContainer}
+          contentContainerStyle={{ paddingTop: hp("11%") }}
+        >
           <View style={styles.captionContainer}>
             <MediaInput />
             <Input
@@ -153,7 +156,6 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     position: "absolute",
-    paddingTop: hp("11%"),
     top: hp("5%"),
     bottom: 0,
     left: 0,

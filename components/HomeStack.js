@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Nav from "./Nav";
 
 import SettingsScreen from "./SettingsScreen";
-import CreateRecipeScreen from "./CreateRecipeScreen/CreateRecipeScreen";
+import CreateRecipeScreen from "./CreateRecipeScreen";
 import CameraScreen from "./CameraScreen";
 import ActivityScreen from "./ActivityScreen";
 
