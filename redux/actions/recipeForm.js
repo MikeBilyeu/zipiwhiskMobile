@@ -67,7 +67,7 @@ export const submitRecipe = () => async (dispatch, getState) => {
 
   // Upload recipe media to S3 Bucket and return url
   // recipe.media_url = await dispatch(
-  //   s3Upload(recipe.media_url, "recipe-media/", id)
+  //   s3Upload(recipe.image_url, `recipe-media/`, id)
   // );
 
   try {

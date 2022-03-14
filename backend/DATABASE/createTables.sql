@@ -78,6 +78,7 @@ CREATE TABLE recipes (
     recipe_name VARCHAR(255) NOT NULL,
     yield int NOT NULL,
     total_time_min INT NOT NULL,
+    caption TEXT,
     instructions TEXT NOT NULL,
     latitude FLOAT,
     longitude FLOAT,

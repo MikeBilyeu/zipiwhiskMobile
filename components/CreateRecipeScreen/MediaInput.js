@@ -14,6 +14,7 @@ const MediaInput = (props) => {
   const handleOnPress = () => {
     navigation.navigate("Camera");
   };
+
   return (
     <Pressable
       style={({ pressed }) => [

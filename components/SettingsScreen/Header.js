@@ -8,6 +8,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 const Header = (props) => {
+  console.log(props.navigation);
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.headerContainer} forceInset={{ top: "always" }}>

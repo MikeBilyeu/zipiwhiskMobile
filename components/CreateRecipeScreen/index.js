@@ -58,7 +58,7 @@ const CreateRecipeScreen = (props) => {
             </Pressable>
           ) : (
             <Pressable
-              onPress={() => props.submitRecipe}
+              onPress={props.submitRecipe}
               style={({ pressed }) => [
                 styles.headerBtn,
                 { opacity: pressed ? 0.5 : 1 },
