@@ -35,14 +35,13 @@ const RenderCamera = (props) => {
       allowsEditing: false,
       quality: 1,
     });
-    console.log("IMAGE RESULT: ", result.uri.substring(7));
 
     if (!result.cancelled) {
       if (result.type == "image") {
-        props.imageChange({ image_url: result.uri.substring(7) });
+        props.imageChange({ image_url: result.uri });
       }
       if (result.type == "video") {
-        props.videoChange({ video_urls: [result.uri.substring(7)] });
+        props.videoChange({ video_urls: [result.uri] });
       }
     }
   };

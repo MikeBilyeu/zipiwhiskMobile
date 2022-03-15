@@ -65,11 +65,6 @@ export const submitRecipe = () => async (dispatch, getState) => {
 
   dispatch({ type: SUBMIT_RECIPE_REQUEST });
 
-  // Upload recipe media to S3 Bucket and return url
-  // recipe.media_url = await dispatch(
-  //   s3Upload(recipe.image_url, `recipe-media/`, id)
-  // );
-
   try {
     await axios.post("api/recipes/create", { recipe });
     dispatch({ type: SUBMIT_RECIPE_SUCCESS });

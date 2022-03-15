@@ -11,6 +11,7 @@ import defaultImage from "../../../assets/userImage.png";
 
 const UserInfo = (props) => {
   const navigation = useNavigation();
+
   return (
     <View style={styles.userInfoContainer}>
       <Pressable

@@ -1,8 +1,8 @@
 const pool = require("../../config/db");
-const uploadFile = require("./uploadFile");
+const uploadFile = require("../../utils/uploadFile");
 
 module.exports = async (req, res) => {
-  const { id } = req.user;
+  const { id: user_id } = req.user;
   let {
     recipe_name,
     instructions,
@@ -27,24 +27,19 @@ module.exports = async (req, res) => {
     ingredients,
   };
 
-  console.log(decodeURIComponent(media_url));
   try {
     pool.query("INSERT INTO recipes SET ?", recipes, (err, { insertId }) => {
       if (err) throw err;
 
-      console.log(insertId);
       //INSERT INTO USERS_RECIPES
       pool.query(
         "INSERT INTO users_recipes (user_id, recipe_id) VALUES (?, ?)",
-        [id, insertId],
+        [user_id, insertId],
         async (err) => {
           if (err) throw err;
-          //INSERT RECIPE MEDIA
 
-          let mediaURL = await uploadFile(
-            decodeURIComponent(media_url),
-            insertId
-          );
+          //INSERT RECIPE MEDIA
+          let mediaURL = await uploadFile("recipe-media/", media_url, insertId);
 
           pool.query(
             "UPDATE recipes SET media_url = ? WHERE id = ?",

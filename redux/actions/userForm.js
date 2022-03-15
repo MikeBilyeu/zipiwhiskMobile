@@ -11,7 +11,6 @@ import {
 } from "../constants";
 import axios from "axios";
 import { checkUsername, getUser } from "./user";
-import s3Upload from "../../utils/s3Upload";
 
 export const getUserState = () => (dispatch, getState) => {
   const data = getState().user;
@@ -47,17 +46,17 @@ export const imageUrlChange = (value) => ({
 
 export const editProfile = (goBack) => async (dispatch, getState) => {
   let { fullname, username, restriction, image_url } = getState().userForm;
-  const { image_url: user_image_url } = getState().user;
-  const { id } = getState().user;
+  // const { image_url: user_image_url } = getState().user;
+  // const { id } = getState().user;
 
-  dispatch({ type: EDIT_USER_REQUEST });
-
-  if (image_url && image_url !== user_image_url) {
-    image_url = await dispatch(s3Upload(image_url, "profile-image/", id));
-  }
+  // if (image_url && image_url !== user_image_url) {
+  //   image_url = await dispatch(s3Upload(image_url, "profile-image/", id));
+  // }
+  // console.log("IMAGE URL", image_url);
 
   const data = { fullname, username, restriction, image_url };
   try {
+    dispatch({ type: EDIT_USER_REQUEST });
     await axios.put("api/users/edit", data);
     dispatch({ type: EDIT_USER_SUCCESS });
     dispatch(getUser());

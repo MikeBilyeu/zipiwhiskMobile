@@ -1,10 +1,14 @@
 const pool = require("../../config/db");
+const uploadFile = require("../../utils/uploadFile");
 
 module.exports = async (req, res) => {
   const { id } = req.user; // Get user_id from auth
-  const { username, fullname, restriction, image_url } = req.body;
+  let { username, fullname, restriction, image_url } = req.body;
 
   try {
+    //INSERT RECIPE MEDIA
+    image_url = await uploadFile("profile-image/", image_url, id);
+
     pool.query(
       `UPDATE users u, users_restrictions ur 
       SET u.username = ?, u.fullname = NULLIF(?, ''), 
