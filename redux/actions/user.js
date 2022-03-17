@@ -19,7 +19,6 @@ export const getUser = () => async (dispatch) => {
       type: GET_USER_FAILURE,
       payload: err.response.data,
     });
-    console.log("user error:", err);
   }
 };
 

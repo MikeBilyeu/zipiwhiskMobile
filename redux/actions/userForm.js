@@ -45,16 +45,10 @@ export const imageUrlChange = (value) => ({
 });
 
 export const editProfile = (goBack) => async (dispatch, getState) => {
-  let { fullname, username, restriction, image_url } = getState().userForm;
-  // const { image_url: user_image_url } = getState().user;
-  // const { id } = getState().user;
+  const { fullname, username, restriction, image_url } = getState().userForm;
+  const { image_url: prev_image_url } = getState().user;
 
-  // if (image_url && image_url !== user_image_url) {
-  //   image_url = await dispatch(s3Upload(image_url, "profile-image/", id));
-  // }
-  // console.log("IMAGE URL", image_url);
-
-  const data = { fullname, username, restriction, image_url };
+  const data = { fullname, username, restriction, image_url, prev_image_url };
   try {
     dispatch({ type: EDIT_USER_REQUEST });
     await axios.put("api/users/edit", data);
@@ -63,6 +57,5 @@ export const editProfile = (goBack) => async (dispatch, getState) => {
     goBack();
   } catch (err) {
     dispatch({ type: EDIT_USER_FAILURE });
-    console.log(err);
   }
 };

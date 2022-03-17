@@ -46,7 +46,7 @@ module.exports = async (req, res) => {
             [mediaURL, insertId],
             (err) => {
               if (err) throw err;
-              console.log("INSERT INTO DB: ", mediaURL, insertId);
+
               //INSTERT CATEGORIES
               categories
                 .filter((c) => c.selected)
@@ -61,13 +61,12 @@ module.exports = async (req, res) => {
                 });
             }
           );
-          res.status(201).send(`recipe added with ID: ${insertId}`);
+          return res.status(201).send(`recipe added with ID: ${insertId}`);
         }
       );
     });
   } catch (err) {
-    console.error(err);
-    res.status(400).json(err);
+    return res.status(400).json(err);
   }
 };
 
