@@ -58,13 +58,21 @@ const CreateRecipeScreen = (props) => {
             </Pressable>
           ) : (
             <Pressable
-              onPress={props.submitRecipe}
+              disabled={props.recipeForm.isLoading}
+              onPress={() => props.submitRecipe(props.navigation)}
               style={({ pressed }) => [
                 styles.headerBtn,
                 { opacity: pressed ? 0.5 : 1 },
               ]}
             >
-              <Text style={styles.headerBtnText}>Post</Text>
+              <Text
+                style={[
+                  styles.headerBtnText,
+                  props.recipeForm.isLoading && styles.headerBtnTextLoading,
+                ]}
+              >
+                {props.recipeForm.isLoading ? "Posting..." : "Post"}
+              </Text>
             </Pressable>
           )}
         </ScreenHeader>
@@ -146,6 +154,10 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextDemiBold",
     fontSize: wp("4%"),
     color: "#0172C4",
+  },
+  headerBtnTextLoading: {
+    color: "#B7B7B7",
+    fontFamily: "AvenirNextRegular",
   },
   captionContainer: {
     flexDirection: "row",

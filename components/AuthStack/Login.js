@@ -13,7 +13,6 @@ import Input from "../Input";
 import Btn from "./Btn";
 import NavBtn from "./NavBtn";
 import Or from "./Or";
-import { isLoading } from "expo-font";
 
 const Login = (props) => {
   const loginDisabled =

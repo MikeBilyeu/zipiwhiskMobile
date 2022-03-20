@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import {
   widthPercentageToDP as wp,
@@ -12,13 +12,15 @@ const Header = (props) => {
   return (
     <SafeAreaView style={styles.headerContainer} forceInset={{ top: "always" }}>
       <View style={styles.headerWrapper}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => navigation.goBack()}
-          activeOpacity={0.4}
-          style={styles.headerBtn}
+          style={({ pressed }) => [
+            styles.headerBtn,
+            { opacity: pressed ? 0.5 : 1 },
+          ]}
         >
           <Text style={styles.btnText}>Cancel</Text>
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.titleWrapper}>
           <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
             {props.title}
@@ -26,8 +28,11 @@ const Header = (props) => {
           <Text style={styles.subTitleText}>{props.subTitle}</Text>
         </View>
         {(
-          <TouchableOpacity
-            style={styles.headerBtn}
+          <Pressable
+            style={({ pressed }) => [
+              styles.headerBtn,
+              { opacity: pressed ? 0.5 : 1 },
+            ]}
             onPress={props.handleSavePress}
             disabled={props.isLoading}
           >
@@ -39,7 +44,7 @@ const Header = (props) => {
             >
               {props.isLoading ? "Saving" : "Save"}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         ) || <View style={styles.headerBtn} />}
       </View>
     </SafeAreaView>
@@ -96,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: wp("4%"),
   },
   saveBtnTextLoading: {
-    color: "#313131",
+    color: "#B7B7B7",
     fontFamily: "AvenirNextRegular",
   },
 });

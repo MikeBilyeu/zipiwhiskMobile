@@ -8,4 +8,10 @@ router.post(
   require("./createRecipe")
 );
 
+router.get(
+  "/recipe",
+  passport.authenticate("jwt", { session: false }),
+  require("./getRecipe")
+);
+
 module.exports = router;

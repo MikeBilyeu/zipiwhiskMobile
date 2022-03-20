@@ -8,9 +8,13 @@ import {
   INGREDIENTS_CHANGE,
   INSTRUCTIONS_CHANGE,
   CATEGORIES_CHANGE,
+  SUBMIT_RECIPE_REQUEST,
+  SUBMIT_RECIPE_SUCCESS,
+  SUBMIT_RECIPE_FAILURE,
 } from "../constants";
 
 const initialState = {
+  isLoading: false,
   id: null,
   image_url: "",
   video_urls: [],
@@ -33,6 +37,12 @@ const initialState = {
 
 const recipeFormReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SUBMIT_RECIPE_REQUEST:
+      return { ...state, isLoading: true };
+    case SUBMIT_RECIPE_FAILURE:
+      return { ...state, isLoading: false };
+    case SUBMIT_RECIPE_SUCCESS:
+      return initialState;
     case RECIPE_NAME_CHANGE:
       return { ...state, recipe_name: action.payload };
     case CAPTION_CHANGE:

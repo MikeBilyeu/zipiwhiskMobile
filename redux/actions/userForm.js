@@ -10,6 +10,7 @@ import {
   EDIT_USER_FAILURE,
 } from "../constants";
 import axios from "axios";
+import { InteractionManager } from "react-native";
 import { checkUsername, getUser } from "./user";
 
 export const getUserState = () => (dispatch, getState) => {
@@ -52,9 +53,11 @@ export const editProfile = (goBack) => async (dispatch, getState) => {
   try {
     dispatch({ type: EDIT_USER_REQUEST });
     await axios.put("api/users/edit", data);
-    dispatch({ type: EDIT_USER_SUCCESS });
     dispatch(getUser());
     goBack();
+    InteractionManager.runAfterInteractions(() => {
+      dispatch({ type: EDIT_USER_SUCCESS });
+    });
   } catch (err) {
     dispatch({ type: EDIT_USER_FAILURE });
   }

@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
                 });
             }
           );
-          return res.status(201).send(`recipe added with ID: ${insertId}`);
+          return res.status(201).json({ recipe_id: insertId });
         }
       );
     });
@@ -69,5 +69,3 @@ module.exports = async (req, res) => {
     return res.status(400).json(err);
   }
 };
-
-// const mediaUrl = `https://zipiwhisk-media.s3.amazonaws.com/recipe-media/${results.insertId}`;

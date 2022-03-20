@@ -13,7 +13,8 @@ import {
   SUBMIT_RECIPE_FAILURE,
 } from "../constants";
 import axios from "axios";
-//import s3Upload from "../utils/s3Upload";
+import { getRecipe } from "./recipe";
+import { InteractionManager } from "react-native";
 
 export const mediaTypeChange = (value) => ({
   type: MEDIA_TYPE_CHANGE,
@@ -59,15 +60,18 @@ export const categoriesChange = (value) => ({
   payload: value,
 });
 
-export const submitRecipe = () => async (dispatch, getState) => {
+export const submitRecipe = (navigation) => async (dispatch, getState) => {
   let recipe = getState().recipeForm;
-  const { id } = getState().user;
-
-  dispatch({ type: SUBMIT_RECIPE_REQUEST });
 
   try {
-    await axios.post("api/recipes/create", { recipe });
-    dispatch({ type: SUBMIT_RECIPE_SUCCESS });
+    dispatch({ type: SUBMIT_RECIPE_REQUEST });
+    //Post Recipe
+    const { data } = await axios.post("api/recipes/create", { recipe });
+    //dispatch(getRecipe(data.recipe_id));
+    navigation.navigate("Home");
+    InteractionManager.runAfterInteractions(() => {
+      dispatch({ type: SUBMIT_RECIPE_SUCCESS });
+    });
   } catch (err) {
     dispatch({ type: SUBMIT_RECIPE_FAILURE });
     console.log(err);
