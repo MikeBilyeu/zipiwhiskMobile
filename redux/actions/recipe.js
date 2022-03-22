@@ -11,6 +11,18 @@ export const setOpenComments = (value) => ({
   payload: value,
 });
 
+export const getSavedRecipes = (value) => async (dispatch) => {
+  //  dispatch({ type: GET_RECIPE_REQUEST });
+  try {
+    const { data } = await axios.get("api/recipes/saved", {
+      params: { user_id: value },
+    });
+    // dispatch({ type: GET_RECIPE_SUCCESS });
+  } catch (err) {
+    // dispatch({ type: GET_RECIPE_FAILURE });
+  }
+};
+
 export const getRecipe = (value) => async (dispatch) => {
   dispatch({ type: GET_RECIPE_REQUEST });
   try {

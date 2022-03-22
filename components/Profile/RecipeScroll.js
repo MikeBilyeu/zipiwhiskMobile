@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { StyleSheet, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -8,9 +9,14 @@ import {
 
 import RecipeCardSmall from "../RecipeCardSmall";
 import data from "../../data";
+import { getSavedRecipes } from "../../redux/actions/recipe";
 
 const RecipeScroll = (props) => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    props.getSavedRecipes(2);
+  }, []);
 
   const renderItem = ({ index, item }) => (
     <RecipeCardSmall
@@ -50,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecipeScroll;
+export default connect(null, { getSavedRecipes })(RecipeScroll);
