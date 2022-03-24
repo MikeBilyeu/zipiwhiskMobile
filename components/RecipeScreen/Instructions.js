@@ -15,7 +15,7 @@ import {
 const screenWidth = Dimensions.get("screen").width;
 
 const renderList = (list) => {
-  return list.map((step, index) => (
+  return list?.split(/\r?\n{2}/).map((step, index) => (
     <View
       key={index}
       style={styles.cardContainer}
@@ -73,7 +73,7 @@ const Instructions = (props) => {
         {renderList(props.data.instructions)}
       </ScrollView>
       <View style={styles.cardNumContainer}>
-        {renderCardNum(props.data.instructions, cardNum)}
+        {renderCardNum(props.data.instructions?.split(/\r?\n{2}/), cardNum)}
       </View>
     </Pressable>
   );

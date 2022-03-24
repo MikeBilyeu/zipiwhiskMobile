@@ -4,8 +4,12 @@ import data from "../../data";
 import RecipeScroll from "./RecipeScroll";
 
 const RecipeScreen = (props) => {
+  console.log("RECIPE ROUTE: ", props.route.params.recipe);
   return (
-    <RecipeScroll data={data} initalScroll={props.route.params.index}>
+    <RecipeScroll
+      data={props.route.params.data}
+      initalScroll={props.route.params.index}
+    >
       <Header
         title={props.route.params.title}
         subTitle={props.route.params.subTitle}

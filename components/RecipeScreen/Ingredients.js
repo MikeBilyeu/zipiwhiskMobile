@@ -6,14 +6,18 @@ import {
 } from "react-native-responsive-screen";
 
 const renderList = (list) =>
-  list.map((i, index) => (
-    <View key={i.ingredient + index} style={styles.ingredientContainer}>
-      <View style={styles.ingredientWrapper}>
-        <Text style={styles.ingredientAmount}>{i.amount}</Text>
-        <Text style={styles.ingredientName}>{i.ingredient}</Text>
+  list &&
+  list.split(/\r?\n/).map((i, index) => {
+    return (
+      <View key={i + index} style={styles.ingredientContainer}>
+        <View style={styles.ingredientWrapper}>
+          {/* <Text style={styles.ingredientAmount}>{i.amount}</Text> */}
+          {/* <Text style={styles.ingredientName}>{i.ingredient}</Text> */}
+          <Text style={styles.ingredientName}>{i}</Text>
+        </View>
       </View>
-    </View>
-  ));
+    );
+  });
 
 const Ingredients = (props) => {
   return (
@@ -21,7 +25,6 @@ const Ingredients = (props) => {
       <Text pointerEvents="none" style={styles.servingsText}>
         {props.data.recipeYield.toString()} Servings
       </Text>
-
       <View style={styles.listContainer}>
         {renderList(props.data.ingredientList)}
       </View>

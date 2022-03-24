@@ -12,6 +12,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import moment from "moment";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -165,22 +166,12 @@ const Footer = (props) => {
               numberOfLines={fullCaption ? 20 : 1}
               ellipsizeMode="tail"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit.
+              {props.caption}
             </Text>
           </Pressable>
-          <Text style={styles.timeAgo}>1 day ago</Text>
+          <Text style={styles.timeAgo}>
+            {moment(props.created_at).fromNow()}
+          </Text>
           <View style={styles.viewsContainer}>
             <Ionicons
               name="eye"

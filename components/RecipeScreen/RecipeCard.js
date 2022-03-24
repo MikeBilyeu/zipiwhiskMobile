@@ -92,9 +92,9 @@ const RecipeCard = ({
         <Footer
           numLikes={data.numLikes}
           numComments={data.numComments}
-          userImage={data.user.image}
-          username={data.user.username}
-          id={data.user.id}
+          userImage={data.user_image_url}
+          username={data.username}
+          id={data.created_by}
           caption={data.caption}
           numViews={data.numViews}
           title={data.title}
@@ -103,6 +103,7 @@ const RecipeCard = ({
           handleCommentPress={setOpenComments}
           setOpenComments={setOpenComments}
           handleSinglePress={handleSinglePress}
+          created_at={data.created_at}
         />
       )}
     </Pressable>

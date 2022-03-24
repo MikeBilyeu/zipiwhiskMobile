@@ -12,10 +12,13 @@ module.exports = async (req, res) => {
       r.ingredients AS ingredientList,
       r.instructions,
       r.created_at,
+      r.media_type,
+      r.media_url,
+      r.caption,
       u.id AS created_by,
-      u.image_url,
+      u.image_url user_image_url,
       u.username,
-      COUNT(us.user_id) AS saved,
+      COUNT(us.user_id) > 0 AS saved,
       COUNT(tus.user_id) AS numLikes,
       COUNT(c.id) AS numComments
       FROM recipes r
