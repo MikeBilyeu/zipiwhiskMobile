@@ -16,9 +16,11 @@ const RecipeScroll = (props) => {
   const [toggleRecipe, setToggleRecipe] = useState(false);
   const [recipeIndex, setRecipeIndex] = useState(props.initalScroll || 0);
   const [initialYValue, setInitialYValue] = useState(0);
+  const [cardNum, setCardNum] = useState(0);
 
   const handleIndexChange = (i) => {
     setInitialYValue(0);
+    setCardNum(0);
     setRecipeIndex(i);
   };
   const handleLoadMore = () => console.log("load more");
@@ -83,7 +85,8 @@ const RecipeScroll = (props) => {
           setToggleRecipe={setToggleRecipe}
           handleCloseRecipe={handleCloseRecipe}
           initialYValue={initialYValue}
-          setInitialYValue={setInitialYValue}
+          cardNum={cardNum}
+          setCardNum={setCardNum}
         />
       )}
       {props.openComments && (

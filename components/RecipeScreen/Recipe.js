@@ -10,11 +10,18 @@ import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 import RecipeHeader from "./RecipeHeader";
 
-const Recipe = ({ data, children, initialYValue, handleCloseRecipe }) => {
+const Recipe = ({
+  data,
+  children,
+  initialYValue,
+  cardNum,
+  setCardNum,
+  handleCloseRecipe,
+}) => {
   const yValue = useRef(new Animated.Value(hp("100%"))).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const yValueScale = useRef(new Animated.Value(0)).current;
-  const [lastYValue, setLastYValue] = useState(0);
+  const [lastYValue, setLastYValue] = useState(initialYValue);
 
   const slideIn = () =>
     Animated.timing(yValue, {
@@ -51,7 +58,7 @@ const Recipe = ({ data, children, initialYValue, handleCloseRecipe }) => {
 
   return (
     <>
-      <RecipeHeader fadeAnim={fadeAnim} />
+      <RecipeHeader fadeAnim={fadeAnim} onPress={fadeOut} />
 
       <Animated.View
         style={{
@@ -91,7 +98,7 @@ const Recipe = ({ data, children, initialYValue, handleCloseRecipe }) => {
         {children}
         <Pressable style={styles.recipeScrollConatiner} onPress={fadeOut}>
           <Ingredients data={data} />
-          <Instructions data={data} />
+          <Instructions data={data} cardNum={cardNum} setCardNum={setCardNum} />
         </Pressable>
       </Animated.ScrollView>
     </>

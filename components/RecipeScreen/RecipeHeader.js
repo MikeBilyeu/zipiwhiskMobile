@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Animated } from "react-native";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { LinearGradient } from "expo-linear-gradient";
+import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 
 const RecipeHeader = (props) => {
   return (
@@ -18,7 +19,9 @@ const RecipeHeader = (props) => {
         start={[0, 0]}
         end={[0, 1]}
         style={styles.gradient}
-      ></LinearGradient>
+      >
+        <Pressable onPress={props.onPress} style={styles.btn}></Pressable>
+      </LinearGradient>
     </Animated.View>
   );
 };
@@ -29,6 +32,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: hp("15%"),
     paddingTop: hp("4%"),
+  },
+  btn: {
+    flex: 1,
   },
 });
 

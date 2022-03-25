@@ -53,7 +53,6 @@ const renderCardNum = (list, cardNum) => {
 };
 
 const Instructions = (props) => {
-  const [cardNum, setCardNum] = useState(0);
   return (
     <Pressable style={styles.wrapper} onPress={null}>
       <ScrollView
@@ -62,8 +61,9 @@ const Instructions = (props) => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.container}
         scrollEventThrottle={250}
+        contentOffset={{ x: props.cardNum * screenWidth }}
         onScroll={(event) => {
-          setCardNum(
+          props.setCardNum(
             Math.round(
               parseFloat(event.nativeEvent.contentOffset.x / screenWidth)
             )
@@ -73,7 +73,10 @@ const Instructions = (props) => {
         {renderList(props.data.instructions)}
       </ScrollView>
       <View style={styles.cardNumContainer}>
-        {renderCardNum(props.data.instructions?.split(/\r?\n{2}/), cardNum)}
+        {renderCardNum(
+          props.data.instructions?.split(/\r?\n{2}/),
+          props.cardNum
+        )}
       </View>
     </Pressable>
   );
