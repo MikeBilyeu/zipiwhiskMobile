@@ -15,7 +15,8 @@ const RecipeCard = ({
   setOpenComments,
   toggleRecipe,
 }) => {
-  const [saved, setSaved] = useState(data.saved);
+  const [liked, setLiked] = useState(data.liked == 0 ? false : true);
+  const [numLikes, setNumLikes] = useState(data.numLikes);
   const [lastTap, setLastTap] = useState(0);
   const [singlePressTimer, setSinglePressTimer] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -37,7 +38,8 @@ const RecipeCard = ({
 
     if (lastTap && timeNow - lastTap < DOUBLE_PRESS_DELAY) {
       //DOUBLE PRESS
-      setSaved(true);
+      setLiked(true);
+      !liked && setNumLikes(numLikes + 1);
     } else {
       setLastTap(timeNow);
 
@@ -90,7 +92,8 @@ const RecipeCard = ({
 
       {!toggleRecipe && (
         <Footer
-          numLikes={data.numLikes}
+          numLikes={numLikes}
+          setNumLikes={setNumLikes}
           numComments={data.numComments}
           userImage={data.user_image_url}
           username={data.username}
@@ -98,8 +101,8 @@ const RecipeCard = ({
           caption={data.caption}
           numViews={data.numViews}
           title={data.title}
-          saved={saved}
-          setSaved={setSaved}
+          liked={liked}
+          setLiked={setLiked}
           handleCommentPress={setOpenComments}
           setOpenComments={setOpenComments}
           handleSinglePress={handleSinglePress}

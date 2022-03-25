@@ -17,7 +17,6 @@ const RecipeScroll = (props) => {
   useEffect(() => {
     props.getUserRecipes(2);
   }, []);
-  console.log(props.userRecipes);
 
   const renderItem = ({ index, item }) => (
     <RecipeCardSmall
@@ -35,15 +34,17 @@ const RecipeScroll = (props) => {
     />
   );
   return (
-    <FlatList
-      style={styles.listContainer}
-      contentContainerStyle={{ paddingTop: props.paddingTop }}
-      showsVerticalScrollIndicator={false}
-      data={props.userRecipes.recipes}
-      numColumns={3}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id.toString()}
-    />
+    !props.userRecipes.isLoading && (
+      <FlatList
+        style={styles.listContainer}
+        contentContainerStyle={{ paddingTop: props.paddingTop }}
+        showsVerticalScrollIndicator={false}
+        data={props.userRecipes.recipes}
+        numColumns={3}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    )
   );
 };
 

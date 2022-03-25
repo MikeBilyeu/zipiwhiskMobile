@@ -38,7 +38,7 @@ const Comment = ({ c }) => {
         <TouchableWithoutFeedback
           onPress={() => navigation.navigate("VisitProfile")}
         >
-          <Image style={styles.userImage} source={{ uri: c.user.image }} />
+          <Image style={styles.userImage} source={{ uri: c.image_url }} />
         </TouchableWithoutFeedback>
 
         <View style={[styles.commentWrapperText]}>
@@ -47,7 +47,7 @@ const Comment = ({ c }) => {
               style={[styles.commentText, { fontFamily: "AvenirNextDemiBold" }]}
               onPress={() => navigation.navigate("VisitProfile")}
             >
-              {c.user.username + "  "}
+              {c.username + "  "}
             </Text>
             {c.comment}
           </Text>

@@ -64,14 +64,19 @@ const Footer = (props) => {
       >
         <View style={styles.footerBtnContainer}>
           <Pressable
-            onPress={() => props.setSaved(!props.saved)}
+            onPress={() => {
+              props.setLiked(!props.liked);
+              props.liked
+                ? props.setNumLikes(props.numLikes - 1)
+                : props.setNumLikes(props.numLikes + 1);
+            }}
             style={styles.footerBtn}
             hitSlop={{ top: 25, right: 20 }}
           >
             <Ionicons
-              name={props.saved ? "heart" : "heart-outline"}
+              name={props.liked ? "heart" : "heart-outline"}
               size={wp("7%")}
-              color={props.saved ? "#FF0000" : "#FFF"}
+              color={props.liked ? "#FF0000" : "#FFF"}
               style={styles.footerBtnIcon}
             />
             <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
