@@ -6,7 +6,6 @@ import {
 } from "react-native-responsive-screen";
 
 const renderList = (list) =>
-  list &&
   list.split(/\r?\n/).map((i, index) => {
     return (
       <View key={i + index} style={styles.ingredientContainer}>
@@ -33,23 +32,16 @@ const Ingredients = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    alignItems: "center",
-    paddingHorizontal: wp("2%"),
-    marginBottom: hp("8%"),
-    borderWidth: 0.5,
-    borderColor: "white",
-  },
   servingsText: {
     fontSize: wp("5%"),
     fontFamily: "AvenirNextRegular",
     color: "#fff",
+    opacity: 0.5,
   },
   listContainer: {
     width: "100%",
     marginTop: wp("6%"),
-    marginBottom: hp("13%"),
+    marginBottom: hp("7.5%"),
     paddingHorizontal: wp("2%"),
   },
   ingredientContainer: {
@@ -70,7 +62,7 @@ const styles = StyleSheet.create({
   },
   ingredientName: {
     marginTop: wp("2%"),
-    fontSize: wp("6%"),
+    fontSize: wp("4%"),
     fontFamily: "AvenirNextRegular",
     color: "#fff",
   },

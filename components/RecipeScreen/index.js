@@ -4,7 +4,6 @@ import data from "../../data";
 import RecipeScroll from "./RecipeScroll";
 
 const RecipeScreen = (props) => {
-  console.log("RECIPE ROUTE: ", props.route.params.isLoading);
   return (
     <RecipeScroll
       data={props.route.params.data}

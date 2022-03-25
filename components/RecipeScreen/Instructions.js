@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   ScrollView,
+  FlatList,
   Text,
   View,
   Dimensions,
@@ -14,27 +15,23 @@ import {
 
 const screenWidth = Dimensions.get("screen").width;
 
-const renderList = (list) => {
-  return list?.split(/\r?\n{2}/).map((step, index) => (
-    <View
-      key={index}
+const renderItem = ({ item }, fadeOut) => {
+  return (
+    <Pressable
       style={styles.cardContainer}
       onStartShouldSetResponder={() => true}
+      onPress={fadeOut}
     >
-      <View>
-        <ScrollView
-          bounces={true}
+      {/* <ScrollView
+          bounces={false}
           nestedScrollEnabled={true}
           contentContainerStyle={styles.cardScroll}
           indicatorStyle={"white"}
-        >
-          <Pressable>
-            <Text style={styles.cardText}>{step}</Text>
-          </Pressable>
-        </ScrollView>
-      </View>
-    </View>
-  ));
+        > */}
+      <Text style={styles.cardText}>{item}</Text>
+      {/* </ScrollView> */}
+    </Pressable>
+  );
 };
 
 const renderCardNum = (list, cardNum) => {
@@ -54,14 +51,15 @@ const renderCardNum = (list, cardNum) => {
 
 const Instructions = (props) => {
   return (
-    <Pressable style={styles.wrapper} onPress={null}>
-      <ScrollView
+    <Pressable style={styles.wrapper} onPress={props.fadeOut}>
+      <FlatList
+        data={props.data.instructions.split(/\r?\n{2}/)}
+        renderItem={(item) => renderItem(item, props.fadeOut)}
+        keyExtractor={(item, i) => i}
         horizontal={true}
-        pagingEnabled
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.container}
+        pagingEnabled
         scrollEventThrottle={250}
-        contentOffset={{ x: props.cardNum * screenWidth }}
         onScroll={(event) => {
           props.setCardNum(
             Math.round(
@@ -69,9 +67,13 @@ const Instructions = (props) => {
             )
           );
         }}
-      >
-        {renderList(props.data.instructions)}
-      </ScrollView>
+        initialScrollIndex={props.cardNum}
+        getItemLayout={(data, index) => ({
+          length: screenWidth,
+          offset: screenWidth * index,
+          index,
+        })}
+      />
       <View style={styles.cardNumContainer}>
         {renderCardNum(
           props.data.instructions?.split(/\r?\n{2}/),
@@ -84,23 +86,16 @@ const Instructions = (props) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: hp("86%"),
+    height: hp("90%"),
     alignItems: "center",
+    marginTop: hp("2.5%"),
   },
   cardContainer: {
-    width: screenWidth - 20,
+    width: screenWidth,
     justifyContent: "center",
-    marginHorizontal: 10,
-    borderRadius: wp("10%"),
-    paddingHorizontal: wp("2%"),
+    paddingHorizontal: wp("5%"),
     paddingVertical: hp("5%"),
-    marginBottom: hp("6%"),
-    backgroundColor: "rgba(0,0,0,.7)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 1,
-    shadowRadius: hp("1.5%"),
-    marginVertical: hp("2.5%"),
+    paddingBottom: hp("15%"),
   },
   cardText: {
     fontSize: wp("6%"),

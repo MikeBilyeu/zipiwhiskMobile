@@ -15,7 +15,7 @@ const RecipeHeader = (props) => {
       }}
     >
       <LinearGradient
-        colors={["rgba(0,0,0,.9)", "transparent"]}
+        colors={["rgba(0,0,0,.4)", "transparent"]}
         start={[0, 0]}
         end={[0, 1]}
         style={styles.gradient}
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   gradient: {
     position: "absolute",
     width: "100%",
-    height: hp("15%"),
+    height: hp("20%"),
     paddingTop: hp("4%"),
   },
   btn: {

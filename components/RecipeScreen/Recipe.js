@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, Animated, Pressable } from "react-native";
+import { StyleSheet, Animated, Pressable, View } from "react-native";
 import { BlurView } from "expo-blur";
 import {
   widthPercentageToDP as wp,
@@ -70,7 +70,7 @@ const Recipe = ({
           opacity: fadeAnim,
         }}
       >
-        <BlurView intensity={100} tint={"dark"} style={{ flex: 1 }} />
+        <BlurView intensity={80} tint={"dark"} style={{ flex: 1 }} />
       </Animated.View>
 
       <Animated.ScrollView
@@ -98,7 +98,13 @@ const Recipe = ({
         {children}
         <Pressable style={styles.recipeScrollConatiner} onPress={fadeOut}>
           <Ingredients data={data} />
-          <Instructions data={data} cardNum={cardNum} setCardNum={setCardNum} />
+          <View style={styles.line}></View>
+          <Instructions
+            data={data}
+            cardNum={cardNum}
+            setCardNum={setCardNum}
+            fadeOut={fadeOut}
+          />
         </Pressable>
       </Animated.ScrollView>
     </>
@@ -118,6 +124,11 @@ const styles = StyleSheet.create({
     paddingTop: hp("12%"),
     alignItems: "center",
     justifyContent: "space-around",
+  },
+  line: {
+    borderTopWidth: 0.5,
+    borderColor: "rgba(256,256,256,.2)",
+    width: "60%",
   },
 });
 
