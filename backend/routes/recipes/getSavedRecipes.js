@@ -1,7 +1,7 @@
 const pool = require("../../config/db");
 
 module.exports = async (req, res) => {
-  const { user_id } = req.query;
+  const { user_id, category } = req.query;
 
   try {
     pool.query(
@@ -19,11 +19,12 @@ module.exports = async (req, res) => {
       u.image_url user_image_url,
       u.username,
       (SELECT COUNT(*) FROM comments WHERE recipe_id = r.id) numComments,
-      (SELECT COUNT(*) > 0 FROM users_saves WHERE recipe_id = r.id AND user_id = ?) liked,
-      (SELECT COUNT(*) FROM users_saves WHERE recipe_id = r.id) numLikes
+      (SELECT COUNT(*) FROM users_saves WHERE recipe_id = r.id) numLikes,
+      (SELECT COUNT(*) > 0 FROM users_saves WHERE recipe_id = r.id AND user_id = ?) liked
       FROM recipes r
       INNER JOIN users_recipes ur ON ur.recipe_id = r.id
       INNER JOIN users u ON u.id = ur.user_id
+      INNER JOIN recipes_categories rc ON rc.recipe_id = r.id AND IF(?!='', rc.category = ?, TRUE)
       LEFT JOIN users_saves us ON us.user_id = ? 
       WHERE r.id IN (SELECT recipe_id FROM users_saves WHERE user_id = ?) 
       OR  r.id IN (SELECT recipe_id FROM users_recipes WHERE user_id = ?)
@@ -31,9 +32,10 @@ module.exports = async (req, res) => {
       CASE WHEN u.id = ? THEN r.created_at
       ELSE us.created_at END DESC
       LIMIT 18`,
-      [user_id, user_id, user_id, user_id, user_id],
+      [user_id, category, category, user_id, user_id, user_id, user_id],
       (err, results) => {
         if (err) throw err;
+        if (!results.length) return res.status(200).json(results);
 
         let recipes = [...results];
 

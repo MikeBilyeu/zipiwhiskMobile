@@ -15,8 +15,8 @@ const RecipeScroll = (props) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    props.getUserRecipes(2);
-  }, []);
+    props.getUserRecipes(props.userId, props.category);
+  }, [props.category]);
 
   const renderItem = ({ index, item }) => (
     <RecipeCardSmall
@@ -28,7 +28,7 @@ const RecipeScroll = (props) => {
           index,
           data: props.userRecipes.recipes,
           title: "Saved Recipes",
-          subTitle: null,
+          subTitle: props.category || null,
         })
       }
     />
@@ -60,5 +60,7 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => ({
   userRecipes: state.userRecipes,
+  userId: state.user.id,
+  category: state.userRecipes.category,
 });
 export default connect(mapStateToProps, { getUserRecipes })(RecipeScroll);

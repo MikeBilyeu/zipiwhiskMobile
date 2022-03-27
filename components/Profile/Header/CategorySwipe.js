@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-const renderCategories = (categories, selected, setSelected) =>
+const renderCategories = (categories, category, categoryChange) =>
   categories.map((categoryName) => (
     <Pressable
       onPress={() => {
-        categoryName === selected
-          ? setSelected(null)
-          : setSelected(categoryName);
+        categoryName === category
+          ? categoryChange("")
+          : categoryChange(categoryName);
       }}
       hitSlop={15}
-      style={[styles.btn, categoryName === selected && styles.btnSelected]}
+      style={[styles.btn, categoryName === category && styles.btnSelected]}
       key={categoryName}
     >
       <Text
         style={[
           styles.btnText,
-          categoryName === selected && styles.btnTextSelected,
+          categoryName === category && styles.btnTextSelected,
         ]}
       >
         {categoryName}
@@ -29,7 +29,6 @@ const renderCategories = (categories, selected, setSelected) =>
   ));
 
 const CategorySwipe = (props) => {
-  const [selected, setSelected] = useState(null);
   return (
     <ScrollView
       horizontal={true}
@@ -38,8 +37,8 @@ const CategorySwipe = (props) => {
     >
       {renderCategories(
         ["Breakfast", "Lunch/Dinner", "Snack", "Dessert", "Beverage"],
-        selected,
-        setSelected
+        props.category,
+        props.categoryChange
       )}
     </ScrollView>
   );
