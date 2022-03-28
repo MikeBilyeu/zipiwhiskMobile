@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   widthPercentageToDP as wp,
@@ -8,7 +8,6 @@ import {
 } from "react-native-responsive-screen";
 
 import RecipeCardSmall from "../RecipeCardSmall";
-import data from "../../data";
 import { getUserRecipes } from "../../redux/actions/userRecipes";
 
 const RecipeScroll = (props) => {
@@ -33,6 +32,11 @@ const RecipeScroll = (props) => {
       }
     />
   );
+  const renderText = () => (
+    <Text style={styles.noResultsText}>{`No ${
+      props.category ? props.category.toLowerCase() + " " : ""
+    }recipes saved.`}</Text>
+  );
   return (
     !props.userRecipes.isLoading && (
       <FlatList
@@ -43,6 +47,7 @@ const RecipeScroll = (props) => {
         numColumns={3}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
+        ListEmptyComponent={renderText}
       />
     )
   );
@@ -56,6 +61,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+  },
+  noResultsText: {
+    color: "rgba(200,200,200,1)",
+    textAlign: "center",
+    fontFamily: "AvenirNextBold",
+    fontSize: wp("4.5%"),
+    marginTop: hp("15%"),
   },
 });
 const mapStateToProps = (state) => ({
