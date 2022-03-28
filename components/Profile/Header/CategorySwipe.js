@@ -30,16 +30,18 @@ const renderCategories = (categories, category, categoryChange) =>
 
 const CategorySwipe = (props) => {
   return (
-    <ScrollView
-      horizontal={true}
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.container}
-    >
-      {renderCategories(
-        ["Breakfast", "Lunch/Dinner", "Snack", "Dessert", "Beverage"],
-        props.category,
-        props.categoryChange
-      )}
+    <ScrollView scrollEnabled={false}>
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.container}
+      >
+        {renderCategories(
+          ["Breakfast", "Lunch/Dinner", "Snack", "Dessert", "Beverage"],
+          props.category,
+          props.categoryChange
+        )}
+      </ScrollView>
     </ScrollView>
   );
 };
