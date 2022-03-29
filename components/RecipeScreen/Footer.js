@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { connect } from "react-redux";
 import {
   StyleSheet,
   Image,
@@ -119,7 +120,11 @@ const Footer = (props) => {
           </Pressable>
           <View style={styles.userContainer}>
             <Pressable
-              onPress={() => navigation.push("VisitProfile", { id: props.id })}
+              onPress={() => {
+                props.id === props.userId
+                  ? navigation.navigate("Home", { screen: "Profile" })
+                  : navigation.push("VisitProfile", { id: props.id });
+              }}
               style={({ pressed }) => [
                 { opacity: pressed ? 0.5 : 1 },
                 styles.userWrapper,
@@ -313,5 +318,7 @@ const styles = StyleSheet.create({
     fontSize: wp("3.4%"),
   },
 });
-
-export default Footer;
+const mapStateToProps = (state) => ({
+  userId: state.user.id,
+});
+export default connect(mapStateToProps)(Footer);
