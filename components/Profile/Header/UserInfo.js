@@ -5,12 +5,13 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import defaultImage from "../../../assets/userImage.png";
 
 const UserInfo = (props) => {
   const navigation = useNavigation();
+  const route = useRoute();
 
   return (
     <View style={styles.userInfoContainer}>
@@ -20,7 +21,11 @@ const UserInfo = (props) => {
           styles.backBtn,
         ]}
         hitSlop={20}
-        onPress={() => navigation.goBack()}
+        onPress={() => {
+          route.name === "Profile"
+            ? navigation.navigate("Home", { screen: "Home" })
+            : navigation.goBack();
+        }}
       >
         <Ionicons name="chevron-back" size={wp("6.5%")} color="#313131" />
       </Pressable>
