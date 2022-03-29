@@ -27,6 +27,7 @@ const SearchScreen = ({}) => {
 
   const renderRecipes = ({ index, item }) => (
     <RecipeCardSmall
+      index={index}
       title={item.title}
       media_url={item.media_url}
       media_type={item.media_type}

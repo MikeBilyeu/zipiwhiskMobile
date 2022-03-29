@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { StyleSheet, FlatList, Text } from "react-native";
+import { StyleSheet, FlatList, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   widthPercentageToDP as wp,
@@ -19,6 +19,7 @@ const RecipeScroll = (props) => {
 
   const renderItem = ({ index, item }) => (
     <RecipeCardSmall
+      index={index}
       title={item.title}
       media_url={item.media_url}
       media_type={item.media_type}
@@ -32,6 +33,7 @@ const RecipeScroll = (props) => {
       }
     />
   );
+
   const renderText = () => (
     <Text style={styles.noResultsText}>{`No ${
       props.category ? props.category.toLowerCase() + " " : ""
