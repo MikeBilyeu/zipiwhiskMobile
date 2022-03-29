@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 import { connect } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import Home from "./HomeScreen";
+import HomeScreen from "./HomeScreen";
 import ProfileScreen from "./Profile/ProfileScreen";
 import SearchScreen from "./SearchScreen";
 
@@ -19,7 +19,7 @@ const Nav = (props) => {
       screenOptions={{ swipeEnabled: !props.openComments }}
     >
       <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
