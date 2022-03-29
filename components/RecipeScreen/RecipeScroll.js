@@ -23,7 +23,7 @@ const RecipeScroll = (props) => {
     setCardNum(0);
     setRecipeIndex(i);
   };
-  const handleLoadMore = () => console.log("load more");
+
   const handleCloseRecipe = (lastYValue) => {
     setToggleRecipe(false);
     setInitialYValue(lastYValue);
@@ -57,7 +57,7 @@ const RecipeScroll = (props) => {
         numColumns={1}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        onEndReached={handleLoadMore}
+        onEndReached={props.handleLoadMore}
         onEndReachedThreshold={0.5}
         initialNumToRender={10}
         pagingEnabled

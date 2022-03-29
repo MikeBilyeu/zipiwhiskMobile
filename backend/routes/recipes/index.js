@@ -10,6 +10,8 @@ router.post(
 
 router.get("/saved", require("./getSavedRecipes"));
 
+router.get("/feed", require("./getFeedRecipes"));
+
 router.get(
   "/recipe",
   passport.authenticate("jwt", { session: false }),
