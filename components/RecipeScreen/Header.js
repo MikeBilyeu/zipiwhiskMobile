@@ -21,9 +21,9 @@ const Header = (props) => {
 
   return (
     <LinearGradient
-      colors={["rgba(0,0,0,.6)", "transparent"]}
-      start={[0, 0]}
-      end={[0, 1]}
+      colors={["rgba(30,30,30, 0)", "rgba(0,0,0,.75)"]}
+      start={[0, 1]}
+      end={[0, -1.5]}
       style={styles.gradient}
     >
       <Pressable

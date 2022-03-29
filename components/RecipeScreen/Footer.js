@@ -50,9 +50,9 @@ const Footer = (props) => {
       }}
     >
       <LinearGradient
-        colors={["rgba(0,0,0,.9)", "transparent"]}
-        start={[0, 0.9]}
-        end={[0, 0]}
+        colors={["rgba(0,0,0,.9)", "rgba(50,50,50, 0)"]}
+        start={[0, 1]}
+        end={[0, 0.1]}
         style={[
           styles.gradientWrapper,
           {

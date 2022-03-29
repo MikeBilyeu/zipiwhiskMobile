@@ -48,9 +48,9 @@ const Header = (props) => {
       }}
     >
       <LinearGradient
-        colors={["rgba(0,0,0,.45)", "transparent"]}
-        start={[0, 0]}
-        end={[0, 1]}
+        colors={["rgba(10,10,10, 0)", "rgba(0,0,0,.75)"]}
+        start={[0, 1]}
+        end={[0, -1]}
         style={styles.gradient}
       >
         <Pressable
