@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import {
@@ -9,10 +10,14 @@ import {
 import ProfileHeader from "./Header/ProfileHeader";
 import RecipeScroll from "./RecipeScroll";
 
-const ProfileScreen = () => (
+const ProfileScreen = (props) => (
   <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
     <ProfileHeader />
-    <RecipeScroll paddingTop={hp("26%")} />
+    <RecipeScroll
+      paddingTop={hp("26%")}
+      userId={props.userId}
+      category={props.category}
+    />
   </SafeAreaView>
 );
 const styles = StyleSheet.create({
@@ -22,4 +27,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+const mapStateToProps = (state) => ({
+  userId: state.user.id,
+  category: state.userRecipes.category,
+});
+
+export default connect(mapStateToProps)(ProfileScreen);

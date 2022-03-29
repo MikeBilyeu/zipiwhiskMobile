@@ -72,7 +72,5 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => ({
   userRecipes: state.userRecipes,
-  userId: state.user.id,
-  category: state.userRecipes.category,
 });
 export default connect(mapStateToProps, { getUserRecipes })(RecipeScroll);

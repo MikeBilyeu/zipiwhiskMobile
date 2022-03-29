@@ -22,7 +22,7 @@ const VisitProfileScreen = (props) => {
   return (
     <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <VisitProfileHeader />
-      <RecipeScroll paddingTop={hp("16%")} />
+      <RecipeScroll paddingTop={hp("16%")} userId={id} />
     </SafeAreaView>
   );
 };
