@@ -1,11 +1,13 @@
 import React, { useState, useRef } from "react";
 import { StyleSheet, ImageBackground, Pressable } from "react-native";
+import { connect } from "react-redux";
 import { Video } from "expo-av";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { likeRecipe, unlikeRecipe } from "../../redux/actions/recipe";
 import Footer from "./Footer";
 
 const RecipeCard = ({
@@ -14,6 +16,8 @@ const RecipeCard = ({
   openComments,
   setOpenComments,
   toggleRecipe,
+  likeRecipe,
+  unlikeRecipe,
 }) => {
   const [liked, setLiked] = useState(data.liked == 0 ? false : true);
   const [numLikes, setNumLikes] = useState(data.numLikes);
@@ -23,6 +27,16 @@ const RecipeCard = ({
   const video = useRef(null);
 
   const DOUBLE_PRESS_DELAY = 200;
+  const handleLikeRecipe = () => {
+    setLiked(true);
+    !liked && setNumLikes(numLikes + 1);
+    likeRecipe(data.id);
+  };
+  const handleUnlikeRecipe = () => {
+    setLiked(false);
+    setNumLikes(numLikes - 1);
+    unlikeRecipe(data.id);
+  };
 
   const cancelSinglePressTimer = () => {
     if (singlePressTimer) {
@@ -30,7 +44,6 @@ const RecipeCard = ({
       setSinglePressTimer(0);
     }
   };
-
   const handleTap = () => {
     cancelSinglePressTimer();
 
@@ -38,8 +51,7 @@ const RecipeCard = ({
 
     if (lastTap && timeNow - lastTap < DOUBLE_PRESS_DELAY) {
       //DOUBLE PRESS
-      setLiked(true);
-      !liked && setNumLikes(numLikes + 1);
+      handleLikeRecipe();
     } else {
       setLastTap(timeNow);
 
@@ -93,7 +105,8 @@ const RecipeCard = ({
       {!toggleRecipe && (
         <Footer
           numLikes={numLikes}
-          setNumLikes={setNumLikes}
+          handleLikeRecipe={handleLikeRecipe}
+          handleUnlikeRecipe={handleUnlikeRecipe}
           numComments={data.numComments}
           userImage={data.user_image_url}
           username={data.username}
@@ -102,7 +115,6 @@ const RecipeCard = ({
           numViews={data.numViews}
           title={data.title}
           liked={liked}
-          setLiked={setLiked}
           handleCommentPress={setOpenComments}
           setOpenComments={setOpenComments}
           handleSinglePress={handleSinglePress}
@@ -150,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecipeCard;
+export default connect(null, { likeRecipe, unlikeRecipe })(RecipeCard);

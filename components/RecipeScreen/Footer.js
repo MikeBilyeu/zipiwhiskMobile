@@ -66,10 +66,9 @@ const Footer = (props) => {
         <View style={styles.footerBtnContainer}>
           <Pressable
             onPress={() => {
-              props.setLiked(!props.liked);
               props.liked
-                ? props.setNumLikes(props.numLikes - 1)
-                : props.setNumLikes(props.numLikes + 1);
+                ? props.handleUnlikeRecipe()
+                : props.handleLikeRecipe();
             }}
             style={styles.footerBtn}
             hitSlop={{ top: 25, right: 20 }}

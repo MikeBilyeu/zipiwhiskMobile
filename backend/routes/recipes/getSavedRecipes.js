@@ -20,19 +20,19 @@ module.exports = async (req, res) => {
       u.username,
       (SELECT COUNT(*) FROM comments WHERE recipe_id = r.id) numComments,
       (SELECT COUNT(*) FROM users_saves WHERE recipe_id = r.id) numLikes,
-      (SELECT COUNT(*) > 0 FROM users_saves WHERE recipe_id = r.id AND user_id = ?) liked
+      (SELECT COUNT(*) > 0 FROM users_saves WHERE recipe_id = r.id AND user_id = ?) liked,
+      (SELECT created_at FROM users_saves WHERE recipe_id = r.id AND user_id = 2) saved_at
       FROM recipes r
       INNER JOIN users_recipes ur ON ur.recipe_id = r.id
       INNER JOIN users u ON u.id = ur.user_id
       INNER JOIN recipes_categories rc ON rc.recipe_id = r.id AND IF(?!='', rc.category = ?, TRUE)
-      LEFT JOIN users_saves us ON us.user_id = ? 
       WHERE r.id IN (SELECT recipe_id FROM users_saves WHERE user_id = ?) 
       OR  r.id IN (SELECT recipe_id FROM users_recipes WHERE user_id = ?)
       ORDER BY 
       CASE WHEN u.id = ? THEN r.created_at
-      ELSE us.created_at END DESC
+      ELSE saved_at END DESC
       LIMIT 18`,
-      [user_id, category, category, user_id, user_id, user_id, user_id],
+      [user_id, category, category, user_id, user_id, user_id],
       (err, results) => {
         if (err) throw err;
         if (!results.length) return res.status(200).json(results);

@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./Header";
-import data from "../../data";
 import RecipeScroll from "./RecipeScroll";
 
 const RecipeScreen = (props) => {
