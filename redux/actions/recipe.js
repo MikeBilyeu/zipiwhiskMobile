@@ -12,6 +12,8 @@ import {
 } from "../constants";
 import axios from "axios";
 
+import { getUserRecipes } from "./userRecipes";
+
 export const setOpenComments = (value) => ({
   type: SET_OPEN_COMMENTS,
   payload: value,
@@ -36,6 +38,7 @@ export const likeRecipe = (recipe_id) => async (dispatch) => {
       recipe_id,
     });
     dispatch({ type: LIKE_RECIPE_SUCCESS });
+    dispatch(getUserRecipes());
   } catch (err) {
     dispatch({ type: LIKE_RECIPE_FAILURE });
   }
@@ -48,6 +51,7 @@ export const unlikeRecipe = (recipe_id) => async (dispatch) => {
       data: { recipe_id },
     });
     dispatch({ type: UNLIKE_RECIPE_SUCCESS });
+    dispatch(getUserRecipes());
   } catch (err) {
     dispatch({ type: UNLIKE_RECIPE_FAILURE });
   }

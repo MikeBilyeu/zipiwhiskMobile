@@ -3,7 +3,6 @@ const pool = require("../../config/db");
 module.exports = async (req, res) => {
   const { id: user_id } = req.user;
   const { recipe_id } = req.body;
-  console.log(recipe_id);
 
   try {
     pool.query(
@@ -15,6 +14,7 @@ module.exports = async (req, res) => {
       }
     );
   } catch (err) {
+    console.log(err);
     return res.status(400).json(err);
   }
 };

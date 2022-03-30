@@ -13,7 +13,8 @@ import {
   SUBMIT_RECIPE_FAILURE,
 } from "../constants";
 import axios from "axios";
-import { getRecipe } from "./recipe";
+import { getSavedRecipes } from "./userRecipes";
+import { getFeedRecipes } from "./feed";
 import { InteractionManager } from "react-native";
 
 export const mediaTypeChange = (value) => ({
@@ -67,7 +68,9 @@ export const submitRecipe = (navigation) => async (dispatch, getState) => {
     dispatch({ type: SUBMIT_RECIPE_REQUEST });
     //Post Recipe
     const { data } = await axios.post("api/recipes/create", { recipe });
-    //dispatch(getRecipe(data.recipe_id));
+    dispatch(getSavedRecipes());
+    dispatch(getFeedRecipes());
+
     navigation.navigate("Home");
     InteractionManager.runAfterInteractions(() => {
       dispatch({ type: SUBMIT_RECIPE_SUCCESS });

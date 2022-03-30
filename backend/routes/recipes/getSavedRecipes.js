@@ -1,7 +1,12 @@
 const pool = require("../../config/db");
+const { database } = require("../../config/prod");
 
 module.exports = async (req, res) => {
-  const { user_id, category } = req.query;
+  let { user_id, category } = req.query;
+  if (user_id === undefined) {
+    user_id = req.user.id;
+  }
+  console.log(category);
 
   try {
     pool.query(
@@ -21,18 +26,39 @@ module.exports = async (req, res) => {
       (SELECT COUNT(*) FROM comments WHERE recipe_id = r.id) numComments,
       (SELECT COUNT(*) FROM users_saves WHERE recipe_id = r.id) numLikes,
       (SELECT COUNT(*) > 0 FROM users_saves WHERE recipe_id = r.id AND user_id = ?) liked,
-      (SELECT created_at FROM users_saves WHERE recipe_id = r.id AND user_id = 2) saved_at
+      (SELECT created_at FROM users_saves WHERE recipe_id = r.id AND user_id = ?) saved_at
       FROM recipes r
       INNER JOIN users_recipes ur ON ur.recipe_id = r.id
       INNER JOIN users u ON u.id = ur.user_id
-      INNER JOIN recipes_categories rc ON rc.recipe_id = r.id AND IF(?!='', rc.category = ?, TRUE)
-      WHERE r.id IN (SELECT recipe_id FROM users_saves WHERE user_id = ?) 
-      OR  r.id IN (SELECT recipe_id FROM users_recipes WHERE user_id = ?)
+      WHERE
+      CASE 
+      WHEN ?!=''
+      THEN 
+        r.id IN (SELECT recipe_id FROM recipes_categories WHERE category = ?)
+        OR
+        r.id IN (SELECT recipe_id FROM users_saves WHERE user_id = ?)
+        AND
+        r.id IN (SELECT recipe_id FROM users_recipes WHERE user_id = ?)
+      ELSE 
+      r.id IN (SELECT recipe_id FROM users_saves WHERE user_id = ?)
+      OR
+      r.id IN (SELECT recipe_id FROM users_recipes WHERE user_id = ?)
+      END
       ORDER BY 
       CASE WHEN u.id = ? THEN r.created_at
       ELSE saved_at END DESC
       LIMIT 18`,
-      [user_id, category, category, user_id, user_id, user_id],
+      [
+        user_id,
+        user_id,
+        category,
+        category,
+        user_id,
+        user_id,
+        user_id,
+        user_id,
+        user_id,
+      ],
       (err, results) => {
         if (err) throw err;
         if (!results.length) return res.status(200).json(results);
