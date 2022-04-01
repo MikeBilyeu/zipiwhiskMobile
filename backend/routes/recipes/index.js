@@ -8,7 +8,11 @@ router.post(
   require("./createRecipe")
 );
 
-router.get("/saved", require("./getSavedRecipes"));
+router.get(
+  "/saved",
+  passport.authenticate("jwt", { session: false }),
+  require("./getSavedRecipes")
+);
 
 router.get("/feed", require("./getFeedRecipes"));
 

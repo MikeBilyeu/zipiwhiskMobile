@@ -13,7 +13,7 @@ import {
   SUBMIT_RECIPE_FAILURE,
 } from "../constants";
 import axios from "axios";
-import { getSavedRecipes } from "./userRecipes";
+import { getUserRecipes } from "./userRecipes";
 import { getFeedRecipes } from "./feed";
 import { InteractionManager } from "react-native";
 
@@ -68,7 +68,7 @@ export const submitRecipe = (navigation) => async (dispatch, getState) => {
     dispatch({ type: SUBMIT_RECIPE_REQUEST });
     //Post Recipe
     const { data } = await axios.post("api/recipes/create", { recipe });
-    dispatch(getSavedRecipes());
+    dispatch(getUserRecipes());
     dispatch(getFeedRecipes());
 
     navigation.navigate("Home");
