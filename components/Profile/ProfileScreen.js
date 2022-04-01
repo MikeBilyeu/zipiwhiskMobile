@@ -10,16 +10,18 @@ import {
 import ProfileHeader from "./Header/ProfileHeader";
 import RecipeScroll from "./RecipeScroll";
 
-const ProfileScreen = (props) => (
-  <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
-    <ProfileHeader />
-    <RecipeScroll
-      paddingTop={hp("26%")}
-      userId={props.userId}
-      category={props.category}
-    />
-  </SafeAreaView>
-);
+const ProfileScreen = (props) => {
+  return (
+    <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
+      <ProfileHeader />
+      <RecipeScroll
+        paddingTop={hp("26%")}
+        userId={props.userId}
+        category={props.category}
+      />
+    </SafeAreaView>
+  );
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,

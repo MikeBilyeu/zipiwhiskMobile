@@ -35,7 +35,7 @@ module.exports = async ({ body: { username, email, password } }, res) => {
   pool.query(
     "SELECT * FROM users WHERE username = ?",
     username,
-    (error, results) => {
+    (err, results) => {
       try {
         if (results[0]) {
           throw {
@@ -62,36 +62,28 @@ module.exports = async ({ body: { username, email, password } }, res) => {
 
   pool.query("INSERT INTO users SET ?", user, (error, results) => {
     try {
-      if (error) throw error;
+      if (err) throw err;
       const user_id = results.insertId;
 
       pool.query(
         "INSERT INTO users_restrictions (user_id) VALUES (?)",
         user_id,
-        (error, results) => {
-          try {
-            if (error) throw error;
+        (err, results) => {
+          if (err) throw err;
 
-            pool.query(
-              "INSERT INTO verifications (user_id, token) VALUES (?, ?)",
-              [user_id, uniqueString],
-              (error, results) => {
-                try {
-                  if (error) throw error;
-                  emailVerification(email, uniqueString);
-                  res.status(201).send(`User added with ID: ${user_id}`);
-                } catch (err) {
-                  res.status(400).json(err);
-                }
-              }
-            );
-          } catch (err) {
-            res.status(400).json(err);
-          }
+          pool.query(
+            "INSERT INTO verifications (user_id, token) VALUES (?, ?)",
+            [user_id, uniqueString],
+            (err, results) => {
+              if (err) throw err;
+              emailVerification(email, uniqueString);
+              res.status(201).send(`User added with ID: ${user_id}`);
+            }
+          );
         }
       );
     } catch (err) {
-      res.status(400).json(err);
+      return res.status(400).json(err);
     }
   });
 };

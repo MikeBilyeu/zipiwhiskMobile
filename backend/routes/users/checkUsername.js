@@ -1,12 +1,12 @@
 const pool = require("../../config/db");
 
 module.exports = async ({ query: { username } }, res) => {
-  pool.query(
-    "SELECT * FROM users WHERE username = ?",
-    username.toLowerCase(),
-    (error, results) => {
-      try {
-        if (error) throw error;
+  try {
+    pool.query(
+      "SELECT * FROM users WHERE username = ?",
+      username.toLowerCase(),
+      (err, results) => {
+        if (err) throw err;
         if (results[0]) {
           return res.status(409).json({
             type: "username",
@@ -14,9 +14,9 @@ module.exports = async ({ query: { username } }, res) => {
           });
         }
         return res.status(200).json("Username is available");
-      } catch (err) {
-        res.status(500).json(err);
       }
-    }
-  );
+    );
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 };

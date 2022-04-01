@@ -66,6 +66,6 @@ module.exports = async (req, res) => {
       }
     );
   } catch (err) {
-    return res.status(401);
+    return res.status(401).json(err);
   }
 };

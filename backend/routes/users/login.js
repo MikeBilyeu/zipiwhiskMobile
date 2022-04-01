@@ -6,12 +6,12 @@ const bcrypt = require("bcryptjs");
 module.exports = async ({ query: { username, password } }, res) => {
   const usernameOrEmail = username.toLowerCase();
 
-  pool.query(
-    `SELECT * FROM users WHERE username = ? OR email = ?`,
-    [usernameOrEmail, usernameOrEmail],
-    async (error, results) => {
-      try {
-        if (error) throw error;
+  try {
+    pool.query(
+      `SELECT * FROM users WHERE username = ? OR email = ?`,
+      [usernameOrEmail, usernameOrEmail],
+      async (err, results) => {
+        if (err) throw err;
 
         const user = results[0];
 
@@ -50,9 +50,9 @@ module.exports = async ({ query: { username, password } }, res) => {
             .status(403)
             .json({ type: "password", message: "Sorry, Incorrect password" });
         }
-      } catch (err) {
-        res.status(500).json(err);
       }
-    }
-  );
+    );
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 };
