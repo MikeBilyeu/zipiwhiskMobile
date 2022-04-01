@@ -1,5 +1,4 @@
 const pool = require("../../config/db");
-const { database } = require("../../config/prod");
 
 module.exports = async (req, res) => {
   let { user_id, category } = req.query;
@@ -31,20 +30,22 @@ module.exports = async (req, res) => {
       INNER JOIN users_recipes ur ON ur.recipe_id = r.id
       INNER JOIN users u ON u.id = ur.user_id
       WHERE
-      CASE 
-      WHEN ?!=''
-      THEN 
-        r.id IN (SELECT recipe_id FROM recipes_categories WHERE category = ?)
-        OR
-        r.id IN (SELECT recipe_id FROM users_saves WHERE user_id = ?)
-        AND
-        r.id IN (SELECT recipe_id FROM users_recipes WHERE user_id = ?)
-      ELSE 
-      r.id IN (SELECT recipe_id FROM users_saves WHERE user_id = ?)
-      OR
-      r.id IN (SELECT recipe_id FROM users_recipes WHERE user_id = ?)
-      END
-      ORDER BY 
+      CASE WHEN ? != ''
+      THEN r.id IN
+        (SELECT us.recipe_id FROM users_saves us
+          INNER JOIN recipes_categories rc ON rc.recipe_id = us.recipe_id AND rc.category = ?
+          WHERE us.user_id = ?)
+          OR
+        r.id IN
+        (SELECT ur.recipe_id FROM users_recipes ur
+          INNER JOIN recipes_categories rc ON rc.recipe_id = ur.recipe_id AND rc.category = ?
+          WHERE ur.user_id = ?)
+        ELSE 
+        r.id IN (SELECT us.recipe_id FROM users_saves us WHERE us.user_id = ?)
+          OR
+        r.id IN (SELECT ur.recipe_id FROM users_recipes ur WHERE ur.user_id = ?)
+        END
+      ORDER BY
       CASE WHEN u.id = ? THEN r.created_at
       ELSE saved_at END DESC
       LIMIT 18`,
@@ -54,6 +55,7 @@ module.exports = async (req, res) => {
         category,
         category,
         user_id,
+        category,
         user_id,
         user_id,
         user_id,
