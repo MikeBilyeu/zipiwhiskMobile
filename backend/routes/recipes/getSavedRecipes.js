@@ -5,7 +5,6 @@ module.exports = async (req, res) => {
   if (user_id === undefined) {
     user_id = req.user.id;
   }
-  console.log(category);
 
   try {
     pool.query(

@@ -22,7 +22,9 @@ const Ingredients = (props) => {
   return (
     <>
       <Text pointerEvents="none" style={styles.servingsText}>
-        {props.data.recipeYield.toString()} Servings
+        {`${props.data.recipeYield.toString()} Serving${
+          props.data.recipeYield > 1 ? "s" : ""
+        }`}
       </Text>
       <View style={styles.listContainer}>
         {renderList(props.data.ingredientList)}
