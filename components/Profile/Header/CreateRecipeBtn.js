@@ -15,7 +15,7 @@ const CreateRecipeBtn = (props) => {
       onPress={() =>
         navigation.navigate(props.media_url ? "CreateRecipe" : "Camera")
       }
-      hitSlop={28}
+      hitSlop={{ top: 10, right: 28, left: 28, bottom: 28 }}
       style={({ pressed }) => [
         { opacity: pressed ? 0.5 : 1 },
         styles.createRecipeBtn,
