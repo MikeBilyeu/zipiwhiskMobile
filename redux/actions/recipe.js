@@ -31,27 +31,29 @@ export const getRecipe = (value) => async (dispatch) => {
   }
 };
 
-export const likeRecipe = (recipe_id) => async (dispatch) => {
+export const likeRecipe = (recipe_id) => async (dispatch, getState) => {
+  const { category } = getState().userRecipes;
   try {
     dispatch({ type: LIKE_RECIPE_REQUEST });
-    const { data } = await axios.post("api/recipes/like", {
+    await axios.post("api/recipes/like", {
       recipe_id,
     });
     dispatch({ type: LIKE_RECIPE_SUCCESS });
-    dispatch(getUserRecipes());
+    dispatch(getUserRecipes(null, category));
   } catch (err) {
     dispatch({ type: LIKE_RECIPE_FAILURE });
   }
 };
 
-export const unlikeRecipe = (recipe_id) => async (dispatch) => {
+export const unlikeRecipe = (recipe_id) => async (dispatch, getState) => {
+  const { category } = getState().userRecipes;
   try {
     dispatch({ type: UNLIKE_RECIPE_REQUEST });
-    const { data } = await axios.delete("api/recipes/like", {
+    await axios.delete("api/recipes/like", {
       data: { recipe_id },
     });
     dispatch({ type: UNLIKE_RECIPE_SUCCESS });
-    dispatch(getUserRecipes());
+    dispatch(getUserRecipes(null, category));
   } catch (err) {
     dispatch({ type: UNLIKE_RECIPE_FAILURE });
   }
