@@ -34,4 +34,10 @@ router.get(
   require("./getRecipe")
 );
 
+router.post(
+  "/comment",
+  passport.authenticate("jwt", { session: false }),
+  require("./postComment")
+);
+
 module.exports = router;

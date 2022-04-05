@@ -93,6 +93,7 @@ const RecipeScroll = (props) => {
         <Comments
           setOpenComments={props.setOpenComments}
           comments={props.data[recipeIndex].comments}
+          recipeId={props.data[recipeIndex].id}
         />
       )}
     </View>

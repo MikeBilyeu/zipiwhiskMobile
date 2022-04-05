@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -14,21 +14,45 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
+import {
+  setInputFocused,
+  setParentCommentId,
+  postComment,
+} from "../../redux/actions/recipe";
+
 const Input = (props) => {
+  const inputEl = useRef(null);
   const [text, setText] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    props.recipe.inputFocused
+      ? inputEl.current.focus()
+      : inputEl.current.blur();
+  }, [props.recipe.inputFocused]);
+
+  const handleOnBlur = () => {
+    props.setInputFocused(false);
+    props.setParentCommentId(null);
+  };
+
+  const handleSubmit = () => {
+    props.postComment(props.recipeId, text, props.recipe.parentCommentId);
+    setText("");
+    inputEl.current.blur();
+  };
 
   return (
     <Animated.View
       style={[
         styles.wrapper,
-        { bottom: isFocused ? hp("38.5%") : 0 },
+        { bottom: props.recipe.inputFocused ? hp("38.5%") : 0 },
         props.style,
       ]}
     >
       <View style={styles.inputContainer}>
         <Image source={{ uri: props.user.image_url }} style={styles.icon} />
         <TextInput
+          ref={inputEl}
           style={styles.textInput}
           onChangeText={(text) => setText(text)}
           value={text}
@@ -36,14 +60,10 @@ const Input = (props) => {
           selectionColor="#fff"
           placeholderTextColor="#464646"
           placeholder="Add a Comment..."
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={() => props.setInputFocused(true)}
+          onBlur={handleOnBlur}
         />
-        <Pressable
-          onPress={() => console.log("post comment")}
-          style={styles.postBtn}
-          hitSlop={25}
-        >
+        <Pressable onPress={handleSubmit} style={styles.postBtn} hitSlop={25}>
           <Text style={styles.postBtnText}>Post</Text>
         </Pressable>
       </View>
@@ -112,5 +132,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  recipe: state.recipe,
 });
-export default connect(mapStateToProps)(Input);
+export default connect(mapStateToProps, {
+  setInputFocused,
+  setParentCommentId,
+  postComment,
+})(Input);

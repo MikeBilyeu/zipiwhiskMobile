@@ -81,7 +81,10 @@ const Comments = (props) => {
           <Text style={styles.noCommentText}>No comments yet.</Text>
         )}
       </Animated.View>
-      <Input style={{ transform: [{ translateY: yValue }] }} />
+      <Input
+        style={{ transform: [{ translateY: yValue }] }}
+        recipeId={props.recipeId}
+      />
     </View>
   );
 };

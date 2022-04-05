@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import {
   StyleSheet,
   View,
-  TouchableOpacity,
   Text,
   Image,
   TouchableWithoutFeedback,
@@ -15,9 +15,14 @@ import {
 } from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
+import {
+  setInputFocused,
+  setParentCommentId,
+} from "../../redux/actions/recipe";
+
 import moment from "moment";
 
-const Comment = ({ c }) => {
+const Comment = ({ c, setInputFocused, setParentCommentId }) => {
   const navigation = useNavigation();
   const [liked, setLiked] = useState(c.liked);
   const [numLikes, setNumLikes] = useState(c.numLikes);
@@ -85,9 +90,14 @@ const Comment = ({ c }) => {
           )}
         </Pressable>
 
-        <TouchableOpacity>
+        <Pressable
+          onPress={() => {
+            setParentCommentId(c.id);
+            setInputFocused(true);
+          }}
+        >
           <Text style={styles.infoText}>Reply</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
       {c.childComments &&
         !c.parent_comment_id &&
@@ -101,7 +111,7 @@ const styles = StyleSheet.create({
     paddingVertical: hp("2.5%"),
   },
   userCommentContainerChild: {
-    marginLeft: wp("5%"),
+    marginLeft: wp("15%"),
     marginTop: wp("1%"),
     marginBottom: 0,
   },
@@ -140,4 +150,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Comment;
+export default connect(null, {
+  setParentCommentId,
+  setInputFocused,
+})(Comment);
