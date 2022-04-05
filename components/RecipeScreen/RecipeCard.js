@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, ImageBackground, Pressable } from "react-native";
 import { connect } from "react-redux";
 import { Video } from "expo-av";
@@ -26,11 +26,19 @@ const RecipeCard = ({
   const [isPlaying, setIsPlaying] = useState(true);
   const video = useRef(null);
 
+  useEffect(() => {
+    setLiked(data.liked);
+    setNumLikes(data.numLikes);
+  }, [data.liked, data.numLikes]);
+
   const DOUBLE_PRESS_DELAY = 200;
+
   const handleLikeRecipe = () => {
     setLiked(true);
-    !liked && setNumLikes(numLikes + 1);
-    likeRecipe(data.id);
+    if (!data.liked) {
+      setNumLikes(numLikes + 1);
+      likeRecipe(data.id);
+    }
   };
   const handleUnlikeRecipe = () => {
     setLiked(false);
