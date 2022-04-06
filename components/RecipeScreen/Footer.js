@@ -121,7 +121,7 @@ const Footer = (props) => {
             <Pressable
               onPress={() => {
                 props.id === props.userId
-                  ? navigation.navigate("Home", { screen: "Profile" })
+                  ? navigation.navigate("Profile")
                   : navigation.push("VisitProfile", { id: props.id });
               }}
               style={({ pressed }) => [
