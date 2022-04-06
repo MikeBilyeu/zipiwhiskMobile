@@ -26,6 +26,14 @@ import {
   imageUrlChange,
   editProfile,
 } from "../../redux/actions/userForm";
+import {
+  selectIsLoading,
+  selectUsername,
+  selectUsernameError,
+  selectFullname,
+  selectFullnameError,
+  selectRestriction,
+} from "../../redux/reducers/userFormReducer";
 
 const restrictions = [
   { label: "Omnivore", value: "omnivore" },
@@ -52,7 +60,7 @@ const SettingsScreen = (props) => {
         title="Settings"
         subTitle="Profile"
         handleSavePress={() => props.editProfile(props.navigation.goBack)}
-        isLoading={props.userForm.isLoading}
+        isLoading={props.isLoading}
       />
 
       <ImageModal
@@ -65,23 +73,24 @@ const SettingsScreen = (props) => {
         <View style={styles.inner}>
           <ImageAndLogout setModalVisible={setModalVisible} />
           <Input
-            value={props.userForm.username}
+            value={props.username}
             handleChange={props.usernameChange}
             placeholder="Username"
             textContentType="username"
             iconName="at"
             autoCapitalize="none"
-            error={props.userForm.usernameError}
+            error={props.usernameError}
           />
           <Input
-            value={props.userForm.fullname}
+            value={props.fullname}
             handleChange={props.fullnameChange}
             placeholder="Full Name"
             textContentType="name"
             iconName="person"
+            error={props.usernameError}
           />
           <SelectInput
-            value={props.userForm.restriction}
+            value={props.restriction}
             items={restrictions}
             handleChange={props.restrictionChange}
             iconName="restaurant"
@@ -109,8 +118,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  userForm: state.userForm,
-  user: state.user,
+  isLoading: selectIsLoading(state),
+  username: selectUsername(state),
+  usernameError: selectUsernameError(state),
+  fullname: selectFullname(state),
+  fullnameError: selectFullnameError(state),
+  restriction: selectRestriction(state),
 });
 
 const mapDispatchToProps = {

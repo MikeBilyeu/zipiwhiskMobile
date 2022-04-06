@@ -29,4 +29,6 @@ const userReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const selectEmail = (state) => state.user.email;
 export default userReducer;

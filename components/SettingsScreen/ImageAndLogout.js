@@ -1,6 +1,9 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import { connect } from "react-redux";
+import { selectImageUrl } from "../../redux/reducers/userFormReducer";
+import { selectEmail } from "../../redux/reducers/userReducer";
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -16,7 +19,7 @@ const ImageAndLogout = (props) => {
       <View style={styles.wrapper}>
         <View style={styles.center}>
           <UserImageBtn
-            uri={props.image}
+            uri={props.imageUrl}
             styles={{ width: 85, height: 85 }}
             handleImagePress={() => props.setModalVisible(true)}
           />
@@ -24,9 +27,9 @@ const ImageAndLogout = (props) => {
         </View>
         <View style={styles.emailWrapper}>
           <Text style={styles.email}>{props.email}</Text>
-          <TouchableOpacity style={styles.logoutBtn} onPress={props.logout}>
+          <Pressable style={styles.logoutBtn} onPress={props.logout}>
             <Text style={styles.logoutBtnText}>Logout</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </View>
@@ -80,8 +83,8 @@ const styles = StyleSheet.create({
   },
 });
 const mapStateToProps = (state) => ({
-  image: state.userForm.image_url,
-  email: state.user.email,
+  imageUrl: selectImageUrl(state),
+  email: selectEmail(state),
 });
 
 export default connect(mapStateToProps, { logout })(ImageAndLogout);

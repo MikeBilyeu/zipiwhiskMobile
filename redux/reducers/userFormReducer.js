@@ -16,8 +16,8 @@ const initialState = {
   usernameError: null,
   fullname: "",
   fullnameError: null,
-  image_url: "",
-  image_urlError: null,
+  imageUrl: "",
+  imageUrlError: null,
   recipeUnit: "US",
   restriction: null,
 };
@@ -29,7 +29,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         username: action.payload.username,
         fullname: action.payload.fullname,
-        image_url: action.payload.image_url,
+        imageUrl: action.payload.image_url,
         recipeUnit: action.payload.recipeUnit,
         restriction: action.payload.restriction,
       };
@@ -42,7 +42,7 @@ const userReducer = (state = initialState, action) => {
     case RESTRICTION_CHANGE:
       return { ...state, restriction: action.payload };
     case IMAGE_URL_CHANGE:
-      return { ...state, image_url: action.payload };
+      return { ...state, imageUrl: action.payload };
     case EDIT_USER_REQUEST:
       return { ...state, isLoading: true };
     case EDIT_USER_SUCCESS:
@@ -51,4 +51,13 @@ const userReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const selectIsLoading = (state) => state.userForm.isLoading;
+export const selectUsername = (state) => state.userForm.username;
+export const selectUsernameError = (state) => state.userForm.usernameError;
+export const selectFullname = (state) => state.userForm.fullname;
+export const selectFullnameError = (state) => state.userForm.fullnameError;
+export const selectRestriction = (state) => state.userForm.restriction;
+export const selectImageUrl = (state) => state.userForm.imageUrl;
+
 export default userReducer;
