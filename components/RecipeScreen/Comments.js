@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { connect } from "react-redux";
 import {
   StyleSheet,
   PanResponder,
@@ -12,6 +13,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+
+import { setOpenComments } from "../../redux/actions/recipe";
 
 import Input from "./Input";
 import Comment from "./Comment";
@@ -127,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Comments;
+export default connect(null, { setOpenComments })(Comments);

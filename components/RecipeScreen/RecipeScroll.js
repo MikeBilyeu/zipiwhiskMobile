@@ -1,8 +1,9 @@
 import React, { useRef, useState, cloneElement } from "react";
 import { connect } from "react-redux";
-import { setOpenComments } from "../../redux/actions/recipe";
 import { useKeepAwake } from "expo-keep-awake";
-import { FlatList, Dimensions, View, Animated } from "react-native";
+import { FlatList, Dimensions, View } from "react-native";
+
+import { selectOpenComments } from "../../redux/reducers/recipeReducer";
 
 import FocusAwareStatusBar from "../FocusAwareStatusBar";
 import RecipeCard from "./RecipeCard";
@@ -41,8 +42,6 @@ const RecipeScroll = (props) => {
       data={item}
       handleSinglePress={() => setToggleRecipe(!toggleRecipe)}
       toggleRecipe={toggleRecipe}
-      openComments={props.openComments}
-      setOpenComments={props.setOpenComments}
     />
   );
 
@@ -91,7 +90,6 @@ const RecipeScroll = (props) => {
       )}
       {props.openComments && (
         <Comments
-          setOpenComments={props.setOpenComments}
           comments={props.data[recipeIndex].comments}
           recipeId={props.data[recipeIndex].id}
         />
@@ -101,7 +99,7 @@ const RecipeScroll = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  openComments: state.recipe.openComments,
+  openComments: selectOpenComments(state),
 });
 
-export default connect(mapStateToProps, { setOpenComments })(RecipeScroll);
+export default connect(mapStateToProps)(RecipeScroll);

@@ -27,4 +27,6 @@ const recipeReducer = (state = initialState, action) => {
   }
 };
 
+export const selectOpenComments = (state) => state.recipe.openComments;
+
 export default recipeReducer;

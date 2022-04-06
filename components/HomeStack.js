@@ -2,6 +2,7 @@ import React from "react";
 import { Dimensions } from "react-native";
 import { connect } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
+import { selectOpenComments } from "../redux/reducers/recipeReducer";
 
 import Nav from "./Nav";
 
@@ -42,6 +43,6 @@ const HomeStack = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  openComments: state.recipe.openComments,
+  openComments: selectOpenComments(state),
 });
 export default connect(mapStateToProps)(HomeStack);

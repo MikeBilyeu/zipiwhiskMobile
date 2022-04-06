@@ -7,8 +7,13 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { likeRecipe, unlikeRecipe } from "../../redux/actions/recipe";
+import {
+  setOpenComments,
+  likeRecipe,
+  unlikeRecipe,
+} from "../../redux/actions/recipe";
 import Footer from "./Footer";
+import { selectOpenComments } from "../../redux/reducers/recipeReducer";
 
 const RecipeCard = ({
   data,
@@ -170,4 +175,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { likeRecipe, unlikeRecipe })(RecipeCard);
+const mapStateToProps = (state) => ({
+  openComments: selectOpenComments(state),
+});
+
+export default connect(mapStateToProps, {
+  setOpenComments,
+  likeRecipe,
+  unlikeRecipe,
+})(RecipeCard);
