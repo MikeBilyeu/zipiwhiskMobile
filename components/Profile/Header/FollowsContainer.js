@@ -12,14 +12,14 @@ const FollowsContainer = (props) => {
     <View style={styles.followContainer}>
       <NumFollows
         text="Followers"
-        num={props.user.num_followers}
-        username={props.user.username}
+        num={props.numFollowers}
+        username={props.username}
       />
       {props.children}
       <NumFollows
         text="Following"
-        num={props.user.num_followings}
-        username={props.user.username}
+        num={props.numFollowings}
+        username={props.username}
       />
     </View>
   );

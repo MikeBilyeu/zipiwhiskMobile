@@ -5,24 +5,41 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import {
+  selectId,
+  selectUsername,
+  selectFullname,
+  selectImageUrl,
+  selectNumFollowers,
+  selectNumFollowings,
+  selectIsFollowing,
+} from "../../../redux/reducers/userProfileReducer";
 
 import Header from "../../Header";
 import UserInfo from "./UserInfo";
 import FollowContainer from "./FollowsContainer";
 import ToggleFollowBtn from "../../ToggleFollowBtn";
 
-const VisitProfileHeader = ({ userProfile }) => {
+const VisitProfileHeader = (props) => {
   return (
     <Header>
       <View style={{ height: hp("15%"), width: "100%" }}>
-        <UserInfo user={userProfile}>
+        <UserInfo
+          username={props.username}
+          fullname={props.fullname}
+          imageUrl={props.imageUrl}
+        >
           <View style={{ width: wp("15%") }} />
         </UserInfo>
-        <FollowContainer user={userProfile}>
+        <FollowContainer
+          username={props.username}
+          numFollowers={props.numFollowers}
+          numFollowings={props.numFollowings}
+        >
           <ToggleFollowBtn
             BtnStyles={{ alignSelf: "center" }}
-            id={userProfile.id}
-            following={userProfile.isFollowing}
+            id={props.id}
+            following={props.isFollowing}
           />
         </FollowContainer>
       </View>
@@ -30,5 +47,13 @@ const VisitProfileHeader = ({ userProfile }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ userProfile: state.userProfile });
+const mapStateToProps = (state) => ({
+  id: selectId(state),
+  username: selectUsername(state),
+  fullname: selectFullname(state),
+  imageUrl: selectImageUrl(state),
+  numFollowers: selectNumFollowers(state),
+  numFollowings: selectNumFollowings(state),
+  isFollowing: selectIsFollowing(state),
+});
 export default connect(mapStateToProps)(VisitProfileHeader);

@@ -45,13 +45,11 @@ const UserInfo = (props) => {
               height: wp("9%"),
             },
           ]}
-          source={
-            props.user.image_url ? { uri: props.user.image_url } : defaultImage
-          }
+          source={props.imageUrl ? { uri: props.imageUrl } : defaultImage}
         />
         <View style={styles.usernameWrapper}>
-          <Text style={styles.usernameText}>@{props.user.username}</Text>
-          <Text style={styles.fullNameText}>{props.user.fullname}</Text>
+          <Text style={styles.usernameText}>{props.username}</Text>
+          <Text style={styles.fullNameText}>{props.fullname}</Text>
         </View>
       </Pressable>
       {props.children}

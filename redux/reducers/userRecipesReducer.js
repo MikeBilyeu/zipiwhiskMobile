@@ -22,4 +22,8 @@ const userRecipesReducer = (state = initialState, action) => {
   }
 };
 
+export const selectIsLoading = (state) => state.userRecipes.isLoading;
+export const selectCategory = (state) => state.userRecipes.category;
+export const selectRecipes = (state) => state.userRecipes.recipes;
+
 export default userRecipesReducer;

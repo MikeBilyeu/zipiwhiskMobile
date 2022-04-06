@@ -6,7 +6,6 @@ import ToggleFollowBtn from "../ToggleFollowBtn";
 const Users = ({ id, username, image }) => (
   <View style={styles.container}>
     <UserNameBtn username={username} image_url={image} id={id} />
-
     <ToggleFollowBtn />
   </View>
 );

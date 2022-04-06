@@ -11,9 +11,9 @@ const initialState = {
   username: "",
   fullname: "",
   image_url: "",
-  following: 0,
-  numFollowers: "1,520",
-  numFollowing: "250",
+  isFollowing: 0,
+  num_followers: "",
+  num_followings: "",
 };
 
 const userProfileReducer = (state = initialState, action) => {
@@ -21,6 +21,7 @@ const userProfileReducer = (state = initialState, action) => {
     case GET_USER_PROFILE_REQUEST:
       return initialState;
     case GET_USER_PROFILE_SUCCESS:
+      console.log(action.payload);
       return { ...state, ...action.payload, isLoading: false };
     case GET_USER_PROFILE_FAILURE:
       return initialState;
@@ -28,4 +29,12 @@ const userProfileReducer = (state = initialState, action) => {
       return state;
   }
 };
+export const selectId = (state) => state.userProfile.id;
+export const selectEmail = (state) => state.userProfile.email;
+export const selectUsername = (state) => `@${state.userProfile.username}`;
+export const selectFullname = (state) => state.userProfile.fullname;
+export const selectImageUrl = (state) => state.userProfile.image_url;
+export const selectNumFollowers = (state) => state.userProfile.num_followers;
+export const selectNumFollowings = (state) => state.userProfile.num_followings;
+export const selectIsFollowing = (state) => state.userProfile.isFollowing;
 export default userProfileReducer;

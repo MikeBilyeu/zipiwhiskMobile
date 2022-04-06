@@ -22,7 +22,7 @@ const FollowScreen = (props) => {
   return (
     <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <ScreenHeader
-        subTitle={`@${props.route.params.username}`}
+        subTitle={props.route.params.username}
         title={`${props.route.params.screen} (${props.route.params.num})`}
       />
       <FlatList

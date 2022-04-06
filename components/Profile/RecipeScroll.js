@@ -9,6 +9,10 @@ import {
 
 import RecipeCardSmall from "../RecipeCardSmall";
 import { getUserRecipes } from "../../redux/actions/userRecipes";
+import {
+  selectIsLoading,
+  selectRecipes,
+} from "../../redux/reducers/userRecipesReducer";
 
 const RecipeScroll = (props) => {
   const navigation = useNavigation();
@@ -26,7 +30,7 @@ const RecipeScroll = (props) => {
       handlePress={() =>
         navigation.push("Recipe", {
           index,
-          data: props.userRecipes.recipes,
+          data: props.recipes,
           title: "Saved Recipes",
           subTitle: props.category || null,
         })
@@ -40,12 +44,12 @@ const RecipeScroll = (props) => {
     }recipes saved.`}</Text>
   );
   return (
-    !props.userRecipes.isLoading && (
+    !props.isLoading && (
       <FlatList
         style={styles.listContainer}
         contentContainerStyle={{ paddingTop: props.paddingTop }}
         showsVerticalScrollIndicator={false}
-        data={props.userRecipes.recipes}
+        data={props.recipes}
         numColumns={3}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
@@ -72,7 +76,9 @@ const styles = StyleSheet.create({
     marginTop: hp("15%"),
   },
 });
+
 const mapStateToProps = (state) => ({
-  userRecipes: state.userRecipes,
+  isLoading: selectIsLoading(state),
+  recipes: selectRecipes(state),
 });
 export default connect(mapStateToProps, { getUserRecipes })(RecipeScroll);

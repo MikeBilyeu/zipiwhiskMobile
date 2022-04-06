@@ -6,6 +6,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { selectId } from "../../redux/reducers/userReducer";
+import { selectCategory } from "../../redux/reducers/userRecipesReducer";
 
 import ProfileHeader from "./Header/ProfileHeader";
 import RecipeScroll from "./RecipeScroll";
@@ -30,8 +32,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  userId: state.user.id,
-  category: state.userRecipes.category,
+  userId: selectId(state),
+  category: selectCategory(state),
 });
 
 export default connect(mapStateToProps)(ProfileScreen);

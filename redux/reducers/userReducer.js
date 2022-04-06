@@ -13,8 +13,8 @@ const initialState = {
   image_url: "",
   recipeUnit: "US",
   restriction: null,
-  numFollowers: "1,520",
-  numFollowing: "250",
+  num_followers: "",
+  num_followings: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -22,6 +22,7 @@ const userReducer = (state = initialState, action) => {
     case GET_USER_REQUEST:
       return initialState;
     case GET_USER_SUCCESS:
+      console.log(action.payload);
       return { ...action.payload, isLoading: false };
     case GET_USER_FAILURE:
       return initialState;
@@ -30,5 +31,11 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
+export const selectId = (state) => state.user.id;
 export const selectEmail = (state) => state.user.email;
+export const selectUsername = (state) => `@${state.user.username}`;
+export const selectFullname = (state) => state.user.fullname;
+export const selectImageUrl = (state) => state.user.image_url;
+export const selectNumFollowers = (state) => state.user.num_followers;
+export const selectNumFollowings = (state) => state.user.num_followings;
 export default userReducer;
