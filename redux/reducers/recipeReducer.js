@@ -28,5 +28,7 @@ const recipeReducer = (state = initialState, action) => {
 };
 
 export const selectOpenComments = (state) => state.recipe.openComments;
+export const selectInputFocused = (state) => state.recipe.inputFocused;
+export const selectParentCommentId = (state) => state.recipe.parentCommentId;
 
 export default recipeReducer;

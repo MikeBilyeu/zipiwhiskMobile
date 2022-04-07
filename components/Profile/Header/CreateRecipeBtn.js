@@ -7,13 +7,14 @@ import {
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { selectIsMediaUrl } from "../../../redux/reducers/recipeFormReducer";
 
 const CreateRecipeBtn = (props) => {
   const navigation = useNavigation();
   return (
     <Pressable
       onPress={() =>
-        navigation.navigate(props.media_url ? "CreateRecipe" : "Camera")
+        navigation.navigate(props.isMediaUrl ? "CreateRecipe" : "Camera")
       }
       hitSlop={{ top: 10, right: 28, left: 28, bottom: 28 }}
       style={({ pressed }) => [
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  media_url: state.recipeForm.media_url,
+  isMediaUrl: selectIsMediaUrl(state),
 });
 
 export default connect(mapStateToProps)(CreateRecipeBtn);

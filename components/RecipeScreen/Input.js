@@ -20,15 +20,19 @@ import {
   postComment,
 } from "../../redux/actions/recipe";
 
+import { selectImageUrl } from "../../redux/reducers/userReducer";
+import {
+  selectInputFocused,
+  selectParentCommentId,
+} from "../../redux/reducers/recipeReducer";
+
 const Input = (props) => {
   const inputEl = useRef(null);
   const [text, setText] = useState("");
 
   useEffect(() => {
-    props.recipe.inputFocused
-      ? inputEl.current.focus()
-      : inputEl.current.blur();
-  }, [props.recipe.inputFocused]);
+    props.inputFocused ? inputEl.current.focus() : inputEl.current.blur();
+  }, [props.inputFocused]);
 
   const handleOnBlur = () => {
     props.setInputFocused(false);
@@ -36,7 +40,7 @@ const Input = (props) => {
   };
 
   const handleSubmit = () => {
-    props.postComment(props.recipeId, text, props.recipe.parentCommentId);
+    props.postComment(props.recipeId, text, props.parentCommentId);
     setText("");
     inputEl.current.blur();
   };
@@ -45,12 +49,12 @@ const Input = (props) => {
     <Animated.View
       style={[
         styles.wrapper,
-        { bottom: props.recipe.inputFocused ? hp("38.5%") : 0 },
+        { bottom: props.inputFocused ? hp("38.5%") : 0 },
         props.style,
       ]}
     >
       <View style={styles.inputContainer}>
-        <Image source={{ uri: props.user.image_url }} style={styles.icon} />
+        <Image source={{ uri: props.imageUrl }} style={styles.icon} />
         <TextInput
           ref={inputEl}
           style={styles.textInput}
@@ -131,8 +135,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  user: state.user,
-  recipe: state.recipe,
+  imageUrl: selectImageUrl(state),
+  parentCommentId: selectParentCommentId(state),
+  inputFocused: selectInputFocused(state),
 });
 export default connect(mapStateToProps, {
   setInputFocused,

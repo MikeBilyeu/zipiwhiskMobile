@@ -44,4 +44,6 @@ const feedReducer = (state = initialState, action) => {
   }
 };
 
+export const selectRecipes = (state) => state.feedRecipes.recipes;
+
 export default feedReducer;

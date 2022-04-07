@@ -18,6 +18,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { parseNum } from "../utils";
+import { selectId } from "../../redux/reducers/userReducer";
 
 const screenHeight = Dimensions.get("screen").height;
 
@@ -318,6 +319,6 @@ const styles = StyleSheet.create({
   },
 });
 const mapStateToProps = (state) => ({
-  userId: state.user.id,
+  userId: selectId(state),
 });
 export default connect(mapStateToProps)(Footer);

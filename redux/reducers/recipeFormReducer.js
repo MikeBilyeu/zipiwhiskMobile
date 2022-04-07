@@ -74,4 +74,11 @@ const recipeFormReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const selectIsMediaUrl = (state) =>
+  (state.recipeForm.image_url || state.recipeForm.video_urls[0]) == true;
+export const selectMediaType = (state) => state.recipeForm.media_type;
+export const selectImageUrl = (state) => state.recipeForm.image_url;
+export const selectVideoUrls = (state) => state.recipeForm.video_urls;
+
 export default recipeFormReducer;

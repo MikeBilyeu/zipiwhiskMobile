@@ -8,6 +8,11 @@ import {
 } from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import {
+  selectMediaType,
+  selectImageUrl,
+  selectVideoUrls,
+} from "../../redux/reducers/recipeFormReducer";
 
 const MediaInput = (props) => {
   const navigation = useNavigation();
@@ -24,14 +29,11 @@ const MediaInput = (props) => {
       onPress={handleOnPress}
       hitSlop={25}
     >
-      {props.recipeForm.media_type === "image" ? (
-        <Image
-          source={{ uri: props.recipeForm.image_url }}
-          style={styles.image}
-        />
-      ) : props.recipeForm.media_type === "video" ? (
+      {props.mediaType === "image" ? (
+        <Image source={{ uri: props.imageUrl }} style={styles.image} />
+      ) : props.mediaType === "video" ? (
         <Video
-          source={{ uri: props.recipeForm.video_urls[0] }}
+          source={{ uri: props.videoUrls[0] }}
           style={styles.image}
           resizeMode="cover"
           isLooping
@@ -66,6 +68,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({ recipeForm: state.recipeForm });
+const mapStateToProps = (state) => ({
+  mediaType: selectMediaType(state),
+  imageUrl: selectImageUrl(state),
+  videoUrls: selectVideoUrls(state),
+});
 
 export default connect(mapStateToProps)(MediaInput);
