@@ -13,7 +13,7 @@ import {
   SUBMIT_RECIPE_FAILURE,
 } from "../constants";
 import axios from "axios";
-import { getUserRecipes } from "./userRecipes";
+import { getUserRecipes } from "./user";
 import { getFeedRecipes } from "./feed";
 import { InteractionManager } from "react-native";
 

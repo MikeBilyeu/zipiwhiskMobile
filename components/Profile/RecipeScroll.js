@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { StyleSheet, FlatList, Text, View } from "react-native";
+import React from "react";
+import { StyleSheet, FlatList, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   widthPercentageToDP as wp,
@@ -8,18 +7,9 @@ import {
 } from "react-native-responsive-screen";
 
 import RecipeCardSmall from "../RecipeCardSmall";
-import { getUserRecipes } from "../../redux/actions/userRecipes";
-import {
-  selectIsLoading,
-  selectRecipes,
-} from "../../redux/reducers/userRecipesReducer";
 
 const RecipeScroll = (props) => {
   const navigation = useNavigation();
-
-  useEffect(() => {
-    props.getUserRecipes(props.userId, props.category);
-  }, [props.category]);
 
   const renderItem = ({ index, item }) => (
     <RecipeCardSmall
@@ -77,8 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({
-  isLoading: selectIsLoading(state),
-  recipes: selectRecipes(state),
-});
-export default connect(mapStateToProps, { getUserRecipes })(RecipeScroll);
+export default RecipeScroll;

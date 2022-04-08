@@ -3,6 +3,10 @@ import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
+  GET_USER_RECIPES_REQUEST,
+  GET_USER_RECIPES_SUCCESS,
+  GET_USER_RECIPES_FAILURE,
+  PROFILE_CATEGORY_CHANGE,
 } from "../constants";
 
 export const getUser = () => async (dispatch) => {
@@ -14,6 +18,7 @@ export const getUser = () => async (dispatch) => {
       type: GET_USER_SUCCESS,
       payload: data,
     });
+    dispatch(getUserRecipes());
   } catch (err) {
     dispatch({
       type: GET_USER_FAILURE,
@@ -35,4 +40,22 @@ export const checkUsername = (username, actionType) => async (dispatch) => {
       });
     }
   }
+};
+
+export const getUserRecipes = (category) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_USER_RECIPES_REQUEST });
+    const { data } = await axios.get("api/recipes/saved", {
+      params: { category: category },
+    });
+    dispatch({ type: GET_USER_RECIPES_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: GET_USER_RECIPES_FAILURE });
+  }
+};
+
+export const categoryChange = (value) => async (dispatch, getState) => {
+  dispatch({ type: PROFILE_CATEGORY_CHANGE, payload: value });
+  let { category } = getState().user.recipeData;
+  dispatch(getUserRecipes(category));
 };

@@ -6,8 +6,12 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { selectId } from "../../redux/reducers/userReducer";
-import { selectCategory } from "../../redux/reducers/userRecipesReducer";
+import {
+  selectId,
+  selectCategory,
+  selectRecipeDataIsLoading,
+  selectRecipes,
+} from "../../redux/reducers/userReducer";
 
 import ProfileHeader from "./Header/ProfileHeader";
 import RecipeScroll from "./RecipeScroll";
@@ -18,8 +22,9 @@ const ProfileScreen = (props) => {
       <ProfileHeader />
       <RecipeScroll
         paddingTop={hp("26%")}
-        userId={props.userId}
         category={props.category}
+        isLoading={props.isLoading}
+        recipes={props.recipes}
       />
     </SafeAreaView>
   );
@@ -34,6 +39,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   userId: selectId(state),
   category: selectCategory(state),
+  isLoading: selectRecipeDataIsLoading(state),
+  recipes: selectRecipes(state),
 });
 
 export default connect(mapStateToProps)(ProfileScreen);

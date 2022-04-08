@@ -17,7 +17,7 @@ import {
 } from "../constants";
 import axios from "axios";
 
-import { getUserRecipes } from "./userRecipes";
+import { getUserRecipes } from "./user";
 
 export const setOpenComments = (value) => ({
   type: SET_OPEN_COMMENTS,
@@ -62,7 +62,7 @@ export const getRecipe = (value) => async (dispatch) => {
 };
 
 export const likeRecipe = (recipe_id) => async (dispatch, getState) => {
-  const { category } = getState().userRecipes;
+  const { category } = getState().user.recipeData;
   try {
     dispatch({ type: LIKE_RECIPE_REQUEST });
     await axios.post("api/recipes/like", {
@@ -76,7 +76,7 @@ export const likeRecipe = (recipe_id) => async (dispatch, getState) => {
 };
 
 export const unlikeRecipe = (recipe_id) => async (dispatch, getState) => {
-  const { category } = getState().userRecipes;
+  const { category } = getState().user.recipeData;
   try {
     dispatch({ type: UNLIKE_RECIPE_REQUEST });
     await axios.delete("api/recipes/like", {

@@ -6,14 +6,14 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { categoryChange } from "../../../redux/actions/userRecipes";
-import { selectCategory } from "../../../redux/reducers/userRecipesReducer";
+import { categoryChange } from "../../../redux/actions/user";
 import {
   selectUsername,
   selectFullname,
   selectImageUrl,
   selectNumFollowers,
   selectNumFollowings,
+  selectCategory,
 } from "../../../redux/reducers/userReducer";
 
 import Header from "../../Header";

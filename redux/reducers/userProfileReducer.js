@@ -2,11 +2,13 @@ import {
   GET_USER_PROFILE_REQUEST,
   GET_USER_PROFILE_SUCCESS,
   GET_USER_PROFILE_FAILURE,
+  GET_USER_PROFILE_RECIPES_REQUEST,
+  GET_USER_PROFILE_RECIPES_SUCCESS,
+  GET_USER_PROFILE_RECIPES_FAILURE,
 } from "../constants";
 
 const initialState = {
   isLoading: true,
-  isVerified: false,
   id: null,
   username: "",
   fullname: "",
@@ -14,6 +16,7 @@ const initialState = {
   isFollowing: 0,
   num_followers: "",
   num_followings: "",
+  recipeData: { isLoading: false, recipes: [] },
 };
 
 const userProfileReducer = (state = initialState, action) => {
@@ -23,6 +26,24 @@ const userProfileReducer = (state = initialState, action) => {
     case GET_USER_PROFILE_SUCCESS:
       console.log(action.payload);
       return { ...state, ...action.payload, isLoading: false };
+    case GET_USER_PROFILE_RECIPES_REQUEST:
+      return {
+        ...state,
+        recipeData: { ...state.recipeData, isLoading: true },
+      };
+    case GET_USER_PROFILE_RECIPES_SUCCESS:
+      return {
+        ...state,
+        recipeData: {
+          recipes: action.payload,
+          isLoading: false,
+        },
+      };
+    case GET_USER_PROFILE_RECIPES_FAILURE:
+      return {
+        ...state,
+        recipeData: { isLoading: false, recipes: [] },
+      };
     case GET_USER_PROFILE_FAILURE:
       return initialState;
     default:
@@ -37,4 +58,7 @@ export const selectImageUrl = (state) => state.userProfile.image_url;
 export const selectNumFollowers = (state) => state.userProfile.num_followers;
 export const selectNumFollowings = (state) => state.userProfile.num_followings;
 export const selectIsFollowing = (state) => state.userProfile.isFollowing;
+export const selectRecipeDataIsLoading = (state) =>
+  state.userProfile.recipeData.isLoading;
+export const selectRecipes = (state) => state.userProfile.recipeData.recipes;
 export default userProfileReducer;

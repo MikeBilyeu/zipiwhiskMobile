@@ -9,7 +9,6 @@ import userProfileReducer from "../reducers/userProfileReducer";
 import loginReducer from "../reducers/loginReducer";
 import signupReducer from "../reducers/signupReducer";
 import recipeReducer from "../reducers/recipeReducer";
-import userRecipesReducer from "../reducers/userRecipesReducer";
 import feedReducer from "../reducers/feedReducer";
 
 const rootReducer = combineReducers({
@@ -21,7 +20,6 @@ const rootReducer = combineReducers({
   userForm: userFormReducer,
   userProfile: userProfileReducer,
   recipe: recipeReducer,
-  userRecipes: userRecipesReducer,
   feedRecipes: feedReducer,
 });
 

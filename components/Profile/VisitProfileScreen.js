@@ -7,6 +7,12 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
+import {
+  selectId,
+  selectRecipeDataIsLoading,
+  selectRecipes,
+} from "../../redux/reducers/userProfileReducer";
+
 import { getUserProfile } from "../../redux/actions/userProfile";
 
 import VisitProfileHeader from "./Header/VisitProfileHeader";
@@ -22,7 +28,12 @@ const VisitProfileScreen = (props) => {
   return (
     <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <VisitProfileHeader />
-      <RecipeScroll paddingTop={hp("16%")} userId={id} />
+      <RecipeScroll
+        paddingTop={hp("16%")}
+        userId={props.userId}
+        isLoading={props.isLoading}
+        recipes={props.recipes}
+      />
     </SafeAreaView>
   );
 };
@@ -34,4 +45,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { getUserProfile })(VisitProfileScreen);
+const mapStateToProps = (state) => ({
+  userId: selectId(state),
+  isLoading: selectRecipeDataIsLoading(state),
+  recipes: selectRecipes(state),
+});
+
+export default connect(mapStateToProps, { getUserProfile })(VisitProfileScreen);
