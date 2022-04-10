@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
       ELSE saved_at END DESC
       LIMIT 18`,
       [
-        user_id,
+        req.user.id,
         user_id,
         category,
         category,
@@ -82,7 +82,7 @@ module.exports = async (req, res) => {
             GROUP BY c.id
             ORDER BY numLikes DESC
             LIMIT 15`,
-            [user_id, r.id],
+            [req.user.id, r.id],
             (err, results) => {
               if (err) throw err;
               recipes[i].comments = results;
