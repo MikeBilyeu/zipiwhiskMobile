@@ -7,49 +7,21 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {
-  setOpenComments,
-  likeRecipe,
-  unlikeRecipe,
-} from "../../redux/actions/recipe";
-import Footer from "./Footer";
+import { setOpenComments } from "../../redux/actions/recipe";
 import { selectOpenComments } from "../../redux/reducers/recipeReducer";
 
 const RecipeCard = ({
   data,
-  handleSinglePress,
+  handleToggleRecipe,
   openComments,
-  setOpenComments,
-  toggleRecipe,
-  likeRecipe,
-  unlikeRecipe,
+  handleLikeRecipe,
 }) => {
-  const [liked, setLiked] = useState(data.liked == 0 ? false : true);
-  const [numLikes, setNumLikes] = useState(data.numLikes);
   const [lastTap, setLastTap] = useState(0);
   const [singlePressTimer, setSinglePressTimer] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const video = useRef(null);
 
-  useEffect(() => {
-    setLiked(data.liked);
-    setNumLikes(data.numLikes);
-  }, [data.liked, data.numLikes]);
-
   const DOUBLE_PRESS_DELAY = 200;
-
-  const handleLikeRecipe = () => {
-    setLiked(true);
-    if (!data.liked) {
-      setNumLikes(numLikes + 1);
-      likeRecipe(data.id);
-    }
-  };
-  const handleUnlikeRecipe = () => {
-    setLiked(false);
-    setNumLikes(numLikes - 1);
-    unlikeRecipe(data.id);
-  };
 
   const cancelSinglePressTimer = () => {
     if (singlePressTimer) {
@@ -71,7 +43,7 @@ const RecipeCard = ({
       const timeout = setTimeout(() => {
         setLastTap(0);
         //SINGLE PRESS
-        !openComments && handleSinglePress();
+        !openComments && handleToggleRecipe();
       }, DOUBLE_PRESS_DELAY);
 
       setSinglePressTimer(timeout);
@@ -112,26 +84,6 @@ const RecipeCard = ({
           size={wp("25%")}
           color="#FFF"
           style={styles.pauseIcon}
-        />
-      )}
-
-      {!toggleRecipe && (
-        <Footer
-          numLikes={numLikes}
-          handleLikeRecipe={handleLikeRecipe}
-          handleUnlikeRecipe={handleUnlikeRecipe}
-          numComments={data.numComments}
-          userImage={data.user_image_url}
-          username={data.username}
-          id={data.created_by}
-          caption={data.caption}
-          numViews={data.numViews}
-          title={data.title}
-          liked={liked}
-          handleCommentPress={setOpenComments}
-          setOpenComments={setOpenComments}
-          handleSinglePress={handleSinglePress}
-          created_at={data.created_at}
         />
       )}
     </Pressable>
@@ -179,8 +131,4 @@ const mapStateToProps = (state) => ({
   openComments: selectOpenComments(state),
 });
 
-export default connect(mapStateToProps, {
-  setOpenComments,
-  likeRecipe,
-  unlikeRecipe,
-})(RecipeCard);
+export default connect(mapStateToProps, { setOpenComments })(RecipeCard);

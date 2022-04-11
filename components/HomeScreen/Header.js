@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, Pressable, Animated } from "react-native";
+import { StyleSheet, Pressable, Animated, View } from "react-native";
 import { connect } from "react-redux";
 import { setOpenComments } from "../../redux/actions/recipe";
 import {
@@ -46,16 +46,20 @@ const Header = (props) => {
         transform: [{ translateY: yValue }],
         opacity: opacityInterpolate,
       }}
+      pointerEvents={"box-none"}
     >
       <LinearGradient
         colors={["rgba(10,10,10, 0)", "rgba(0,0,0,.75)"]}
         start={[0, 1]}
         end={[0, -1]}
         style={styles.gradient}
-      >
+        pointerEvents={"none"}
+      />
+
+      <View style={styles.wrapper} pointerEvents={"box-none"}>
         <Pressable
           onPress={handleSearchPress}
-          hitSlop={{ bottom: 15 }}
+          hitSlop={{ top: 15, bottom: 15 }}
           style={({ pressed }) => [
             { opacity: pressed ? 0.5 : 1 },
             styles.headerBtn,
@@ -68,14 +72,16 @@ const Header = (props) => {
             style={styles.headerBtnIcon}
           />
         </Pressable>
-        <Pressable
-          style={styles.scrollTopBtn}
-          hitSlop={{ bottom: 15 }}
-          onPress={props.handleScrollTop}
-        />
+        {!props.openComments && (
+          <Pressable
+            style={styles.scrollTopBtn}
+            hitSlop={{ top: 15, bottom: 15 }}
+            onPress={props.handleScrollTop}
+          />
+        )}
         <Pressable
           onPress={handleProfilePress}
-          hitSlop={{ bottom: 15 }}
+          hitSlop={{ top: 15, bottom: 15 }}
           style={({ pressed }) => [
             { opacity: pressed ? 0.5 : 1 },
             styles.headerBtn,
@@ -88,7 +94,7 @@ const Header = (props) => {
             style={styles.headerBtnIcon}
           />
         </Pressable>
-      </LinearGradient>
+      </View>
     </Animated.View>
   );
 };
@@ -96,7 +102,11 @@ const Header = (props) => {
 const styles = StyleSheet.create({
   gradient: {
     position: "absolute",
-    zIndex: 2,
+    width: "100%",
+    height: hp("13%"),
+  },
+  wrapper: {
+    position: "absolute",
     width: "100%",
     height: hp("13%"),
     paddingTop: hp("4%"),

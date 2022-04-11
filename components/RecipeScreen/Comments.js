@@ -96,8 +96,9 @@ const styles = StyleSheet.create({
   outer: {
     position: "absolute",
     width: "100%",
-    height: hp("87%"),
+    height: hp("100%"),
     bottom: 0,
+    zIndex: 1,
   },
   wrapper: {
     paddingTop: hp("2.5%"),
@@ -109,7 +110,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: "100%",
     height: hp("75%"),
-    zIndex: 2,
   },
   title: {
     textAlign: "center",
@@ -122,11 +122,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp("2%"),
   },
   noCommentText: {
-    color: "rgba(200,200,200,.1)",
+    color: "rgba(200,200,200,.3)",
     textAlign: "center",
     fontFamily: "AvenirNextBold",
     fontSize: wp("5.5%"),
-    marginTop: hp("7.5%"),
+    marginTop: hp("25.5%"),
   },
 });
 

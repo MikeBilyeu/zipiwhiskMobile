@@ -1,23 +1,54 @@
-import React, { useRef, useState, cloneElement } from "react";
+import React, { useRef, useState, useEffect, cloneElement } from "react";
 import { connect } from "react-redux";
 import { useKeepAwake } from "expo-keep-awake";
 import { FlatList, Dimensions, View } from "react-native";
 
 import { selectOpenComments } from "../../redux/reducers/recipeReducer";
 
+import { likeRecipe, unlikeRecipe } from "../../redux/actions/recipe";
+
 import FocusAwareStatusBar from "../FocusAwareStatusBar";
 import RecipeCard from "./RecipeCard";
 import Recipe from "./Recipe";
 import Comments from "./Comments";
+import Footer from "./Footer";
+import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
 const screenHeight = Dimensions.get("screen").height;
 
-const RecipeScroll = (props) => {
+const RecipeScroll = ({
+  data,
+  initalScroll,
+  openComments,
+  unlikeRecipe,
+  likeRecipe,
+  children,
+  handleLoadMore,
+  refreshing,
+  handleRefresh,
+}) => {
   useKeepAwake();
+
   const [toggleRecipe, setToggleRecipe] = useState(false);
-  const [recipeIndex, setRecipeIndex] = useState(props.initalScroll || 0);
+  const [recipeIndex, setRecipeIndex] = useState(initalScroll || 0);
   const [initialYValue, setInitialYValue] = useState(0);
   const [cardNum, setCardNum] = useState(0);
+  const [liked, setLiked] = useState(
+    data.length && data[recipeIndex].liked == 0 ? false : true
+  );
+  const [numLikes, setNumLikes] = useState(
+    data.length && data[recipeIndex].numLikes
+  );
+
+  const flatListRef = useRef();
+
+  useEffect(() => {
+    setLiked(data.length && data[recipeIndex].liked);
+    setNumLikes(data.length && data[recipeIndex].numLikes);
+  }, [
+    data.length ? data[recipeIndex].liked : null,
+    data.length ? data[recipeIndex].numLikes : null,
+  ]);
 
   const handleIndexChange = (i) => {
     setInitialYValue(0);
@@ -30,40 +61,71 @@ const RecipeScroll = (props) => {
     setInitialYValue(lastYValue);
   };
 
-  const flatListRef = useRef();
   const handleScrollTop = () => {
-    !toggleRecipe &&
-      !props.openComments &&
-      flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
+    flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
   };
+
+  const handleLikeRecipe = () => {
+    setLiked(true);
+    if (!data[recipeIndex].liked) {
+      setNumLikes(numLikes + 1);
+      likeRecipe(data[recipeIndex].id);
+    }
+  };
+
+  const handleUnlikeRecipe = () => {
+    setLiked(false);
+    setNumLikes(numLikes - 1);
+    unlikeRecipe(data[recipeIndex].id);
+  };
+
+  const handleToggleRecipe = () => setToggleRecipe(!toggleRecipe);
 
   const renderItem = ({ item }) => (
     <RecipeCard
       data={item}
-      handleSinglePress={() => setToggleRecipe(!toggleRecipe)}
-      toggleRecipe={toggleRecipe}
+      handleToggleRecipe={handleToggleRecipe}
+      handleLikeRecipe={handleLikeRecipe}
     />
   );
 
   return (
-    <View style={{ backgroundColor: "#000" }}>
+    <View style={{ backgroundColor: "#fff", flex: 1 }}>
       <FocusAwareStatusBar style="light" />
-      {!toggleRecipe && cloneElement(props.children, { handleScrollTop })}
+      {!toggleRecipe &&
+        cloneElement(children, { openComments, handleScrollTop })}
+      {!toggleRecipe && data[recipeIndex] && (
+        <Footer
+          numLikes={numLikes}
+          handleLikeRecipe={handleLikeRecipe}
+          handleUnlikeRecipe={handleUnlikeRecipe}
+          numComments={data[recipeIndex].numComments}
+          userImage={data[recipeIndex].user_image_url}
+          username={data[recipeIndex].username}
+          id={data[recipeIndex].created_by}
+          caption={data[recipeIndex].caption}
+          numViews={data[recipeIndex].numViews}
+          title={data[recipeIndex].title}
+          liked={liked}
+          handleToggleRecipe={handleToggleRecipe}
+          created_at={data[recipeIndex].created_at}
+        />
+      )}
 
       <FlatList
         ref={flatListRef}
-        data={props.data}
+        data={data}
         numColumns={1}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        onEndReached={props.handleLoadMore}
+        onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
         initialNumToRender={10}
         pagingEnabled
         showsVerticalScrollIndicator={false}
-        scrollEnabled={!props.openComments}
-        initialScrollIndex={props.initalScroll || 0}
-        scrollsToTop={!toggleRecipe && !props.openComments}
+        scrollEnabled={!openComments}
+        initialScrollIndex={initalScroll || 0}
+        scrollsToTop={!toggleRecipe && !openComments}
         onScrollToTop={() => handleIndexChange(0)}
         onMomentumScrollEnd={(event) => {
           handleIndexChange(
@@ -77,10 +139,13 @@ const RecipeScroll = (props) => {
           offset: screenHeight * index,
           index,
         })}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
       />
+
       {toggleRecipe && recipeIndex !== null && (
         <Recipe
-          data={props.data[recipeIndex]}
+          data={data[recipeIndex]}
           setToggleRecipe={setToggleRecipe}
           handleCloseRecipe={handleCloseRecipe}
           initialYValue={initialYValue}
@@ -88,10 +153,10 @@ const RecipeScroll = (props) => {
           setCardNum={setCardNum}
         />
       )}
-      {props.openComments && (
+      {openComments && (
         <Comments
-          comments={props.data[recipeIndex].comments}
-          recipeId={props.data[recipeIndex].id}
+          comments={data[recipeIndex].comments}
+          recipeId={data[recipeIndex].id}
         />
       )}
     </View>
@@ -102,4 +167,6 @@ const mapStateToProps = (state) => ({
   openComments: selectOpenComments(state),
 });
 
-export default connect(mapStateToProps)(RecipeScroll);
+export default connect(mapStateToProps, { likeRecipe, unlikeRecipe })(
+  RecipeScroll
+);

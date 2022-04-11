@@ -8,17 +8,20 @@ import {
   Pressable,
   Dimensions,
   Animated,
+  Easing,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import TextTicker from "react-native-text-ticker";
 import moment from "moment";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { parseNum } from "../utils";
 import { selectId } from "../../redux/reducers/userReducer";
+import { setOpenComments } from "../../redux/actions/recipe";
 
 const screenHeight = Dimensions.get("screen").height;
 
@@ -48,14 +51,20 @@ const Footer = (props) => {
       style={{
         transform: [{ translateY: yValue }],
         opacity: opacityInterpolate,
+        zIndex: 1,
       }}
+      pointerEvents={"box-none"}
     >
       <LinearGradient
+        pointerEvents={"none"}
         colors={["rgba(0,0,0,.9)", "rgba(50,50,50, 0)"]}
         start={[0, 1]}
         end={[0, 0.1]}
+        style={styles.gradient}
+      />
+      <View
         style={[
-          styles.gradientWrapper,
+          styles.footerBtnContainer,
           {
             height: fullCaption ? wp("90%") + captionHeight : wp("90%"),
             top: fullCaption
@@ -63,165 +72,165 @@ const Footer = (props) => {
               : screenHeight - wp("90%"),
           },
         ]}
+        pointerEvents={"box-none"}
       >
-        <View style={styles.footerBtnContainer}>
+        <Pressable
+          onPress={() => {
+            props.liked ? props.handleUnlikeRecipe() : props.handleLikeRecipe();
+          }}
+          style={styles.footerBtn}
+          hitSlop={{ top: 25, right: 20 }}
+        >
+          <Ionicons
+            name={props.liked ? "heart" : "heart-outline"}
+            size={wp("7%")}
+            color={props.liked ? "#FF0000" : "#FFF"}
+            style={styles.footerBtnIcon}
+          />
+          <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => props.setOpenComments(true)}
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1 },
+            styles.footerBtn,
+          ]}
+          hitSlop={{ right: 20 }}
+        >
+          <Ionicons
+            name="chatbox-outline"
+            size={wp("7%")}
+            color="#FFF"
+            style={styles.footerBtnIcon}
+          />
+          <Text style={styles.footerBtnText}>
+            {parseNum(props.numComments)}
+          </Text>
+        </Pressable>
+        <Pressable
+          onPress={() => props.handleToggleRecipe()}
+          style={({ pressed }) => [
+            styles.footerBtn,
+            {
+              opacity: pressed ? 0.5 : 1,
+              height: wp("12%"),
+            },
+          ]}
+          hitSlop={{ right: 20 }}
+        >
+          <Ionicons
+            name="list-outline"
+            size={wp("7%")}
+            color={"#FFF"}
+            style={styles.footerBtnIcon}
+          />
+        </Pressable>
+        <View style={styles.userContainer}>
           <Pressable
             onPress={() => {
-              props.liked
-                ? props.handleUnlikeRecipe()
-                : props.handleLikeRecipe();
+              props.id === props.userId
+                ? navigation.navigate("Profile")
+                : navigation.push("VisitProfile", { id: props.id });
             }}
-            style={styles.footerBtn}
-            hitSlop={{ top: 25, right: 20 }}
-          >
-            <Ionicons
-              name={props.liked ? "heart" : "heart-outline"}
-              size={wp("7%")}
-              color={props.liked ? "#FF0000" : "#FFF"}
-              style={styles.footerBtnIcon}
-            />
-            <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => props.setOpenComments(true)}
             style={({ pressed }) => [
               { opacity: pressed ? 0.5 : 1 },
-              styles.footerBtn,
+              styles.userWrapper,
             ]}
-            hitSlop={{ right: 20 }}
           >
-            <Ionicons
-              name="chatbox-outline"
-              size={wp("7%")}
-              color="#FFF"
-              style={styles.footerBtnIcon}
-            />
-            <Text style={styles.footerBtnText}>
-              {parseNum(props.numComments)}
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => props.handleSinglePress()}
-            style={({ pressed }) => [
-              styles.footerBtn,
-              {
-                opacity: pressed ? 0.5 : 1,
-                flex: 1.5,
-              },
-            ]}
-            hitSlop={{ right: 20 }}
-          >
-            <Ionicons
-              name="list-outline"
-              size={wp("7%")}
-              color={"#FFF"}
-              style={styles.footerBtnIcon}
-            />
-          </Pressable>
-          <View style={styles.userContainer}>
-            <Pressable
-              onPress={() => {
-                props.id === props.userId
-                  ? navigation.navigate("Profile")
-                  : navigation.push("VisitProfile", { id: props.id });
+            <View
+              style={{
+                alignItems: "center",
+                width: wp("15%"),
               }}
-              style={({ pressed }) => [
-                { opacity: pressed ? 0.5 : 1 },
-                styles.userWrapper,
-              ]}
             >
-              <View
-                style={{
-                  alignItems: "center",
-                  width: wp("15%"),
+              <Image
+                source={{ uri: props.userImage }}
+                style={styles.userIcon}
+              />
+            </View>
+            <Text style={styles.userInfoText}>{props.username}</Text>
+          </Pressable>
+          {!isFollowing && (
+            <>
+              <View style={[styles.followIcon]} />
+              <Pressable
+                style={styles.followBtn}
+                onPress={() => setIsFollowing(true)}
+                hitSlop={{
+                  left: wp("5.3%"),
+                  right: wp("5.5%"),
                 }}
               >
-                <Image
-                  source={{ uri: props.userImage }}
-                  style={styles.userIcon}
-                />
-              </View>
-              <Text style={styles.userInfoText}>{props.username}</Text>
-            </Pressable>
-            {!isFollowing && (
-              <>
-                <View style={[styles.followIcon]} />
-                <Pressable
-                  style={styles.followBtn}
-                  onPress={() => setIsFollowing(true)}
-                  hitSlop={{
-                    left: wp("5.3%"),
-                    right: wp("5.5%"),
-                  }}
-                >
-                  <Text style={styles.userInfoText}>Follow</Text>
-                </Pressable>
-              </>
-            )}
-          </View>
-          <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
-            {props.title}
-          </Text>
-          <Pressable
-            style={styles.captionBtn}
-            hitSlop={{ top: 32, bottom: 500, right: 500, left: 500 }}
-            onPress={() => setFullCaption(!fullCaption)}
-            onLayout={(event) => {
-              let { height } = event.nativeEvent.layout;
-              setCaptionHeight(height);
-            }}
-          >
-            <Text
-              style={styles.captionText}
-              numberOfLines={fullCaption ? 20 : 1}
-              ellipsizeMode="tail"
-            >
-              {props.caption}
-            </Text>
-          </Pressable>
-          <Text style={styles.timeAgo}>
-            {moment(props.created_at).fromNow()}
-          </Text>
-          <View style={styles.viewsContainer}>
-            <Ionicons
-              name="eye"
-              size={wp("5%")}
-              color="#FFF"
-              style={styles.viewsIcon}
-            />
-            <Text style={styles.viewsText}>52.1k</Text>
-          </View>
+                <Text style={styles.userInfoText}>Follow</Text>
+              </Pressable>
+            </>
+          )}
         </View>
-      </LinearGradient>
+
+        <TextTicker
+          style={styles.title}
+          duration={15000}
+          loop
+          bounce
+          repeatSpacer={50}
+          scroll={false}
+          marqueeDelay={750}
+          easing={Easing.linear}
+        >
+          {props.title}
+        </TextTicker>
+        <Pressable
+          style={styles.captionBtn}
+          hitSlop={{ top: 32, bottom: 500, right: 500, left: 500 }}
+          onPress={() => setFullCaption(!fullCaption)}
+          onLayout={(event) => {
+            let { height } = event.nativeEvent.layout;
+            setCaptionHeight(height);
+          }}
+        >
+          <Text
+            style={styles.captionText}
+            numberOfLines={fullCaption ? 20 : 1}
+            ellipsizeMode="tail"
+          >
+            {props.caption}
+          </Text>
+        </Pressable>
+        <Text style={styles.timeAgo}>{moment(props.created_at).fromNow()}</Text>
+        <View style={styles.viewsContainer}>
+          <Ionicons
+            name="eye"
+            size={wp("5%")}
+            color="#FFF"
+            style={styles.viewsIcon}
+          />
+          <Text style={styles.viewsText}>52.1k</Text>
+        </View>
+      </View>
     </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
-  gradientWrapper: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    flex: 1,
-    paddingTop: hp("2%"),
-    paddingBottom: hp("2.5%"),
-    height: wp("90%"),
-    top: screenHeight - wp("90%"),
-    width: "100%",
+  gradient: {
     position: "absolute",
+    height: wp("90%"),
+    width: "100%",
+    top: screenHeight - wp("90%"),
   },
   footerBtnContainer: {
-    height: "100%",
-    width: wp("100%"),
+    position: "absolute",
+    width: "100%",
     justifyContent: "flex-end",
     alignItems: "stretch",
+    paddingTop: hp("2%"),
+    paddingBottom: hp("2.5%"),
   },
   footerBtn: {
     justifyContent: "center",
     alignItems: "center",
-    height: wp("10%"),
+    height: wp("17%"),
     width: wp("15%"),
-    flex: 2,
   },
   footerBtnText: {
     color: "#FFF",
@@ -231,13 +240,13 @@ const styles = StyleSheet.create({
   footerBtnIcon: {
     width: wp("7%"),
     height: wp("7%"),
-    marginBottom: 4,
+    marginBottom: wp("1%"),
   },
   userContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    flex: 2,
+    height: wp("18%"),
   },
   userIcon: {
     width: wp("10%"),
@@ -272,24 +281,18 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: wp("5%"),
     fontFamily: "AvenirNextBold",
-    lineHeight: wp("5%"),
-    width: "100%",
     paddingLeft: wp("3.5%"),
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.8,
-    shadowRadius: 10,
-    flex: 1,
   },
+
   captionBtn: {
     paddingHorizontal: wp("4%"),
-    marginRight: 50,
+    marginRight: wp("15%"),
   },
   captionText: {
     color: "#FFF",
     fontFamily: "AvenirNextRegular",
     fontSize: wp("3.4%"),
-    lineHeight: wp("4%"),
+    lineHeight: wp("4.5%"),
   },
   timeAgo: {
     color: "#FFF",
@@ -303,7 +306,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     opacity: 0.3,
     right: wp("3.5%"),
-    bottom: 0,
+    bottom: hp("2.5%"),
     justifyContent: "center",
     alignItems: "center",
   },
@@ -321,4 +324,4 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   userId: selectId(state),
 });
-export default connect(mapStateToProps)(Footer);
+export default connect(mapStateToProps, { setOpenComments })(Footer);

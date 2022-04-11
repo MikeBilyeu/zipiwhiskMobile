@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getFeedRecipes } from "../../redux/actions/feed";
-import { selectRecipes } from "../../redux/reducers/feedReducer";
+import { getFeedRecipes, refreshFeedRecipes } from "../../redux/actions/feed";
+import {
+  selectRecipes,
+  selectIsRefreshing,
+} from "../../redux/reducers/feedReducer";
 import Header from "./Header";
 import RecipeScroll from "../RecipeScreen/RecipeScroll";
 
@@ -11,14 +14,24 @@ const HomeScreen = (props) => {
   }, []);
 
   return (
-    <RecipeScroll data={props.recipes} handleLoadMore={props.getFeedRecipes}>
-      <Header />
-    </RecipeScroll>
+    props.recipes && (
+      <RecipeScroll
+        data={props.recipes}
+        handleLoadMore={props.getFeedRecipes}
+        handleRefresh={props.refreshFeedRecipes}
+        refreshing={props.refreshing}
+      >
+        <Header />
+      </RecipeScroll>
+    )
   );
 };
 
 const mapStateToProps = (state) => ({
   recipes: selectRecipes(state),
+  refreshing: selectIsRefreshing(state),
 });
 
-export default connect(mapStateToProps, { getFeedRecipes })(HomeScreen);
+export default connect(mapStateToProps, { getFeedRecipes, refreshFeedRecipes })(
+  HomeScreen
+);

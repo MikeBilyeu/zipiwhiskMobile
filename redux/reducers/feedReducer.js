@@ -4,12 +4,31 @@ import {
   GET_FEED_RECIPES_FAILURE,
   LIKE_RECIPE_SUCCESS,
   UNLIKE_RECIPE_SUCCESS,
+  REFRESH_FEED_RECIPES_REQUEST,
+  REFRESH_FEED_RECIPES_SUCCESS,
+  REFRESH_FEED_RECIPES_FAILURE,
 } from "../constants";
 
-const initialState = { isLoading: false, recipes: [], offsetNum: 0 };
+const initialState = {
+  isLoading: false,
+  isRefreshing: false,
+  recipes: [],
+  offsetNum: 0,
+};
 
 const feedReducer = (state = initialState, action) => {
   switch (action.type) {
+    case REFRESH_FEED_RECIPES_REQUEST:
+      return {
+        ...state,
+        isRefreshing: true,
+      };
+    case REFRESH_FEED_RECIPES_SUCCESS:
+      return {
+        isRefreshing: false,
+        offsetNum: 1,
+        recipes: action.payload,
+      };
     case GET_FEED_RECIPES_REQUEST:
       return { ...state, isLoading: true };
     case GET_FEED_RECIPES_SUCCESS:
@@ -17,6 +36,7 @@ const feedReducer = (state = initialState, action) => {
         ...state,
         recipes: [...state.recipes, ...action.payload],
         isLoading: false,
+        isRefreshing: false,
         offsetNum: state.offsetNum + 1,
       };
     case LIKE_RECIPE_SUCCESS:
@@ -38,12 +58,13 @@ const feedReducer = (state = initialState, action) => {
         ),
       };
     case GET_FEED_RECIPES_FAILURE:
-      return state;
+    case REFRESH_FEED_RECIPES_FAILURE:
     default:
       return state;
   }
 };
 
 export const selectRecipes = (state) => state.feedRecipes.recipes;
+export const selectIsRefreshing = (state) => state.feedRecipes.isRefreshing;
 
 export default feedReducer;
