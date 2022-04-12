@@ -35,10 +35,10 @@ const Ingredients = (props) => {
 
 const styles = StyleSheet.create({
   servingsText: {
-    fontSize: wp("5%"),
+    fontSize: wp("4%"),
     fontFamily: "AvenirNextRegular",
     color: "#fff",
-    opacity: 0.5,
+    opacity: 1,
   },
   listContainer: {
     width: "100%",

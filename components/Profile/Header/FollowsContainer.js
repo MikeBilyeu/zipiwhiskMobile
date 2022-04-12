@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     height: hp("7%"),
-    paddingHorizontal: wp("4%"),
+    paddingHorizontal: wp("2%"),
   },
 });
 

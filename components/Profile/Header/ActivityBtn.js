@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     width: wp("15%"),
     height: wp("15%"),
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
 });
 

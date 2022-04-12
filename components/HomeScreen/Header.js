@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   headerBtn: {
-    width: wp("20%"),
+    width: wp("15%"),
     height: wp("15%"),
     justifyContent: "center",
     alignItems: "center",

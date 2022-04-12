@@ -32,24 +32,27 @@ const UserInfo = (props) => {
       <Pressable
         onPress={props.handleImagePress}
         style={({ pressed }) => [
-          { opacity: pressed ? 0.5 : 1 },
+          {
+            opacity: pressed ? 0.5 : 1,
+            marginRight: !props.children && wp("15%"),
+          },
           styles.userContainer,
         ]}
         hitSlop={25}
       >
         <Image
-          style={[
-            {
-              borderRadius: 50,
-              width: wp("9%"),
-              height: wp("9%"),
-            },
-          ]}
+          style={{
+            borderRadius: 50,
+            width: wp("10%"),
+            height: wp("10%"),
+          }}
           source={props.imageUrl ? { uri: props.imageUrl } : defaultImage}
         />
         <View style={styles.usernameWrapper}>
           <Text style={styles.usernameText}>{props.username}</Text>
-          <Text style={styles.fullNameText}>{props.fullname}</Text>
+          {props.fullname ? (
+            <Text style={styles.fullNameText}>{props.fullname}</Text>
+          ) : null}
         </View>
       </Pressable>
       {props.children}
@@ -63,31 +66,36 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: wp("5%"),
     paddingVertical: hp("1%"),
   },
   backBtn: {
-    height: wp("13%"),
-    width: wp("13%"),
-    alignItems: "flex-start",
+    height: wp("15%"),
+    width: wp("15%"),
+    alignItems: "center",
     justifyContent: "center",
   },
   userContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    height: wp("15%"),
+    flex: 1,
   },
   usernameWrapper: {
     justifyContent: "center",
     marginLeft: wp("2%"),
+    marginRight: wp("11%"),
   },
   usernameText: {
     textAlign: "center",
     fontSize: wp("5%"),
     fontFamily: "AvenirNextDemiBold",
     color: "#313131",
-    marginTop: wp("1%"),
-    marginBottom: 2,
+    marginBottom: wp(".5%"),
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   fullNameText: {
     textAlign: "center",

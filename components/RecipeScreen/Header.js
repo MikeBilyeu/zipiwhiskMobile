@@ -20,12 +20,14 @@ const Header = (props) => {
   };
 
   return (
-    <LinearGradient
-      colors={["rgba(30,30,30, 0)", "rgba(0,0,0,.75)"]}
-      start={[0, 1]}
-      end={[0, -1.5]}
-      style={styles.gradient}
-    >
+    <View style={styles.wrapper} pointerEvents={"box-none"}>
+      <LinearGradient
+        colors={["rgba(30,30,30, 0)", "rgba(0,0,0,.75)"]}
+        start={[0, 1]}
+        end={[0, -1.5]}
+        style={styles.gradient}
+        pointerEvents={"none"}
+      />
       <Pressable
         onPress={handleBackPress}
         hitSlop={{ bottom: 15, right: 15 }}
@@ -36,7 +38,12 @@ const Header = (props) => {
       >
         <Ionicons name="chevron-back" size={wp("6.5%")} color="#fff" />
       </Pressable>
-      <View style={styles.titleWrapper}>
+
+      <Pressable
+        style={styles.titleWrapper}
+        hitSlop={{ top: 15, bottom: 15 }}
+        onPress={!props.openComments && props.handleScrollTop}
+      >
         <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
           {props.title}
         </Text>
@@ -49,29 +56,34 @@ const Header = (props) => {
             {props.subTitle}
           </Text>
         )}
-      </View>
-    </LinearGradient>
+      </Pressable>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  gradient: {
+  wrapper: {
     position: "absolute",
-    zIndex: 1,
     width: "100%",
-    height: hp("20%"),
-    paddingTop: hp("4%"),
+    height: hp("13%"),
+    paddingTop: hp("5%"),
     flexDirection: "row",
     justifyContent: "center",
+    zIndex: 2,
+  },
+  gradient: {
+    position: "absolute",
+    width: "100%",
+    height: hp("20%"),
   },
   headerBtn: {
-    width: wp("20%"),
-    height: wp("15%"),
     justifyContent: "center",
+    alignItems: "flex-start",
+    marginTop: hp("1%"),
+    height: wp("15%"),
+    width: wp("15%"),
     alignItems: "center",
-    position: "absolute",
-    left: 0,
-    top: hp("5%"),
+    justifyContent: "center",
   },
   headerBtnIcon: {
     width: wp("4%"),
@@ -81,6 +93,8 @@ const styles = StyleSheet.create({
     height: wp("15%"),
     justifyContent: "center",
     marginTop: hp("1%"),
+    paddingRight: wp("15%"),
+    flex: 1,
   },
   titleText: {
     textAlign: "center",

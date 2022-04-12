@@ -52,7 +52,8 @@ const userProfileReducer = (state = initialState, action) => {
 };
 export const selectId = (state) => state.userProfile.id;
 export const selectEmail = (state) => state.userProfile.email;
-export const selectUsername = (state) => `@${state.userProfile.username}`;
+export const selectUsername = (state) =>
+  state.userProfile.username && `@${state.userProfile.username}`;
 export const selectFullname = (state) => state.userProfile.fullname;
 export const selectImageUrl = (state) => state.userProfile.image_url;
 export const selectNumFollowers = (state) => state.userProfile.num_followers;

@@ -32,10 +32,10 @@ module.exports = async (req, res) => {
       async (error, results, fields) => {
         if (error) throw error;
         if (!results) {
-          return res.status(401);
+          return res.status(401).end();
         }
         console.log(results[0]);
-        res.status(200).json(results[0]);
+        return res.status(200).json(results[0]);
       }
     );
   } catch (err) {

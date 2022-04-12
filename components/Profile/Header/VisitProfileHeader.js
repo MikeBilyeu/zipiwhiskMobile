@@ -23,14 +23,13 @@ import ToggleFollowBtn from "../../ToggleFollowBtn";
 const VisitProfileHeader = (props) => {
   return (
     <Header>
-      <View style={{ height: hp("15%"), width: "100%" }}>
+      <View style={{ height: hp("17%"), width: "100%" }}>
         <UserInfo
           username={props.username}
           fullname={props.fullname}
           imageUrl={props.imageUrl}
-        >
-          <View style={{ width: wp("15%") }} />
-        </UserInfo>
+        />
+
         <FollowContainer
           username={props.username}
           numFollowers={props.numFollowers}

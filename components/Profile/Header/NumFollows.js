@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   numWrapper: {
     justifyContent: "center",
     alignItems: "center",
-    height: "100%",
+    width: wp("20%"),
   },
   num: {
     fontFamily: "AvenirNextBold",
