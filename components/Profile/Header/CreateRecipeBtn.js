@@ -16,7 +16,7 @@ const CreateRecipeBtn = (props) => {
       onPress={() =>
         navigation.navigate(props.isMediaUrl ? "CreateRecipe" : "Camera")
       }
-      hitSlop={{ top: 10, right: 28, left: 28, bottom: 28 }}
+      hitSlop={{ top: 10, bottom: 10 }}
       style={({ pressed }) => [
         { opacity: pressed ? 0.5 : 1 },
         styles.createRecipeBtn,
@@ -24,7 +24,7 @@ const CreateRecipeBtn = (props) => {
     >
       <Ionicons
         name="create-outline"
-        size={wp("8%")}
+        size={wp("7%")}
         color="#313131"
         style={{ marginBottom: hp(".5%"), marginLeft: hp(".5%") }}
       />
@@ -34,9 +34,9 @@ const CreateRecipeBtn = (props) => {
 
 const styles = StyleSheet.create({
   createRecipeBtn: {
-    width: wp("12%"),
-    height: wp("12%"),
-    alignItems: "center",
+    width: wp("15%"),
+    height: wp("15%"),
+    alignItems: "flex-start",
     justifyContent: "center",
   },
 });

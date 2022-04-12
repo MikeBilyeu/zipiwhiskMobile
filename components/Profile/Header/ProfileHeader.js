@@ -34,15 +34,14 @@ const ProfileHeader = (props) => {
           imageUrl={props.imageUrl}
           handleImagePress={() => navigation.navigate("Settings")}
         >
+          <CreateRecipeBtn />
           <ActivityBtn />
         </UserInfo>
         <FollowContainer
           username={props.username}
           numFollowings={props.numFollowings}
           numFollowers={props.numFollowers}
-        >
-          <CreateRecipeBtn />
-        </FollowContainer>
+        ></FollowContainer>
         <CategorySwipe
           category={props.category}
           categoryChange={props.categoryChange}

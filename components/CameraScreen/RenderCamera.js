@@ -117,12 +117,12 @@ const RenderCamera = (props) => {
             <CamBtn
               onPress={handleFlipCamPress}
               styles={{ right: 0, top: 0 }}
-              icon="camera-reverse-outline"
+              icon="sync-outline"
             />
             <CamBtn
               onPress={pickImage}
               styles={{ left: 0, bottom: 0 }}
-              icon="library"
+              icon="images-outline"
             />
 
             {props.recipeForm.video_urls[0] && (

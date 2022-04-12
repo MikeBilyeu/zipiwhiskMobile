@@ -34,15 +34,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: wp("20%"),
+    height: wp("10%"),
   },
   num: {
     fontFamily: "AvenirNextBold",
-    fontSize: wp("3.8%"),
+    fontSize: wp("3%"),
     color: "#313131",
   },
   numText: {
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("3.5%"),
+    fontSize: wp("3%"),
     color: "#313131",
   },
 });

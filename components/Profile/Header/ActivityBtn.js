@@ -13,7 +13,7 @@ const ActivityBtn = () => {
     <Pressable
       onPress={() => navigation.navigate("Activity")}
       style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }, styles.btn]}
-      hitSlop={25}
+      hitSlop={{ top: 10, bottom: 10 }}
     >
       <Ionicons name="people-outline" size={wp("7%")} color="#000" />
     </Pressable>

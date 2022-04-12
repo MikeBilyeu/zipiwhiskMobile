@@ -34,14 +34,15 @@ const UserInfo = (props) => {
         style={({ pressed }) => [
           {
             opacity: pressed ? 0.5 : 1,
-            marginRight: !props.children && wp("15%"),
+            marginRight: !props.children && wp("31%"),
           },
           styles.userContainer,
         ]}
-        hitSlop={25}
+        hitSlop={{ top: 10, bottom: 10 }}
       >
         <Image
           style={{
+            marginLeft: wp("4%"),
             borderRadius: 50,
             width: wp("10%"),
             height: wp("10%"),
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
   usernameWrapper: {
     justifyContent: "center",
     marginLeft: wp("2%"),
-    marginRight: wp("11%"),
   },
   usernameText: {
     textAlign: "center",
