@@ -6,6 +6,10 @@ import Follow from "./Follow";
 import Post from "./Post";
 import Like from "./Like";
 import Mention from "./Mention";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import { data } from "./data";
 
@@ -29,6 +33,7 @@ function Activity() {
       <ActivityHeader />
       <FlatList
         style={styles.listContainer}
+        contentContainerStyle={{ paddingTop: hp("11%") }}
         data={data}
         numColumns={1}
         renderItem={renderItem}
@@ -45,9 +50,8 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    paddingTop: 50,
     position: "absolute",
-    top: 50,
+    top: hp("6%"),
     bottom: 0,
     left: 0,
     right: 0,

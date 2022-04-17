@@ -7,6 +7,7 @@ import {
   View,
   Text,
   Pressable,
+  StatusBar,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
@@ -38,6 +39,7 @@ const CreateRecipeScreen = (props) => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <SafeAreaView style={{ flex: 1 }} forceInset={{ top: "always" }}>
+        <StatusBar hidden={false} />
         <ScreenHeader
           title="Create Recipe"
           subTitle="Recipe Info"
@@ -168,7 +170,7 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     position: "absolute",
-    top: hp("5%"),
+    top: hp("6%"),
     bottom: 0,
     left: 0,
     right: 0,

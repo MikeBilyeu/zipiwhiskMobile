@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     position: "absolute",
-    top: hp("5%"),
+    top: hp("6%"),
     bottom: 0,
     left: 0,
     right: 0,
