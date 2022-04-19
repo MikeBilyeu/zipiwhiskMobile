@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   btnSelected: {
-    backgroundColor: "#01C481",
+    backgroundColor: "#00D088",
   },
   btnText: {
     fontSize: wp("4.2%"),

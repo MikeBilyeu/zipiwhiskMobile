@@ -22,8 +22,10 @@ module.exports = async (req, res) => {
       u.image_url user_image_url,
       u.username,
       (SELECT COUNT(*) FROM comments WHERE recipe_id = r.id) numComments,
-      (SELECT COUNT(*) FROM users_saves WHERE recipe_id = r.id) numLikes,
-      (SELECT COUNT(*) > 0 FROM users_saves WHERE recipe_id = r.id AND user_id = ?) liked,
+      (SELECT COUNT(*) FROM users_likes WHERE recipe_id = r.id) numLikes,
+      (SELECT COUNT(*) > 0 FROM users_likes WHERE recipe_id = r.id AND user_id = ?) liked,
+      (SELECT COUNT(*) FROM users_saves WHERE recipe_id = r.id) numSaves,
+      (SELECT COUNT(*) > 0 FROM users_saves WHERE recipe_id = r.id AND user_id = ?) saved,
       (SELECT created_at FROM users_saves WHERE recipe_id = r.id AND user_id = ?) saved_at
       FROM recipes r
       INNER JOIN users_recipes ur ON ur.recipe_id = r.id
@@ -49,6 +51,7 @@ module.exports = async (req, res) => {
       ELSE saved_at END DESC
       LIMIT 18`,
       [
+        req.user.id,
         req.user.id,
         user_id,
         category,

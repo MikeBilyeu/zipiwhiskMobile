@@ -20,8 +20,10 @@ module.exports = async (req, res) => {
       u.image_url user_image_url,
       u.username,
       (SELECT COUNT(*) FROM comments WHERE recipe_id = r.id) numComments,
-      (SELECT COUNT(*) FROM users_saves WHERE recipe_id = r.id) numLikes,
-      (SELECT COUNT(*) > 0 FROM users_saves WHERE recipe_id = r.id AND user_id = ?) liked
+      (SELECT COUNT(*) FROM users_likes WHERE recipe_id = r.id) numLikes,
+      (SELECT COUNT(*) > 0 FROM users_likes WHERE recipe_id = r.id AND user_id = ?) liked,
+      (SELECT COUNT(*) FROM users_saves WHERE recipe_id = r.id) numSaves,
+      (SELECT COUNT(*) > 0 FROM users_saves WHERE recipe_id = r.id AND user_id = ?) saved
       FROM recipes r
       INNER JOIN users_recipes ur ON ur.recipe_id = r.id
       INNER JOIN users u ON u.id = ur.user_id
@@ -29,7 +31,7 @@ module.exports = async (req, res) => {
       LIMIT 10
       OFFSET ?;
 `,
-      [user_id, offset],
+      [user_id, user_id, offset],
       (err, results) => {
         if (err) throw err;
         if (!results.length) return res.status(200).json(results);

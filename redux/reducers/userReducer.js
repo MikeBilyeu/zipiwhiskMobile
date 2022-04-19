@@ -2,9 +2,9 @@ import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
-  GET_USER_RECIPES_REQUEST,
-  GET_USER_RECIPES_SUCCESS,
-  GET_USER_RECIPES_FAILURE,
+  GET_USER_SAVED_RECIPES_REQUEST,
+  GET_USER_SAVED_RECIPES_SUCCESS,
+  GET_USER_SAVED_RECIPES_FAILURE,
   PROFILE_CATEGORY_CHANGE,
 } from "../constants";
 
@@ -19,7 +19,8 @@ const initialState = {
   restriction: null,
   num_followers: "",
   num_followings: "",
-  recipeData: { isLoading: false, category: "", recipes: [] },
+  savedRecipeData: { isLoading: false, category: "", recipes: [] },
+  likedRecipeData: { isLoading: false, category: "", recipes: [] },
 };
 
 const userReducer = (state = initialState, action) => {
@@ -30,29 +31,29 @@ const userReducer = (state = initialState, action) => {
       return { ...state, ...action.payload, isLoading: false };
     case GET_USER_FAILURE:
       return initialState;
-    case GET_USER_RECIPES_REQUEST:
+    case GET_USER_SAVED_RECIPES_REQUEST:
       return {
         ...state,
-        recipeData: { ...state.recipeData, isLoading: true },
+        savedRecipeData: { ...state.savedRecipeData, isLoading: true },
       };
-    case GET_USER_RECIPES_SUCCESS:
+    case GET_USER_SAVED_RECIPES_SUCCESS:
       return {
         ...state,
-        recipeData: {
-          ...state.recipeData,
+        savedRecipeData: {
+          ...state.savedRecipeData,
           recipes: action.payload,
           isLoading: false,
         },
       };
-    case GET_USER_RECIPES_FAILURE:
+    case GET_USER_SAVED_RECIPES_FAILURE:
       return {
         ...state,
-        recipeData: { isLoading: false, category: "", recipes: [] },
+        savedRecipeData: { isLoading: false, category: "", recipes: [] },
       };
     case PROFILE_CATEGORY_CHANGE:
       return {
         ...state,
-        recipeData: { ...state.recipeData, category: action.payload },
+        savedRecipeData: { ...state.savedRecipeData, category: action.payload },
       };
     default:
       return state;
@@ -68,7 +69,7 @@ export const selectImageUrl = (state) => state.user.image_url;
 export const selectNumFollowers = (state) => state.user.num_followers;
 export const selectNumFollowings = (state) => state.user.num_followings;
 export const selectRecipeDataIsLoading = (state) =>
-  state.user.recipeData.isLoading;
-export const selectCategory = (state) => state.user.recipeData.category;
-export const selectRecipes = (state) => state.user.recipeData.recipes;
+  state.user.savedRecipeData.isLoading;
+export const selectCategory = (state) => state.user.savedRecipeData.category;
+export const selectRecipes = (state) => state.user.savedRecipeData.recipes;
 export default userReducer;

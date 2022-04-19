@@ -5,14 +5,18 @@ import { FlatList, Dimensions, View } from "react-native";
 
 import { selectOpenComments } from "../../redux/reducers/recipeReducer";
 
-import { likeRecipe, unlikeRecipe } from "../../redux/actions/recipe";
+import {
+  likeRecipe,
+  unlikeRecipe,
+  saveRecipe,
+  unsaveRecipe,
+} from "../../redux/actions/recipe";
 
 import FocusAwareStatusBar from "../FocusAwareStatusBar";
 import RecipeCard from "./RecipeCard";
 import Recipe from "./Recipe";
 import Comments from "./Comments";
 import Footer from "./Footer";
-import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
 const screenHeight = Dimensions.get("screen").height;
 
@@ -22,6 +26,8 @@ const RecipeScroll = ({
   openComments,
   unlikeRecipe,
   likeRecipe,
+  saveRecipe,
+  unsaveRecipe,
   children,
   handleLoadMore,
   refreshing,
@@ -40,6 +46,14 @@ const RecipeScroll = ({
     data.length && data[recipeIndex].numLikes
   );
 
+  const [saved, setSaved] = useState(
+    data.length && data[recipeIndex].saved == 0 ? false : true
+  );
+
+  const [numSaves, setNumSaves] = useState(
+    data.length && data[recipeIndex].numSaves
+  );
+
   const flatListRef = useRef();
 
   useEffect(() => {
@@ -48,6 +62,14 @@ const RecipeScroll = ({
   }, [
     data.length ? data[recipeIndex].liked : null,
     data.length ? data[recipeIndex].numLikes : null,
+  ]);
+
+  useEffect(() => {
+    setSaved(data.length && data[recipeIndex].saved);
+    setNumSaves(data.length && data[recipeIndex].numSaves);
+  }, [
+    data.length ? data[recipeIndex].saved : null,
+    data.length ? data[recipeIndex].numSaves : null,
   ]);
 
   const handleIndexChange = (i) => {
@@ -79,6 +101,20 @@ const RecipeScroll = ({
     unlikeRecipe(data[recipeIndex].id);
   };
 
+  const handleSaveRecipe = () => {
+    setSaved(true);
+    if (!data[recipeIndex].saved) {
+      setNumSaves(numSaves + 1);
+      saveRecipe(data[recipeIndex].id);
+    }
+  };
+
+  const handleUnsaveRecipe = () => {
+    setSaved(false);
+    setNumSaves(numSaves - 1);
+    unsaveRecipe(data[recipeIndex].id);
+  };
+
   const handleToggleRecipe = () => setToggleRecipe(!toggleRecipe);
 
   const renderItem = ({ item }) => (
@@ -96,9 +132,14 @@ const RecipeScroll = ({
         cloneElement(children, { openComments, handleScrollTop })}
       {!toggleRecipe && data[recipeIndex] && (
         <Footer
+          liked={liked}
           numLikes={numLikes}
+          saved={saved}
+          numSaves={numSaves}
           handleLikeRecipe={handleLikeRecipe}
           handleUnlikeRecipe={handleUnlikeRecipe}
+          handleSaveRecipe={handleSaveRecipe}
+          handleUnsaveRecipe={handleUnsaveRecipe}
           numComments={data[recipeIndex].numComments}
           userImage={data[recipeIndex].user_image_url}
           username={data[recipeIndex].username}
@@ -106,7 +147,6 @@ const RecipeScroll = ({
           caption={data[recipeIndex].caption}
           numViews={data[recipeIndex].numViews}
           title={data[recipeIndex].title}
-          liked={liked}
           handleToggleRecipe={handleToggleRecipe}
           created_at={data[recipeIndex].created_at}
         />
@@ -167,6 +207,9 @@ const mapStateToProps = (state) => ({
   openComments: selectOpenComments(state),
 });
 
-export default connect(mapStateToProps, { likeRecipe, unlikeRecipe })(
-  RecipeScroll
-);
+export default connect(mapStateToProps, {
+  likeRecipe,
+  unlikeRecipe,
+  saveRecipe,
+  unsaveRecipe,
+})(RecipeScroll);

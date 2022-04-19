@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
 
   try {
     pool.query(
-      "DELETE FROM users_likes WHERE user_id = ? AND recipe_id = ?",
+      "INSERT INTO users_saves (user_id, recipe_id) VALUES (?, ?)",
       [user_id, recipe_id],
       (err, results) => {
         if (err) throw err;

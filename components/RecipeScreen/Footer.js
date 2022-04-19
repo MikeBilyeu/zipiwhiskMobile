@@ -108,7 +108,9 @@ const Footer = (props) => {
           </Text>
         </Pressable>
         <Pressable
-          onPress={() => props.handleToggleRecipe()}
+          onPress={() => {
+            props.saved ? props.handleUnsaveRecipe() : props.handleSaveRecipe();
+          }}
           style={({ pressed }) => [
             styles.footerBtn,
             {
@@ -119,11 +121,12 @@ const Footer = (props) => {
           hitSlop={{ right: 20 }}
         >
           <Ionicons
-            name="list-outline"
+            name={!props.saved ? "bookmark-outline" : "bookmark"}
             size={wp("7%")}
             color={"#FFF"}
             style={styles.footerBtnIcon}
           />
+          <Text style={styles.footerBtnText}>{parseNum(props.numSaves)}</Text>
         </Pressable>
         <View style={styles.userContainer}>
           <Pressable
@@ -271,7 +274,7 @@ const styles = StyleSheet.create({
     height: wp("1.8%"),
     borderRadius: 100,
     marginRight: wp("3.5%"),
-    backgroundColor: "#01C481",
+    backgroundColor: "#00D088",
   },
   followBtn: {
     height: "100%",

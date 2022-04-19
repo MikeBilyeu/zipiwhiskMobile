@@ -71,6 +71,17 @@ CREATE TABLE users_saves (
     PRIMARY KEY(user_id, recipe_id)
 );
 
+CREATE TABLE users_likes (
+    user_id INT NOT NULL,
+    recipe_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (user_id) 
+        REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (recipe_id) 
+        REFERENCES recipes(id) ON DELETE CASCADE,
+    PRIMARY KEY(user_id, recipe_id)
+);
+
 CREATE TABLE recipes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     media_url VARCHAR(255) NOT NULL,

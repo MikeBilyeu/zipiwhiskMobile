@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
 
   try {
     pool.query(
-      "DELETE FROM users_likes WHERE user_id = ? AND recipe_id = ?",
+      "DELETE FROM users_saves WHERE user_id = ? AND recipe_id = ?",
       [user_id, recipe_id],
       (err, results) => {
         if (err) throw err;

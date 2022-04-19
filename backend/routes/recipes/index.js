@@ -28,6 +28,18 @@ router.delete(
   require("./unlikeRecipe")
 );
 
+router.post(
+  "/save",
+  passport.authenticate("jwt", { session: false }),
+  require("./saveRecipe")
+);
+
+router.delete(
+  "/save",
+  passport.authenticate("jwt", { session: false }),
+  require("./unsaveRecipe")
+);
+
 router.get(
   "/recipe",
   passport.authenticate("jwt", { session: false }),

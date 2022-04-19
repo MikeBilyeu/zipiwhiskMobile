@@ -4,6 +4,8 @@ import {
   GET_FEED_RECIPES_FAILURE,
   LIKE_RECIPE_SUCCESS,
   UNLIKE_RECIPE_SUCCESS,
+  SAVE_RECIPE_SUCCESS,
+  UNSAVE_RECIPE_SUCCESS,
   REFRESH_FEED_RECIPES_REQUEST,
   REFRESH_FEED_RECIPES_SUCCESS,
   REFRESH_FEED_RECIPES_FAILURE,
@@ -54,6 +56,25 @@ const feedReducer = (state = initialState, action) => {
         recipes: state.recipes.map((r) =>
           r.id === action.payload
             ? { ...r, liked: 0, numLikes: r.numLikes - 1 }
+            : r
+        ),
+      };
+
+    case SAVE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        recipes: state.recipes.map((r) =>
+          r.id === action.payload
+            ? { ...r, saved: 1, numSaves: r.numSaves + 1 }
+            : r
+        ),
+      };
+    case UNSAVE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        recipes: state.recipes.map((r) =>
+          r.id === action.payload
+            ? { ...r, saved: 0, numSaves: r.numSaves - 1 }
             : r
         ),
       };
