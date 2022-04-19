@@ -83,9 +83,8 @@ const Footer = (props) => {
         >
           <Ionicons
             name={props.liked ? "heart" : "heart-outline"}
-            size={wp("7%")}
+            size={wp("8%")}
             color={props.liked ? "#FF0000" : "#FFF"}
-            style={styles.footerBtnIcon}
           />
           <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
         </Pressable>
@@ -97,12 +96,7 @@ const Footer = (props) => {
           ]}
           hitSlop={{ right: 20 }}
         >
-          <Ionicons
-            name="chatbox-outline"
-            size={wp("7%")}
-            color="#FFF"
-            style={styles.footerBtnIcon}
-          />
+          <Ionicons name="chatbox-outline" size={wp("8%")} color="#FFF" />
           <Text style={styles.footerBtnText}>
             {parseNum(props.numComments)}
           </Text>
@@ -111,20 +105,13 @@ const Footer = (props) => {
           onPress={() => {
             props.saved ? props.handleUnsaveRecipe() : props.handleSaveRecipe();
           }}
-          style={({ pressed }) => [
-            styles.footerBtn,
-            {
-              opacity: pressed ? 0.5 : 1,
-              height: wp("12%"),
-            },
-          ]}
+          style={styles.footerBtn}
           hitSlop={{ right: 20 }}
         >
           <Ionicons
             name={!props.saved ? "bookmark-outline" : "bookmark"}
-            size={wp("7%")}
+            size={wp("8%")}
             color={"#FFF"}
-            style={styles.footerBtnIcon}
           />
           <Text style={styles.footerBtnText}>{parseNum(props.numSaves)}</Text>
         </Pressable>
@@ -240,16 +227,11 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextRegular",
     fontSize: wp("3.4%"),
   },
-  footerBtnIcon: {
-    width: wp("7%"),
-    height: wp("7%"),
-    marginBottom: wp("1%"),
-  },
   userContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    height: wp("18%"),
+    height: wp("17%"),
   },
   userIcon: {
     width: wp("10%"),
