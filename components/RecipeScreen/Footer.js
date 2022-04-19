@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
   },
   timeAgo: {
     color: "#FFF",
-    opacity: 0.3,
+    opacity: 0.2,
     fontFamily: "AvenirNextRegular",
     fontSize: wp("3.4%"),
     textAlign: "center",
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
   },
   viewsContainer: {
     position: "absolute",
-    opacity: 0.3,
+    opacity: 0.2,
     right: wp("3.5%"),
     bottom: hp("2.5%"),
     justifyContent: "center",
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
   viewsIcon: {
     width: wp("5%"),
     height: wp("5%"),
-    marginBottom: 2,
+    marginBottom: wp(".5%"),
   },
   viewsText: {
     color: "#FFF",
