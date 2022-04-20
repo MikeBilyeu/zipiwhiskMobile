@@ -60,9 +60,7 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
       </View>
 
       <View style={styles.commentInfoContainer}>
-        <Text style={[styles.infoText, { color: "rgba(255,255,255, .3)" }]}>
-          {moment(c.created_at).fromNow()}
-        </Text>
+        <Text style={[styles.infoText]}>{moment(c.created_at).fromNow()}</Text>
 
         <Pressable
           onPress={handleLikePress}
@@ -76,7 +74,7 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
           <Ionicons
             name="heart"
             size={wp("3%")}
-            color={liked ? "#FF2121" : "#464646"}
+            color={liked ? "#FF2121" : "rgba(255,255,255,.2)"}
             style={{
               width: wp("3%"),
               height: wp("4%"),
@@ -91,6 +89,8 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
         </Pressable>
 
         <Pressable
+          style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }]}
+          hitSlop={10}
           onPress={() => {
             setParentCommentId(c.id);
             setInputFocused(true);
@@ -108,12 +108,12 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
 
 const styles = StyleSheet.create({
   userCommentContainer: {
-    paddingVertical: hp("2.5%"),
+    marginTop: wp("2.5%"),
   },
   userCommentContainerChild: {
-    marginLeft: wp("15%"),
-    marginTop: wp("1%"),
-    marginBottom: 0,
+    marginTop: 0,
+    marginLeft: wp("18%"),
+    marginVertical: 0,
   },
   userImage: {
     height: wp("8%"),
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   },
   commentWrapperText: {
     flexDirection: "row",
-    marginTop: hp("1%"),
+    marginTop: wp("4%"),
     flex: 1,
   },
   commentText: {
@@ -141,12 +141,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: hp("1%"),
+    marginTop: wp("1%"),
   },
   infoText: {
     fontSize: wp("3%"),
     fontFamily: "AvenirNextRegular",
     color: "#fff",
+    opacity: 0.2,
   },
 });
 

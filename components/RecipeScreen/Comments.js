@@ -79,6 +79,7 @@ const Comments = (props) => {
             keyExtractor={(item) => item.id.toString()}
             bounces={true}
             contentContainerStyle={styles.list}
+            indicatorStyle="white"
           />
         ) : (
           <Text style={styles.noCommentText}>No comments yet.</Text>
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
   wrapper: {
     paddingTop: hp("2.5%"),
     paddingBottom: hp("12%"),
-    backgroundColor: "rgba(0,0,0,1)",
+    backgroundColor: "rgba(10,10,10,1)",
     borderTopLeftRadius: wp("5%"),
     borderTopRightRadius: wp("5%"),
     position: "absolute",
@@ -116,10 +117,10 @@ const styles = StyleSheet.create({
     fontFamily: "AvenirNextDemiBold",
     fontSize: wp("3.5%"),
     color: "#fff",
-    marginBottom: hp("2%"),
+    marginBottom: wp("5%"),
   },
   list: {
-    paddingHorizontal: wp("2%"),
+    paddingHorizontal: wp("2.5%"),
   },
   noCommentText: {
     color: "rgba(200,200,200,.3)",
