@@ -72,7 +72,7 @@ const Comments = (props) => {
         style={[styles.wrapper, { transform: [{ translateY: yValue }] }]}
       >
         <Text style={styles.title}>Comments</Text>
-        {props.comments.length ? (
+        {props.comments?.length ? (
           <FlatList
             data={props.comments}
             renderItem={renderComment}
@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
     paddingTop: hp("2.5%"),
     paddingBottom: hp("12%"),
     backgroundColor: "rgba(10,10,10,1)",
-    borderTopLeftRadius: wp("5%"),
-    borderTopRightRadius: wp("5%"),
+    borderTopLeftRadius: wp("3%"),
+    borderTopRightRadius: wp("3%"),
     position: "absolute",
     bottom: 0,
     width: "100%",
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: wp("5%"),
   },
   list: {
-    paddingHorizontal: wp("2.5%"),
+    paddingHorizontal: wp("5%"),
   },
   noCommentText: {
     color: "rgba(200,200,200,.3)",

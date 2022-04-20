@@ -41,19 +41,21 @@ module.exports = async (req, res) => {
         for (const [i, r] of results.entries()) {
           pool.query(
             `SELECT
-            c.*,
+            root.*,
             u.username, 
             u.image_url,
-            COUNT(l.user_id) > 0 AS liked,
-            COUNT(cl.comment_id) AS numLikes
-            FROM comments c
+            COUNT(cl.comment_id) AS numLikes,
+            (SELECT COUNT(*) 
+              FROM comments child 
+              WHERE child.recipe_id = root.recipe_id
+              AND child.parent_comment_id = root.id) numReplies
+            FROM comments root
             LEFT JOIN comments_likes l ON l.user_id = ?
-            LEFT JOIN comments_likes cl ON cl.comment_id = c.id
-            INNER JOIN users u ON u.id = c.user_id
-            WHERE recipe_id = ?
-            GROUP BY c.id
-            ORDER BY c.created_at DESC
-            LIMIT 15`,
+            LEFT JOIN comments_likes cl ON cl.comment_id = root.id
+            INNER JOIN users u ON u.id = root.user_id
+            WHERE recipe_id = ? 
+            GROUP BY root.id
+            ORDER BY numLikes DESC, root.created_at DESC`,
             [user_id, r.id],
             (err, results) => {
               if (err) throw err;

@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TouchableWithoutFeedback,
-  Pressable,
-} from "react-native";
+import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   widthPercentageToDP as wp,
@@ -40,53 +33,45 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
       ]}
     >
       <View style={styles.commentWrapper}>
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate("VisitProfile")}
-        >
+        <Pressable onPress={() => navigation.navigate("VisitProfile")}>
           <Image style={styles.userImage} source={{ uri: c.image_url }} />
-        </TouchableWithoutFeedback>
+        </Pressable>
 
-        <View style={[styles.commentWrapperText]}>
-          <Text style={styles.commentText}>
-            <Text
-              style={[styles.commentText, { fontFamily: "AvenirNextDemiBold" }]}
-              onPress={() => navigation.navigate("VisitProfile")}
-            >
-              {c.username + "  "}
-            </Text>
-            {c.comment}
-          </Text>
-          <Pressable
-            onPress={handleLikePress}
-            style={{
-              position: "absolute",
-              right: 0,
-              flexDirection: "row",
-              width: wp("15%"),
-              justifyContent: "flex-end",
-            }}
-            hitSlop={10}
+        <Text style={styles.commentText}>
+          <Text
+            style={[styles.commentText, { fontFamily: "AvenirNextDemiBold" }]}
+            onPress={() => navigation.navigate("VisitProfile")}
           >
-            {numLikes > 0 && (
-              <Text style={styles.infoText}>
-                {numLikes} Like{numLikes > 1 ? "s" : ""}
-              </Text>
-            )}
-            <Ionicons
-              name="heart"
-              size={wp("3%")}
-              color={liked ? "#FF2121" : "rgba(255,255,255,.2)"}
-              style={{
-                width: wp("3%"),
-                marginLeft: wp("1%"),
-              }}
-            />
-          </Pressable>
-        </View>
+            {c.username + "  "}
+          </Text>
+          {c.comment}
+        </Text>
+
+        <Pressable
+          onPress={handleLikePress}
+          style={{
+            alignSelf: "center",
+          }}
+          hitSlop={20}
+        >
+          <Ionicons
+            name="heart"
+            size={wp("3%")}
+            color={liked ? "#FF2121" : "rgba(255,255,255,.2)"}
+          />
+        </Pressable>
       </View>
 
       <View style={styles.commentInfoContainer}>
-        <Text style={styles.infoText}>{moment(c.created_at).fromNow()}</Text>
+        <Text style={[styles.infoText, { position: "absolute", left: 0 }]}>
+          {moment(c.created_at).fromNow()}
+        </Text>
+
+        {numLikes > 0 && (
+          <Text style={styles.infoText}>
+            {numLikes} Like{numLikes > 1 ? "s" : ""}
+          </Text>
+        )}
 
         {/* <Pressable
           style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }]}
@@ -107,39 +92,41 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
 };
 
 const styles = StyleSheet.create({
-  userCommentContainer: {},
+  userCommentContainer: {
+    paddingTop: wp("4%"),
+  },
   userCommentContainerChild: {
     marginTop: 0,
     marginLeft: wp("18%"),
     marginVertical: 0,
   },
-  userImage: {
-    height: wp("8%"),
-    width: wp("8%"),
-    margin: wp("2%"),
-    marginLeft: 0,
-    resizeMode: "stretch",
-    borderRadius: 100,
-  },
   commentWrapper: {
     flexDirection: "row",
   },
-  commentWrapperText: {
-    flexDirection: "row",
-    marginTop: wp("4%"),
-    flex: 1,
+  userImage: {
+    height: wp("8%"),
+    width: wp("8%"),
+    resizeMode: "stretch",
+    borderRadius: 100,
+    position: "absolute",
   },
   commentText: {
     color: "#FFF",
     fontFamily: "AvenirNextRegular",
     fontSize: wp("3.4%"),
     lineHeight: wp("4%"),
+    paddingRight: wp("5%"),
+    marginLeft: wp("10%"),
+    paddingTop: wp(".5%"),
+    flex: 1,
   },
   commentInfoContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
-    marginTop: wp("1%"),
+    marginLeft: wp("10%"),
+    marginTop: wp("1.5%"),
+    height: wp("3%"),
   },
   infoText: {
     fontSize: wp("3%"),
