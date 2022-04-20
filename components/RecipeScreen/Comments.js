@@ -65,7 +65,7 @@ const Comments = (props) => {
   ).current;
 
   const panHandlers = panResponder.panHandlers;
-
+  console.log(props.comments);
   return (
     <View style={styles.outer} {...panHandlers}>
       <Animated.View

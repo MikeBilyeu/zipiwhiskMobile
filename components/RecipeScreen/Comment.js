@@ -56,39 +56,39 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
             </Text>
             {c.comment}
           </Text>
+          <Pressable
+            onPress={handleLikePress}
+            style={{
+              position: "absolute",
+              right: 0,
+              flexDirection: "row",
+              width: wp("15%"),
+              justifyContent: "flex-end",
+            }}
+            hitSlop={10}
+          >
+            {numLikes > 0 && (
+              <Text style={styles.infoText}>
+                {numLikes} Like{numLikes > 1 ? "s" : ""}
+              </Text>
+            )}
+            <Ionicons
+              name="heart"
+              size={wp("3%")}
+              color={liked ? "#FF2121" : "rgba(255,255,255,.2)"}
+              style={{
+                width: wp("3%"),
+                marginLeft: wp("1%"),
+              }}
+            />
+          </Pressable>
         </View>
       </View>
 
       <View style={styles.commentInfoContainer}>
-        <Text style={[styles.infoText]}>{moment(c.created_at).fromNow()}</Text>
+        <Text style={styles.infoText}>{moment(c.created_at).fromNow()}</Text>
 
-        <Pressable
-          onPress={handleLikePress}
-          style={{
-            flexDirection: "row",
-            width: wp("25%"),
-            alignItems: "center",
-          }}
-          hitSlop={10}
-        >
-          <Ionicons
-            name="heart"
-            size={wp("3%")}
-            color={liked ? "#FF2121" : "rgba(255,255,255,.2)"}
-            style={{
-              width: wp("3%"),
-              height: wp("4%"),
-              marginRight: wp("1%"),
-            }}
-          />
-          {numLikes > 0 && (
-            <Text style={styles.infoText}>
-              {numLikes} Like{numLikes > 1 ? "s" : ""}
-            </Text>
-          )}
-        </Pressable>
-
-        <Pressable
+        {/* <Pressable
           style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }]}
           hitSlop={10}
           onPress={() => {
@@ -97,7 +97,7 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
           }}
         >
           <Text style={styles.infoText}>Reply</Text>
-        </Pressable>
+        </Pressable> */}
       </View>
       {c.childComments &&
         !c.parent_comment_id &&
@@ -107,9 +107,7 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
 };
 
 const styles = StyleSheet.create({
-  userCommentContainer: {
-    marginTop: wp("2.5%"),
-  },
+  userCommentContainer: {},
   userCommentContainerChild: {
     marginTop: 0,
     marginLeft: wp("18%"),

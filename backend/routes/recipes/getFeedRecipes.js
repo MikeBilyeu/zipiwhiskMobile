@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
             INNER JOIN users u ON u.id = c.user_id
             WHERE recipe_id = ?
             GROUP BY c.id
-            ORDER BY numLikes DESC
+            ORDER BY c.created_at DESC
             LIMIT 15`,
             [user_id, r.id],
             (err, results) => {
