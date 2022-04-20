@@ -162,6 +162,7 @@ const RecipeScroll = ({
         onEndReachedThreshold={0.5}
         initialNumToRender={10}
         pagingEnabled
+        scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
         scrollEnabled={!openComments}
         initialScrollIndex={initalScroll || 0}

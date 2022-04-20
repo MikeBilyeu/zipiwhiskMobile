@@ -59,7 +59,7 @@ const Instructions = (props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         pagingEnabled
-        scrollEventThrottle={250}
+        scrollEventThrottle={16}
         onScroll={(event) => {
           props.setCardNum(
             Math.round(
