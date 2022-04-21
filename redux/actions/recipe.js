@@ -2,6 +2,9 @@ import {
   SET_OPEN_COMMENTS,
   INPUT_FOCUSED,
   SET_PARENT_COMMENT_ID,
+  GET_COMMENTS_REQUEST,
+  GET_COMMENTS_SUCCESS,
+  GET_COMMENTS_FAILURE,
   POST_COMMENT_REQUEST,
   POST_COMMENT_SUCCESS,
   POST_COMMENT_FAILURE,
@@ -30,11 +33,23 @@ export const setOpenComments = (value) => ({
   payload: value,
 });
 
+export const getComments = (recipeId) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_COMMENTS_REQUEST });
+    const { data } = await axios.get("api/recipes/comments", {
+      params: { recipe_id: recipeId },
+    });
+    dispatch({ type: GET_COMMENTS_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: GET_COMMENTS_FAILURE });
+  }
+};
+
 export const postComment =
   (recipeId, comment, parentCommentId) => async (dispatch) => {
     try {
       dispatch({ type: POST_COMMENT_REQUEST });
-      await axios.post("api/recipes/comment", {
+      await axios.post("api/recipes/comments", {
         recipeId,
         comment,
         parentCommentId,

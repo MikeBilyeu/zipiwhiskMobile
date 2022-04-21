@@ -7,6 +7,7 @@ import {
   Text,
   Animated,
   View,
+  ActivityIndicator,
 } from "react-native";
 
 import {
@@ -14,10 +15,14 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import { setOpenComments } from "../../redux/actions/recipe";
+import { setOpenComments, getComments } from "../../redux/actions/recipe";
 
 import Input from "./Input";
 import Comment from "./Comment";
+import {
+  selectComments,
+  selectLoadingComments,
+} from "../../redux/reducers/recipeReducer";
 
 const renderComment = ({ item }) => <Comment c={item} />;
 
@@ -31,7 +36,10 @@ const Comments = (props) => {
       useNativeDriver: true,
     }).start();
 
-  useEffect(slideIn, []);
+  useEffect(() => {
+    slideIn();
+    props.getComments(props.recipeId);
+  }, []);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -65,14 +73,16 @@ const Comments = (props) => {
   ).current;
 
   const panHandlers = panResponder.panHandlers;
-  console.log(props.comments);
   return (
     <View style={styles.outer} {...panHandlers}>
       <Animated.View
         style={[styles.wrapper, { transform: [{ translateY: yValue }] }]}
       >
         <Text style={styles.title}>Comments</Text>
-        {props.comments?.length ? (
+
+        {props.isLoading ? (
+          <ActivityIndicator />
+        ) : (
           <FlatList
             data={props.comments}
             renderItem={renderComment}
@@ -80,9 +90,10 @@ const Comments = (props) => {
             bounces={true}
             contentContainerStyle={styles.list}
             indicatorStyle="white"
+            ListEmptyComponent={() => (
+              <Text style={styles.noCommentText}>No comments yet.</Text>
+            )}
           />
-        ) : (
-          <Text style={styles.noCommentText}>No comments yet.</Text>
         )}
       </Animated.View>
       <Input
@@ -130,5 +141,10 @@ const styles = StyleSheet.create({
     marginTop: hp("25.5%"),
   },
 });
-
-export default connect(null, { setOpenComments })(Comments);
+const mapStateToProps = (state) => ({
+  isLoading: selectLoadingComments(state),
+  comments: selectComments(state),
+});
+export default connect(mapStateToProps, { setOpenComments, getComments })(
+  Comments
+);

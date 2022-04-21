@@ -132,6 +132,7 @@ const RecipeScroll = ({
         cloneElement(children, { openComments, handleScrollTop })}
       {!toggleRecipe && data[recipeIndex] && (
         <Footer
+          recipeId={data[recipeIndex].id}
           liked={liked}
           numLikes={numLikes}
           saved={saved}
@@ -194,12 +195,7 @@ const RecipeScroll = ({
           setCardNum={setCardNum}
         />
       )}
-      {openComments && (
-        <Comments
-          comments={data[recipeIndex].comments}
-          recipeId={data[recipeIndex].id}
-        />
-      )}
+      {openComments && <Comments recipeId={data[recipeIndex].id} />}
     </View>
   );
 };

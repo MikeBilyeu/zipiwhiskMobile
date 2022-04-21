@@ -46,8 +46,14 @@ router.get(
   require("./getRecipe")
 );
 
+router.get(
+  "/comments",
+  passport.authenticate("jwt", { session: false }),
+  require("./getComments")
+);
+
 router.post(
-  "/comment",
+  "/comments",
   passport.authenticate("jwt", { session: false }),
   require("./postComment")
 );

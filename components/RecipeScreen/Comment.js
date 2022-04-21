@@ -34,10 +34,21 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
     >
       <View style={styles.commentWrapper}>
         <Pressable onPress={() => navigation.navigate("VisitProfile")}>
-          <Image style={styles.userImage} source={{ uri: c.image_url }} />
+          <Image
+            style={[
+              styles.userImage,
+              c.parent_comment_id && styles.childUserImage,
+            ]}
+            source={{ uri: c.image_url }}
+          />
         </Pressable>
 
-        <Text style={styles.commentText}>
+        <Text
+          style={[
+            styles.commentText,
+            c.parent_comment_id && styles.childCommentText,
+          ]}
+        >
           <Text
             style={[styles.commentText, { fontFamily: "AvenirNextDemiBold" }]}
             onPress={() => navigation.navigate("VisitProfile")}
@@ -62,10 +73,13 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
         </Pressable>
       </View>
 
-      <View style={styles.commentInfoContainer}>
-        <Text style={[styles.infoText, { position: "absolute", left: 0 }]}>
-          {moment(c.created_at).fromNow()}
-        </Text>
+      <View
+        style={[
+          styles.commentInfoContainer,
+          c.parent_comment_id && styles.childCommentInfoContainer,
+        ]}
+      >
+        <Text style={styles.infoText}>{moment(c.created_at).fromNow()}</Text>
 
         {numLikes > 0 && (
           <Text style={styles.infoText}>
@@ -73,20 +87,27 @@ const Comment = ({ c, setInputFocused, setParentCommentId }) => {
           </Text>
         )}
 
-        {/* <Pressable
+        <Pressable
           style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }]}
           hitSlop={10}
           onPress={() => {
-            setParentCommentId(c.id);
+            setParentCommentId(c.parent_comment_id || c.id);
             setInputFocused(true);
           }}
         >
           <Text style={styles.infoText}>Reply</Text>
-        </Pressable> */}
+        </Pressable>
       </View>
       {c.childComments &&
         !c.parent_comment_id &&
-        c.childComments.map((item) => <Comment key={item.id} c={item} />)}
+        c.childComments.map((item) => (
+          <Comment
+            key={item.id}
+            c={item}
+            setParentCommentId={setParentCommentId}
+            setInputFocused={setInputFocused}
+          />
+        ))}
     </Pressable>
   );
 };
@@ -97,7 +118,7 @@ const styles = StyleSheet.create({
   },
   userCommentContainerChild: {
     marginTop: 0,
-    marginLeft: wp("18%"),
+    marginLeft: wp("10%"),
     marginVertical: 0,
   },
   commentWrapper: {
@@ -110,6 +131,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     position: "absolute",
   },
+  childUserImage: { height: wp("6%"), width: wp("6%") },
   commentText: {
     color: "#FFF",
     fontFamily: "AvenirNextRegular",
@@ -120,13 +142,18 @@ const styles = StyleSheet.create({
     paddingTop: wp(".5%"),
     flex: 1,
   },
+  childCommentText: { marginLeft: wp("8%") },
   commentInfoContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
-    marginLeft: wp("10%"),
+    marginHorizontal: wp("10%"),
+    marginRight: wp("15%"),
     marginTop: wp("1.5%"),
     height: wp("3%"),
+  },
+  childCommentInfoContainer: {
+    marginLeft: wp("8%"),
   },
   infoText: {
     fontSize: wp("3%"),

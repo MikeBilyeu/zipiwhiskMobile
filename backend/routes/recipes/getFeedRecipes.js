@@ -34,39 +34,7 @@ module.exports = async (req, res) => {
       [user_id, user_id, offset],
       (err, results) => {
         if (err) throw err;
-        if (!results.length) return res.status(200).json(results);
-
-        let recipes = [...results];
-
-        for (const [i, r] of results.entries()) {
-          pool.query(
-            `SELECT
-            root.*,
-            u.username, 
-            u.image_url,
-            COUNT(cl.comment_id) AS numLikes,
-            (SELECT COUNT(*) 
-              FROM comments child 
-              WHERE child.recipe_id = root.recipe_id
-              AND child.parent_comment_id = root.id) numReplies
-            FROM comments root
-            LEFT JOIN comments_likes l ON l.user_id = ?
-            LEFT JOIN comments_likes cl ON cl.comment_id = root.id
-            INNER JOIN users u ON u.id = root.user_id
-            WHERE recipe_id = ? 
-            GROUP BY root.id
-            ORDER BY numLikes DESC, root.created_at DESC`,
-            [user_id, r.id],
-            (err, results) => {
-              if (err) throw err;
-              recipes[i].comments = results;
-
-              if (i >= recipes.length - 1) {
-                return res.status(200).json(recipes);
-              }
-            }
-          );
-        }
+        return res.status(200).json(results);
       }
     );
   } catch (err) {
