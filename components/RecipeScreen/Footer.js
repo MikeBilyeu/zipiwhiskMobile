@@ -21,7 +21,6 @@ import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { parseNum } from "../utils";
 import { selectId } from "../../redux/reducers/userReducer";
-import { setOpenComments } from "../../redux/actions/recipe";
 
 const screenHeight = Dimensions.get("screen").height;
 
@@ -309,4 +308,4 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   userId: selectId(state),
 });
-export default connect(mapStateToProps, { setOpenComments })(Footer);
+export default connect(mapStateToProps)(Footer);

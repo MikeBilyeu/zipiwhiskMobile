@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { useKeepAwake } from "expo-keep-awake";
 import { FlatList, Dimensions, View } from "react-native";
 
-import { selectOpenComments } from "../../redux/reducers/recipeReducer";
-
 import {
   likeRecipe,
   unlikeRecipe,
@@ -23,7 +21,6 @@ const screenHeight = Dimensions.get("screen").height;
 const RecipeScroll = ({
   data,
   initalScroll,
-  openComments,
   unlikeRecipe,
   likeRecipe,
   saveRecipe,
@@ -35,6 +32,7 @@ const RecipeScroll = ({
 }) => {
   useKeepAwake();
 
+  const [openComments, setOpenComments] = useState(false);
   const [toggleRecipe, setToggleRecipe] = useState(false);
   const [recipeIndex, setRecipeIndex] = useState(initalScroll || 0);
   const [initialYValue, setInitialYValue] = useState(0);
@@ -150,6 +148,7 @@ const RecipeScroll = ({
           title={data[recipeIndex].title}
           handleToggleRecipe={handleToggleRecipe}
           created_at={data[recipeIndex].created_at}
+          setOpenComments={setOpenComments}
         />
       )}
 
@@ -195,16 +194,17 @@ const RecipeScroll = ({
           setCardNum={setCardNum}
         />
       )}
-      {openComments && <Comments recipeId={data[recipeIndex].id} />}
+      {openComments && (
+        <Comments
+          recipeId={data[recipeIndex].id}
+          setOpenComments={setOpenComments}
+        />
+      )}
     </View>
   );
 };
 
-const mapStateToProps = (state) => ({
-  openComments: selectOpenComments(state),
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   likeRecipe,
   unlikeRecipe,
   saveRecipe,

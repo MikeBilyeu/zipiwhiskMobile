@@ -1,5 +1,4 @@
 import {
-  SET_OPEN_COMMENTS,
   SET_PARENT_COMMENT_ID,
   INPUT_FOCUSED,
   GET_COMMENTS_REQUEST,
@@ -8,7 +7,6 @@ import {
 } from "../constants";
 
 const initialState = {
-  openComments: false,
   inputFocused: false,
   parentCommentId: null,
   comments: [],
@@ -17,12 +15,6 @@ const initialState = {
 
 const recipeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_OPEN_COMMENTS:
-      return {
-        inputFocused: false,
-        parentCommentId: null,
-        openComments: action.payload,
-      };
     case GET_COMMENTS_REQUEST:
       return { ...state, comments: [], loadingComments: true };
     case GET_COMMENTS_SUCCESS:
@@ -38,7 +30,6 @@ const recipeReducer = (state = initialState, action) => {
   }
 };
 
-export const selectOpenComments = (state) => state.recipe.openComments;
 export const selectInputFocused = (state) => state.recipe.inputFocused;
 export const selectParentCommentId = (state) => state.recipe.parentCommentId;
 export const selectLoadingComments = (state) => state.recipe.loadingComments;

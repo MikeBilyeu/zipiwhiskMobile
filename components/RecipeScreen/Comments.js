@@ -15,7 +15,11 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import { setOpenComments, getComments } from "../../redux/actions/recipe";
+import {
+  getComments,
+  setParentCommentId,
+  setInputFocused,
+} from "../../redux/actions/recipe";
 
 import Input from "./Input";
 import Comment from "./Comment";
@@ -37,8 +41,11 @@ const Comments = (props) => {
     }).start();
 
   useEffect(() => {
-    slideIn();
+    console.log("initial Render: ", props.recipeId);
+    props.setParentCommentId(null);
+    props.setInputFocused(false);
     props.getComments(props.recipeId);
+    slideIn();
   }, []);
 
   const panResponder = useRef(
@@ -145,6 +152,8 @@ const mapStateToProps = (state) => ({
   isLoading: selectLoadingComments(state),
   comments: selectComments(state),
 });
-export default connect(mapStateToProps, { setOpenComments, getComments })(
-  Comments
-);
+export default connect(mapStateToProps, {
+  getComments,
+  setParentCommentId,
+  setInputFocused,
+})(Comments);

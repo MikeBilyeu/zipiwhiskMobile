@@ -1,21 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, ImageBackground, Pressable } from "react-native";
-import { connect } from "react-redux";
 import { Video } from "expo-av";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { setOpenComments } from "../../redux/actions/recipe";
-import { selectOpenComments } from "../../redux/reducers/recipeReducer";
 
-const RecipeCard = ({
-  data,
-  handleToggleRecipe,
-  openComments,
-  handleLikeRecipe,
-}) => {
+const RecipeCard = ({ data, handleToggleRecipe, handleLikeRecipe }) => {
   const [lastTap, setLastTap] = useState(0);
   const [singlePressTimer, setSinglePressTimer] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -43,7 +35,7 @@ const RecipeCard = ({
       const timeout = setTimeout(() => {
         setLastTap(0);
         //SINGLE PRESS
-        !openComments && handleToggleRecipe();
+        handleToggleRecipe();
       }, DOUBLE_PRESS_DELAY);
 
       setSinglePressTimer(timeout);
@@ -127,8 +119,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({
-  openComments: selectOpenComments(state),
-});
-
-export default connect(mapStateToProps, { setOpenComments })(RecipeCard);
+export default RecipeCard;

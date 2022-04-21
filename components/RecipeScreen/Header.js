@@ -1,7 +1,5 @@
 import React from "react";
 import { StyleSheet, Pressable, Text, View } from "react-native";
-import { connect } from "react-redux";
-import { setOpenComments } from "../../redux/actions/recipe";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -15,7 +13,6 @@ const Header = (props) => {
   const navigation = useNavigation();
 
   const handleBackPress = () => {
-    props.setOpenComments(false);
     navigation.goBack();
   };
 
@@ -111,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { setOpenComments })(Header);
+export default Header;

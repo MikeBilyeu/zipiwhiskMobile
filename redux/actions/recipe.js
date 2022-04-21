@@ -1,5 +1,4 @@
 import {
-  SET_OPEN_COMMENTS,
   INPUT_FOCUSED,
   SET_PARENT_COMMENT_ID,
   GET_COMMENTS_REQUEST,
@@ -27,11 +26,6 @@ import {
 import axios from "axios";
 
 import { getUserRecipes } from "./user";
-
-export const setOpenComments = (value) => ({
-  type: SET_OPEN_COMMENTS,
-  payload: value,
-});
 
 export const getComments = (recipeId) => async (dispatch) => {
   try {

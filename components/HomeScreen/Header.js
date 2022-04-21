@@ -1,7 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import { StyleSheet, Pressable, Animated, View } from "react-native";
-import { connect } from "react-redux";
-import { setOpenComments } from "../../redux/actions/recipe";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -16,12 +14,10 @@ const Header = (props) => {
   const yValue = useRef(new Animated.Value(hp("-13%"))).current;
 
   const handleSearchPress = () => {
-    props.setOpenComments(false);
     navigation.navigate("Search");
   };
 
   const handleProfilePress = () => {
-    props.setOpenComments(false);
     navigation.navigate("Profile");
   };
 
@@ -129,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { setOpenComments })(Header);
+export default Header;
