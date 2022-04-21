@@ -39,7 +39,8 @@ const Header = (props) => {
       <Pressable
         style={styles.titleWrapper}
         hitSlop={{ top: 15, bottom: 15 }}
-        onPress={!props.openComments && props.handleScrollTop}
+        onPress={props.handleScrollTop}
+        pointerEvents={props.toggleComments ? "none" : "auto"}
       >
         <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
           {props.title}

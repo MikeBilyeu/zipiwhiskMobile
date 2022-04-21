@@ -68,13 +68,14 @@ const Header = (props) => {
             style={styles.headerBtnIcon}
           />
         </Pressable>
-        {!props.openComments && (
-          <Pressable
-            style={styles.scrollTopBtn}
-            hitSlop={{ top: 15, bottom: 15 }}
-            onPress={props.handleScrollTop}
-          />
-        )}
+
+        <Pressable
+          style={styles.scrollTopBtn}
+          hitSlop={{ top: 15, bottom: 15 }}
+          onPress={props.handleScrollTop}
+          pointerEvents={props.toggleComments ? "none" : "auto"}
+        />
+
         <Pressable
           onPress={handleProfilePress}
           hitSlop={{ top: 15, bottom: 15 }}

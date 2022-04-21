@@ -88,7 +88,7 @@ const Footer = (props) => {
           <Text style={styles.footerBtnText}>{parseNum(props.numLikes)}</Text>
         </Pressable>
         <Pressable
-          onPress={() => props.setOpenComments(true)}
+          onPress={props.handleToggleComments}
           style={({ pressed }) => [
             { opacity: pressed ? 0.5 : 1 },
             styles.footerBtn,

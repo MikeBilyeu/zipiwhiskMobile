@@ -8,6 +8,8 @@ import {
   unlikeRecipe,
   saveRecipe,
   unsaveRecipe,
+  setParentCommentId,
+  setInputFocused,
 } from "../../redux/actions/recipe";
 
 import FocusAwareStatusBar from "../FocusAwareStatusBar";
@@ -29,10 +31,12 @@ const RecipeScroll = ({
   handleLoadMore,
   refreshing,
   handleRefresh,
+  setParentCommentId,
+  setInputFocused,
 }) => {
   useKeepAwake();
 
-  const [openComments, setOpenComments] = useState(false);
+  const [toggleComments, setToggleComments] = useState(false);
   const [toggleRecipe, setToggleRecipe] = useState(false);
   const [recipeIndex, setRecipeIndex] = useState(initalScroll || 0);
   const [initialYValue, setInitialYValue] = useState(0);
@@ -54,6 +58,15 @@ const RecipeScroll = ({
 
   const flatListRef = useRef();
 
+  const handleToggleComments = () => {
+    if (toggleComments) {
+      setParentCommentId(null);
+      setInputFocused(false);
+      setToggleComments(false);
+    } else {
+      setToggleComments(true);
+    }
+  };
   useEffect(() => {
     setLiked(data.length && data[recipeIndex].liked);
     setNumLikes(data.length && data[recipeIndex].numLikes);
@@ -127,7 +140,7 @@ const RecipeScroll = ({
     <View style={{ backgroundColor: "#fff", flex: 1 }}>
       <FocusAwareStatusBar style="light" />
       {!toggleRecipe &&
-        cloneElement(children, { openComments, handleScrollTop })}
+        cloneElement(children, { toggleComments, handleScrollTop })}
       {!toggleRecipe && data[recipeIndex] && (
         <Footer
           recipeId={data[recipeIndex].id}
@@ -148,7 +161,7 @@ const RecipeScroll = ({
           title={data[recipeIndex].title}
           handleToggleRecipe={handleToggleRecipe}
           created_at={data[recipeIndex].created_at}
-          setOpenComments={setOpenComments}
+          handleToggleComments={handleToggleComments}
         />
       )}
 
@@ -164,9 +177,9 @@ const RecipeScroll = ({
         pagingEnabled
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
-        scrollEnabled={!openComments}
+        scrollEnabled={!toggleComments}
         initialScrollIndex={initalScroll || 0}
-        scrollsToTop={!toggleRecipe && !openComments}
+        scrollsToTop={!toggleRecipe && !toggleComments}
         onScrollToTop={() => handleIndexChange(0)}
         onMomentumScrollEnd={(event) => {
           handleIndexChange(
@@ -194,10 +207,10 @@ const RecipeScroll = ({
           setCardNum={setCardNum}
         />
       )}
-      {openComments && (
+      {toggleComments && (
         <Comments
           recipeId={data[recipeIndex].id}
-          setOpenComments={setOpenComments}
+          handleToggleComments={handleToggleComments}
         />
       )}
     </View>
@@ -209,4 +222,6 @@ export default connect(null, {
   unlikeRecipe,
   saveRecipe,
   unsaveRecipe,
+  setParentCommentId,
+  setInputFocused,
 })(RecipeScroll);

@@ -15,11 +15,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import {
-  getComments,
-  setParentCommentId,
-  setInputFocused,
-} from "../../redux/actions/recipe";
+import { getComments } from "../../redux/actions/recipe";
 
 import Input from "./Input";
 import Comment from "./Comment";
@@ -41,9 +37,6 @@ const Comments = (props) => {
     }).start();
 
   useEffect(() => {
-    console.log("initial Render: ", props.recipeId);
-    props.setParentCommentId(null);
-    props.setInputFocused(false);
     props.getComments(props.recipeId);
     slideIn();
   }, []);
@@ -67,7 +60,7 @@ const Comments = (props) => {
             toValue: hp("75%"),
             duration: 350 - vy * 100,
             useNativeDriver: true,
-          }).start(() => props.setOpenComments(false));
+          }).start(props.handleToggleComments);
         } else {
           Animated.spring(yValue, {
             toValue: 0,
@@ -152,8 +145,4 @@ const mapStateToProps = (state) => ({
   isLoading: selectLoadingComments(state),
   comments: selectComments(state),
 });
-export default connect(mapStateToProps, {
-  getComments,
-  setParentCommentId,
-  setInputFocused,
-})(Comments);
+export default connect(mapStateToProps, { getComments })(Comments);
