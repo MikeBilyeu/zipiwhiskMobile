@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
 
   try {
     pool.query(
-      "INSERT INTO users_likes (user_id, recipe_id) VALUES (?, ?)",
+      "INSERT IGNORE INTO users_likes (user_id, recipe_id) VALUES (?, ?)",
       [user_id, recipe_id],
       (err, results) => {
         if (err) throw err;
