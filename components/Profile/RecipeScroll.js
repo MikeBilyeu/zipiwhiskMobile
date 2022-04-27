@@ -21,7 +21,7 @@ const RecipeScroll = (props) => {
         navigation.push("Recipe", {
           index,
           data: props.recipes,
-          title: "Saved Recipes",
+          title: props.screenTitle + " Recipes",
           subTitle: props.category || null,
         })
       }
@@ -30,14 +30,17 @@ const RecipeScroll = (props) => {
 
   const renderText = () => (
     <Text style={styles.noResultsText}>{`No ${
-      props.category ? props.category.toLowerCase() + " " : ""
-    }recipes saved.`}</Text>
+      props.category
+        ? props.screenTitle.toLowerCase() +
+          " " +
+          props.category.toLowerCase() +
+          " recipes"
+        : props.screenTitle.toLowerCase() + " recipes"
+    }.`}</Text>
   );
   return (
     !props.isLoading && (
       <FlatList
-        style={styles.listContainer}
-        contentContainerStyle={{ paddingTop: props.paddingTop }}
         showsVerticalScrollIndicator={false}
         data={props.recipes}
         numColumns={3}
@@ -50,14 +53,6 @@ const RecipeScroll = (props) => {
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
-    flex: 1,
-    position: "absolute",
-    top: hp("6%"),
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
   noResultsText: {
     color: "rgba(200,200,200,1)",
     textAlign: "center",

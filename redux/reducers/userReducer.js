@@ -2,9 +2,15 @@ import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
-  GET_USER_SAVED_RECIPES_REQUEST,
-  GET_USER_SAVED_RECIPES_SUCCESS,
-  GET_USER_SAVED_RECIPES_FAILURE,
+  GET_SAVES_REQUEST,
+  GET_SAVES_SUCCESS,
+  GET_SAVES_FAILURE,
+  GET_LIKES_REQUEST,
+  GET_LIKES_SUCCESS,
+  GET_LIKES_FAILURE,
+  GET_POSTS_REQUEST,
+  GET_POSTS_SUCCESS,
+  GET_POSTS_FAILURE,
   PROFILE_CATEGORY_CHANGE,
 } from "../constants";
 
@@ -19,8 +25,10 @@ const initialState = {
   restriction: null,
   num_followers: "",
   num_followings: "",
-  savedRecipeData: { isLoading: false, category: "", recipes: [] },
-  likedRecipeData: { isLoading: false, category: "", recipes: [] },
+  categoryFilter: "",
+  savesData: { isLoading: false, recipes: [] },
+  likesData: { isLoading: false, recipes: [] },
+  postsData: { isLoading: false, recipes: [] },
 };
 
 const userReducer = (state = initialState, action) => {
@@ -31,29 +39,66 @@ const userReducer = (state = initialState, action) => {
       return { ...state, ...action.payload, isLoading: false };
     case GET_USER_FAILURE:
       return initialState;
-    case GET_USER_SAVED_RECIPES_REQUEST:
+    case GET_SAVES_REQUEST:
       return {
         ...state,
-        savedRecipeData: { ...state.savedRecipeData, isLoading: true },
+        savesData: { ...state.savesData, isLoading: true },
       };
-    case GET_USER_SAVED_RECIPES_SUCCESS:
+    case GET_SAVES_SUCCESS:
       return {
         ...state,
-        savedRecipeData: {
-          ...state.savedRecipeData,
+        savesData: {
           recipes: action.payload,
           isLoading: false,
         },
       };
-    case GET_USER_SAVED_RECIPES_FAILURE:
+    case GET_SAVES_FAILURE:
       return {
         ...state,
-        savedRecipeData: { isLoading: false, category: "", recipes: [] },
+        savesData: { isLoading: false, recipes: [] },
+      };
+
+    case GET_LIKES_REQUEST:
+      return {
+        ...state,
+        likesData: { ...state.likesData, isLoading: true },
+      };
+    case GET_LIKES_SUCCESS:
+      return {
+        ...state,
+        likesData: {
+          recipes: action.payload,
+          isLoading: false,
+        },
+      };
+    case GET_LIKES_FAILURE:
+      return {
+        ...state,
+        likesData: { isLoading: false, recipes: [] },
+      };
+
+    case GET_POSTS_REQUEST:
+      return {
+        ...state,
+        postsData: { ...state.postsData, isLoading: true },
+      };
+    case GET_POSTS_SUCCESS:
+      return {
+        ...state,
+        postsData: {
+          recipes: action.payload,
+          isLoading: false,
+        },
+      };
+    case GET_POSTS_FAILURE:
+      return {
+        ...state,
+        postsData: { isLoading: false, recipes: [] },
       };
     case PROFILE_CATEGORY_CHANGE:
       return {
         ...state,
-        savedRecipeData: { ...state.savedRecipeData, category: action.payload },
+        categoryFilter: action.payload,
       };
     default:
       return state;
@@ -68,8 +113,11 @@ export const selectFullname = (state) => state.user.fullname;
 export const selectImageUrl = (state) => state.user.image_url;
 export const selectNumFollowers = (state) => state.user.num_followers;
 export const selectNumFollowings = (state) => state.user.num_followings;
-export const selectRecipeDataIsLoading = (state) =>
-  state.user.savedRecipeData.isLoading;
-export const selectCategory = (state) => state.user.savedRecipeData.category;
-export const selectRecipes = (state) => state.user.savedRecipeData.recipes;
+export const selectIsLoadingSaves = (state) => state.user.savesData.isLoading;
+export const selectIsLoadingLikes = (state) => state.user.likesData.isLoading;
+export const selectIsLoadingPosts = (state) => state.user.postsData.isLoading;
+export const selectSaves = (state) => state.user.savesData.recipes;
+export const selectLikes = (state) => state.user.likesData.recipes;
+export const selectPosts = (state) => state.user.postsData.recipes;
+export const selectCategory = (state) => state.user.categoryFilter;
 export default userReducer;

@@ -5,7 +5,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { followUser, unfollowUser } from "../redux/actions/userProfile";
+import { followUser, unfollowUser } from "../redux/actions/visitProfile";
 
 const ToggleFollowBtn = ({
   id,

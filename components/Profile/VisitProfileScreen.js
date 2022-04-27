@@ -11,9 +11,9 @@ import {
   selectId,
   selectRecipeDataIsLoading,
   selectRecipes,
-} from "../../redux/reducers/userProfileReducer";
+} from "../../redux/reducers/visitProfileReducer";
 
-import { getUserProfile } from "../../redux/actions/userProfile";
+import { getVisitProfile } from "../../redux/actions/visitProfile";
 
 import VisitProfileHeader from "./Header/VisitProfileHeader";
 import RecipeScroll from "./RecipeScroll";
@@ -22,7 +22,7 @@ const VisitProfileScreen = (props) => {
   const { id } = props.route.params;
 
   useEffect(() => {
-    props.getUserProfile(id);
+    props.getVisitProfile(id);
   }, []);
 
   return (
@@ -51,4 +51,6 @@ const mapStateToProps = (state) => ({
   recipes: selectRecipes(state),
 });
 
-export default connect(mapStateToProps, { getUserProfile })(VisitProfileScreen);
+export default connect(mapStateToProps, { getVisitProfile })(
+  VisitProfileScreen
+);

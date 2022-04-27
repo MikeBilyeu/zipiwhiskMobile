@@ -13,7 +13,7 @@ import {
   selectNumFollowers,
   selectNumFollowings,
   selectIsFollowing,
-} from "../../../redux/reducers/userProfileReducer";
+} from "../../../redux/reducers/visitProfileReducer";
 
 import Header from "../../Header";
 import UserInfo from "./UserInfo";
