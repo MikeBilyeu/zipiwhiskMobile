@@ -14,6 +14,18 @@ router.get(
   require("./getSavedRecipes")
 );
 
+router.get(
+  "/liked",
+  passport.authenticate("jwt", { session: false }),
+  require("./getLikedRecipes")
+);
+
+router.get(
+  "/posted",
+  passport.authenticate("jwt", { session: false }),
+  require("./getPostedRecipes")
+);
+
 router.get("/feed", require("./getFeedRecipes"));
 
 router.post(

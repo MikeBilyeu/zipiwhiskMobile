@@ -33,11 +33,11 @@ module.exports = async (req, res) => {
       WHERE
       CASE WHEN ? != ''
       THEN r.id IN
-        (SELECT us.recipe_id FROM users_saves us
+        (SELECT us.recipe_id FROM users_recipes us
           INNER JOIN recipes_categories rc ON rc.recipe_id = us.recipe_id AND rc.category = ?
           WHERE us.user_id = ?)
         ELSE 
-        r.id IN (SELECT us.recipe_id FROM users_saves us WHERE us.user_id = ?)
+        r.id IN (SELECT us.recipe_id FROM users_recipes us WHERE us.user_id = ?)
         END
       ORDER BY
       CASE WHEN u.id = ? THEN r.created_at

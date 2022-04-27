@@ -31,10 +31,9 @@ const RecipeScroll = (props) => {
   const renderText = () => (
     <Text style={styles.noResultsText}>{`No ${
       props.category
-        ? props.screenTitle.toLowerCase() +
-          " " +
-          props.category.toLowerCase() +
-          " recipes"
+        ? props.category.toLowerCase() +
+          " recipes " +
+          props.screenTitle.toLowerCase()
         : props.screenTitle.toLowerCase() + " recipes"
     }.`}</Text>
   );
