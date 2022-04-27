@@ -39,20 +39,9 @@ module.exports = async (req, res) => {
         ELSE 
         r.id IN (SELECT us.recipe_id FROM users_saves us WHERE us.user_id = ?)
         END
-      ORDER BY
-      CASE WHEN u.id = ? THEN r.created_at
-      ELSE saved_at END DESC
+      ORDER BY saved_at DESC
       LIMIT 18`,
-      [
-        req.user.id,
-        req.user.id,
-        user_id,
-        category,
-        category,
-        user_id,
-        user_id,
-        user_id,
-      ],
+      [req.user.id, req.user.id, user_id, category, category, user_id, user_id],
       (err, results) => {
         if (err) throw err;
         return res.status(200).json(results);
