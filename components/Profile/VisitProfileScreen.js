@@ -33,6 +33,7 @@ const VisitProfileScreen = (props) => {
         userId={props.userId}
         isLoading={props.isLoading}
         recipes={props.recipes}
+        screenTitle="Saved"
       />
     </SafeAreaView>
   );

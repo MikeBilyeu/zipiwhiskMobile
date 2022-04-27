@@ -50,19 +50,16 @@ const visitProfileReducer = (state = initialState, action) => {
       return state;
   }
 };
-export const selectId = (state) => state.visitUserProfile.id;
-export const selectEmail = (state) => state.visitUserProfile.email;
+export const selectId = (state) => state.visitProfile.id;
+export const selectEmail = (state) => state.visitProfile.email;
 export const selectUsername = (state) =>
-  state.visitUserProfile.username && `@${state.visitUserProfile.username}`;
-export const selectFullname = (state) => state.visitUserProfile.fullname;
-export const selectImageUrl = (state) => state.visitUserProfile.image_url;
-export const selectNumFollowers = (state) =>
-  state.visitUserProfile.num_followers;
-export const selectNumFollowings = (state) =>
-  state.visitUserProfile.num_followings;
-export const selectIsFollowing = (state) => state.visitUserProfile.isFollowing;
+  state.visitProfile.username && `@${state.visitProfile.username}`;
+export const selectFullname = (state) => state.visitProfile.fullname;
+export const selectImageUrl = (state) => state.visitProfile.image_url;
+export const selectNumFollowers = (state) => state.visitProfile.num_followers;
+export const selectNumFollowings = (state) => state.visitProfile.num_followings;
+export const selectIsFollowing = (state) => state.visitProfile.isFollowing;
 export const selectRecipeDataIsLoading = (state) =>
-  state.visitUserProfile.recipeData.isLoading;
-export const selectRecipes = (state) =>
-  state.visitUserProfile.recipeData.recipes;
+  state.visitProfile.recipeData.isLoading;
+export const selectRecipes = (state) => state.visitProfile.recipeData.recipes;
 export default visitProfileReducer;
