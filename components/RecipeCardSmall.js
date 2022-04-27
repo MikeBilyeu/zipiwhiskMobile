@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     width: wp("100%") / 3,
     justifyContent: "flex-end",
     borderBottomWidth: 1,
-    borderColor: "#fff",
+    borderColor: "rgb(242,242,242)",
   },
   thumbnail: {
     position: "absolute",

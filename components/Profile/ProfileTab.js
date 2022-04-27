@@ -30,10 +30,17 @@ const ProfileTab = (props) => {
       initialLayout={{ width: Dimensions.get("window").width }}
       initialRouteName="SavedRecipes"
       screenOptions={{
-        tabBarLabelStyle: { fontSize: wp("2.3%") },
-        tabBarItemStyle: { width: wp("33.333%") },
+        tabBarLabelStyle: {
+          fontSize: wp("2.3%"),
+          fontFamily: "AvenirNextRegular",
+        },
+        tabBarItemStyle: { width: wp("33.3%") },
         tabBarActiveTintColor: "#464646",
-        tabBarIndicatorStyle: { backgroundColor: "#00D088" },
+        tabBarIndicatorStyle: {
+          backgroundColor: "#00D088",
+          marginBottom: 1,
+          borderRadius: "100%",
+        },
       }}
     >
       <Tab.Screen
@@ -108,7 +115,7 @@ const styles = StyleSheet.create({
     zIndex: -1,
     flex: 1,
     position: "absolute",
-    top: hp("22%"),
+    top: hp("21.5%"),
     bottom: 0,
     left: 0,
     right: 0,
