@@ -37,7 +37,7 @@ const ProfileTab = (props) => {
       }}
     >
       <Tab.Screen
-        name="Saves"
+        name={`Saves (${props.saves.length})`}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
@@ -58,7 +58,7 @@ const ProfileTab = (props) => {
         )}
       />
       <Tab.Screen
-        name="Likes"
+        name={`Likes (${props.likes.length})`}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
@@ -79,7 +79,7 @@ const ProfileTab = (props) => {
         )}
       />
       <Tab.Screen
-        name="Post"
+        name={`Posts (${props.posts.length})`}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
