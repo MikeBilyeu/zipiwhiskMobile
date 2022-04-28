@@ -17,7 +17,6 @@ import {
 } from "../../redux/reducers/userReducer";
 
 import RecipeScroll from "./RecipeScroll";
-import SavedRecipeScreen from "../RecipeScreen/SavedRecipeScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -27,7 +26,7 @@ const ProfileTab = (props) => {
       style={styles.wrapper}
       backBehavior="initialRoute"
       initialLayout={{ width: Dimensions.get("window").width }}
-      initialRouteName="SavedRecipes"
+      initialRouteName="saves"
       screenOptions={{
         tabBarLabelStyle: {
           fontSize: wp("2.3%"),
@@ -43,8 +42,9 @@ const ProfileTab = (props) => {
       }}
     >
       <Tab.Screen
-        name={`Saves (${props.saves.length})`}
+        name="saves"
         options={{
+          tabBarLabel: `Saves (${props.saves.length})`,
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "bookmarks" : "bookmarks-outline"}
@@ -64,8 +64,9 @@ const ProfileTab = (props) => {
         )}
       />
       <Tab.Screen
-        name={`Posts (${props.posts.length})`}
+        name="posts"
         options={{
+          tabBarLabel: `Posts (${props.posts.length})`,
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "duplicate" : "duplicate-outline"}
