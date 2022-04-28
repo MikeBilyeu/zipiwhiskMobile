@@ -116,6 +116,10 @@ const userReducer = (state = initialState, action) => {
     case SAVE_RECIPE_REQUEST:
       return {
         ...state,
+        savesData: {
+          ...state.savesData,
+          recipes: saveFromRecipes(state.savesData.recipes, action.payload),
+        },
         postsData: {
           ...state.postsData,
           recipes: saveFromRecipes(state.postsData.recipes, action.payload),
