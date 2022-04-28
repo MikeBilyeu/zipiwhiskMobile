@@ -74,9 +74,7 @@ const Footer = (props) => {
         pointerEvents={"box-none"}
       >
         <Pressable
-          onPress={() => {
-            props.liked ? props.handleUnlikeRecipe() : props.handleLikeRecipe();
-          }}
+          onPress={props.handleToggleLike}
           style={styles.footerBtn}
           hitSlop={{ top: 25, right: 20 }}
         >
@@ -101,9 +99,7 @@ const Footer = (props) => {
           </Text>
         </Pressable>
         <Pressable
-          onPress={() => {
-            props.saved ? props.handleUnsaveRecipe() : props.handleSaveRecipe();
-          }}
+          onPress={props.handleToggleSave}
           style={styles.footerBtn}
           hitSlop={{ right: 20 }}
         >

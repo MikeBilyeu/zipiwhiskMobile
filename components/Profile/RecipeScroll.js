@@ -18,10 +18,9 @@ const RecipeScroll = (props) => {
       media_url={item.media_url}
       media_type={item.media_type}
       handlePress={() =>
-        navigation.push("Recipe", {
+        navigation.push(props.navigateTo, {
           index,
           data: props.recipes,
-          title: props.screenTitle + " Recipes",
           subTitle: props.category || null,
         })
       }

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, cloneElement } from "react";
+import React, { useRef, useState, cloneElement } from "react";
 import { connect } from "react-redux";
 import { useKeepAwake } from "expo-keep-awake";
 import { FlatList, Dimensions, View } from "react-native";
@@ -41,20 +41,6 @@ const RecipeScroll = ({
   const [recipeIndex, setRecipeIndex] = useState(initalScroll || 0);
   const [initialYValue, setInitialYValue] = useState(0);
   const [cardNum, setCardNum] = useState(0);
-  const [liked, setLiked] = useState(
-    data.length && data[recipeIndex].liked == 0 ? false : true
-  );
-  const [numLikes, setNumLikes] = useState(
-    data.length && data[recipeIndex].numLikes
-  );
-
-  const [saved, setSaved] = useState(
-    data.length && data[recipeIndex].saved == 0 ? false : true
-  );
-
-  const [numSaves, setNumSaves] = useState(
-    data.length && data[recipeIndex].numSaves
-  );
 
   const flatListRef = useRef();
 
@@ -67,21 +53,6 @@ const RecipeScroll = ({
       setToggleComments(true);
     }
   };
-  useEffect(() => {
-    setLiked(data.length && data[recipeIndex].liked);
-    setNumLikes(data.length && data[recipeIndex].numLikes);
-  }, [
-    data.length ? data[recipeIndex].liked : null,
-    data.length ? data[recipeIndex].numLikes : null,
-  ]);
-
-  useEffect(() => {
-    setSaved(data.length && data[recipeIndex].saved);
-    setNumSaves(data.length && data[recipeIndex].numSaves);
-  }, [
-    data.length ? data[recipeIndex].saved : null,
-    data.length ? data[recipeIndex].numSaves : null,
-  ]);
 
   const handleIndexChange = (i) => {
     setInitialYValue(0);
@@ -99,31 +70,23 @@ const RecipeScroll = ({
   };
 
   const handleLikeRecipe = () => {
-    setLiked(true);
-    if (!data[recipeIndex].liked) {
-      setNumLikes(numLikes + 1);
-      likeRecipe(data[recipeIndex].id);
+    likeRecipe(data[recipeIndex].id);
+  };
+
+  const handleToggleLike = () => {
+    if (data[recipeIndex]?.liked) {
+      unlikeRecipe(data[recipeIndex].id);
+    } else {
+      handleLikeRecipe();
     }
   };
 
-  const handleUnlikeRecipe = () => {
-    setLiked(false);
-    setNumLikes(numLikes - 1);
-    unlikeRecipe(data[recipeIndex].id);
-  };
-
-  const handleSaveRecipe = () => {
-    setSaved(true);
-    if (!data[recipeIndex].saved) {
-      setNumSaves(numSaves + 1);
+  const handleToggleSave = () => {
+    if (data[recipeIndex]?.saved) {
+      unsaveRecipe(data[recipeIndex].id);
+    } else {
       saveRecipe(data[recipeIndex].id);
     }
-  };
-
-  const handleUnsaveRecipe = () => {
-    setSaved(false);
-    setNumSaves(numSaves - 1);
-    unsaveRecipe(data[recipeIndex].id);
   };
 
   const handleToggleRecipe = () => setToggleRecipe(!toggleRecipe);
@@ -144,14 +107,12 @@ const RecipeScroll = ({
       {!toggleRecipe && data[recipeIndex] && (
         <Footer
           recipeId={data[recipeIndex].id}
-          liked={liked}
-          numLikes={numLikes}
-          saved={saved}
-          numSaves={numSaves}
-          handleLikeRecipe={handleLikeRecipe}
-          handleUnlikeRecipe={handleUnlikeRecipe}
-          handleSaveRecipe={handleSaveRecipe}
-          handleUnsaveRecipe={handleUnsaveRecipe}
+          liked={data[recipeIndex]?.liked}
+          numLikes={data[recipeIndex]?.numLikes}
+          saved={data[recipeIndex]?.saved}
+          numSaves={data[recipeIndex]?.numSaves}
+          handleToggleLike={handleToggleLike}
+          handleToggleSave={handleToggleSave}
           numComments={data[recipeIndex].numComments}
           userImage={data[recipeIndex].user_image_url}
           username={data[recipeIndex].username}

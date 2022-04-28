@@ -6,7 +6,7 @@ import {
   selectIsRefreshing,
 } from "../../redux/reducers/feedReducer";
 import Header from "./Header";
-import RecipeScroll from "../RecipeScreen/RecipeScroll";
+import RecipeScroll from "../RecipeScroll";
 
 const HomeScreen = (props) => {
   useEffect(() => {

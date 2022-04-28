@@ -25,7 +25,7 @@ import {
 } from "../constants";
 import axios from "axios";
 
-import { getUserRecipes } from "./user";
+import { getSaves, getLikes, getPosts } from "./user";
 
 export const getComments = (recipeId) => async (dispatch) => {
   try {
@@ -76,29 +76,25 @@ export const getRecipe = (value) => async (dispatch) => {
   }
 };
 
-export const likeRecipe = (recipe_id) => async (dispatch, getState) => {
-  const { categoryFilter } = getState().user;
+export const likeRecipe = (recipe_id) => async (dispatch) => {
   try {
-    dispatch({ type: LIKE_RECIPE_REQUEST });
+    dispatch({ type: LIKE_RECIPE_REQUEST, payload: recipe_id });
     await axios.post("api/recipes/like", {
       recipe_id,
     });
     dispatch({ type: LIKE_RECIPE_SUCCESS, payload: recipe_id });
-    dispatch(getUserRecipes(categoryFilter));
   } catch (err) {
     dispatch({ type: LIKE_RECIPE_FAILURE });
   }
 };
 
-export const unlikeRecipe = (recipe_id) => async (dispatch, getState) => {
-  const { categoryFilter } = getState().user;
+export const unlikeRecipe = (recipe_id) => async (dispatch) => {
   try {
-    dispatch({ type: UNLIKE_RECIPE_REQUEST });
+    dispatch({ type: UNLIKE_RECIPE_REQUEST, payload: recipe_id });
     await axios.delete("api/recipes/like", {
       data: { recipe_id },
     });
     dispatch({ type: UNLIKE_RECIPE_SUCCESS, payload: recipe_id });
-    dispatch(getUserRecipes(categoryFilter));
   } catch (err) {
     dispatch({ type: UNLIKE_RECIPE_FAILURE });
   }
@@ -107,26 +103,24 @@ export const unlikeRecipe = (recipe_id) => async (dispatch, getState) => {
 export const saveRecipe = (recipe_id) => async (dispatch, getState) => {
   const { categoryFilter } = getState().user;
   try {
-    dispatch({ type: SAVE_RECIPE_REQUEST });
+    dispatch({ type: SAVE_RECIPE_REQUEST, payload: recipe_id });
     await axios.post("api/recipes/save", {
       recipe_id,
     });
+    dispatch(getSaves(categoryFilter));
     dispatch({ type: SAVE_RECIPE_SUCCESS, payload: recipe_id });
-    dispatch(getUserRecipes(categoryFilter));
   } catch (err) {
     dispatch({ type: SAVE_RECIPE_FAILURE });
   }
 };
 
 export const unsaveRecipe = (recipe_id) => async (dispatch, getState) => {
-  const { categoryFilter } = getState().user;
   try {
-    dispatch({ type: UNSAVE_RECIPE_REQUEST });
+    dispatch({ type: UNSAVE_RECIPE_REQUEST, payload: recipe_id });
     await axios.delete("api/recipes/save", {
       data: { recipe_id },
     });
     dispatch({ type: UNSAVE_RECIPE_SUCCESS, payload: recipe_id });
-    dispatch(getUserRecipes(categoryFilter));
   } catch (err) {
     dispatch({ type: UNSAVE_RECIPE_FAILURE });
   }

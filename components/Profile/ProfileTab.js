@@ -11,14 +11,13 @@ import {
 import {
   selectCategory,
   selectIsLoadingSaves,
-  selectIsLoadingLikes,
   selectIsLoadingPosts,
   selectSaves,
-  selectLikes,
   selectPosts,
 } from "../../redux/reducers/userReducer";
 
 import RecipeScroll from "./RecipeScroll";
+import SavedRecipeScreen from "../RecipeScreen/SavedRecipeScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -34,7 +33,7 @@ const ProfileTab = (props) => {
           fontSize: wp("2.3%"),
           fontFamily: "AvenirNextRegular",
         },
-        tabBarItemStyle: { width: wp("33.3%") },
+        tabBarItemStyle: { width: wp("50%") },
         tabBarActiveTintColor: "#464646",
         tabBarIndicatorStyle: {
           backgroundColor: "#00D088",
@@ -54,34 +53,13 @@ const ProfileTab = (props) => {
             />
           ),
         }}
-        children={(cProps) => (
+        children={() => (
           <RecipeScroll
-            {...cProps}
             category={props.category}
             isLoading={props.isLoadingSaves}
             recipes={props.saves}
             screenTitle="Saved"
-          />
-        )}
-      />
-      <Tab.Screen
-        name={`Likes (${props.likes.length})`}
-        options={{
-          tabBarIcon: ({ focused, color }) => (
-            <Ionicons
-              name={focused ? "heart-circle" : "heart-circle-outline"}
-              size={wp("6%")}
-              color={focused ? "#000" : color}
-            />
-          ),
-        }}
-        children={(cProps) => (
-          <RecipeScroll
-            {...cProps}
-            category={props.category}
-            isLoading={props.isLoadingLikes}
-            recipes={props.likes}
-            screenTitle="Liked"
+            navigateTo="SavedRecipeScreen"
           />
         )}
       />
@@ -96,13 +74,13 @@ const ProfileTab = (props) => {
             />
           ),
         }}
-        children={(cProps) => (
+        children={() => (
           <RecipeScroll
-            {...cProps}
             category={props.category}
             isLoading={props.isLoadingPosts}
             recipes={props.posts}
             screenTitle="Posted"
+            navigateTo="PostedRecipeScreen"
           />
         )}
       />
@@ -125,10 +103,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   category: selectCategory(state),
   saves: selectSaves(state),
-  likes: selectLikes(state),
   posts: selectPosts(state),
   isLoadingSaves: selectIsLoadingSaves(state),
-  isLoadingLikes: selectIsLoadingLikes(state),
   isLoadingPosts: selectIsLoadingPosts(state),
 });
 export default connect(mapStateToProps)(ProfileTab);
