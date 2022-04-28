@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, FlatList, Text } from "react-native";
+import { StyleSheet, FlatList, Text, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   widthPercentageToDP as wp,
@@ -36,17 +36,17 @@ const RecipeScroll = (props) => {
         : props.screenTitle.toLowerCase() + " recipes"
     }.`}</Text>
   );
-  return (
-    !props.isLoading && (
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={props.recipes}
-        numColumns={3}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        ListEmptyComponent={renderText}
-      />
-    )
+  return props.isLoading ? (
+    <ActivityIndicator />
+  ) : (
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      data={props.recipes}
+      numColumns={3}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.id.toString()}
+      ListEmptyComponent={renderText}
+    />
   );
 };
 
