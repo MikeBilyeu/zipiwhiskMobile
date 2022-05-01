@@ -1,47 +1,70 @@
-import React from "react";
-import { StyleSheet, ScrollView, Text, Pressable } from "react-native";
+import React, { useRef, useState } from "react";
+import {
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  Text,
+  Pressable,
+} from "react-native";
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-const renderCategories = (categories, category, categoryChange) =>
-  categories.map((categoryName) => (
+const renderItem = ({ item, index }, category, categoryChange, scrollTo) => {
+  return (
     <Pressable
       onPress={() => {
-        categoryName === category
-          ? categoryChange("")
-          : categoryChange(categoryName);
+        scrollTo(index);
+        item === category ? categoryChange("") : categoryChange(item);
       }}
       hitSlop={15}
-      style={[styles.btn, categoryName === category && styles.btnSelected]}
-      key={categoryName}
+      style={[styles.btn, item === category && styles.btnSelected]}
+      key={item}
     >
       <Text
-        style={[
-          styles.btnText,
-          categoryName === category && styles.btnTextSelected,
-        ]}
+        style={[styles.btnText, item === category && styles.btnTextSelected]}
       >
-        {categoryName}
+        {item}
       </Text>
     </Pressable>
-  ));
+  );
+};
 
 const CategorySwipe = (props) => {
+  const scrollRef = useRef();
+
+  const categories = [
+    "Breakfast",
+    "Lunch/Dinner",
+    "Snack",
+    "Dessert",
+    "Beverage",
+  ];
+
+  const scrollTo = (i) => {
+    scrollRef.current?.scrollToIndex({
+      animated: true,
+      index: i,
+      viewPosition: 0.5,
+    });
+  };
+
   return (
     <ScrollView scrollEnabled={false}>
-      <ScrollView
+      <FlatList
+        ref={scrollRef}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.container}
-      >
-        {renderCategories(
-          ["Breakfast", "Lunch/Dinner", "Snack", "Dessert", "Beverage"],
-          props.category,
-          props.categoryChange
-        )}
-      </ScrollView>
+        data={categories}
+        renderItem={(item) =>
+          renderItem(item, props.category, props.categoryChange, scrollTo)
+        }
+        keyExtractor={(item) => item}
+        extraData={props.category}
+      />
     </ScrollView>
   );
 };
