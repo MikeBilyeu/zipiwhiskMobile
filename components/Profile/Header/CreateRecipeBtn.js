@@ -34,9 +34,9 @@ const CreateRecipeBtn = (props) => {
 
 const styles = StyleSheet.create({
   createRecipeBtn: {
-    width: wp("15%"),
+    width: wp("12%"),
     height: wp("15%"),
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
   },
 });

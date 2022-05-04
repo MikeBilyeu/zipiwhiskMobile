@@ -22,10 +22,10 @@ const ActivityBtn = () => {
 
 const styles = StyleSheet.create({
   btn: {
-    width: wp("15%"),
+    width: wp("18%"),
     height: wp("15%"),
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
 });
 

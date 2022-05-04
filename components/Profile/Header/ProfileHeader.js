@@ -13,7 +13,6 @@ import {
 } from "../../../redux/reducers/userReducer";
 
 import UserInfo from "./UserInfo";
-import FollowContainer from "./FollowsContainer";
 import CreateRecipeBtn from "./CreateRecipeBtn";
 import CategorySwipe from "./CategorySwipe";
 import ActivityBtn from "./ActivityBtn";
@@ -31,11 +30,6 @@ const ProfileHeader = (props) => {
         <CreateRecipeBtn />
         <ActivityBtn />
       </UserInfo>
-      {/* <FollowContainer
-          username={props.username}
-          numFollowings={props.numFollowings}
-          numFollowers={props.numFollowers}
-        ></FollowContainer> */}
       <CategorySwipe
         category={props.category}
         categoryChange={props.categoryChange}
