@@ -18,7 +18,7 @@ const ActivityTab = (props) => {
       style={styles.wrapper}
       backBehavior="initialRoute"
       initialLayout={{ width: Dimensions.get("window").width }}
-      initialRouteName="saves"
+      initialRouteName="Activity"
       screenOptions={{
         tabBarLabelStyle: {
           fontSize: wp("2.3%"),

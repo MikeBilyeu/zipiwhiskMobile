@@ -86,34 +86,6 @@ const ProfileTab = (props) => {
           />
         )}
       />
-      {/* <Tab.Screen
-        name="Followers"
-        options={{
-          tabBarLabel: `Followers (${0})`,
-          tabBarIcon: ({ focused, color }) => (
-            <Ionicons
-              name={focused ? "people-circle" : "people-circle-outline"}
-              size={wp("6%")}
-              color={focused ? "#000" : color}
-            />
-          ),
-        }}
-        children={() => null}
-      />
-      <Tab.Screen
-        name="Following"
-        options={{
-          tabBarLabel: `Following (${0})`,
-          tabBarIcon: ({ focused, color }) => (
-            <Ionicons
-              name={focused ? "person-circle" : "person-circle-outline"}
-              size={wp("6%")}
-              color={focused ? "#000" : color}
-            />
-          ),
-        }}
-        children={() => null}
-      /> */}
     </Tab.Navigator>
   );
 };
