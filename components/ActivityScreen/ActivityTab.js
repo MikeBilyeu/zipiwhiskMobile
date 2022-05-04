@@ -25,7 +25,7 @@ const ActivityTab = (props) => {
           fontFamily: "AvenirNextRegular",
           textTransform: "capitalize",
         },
-        tabBarItemStyle: { width: wp("33.33r%") },
+        tabBarItemStyle: { width: wp("33.33%") },
         tabBarActiveTintColor: "#464646",
         tabBarIndicatorStyle: {
           backgroundColor: "#00D088",
