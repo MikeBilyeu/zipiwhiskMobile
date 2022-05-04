@@ -8,7 +8,7 @@ import FocusAwareStatusBar from "../FocusAwareStatusBar";
 import Header from "../Header";
 import SearchBar from "./SearchBar";
 import CategorySwipe from "../Profile/Header/CategorySwipe";
-import Users from "../FollowScreen/Users";
+import Users from "../ActivityScreen/Users";
 import RecipeCardSmall from "../RecipeCardSmall";
 import data from "../../data";
 

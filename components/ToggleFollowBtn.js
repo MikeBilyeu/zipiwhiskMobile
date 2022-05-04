@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, Pressable, View } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -11,7 +11,6 @@ const ToggleFollowBtn = ({
   id,
   following,
   BtnStyles,
-  textStyles,
   followUser,
   unfollowUser,
 }) => {
@@ -27,7 +26,7 @@ const ToggleFollowBtn = ({
   };
 
   return (
-    <TouchableOpacity style={[styles.btn, BtnStyles]} onPress={handleOnPress}>
+    <Pressable style={[styles.btn, BtnStyles]} onPress={handleOnPress}>
       <View
         style={[
           styles.btnIcon,
@@ -37,7 +36,7 @@ const ToggleFollowBtn = ({
         ]}
       />
       <Text style={styles.btnText}>{isFollowing ? "Following" : "Follow"}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -46,29 +45,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: wp("2.5%"),
-    width: wp("30%"),
-    borderRadius: 50,
-    backgroundColor: "#fff",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowColor: "black",
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
+    width: wp("28%"),
+    height: wp("9%"),
+    borderRadius: wp("1%"),
+    borderWidth: wp(".25%"),
+    borderColor: "#707070",
   },
   btnText: {
     textAlign: "center",
     color: "#313131",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("3.5%"),
+    fontSize: wp("3.2%"),
   },
   btnIcon: {
-    width: wp("1.6%"),
-    height: wp("1.6%"),
+    width: wp("1.3%"),
+    height: wp("1.3%"),
     borderRadius: 100,
-    marginRight: wp("2.5%"),
+    marginRight: wp("3%"),
+    backgroundColor: "#00D088",
   },
 });
 

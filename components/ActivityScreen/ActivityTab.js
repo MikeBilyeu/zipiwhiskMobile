@@ -7,20 +7,12 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-
-import {
-  selectCategory,
-  selectIsLoadingSaves,
-  selectIsLoadingPosts,
-  selectSaves,
-  selectPosts,
-} from "../../redux/reducers/userReducer";
-
-import RecipeScroll from "./RecipeScroll";
+import ActivityScroll from "./ActivityScroll";
+import FollowScroll from "./FollowScroll";
 
 const Tab = createMaterialTopTabNavigator();
 
-const ProfileTab = (props) => {
+const ActivityTab = (props) => {
   return (
     <Tab.Navigator
       style={styles.wrapper}
@@ -33,7 +25,7 @@ const ProfileTab = (props) => {
           fontFamily: "AvenirNextRegular",
           textTransform: "capitalize",
         },
-        tabBarItemStyle: { width: wp("50%") },
+        tabBarItemStyle: { width: wp("33.33r%") },
         tabBarActiveTintColor: "#464646",
         tabBarIndicatorStyle: {
           backgroundColor: "#00D088",
@@ -43,50 +35,24 @@ const ProfileTab = (props) => {
       }}
     >
       <Tab.Screen
-        name="saves"
+        name="Activity"
         options={{
-          tabBarLabel: `Saves (${props.saves.length})`,
+          tabBarLabel: `Activity`,
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
-              name={focused ? "bookmarks" : "bookmarks-outline"}
-              size={wp("5.5%")}
-              color={focused ? "#000" : color}
-            />
-          ),
-        }}
-        children={() => (
-          <RecipeScroll
-            category={props.category}
-            isLoading={props.isLoadingSaves}
-            recipes={props.saves}
-            screenTitle="Saved"
-            navigateTo="SavedRecipeScreen"
-          />
-        )}
-      />
-      <Tab.Screen
-        name="posts"
-        options={{
-          tabBarLabel: `Posts (${props.posts.length})`,
-          tabBarIcon: ({ focused, color }) => (
-            <Ionicons
-              name={focused ? "duplicate" : "duplicate-outline"}
+              name={
+                focused
+                  ? "notifications-circle"
+                  : "notifications-circle-outline"
+              }
               size={wp("6%")}
               color={focused ? "#000" : color}
             />
           ),
         }}
-        children={() => (
-          <RecipeScroll
-            category={props.category}
-            isLoading={props.isLoadingPosts}
-            recipes={props.posts}
-            screenTitle="Posted"
-            navigateTo="PostedRecipeScreen"
-          />
-        )}
+        component={ActivityScroll}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Followers"
         options={{
           tabBarLabel: `Followers (${0})`,
@@ -98,7 +64,7 @@ const ProfileTab = (props) => {
             />
           ),
         }}
-        children={() => null}
+        children={() => <FollowScroll />}
       />
       <Tab.Screen
         name="Following"
@@ -112,29 +78,31 @@ const ProfileTab = (props) => {
             />
           ),
         }}
-        children={() => null}
-      /> */}
+        children={() => <FollowScroll />}
+      />
     </Tab.Navigator>
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
-    zIndex: -1,
+    zIndex: 1,
     flex: 1,
     position: "absolute",
-    top: hp("21.5%"),
+    top: hp("11%"),
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  listContainer: {
+    flex: 1,
+    position: "absolute",
+    top: hp("6%"),
     bottom: 0,
     left: 0,
     right: 0,
   },
 });
 
-const mapStateToProps = (state) => ({
-  category: selectCategory(state),
-  saves: selectSaves(state),
-  posts: selectPosts(state),
-  isLoadingSaves: selectIsLoadingSaves(state),
-  isLoadingPosts: selectIsLoadingPosts(state),
-});
-export default connect(mapStateToProps)(ProfileTab);
+const mapStateToProps = (state) => ({});
+export default connect(mapStateToProps)(ActivityTab);

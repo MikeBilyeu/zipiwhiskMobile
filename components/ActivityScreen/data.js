@@ -16,6 +16,7 @@ export const data = [
     id: 9667556664333,
     user: {
       username: "mikebilyeu512",
+      name: "Mike Bilyeu",
       image_url: "https://randomuser.me/api/portraits/men/17.jpg",
       id: 10,
       following: 1,
@@ -27,6 +28,7 @@ export const data = [
     id: 96675956664333,
     user: {
       username: "mjackchef12",
+      name: "Chef Jack",
       image_url: "https://randomuser.me/api/portraits/men/67.jpg",
       id: 10,
       following: 1,
@@ -38,6 +40,7 @@ export const data = [
     id: 966754423333,
     user: {
       username: "mikebilyeu512",
+      name: "Mike Bilyeu",
       image_url: "https://randomuser.me/api/portraits/men/17.jpg",
       id: 10,
     },
@@ -50,6 +53,7 @@ export const data = [
     id: 96675104333,
     user: {
       username: "mikebilyeu512",
+      name: "Mike Bilyeu",
       image_url: "https://randomuser.me/api/portraits/men/17.jpg",
       id: 10,
     },
@@ -178,6 +182,7 @@ export const data = [
     user: {
       image_url: "https://randomuser.me/api/portraits/men/54.jpg",
       username: "billybob",
+      name: "Chef Jack",
       id: 10,
     },
     timestamp: "2021-02-15T17:28:38-05:00",

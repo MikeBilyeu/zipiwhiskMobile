@@ -1,11 +1,15 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import UserNameBtn from "../UserNameBtn";
+import UserNameBtn from "./UserNameBtn";
 import ToggleFollowBtn from "../ToggleFollowBtn";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
-const Users = ({ id, username, image }) => (
+const Users = ({ id, username, name, image }) => (
   <View style={styles.container}>
-    <UserNameBtn username={username} image_url={image} id={id} />
+    <UserNameBtn username={username} image_url={image} name={name} id={id} />
     <ToggleFollowBtn />
   </View>
 );
@@ -18,7 +22,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#FFF",
     paddingHorizontal: 10,
-    marginBottom: 10,
+    marginVertical: hp(".75%"),
   },
 });
 export default Users;

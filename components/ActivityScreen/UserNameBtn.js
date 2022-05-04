@@ -1,12 +1,12 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Image, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, Image, Text, View } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 
-const UserNameBtn = ({ id, username, image_url }) => {
+const UserNameBtn = ({ id, username, name, image_url }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -14,7 +14,10 @@ const UserNameBtn = ({ id, username, image_url }) => {
       onPress={() => navigation.push("VisitProfile", { id })}
     >
       <Image style={styles.userImage} source={{ uri: image_url }} />
-      <Text style={styles.username}>{username}</Text>
+      <View>
+        <Text style={styles.text}>{name}</Text>
+        <Text style={[styles.text, styles.username]}>{`@${username}`}</Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -24,21 +27,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 5,
+    alignSelf: "flex-start",
+    marginRight: wp("2%"),
   },
   userImage: {
-    height: wp("10%"),
-    width: wp("10%"),
-    marginRight: wp("1.5%"),
+    height: wp("11%"),
+    width: wp("11%"),
+    marginRight: wp("2.5%"),
     marginLeft: 0,
     resizeMode: "cover",
-    borderRadius: 100,
+    borderRadius: wp("100%"),
+    borderWidth: 1,
+    borderColor: "#E2E2E2",
   },
-  username: {
+  text: {
     color: "#313131",
     fontFamily: "AvenirNextDemiBold",
-    fontSize: wp("4%"),
-    lineHeight: wp("4%"),
+    fontSize: wp("3.2%"),
+    marginVertical: wp(".25%"),
+  },
+  username: {
+    color: "#B7B7B7",
   },
 });
 

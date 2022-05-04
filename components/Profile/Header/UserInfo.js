@@ -43,17 +43,19 @@ const UserInfo = (props) => {
         <Image
           style={{
             marginLeft: wp("4%"),
-            borderRadius: 50,
-            width: wp("10%"),
-            height: wp("10%"),
+            borderRadius: wp("100%"),
+            width: wp("11%"),
+            height: wp("11%"),
+            borderWidth: 1,
+            borderColor: "#E2E2E2",
           }}
           source={props.imageUrl ? { uri: props.imageUrl } : defaultImage}
         />
         <View style={styles.usernameWrapper}>
-          <Text style={styles.usernameText}>{props.username}</Text>
           {props.fullname ? (
             <Text style={styles.fullNameText}>{props.fullname}</Text>
           ) : null}
+          <Text style={styles.usernameText}>{props.username}</Text>
         </View>
       </Pressable>
       {props.children}
@@ -86,22 +88,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginLeft: wp("2%"),
   },
-  usernameText: {
-    textAlign: "center",
-    fontSize: wp("5%"),
+  fullNameText: {
+    fontSize: wp("3.2%"),
     fontFamily: "AvenirNextDemiBold",
     color: "#313131",
-    marginBottom: wp(".5%"),
+    marginBottom: wp(".75%"),
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
   },
-  fullNameText: {
-    textAlign: "center",
-    fontSize: wp("3.25%"),
-    fontFamily: "AvenirNextRegular",
-    color: "#313131",
+  usernameText: {
+    fontSize: wp("3.2%"),
+    fontFamily: "AvenirNextDemiBold",
+    color: "#B7B7B7",
   },
 });
 

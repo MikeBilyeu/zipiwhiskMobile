@@ -11,7 +11,6 @@ import ActivityScreen from "./ActivityScreen";
 
 import SavedRecipeScreen from "./RecipeScreen/SavedRecipeScreen";
 import PostedRecipeScreen from "./RecipeScreen/PostedRecipeScreen";
-import FollowScreen from "./FollowScreen";
 
 import VisitProfileScreen from "./Profile/VisitProfileScreen";
 
@@ -37,7 +36,6 @@ const HomeStack = (props) => {
       <Stack.Screen name="VisitProfile" component={VisitProfileScreen} />
       <Stack.Screen name="SavedRecipeScreen" component={SavedRecipeScreen} />
       <Stack.Screen name="PostedRecipeScreen" component={PostedRecipeScreen} />
-      <Stack.Screen name="Follows" component={FollowScreen} />
     </Stack.Navigator>
   );
 };

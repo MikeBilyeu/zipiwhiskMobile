@@ -11,30 +11,29 @@ import Header from "../Header";
 
 function ActivityHeader() {
   const navigation = useNavigation();
+
   return (
-    <Header>
-      <View style={styles.container}>
-        <Pressable
-          onPress={() => navigation.goBack()}
-          hitSlop={{ bottom: 15 }}
-          style={({ pressed }) => [
-            { opacity: pressed ? 0.5 : 1, alignItems: "flex-start" },
-            styles.backBtn,
-          ]}
-        >
-          <Ionicons
-            name="chevron-back"
-            size={wp("6.5%")}
-            color="#313131"
-            style={{ paddingRight: wp("7%") }}
-          />
-        </Pressable>
+    <View style={styles.container}>
+      <Pressable
+        onPress={() => navigation.goBack()}
+        hitSlop={{ bottom: 15 }}
+        style={({ pressed }) => [
+          { opacity: pressed ? 0.5 : 1, alignItems: "flex-start" },
+          styles.backBtn,
+        ]}
+      >
+        <Ionicons
+          name="chevron-back"
+          size={wp("6.5%")}
+          color="#313131"
+          style={{ paddingRight: wp("7%") }}
+        />
+      </Pressable>
 
-        <Text style={styles.titleText}>Activity</Text>
+      <Text style={styles.titleText}>Activity</Text>
 
-        <View style={{ width: wp("12%"), height: wp("12%") }} />
-      </View>
-    </Header>
+      <View style={{ width: wp("12%"), height: wp("12%") }} />
+    </View>
   );
 }
 
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: wp("5%"),
-    marginTop: 5,
+    marginTop: wp("1%"),
   },
   titleText: {
     textAlign: "center",

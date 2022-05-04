@@ -12,8 +12,11 @@ const Time = ({ time }) => (
 const styles = StyleSheet.create({
   time: {
     color: "#B7B7B7",
-    fontSize: wp("3.5%"),
+    fontSize: wp("3%"),
     fontFamily: "AvenirNextRegular",
+    marginTop: wp("1%"),
+    position: "absolute",
+    top: wp("17%"),
   },
 });
 

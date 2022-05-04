@@ -9,7 +9,7 @@ const UserImageBtn = (props) => (
     hitSlop={20}
   >
     <Image
-      style={[{ borderRadius: 50 }, props.styles]}
+      style={[{}, props.styles]}
       source={props.uri ? { uri: props.uri } : defaultImage}
     />
   </Pressable>
