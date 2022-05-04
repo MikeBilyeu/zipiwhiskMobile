@@ -7,16 +7,14 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import Header from "../Header";
-
-function ActivityHeader() {
+const ActivityHeader = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <Pressable
         onPress={() => navigation.goBack()}
-        hitSlop={{ bottom: 15 }}
+        hitSlop={20}
         style={({ pressed }) => [
           { opacity: pressed ? 0.5 : 1, alignItems: "flex-start" },
           styles.backBtn,
@@ -35,7 +33,7 @@ function ActivityHeader() {
       <View style={{ width: wp("12%"), height: wp("12%") }} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
