@@ -31,6 +31,8 @@ const ActivityTab = (props) => {
           backgroundColor: "#00D088",
           marginBottom: 1,
           borderRadius: "100%",
+          width: "30%",
+          left: wp("1.665%"),
         },
       }}
     >

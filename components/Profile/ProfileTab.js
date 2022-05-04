@@ -39,6 +39,8 @@ const ProfileTab = (props) => {
           backgroundColor: "#00D088",
           marginBottom: 1,
           borderRadius: "100%",
+          width: "47%",
+          left: wp("1.5%"),
         },
       }}
     >
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
     zIndex: -1,
     flex: 1,
     position: "absolute",
-    top: hp("21.5%"),
+    top: hp("21.75%"),
     bottom: 0,
     left: 0,
     right: 0,
