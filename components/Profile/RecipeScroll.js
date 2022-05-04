@@ -37,7 +37,7 @@ const RecipeScroll = (props) => {
     }.`}</Text>
   );
   return props.isLoading ? (
-    <ActivityIndicator />
+    <ActivityIndicator style={{ top: wp("30%") }} />
   ) : (
     <FlatList
       showsVerticalScrollIndicator={false}
