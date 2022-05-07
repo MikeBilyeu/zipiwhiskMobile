@@ -96,14 +96,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  listContainer: {
-    flex: 1,
-    position: "absolute",
-    top: hp("6%"),
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
 });
 
 const mapStateToProps = (state) => ({});
