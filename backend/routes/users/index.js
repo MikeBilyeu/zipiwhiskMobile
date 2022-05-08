@@ -30,6 +30,18 @@ router.post(
   require("./unfollow")
 );
 
+router.get(
+  "/followers",
+  passport.authenticate("jwt", { session: false }),
+  require("./getFollowers")
+);
+
+router.get(
+  "/followings",
+  passport.authenticate("jwt", { session: false }),
+  require("./getFollowings")
+);
+
 router.get("/login", require("./login"));
 
 router.get("/email", require("./checkEmail"));

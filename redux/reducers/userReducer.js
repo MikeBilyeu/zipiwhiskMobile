@@ -13,6 +13,12 @@ import {
   UNLIKE_RECIPE_REQUEST,
   SAVE_RECIPE_REQUEST,
   UNSAVE_RECIPE_REQUEST,
+  GET_FOLLOWERS_REQUEST,
+  GET_FOLLOWERS_SUCCESS,
+  GET_FOLLOWERS_FAILURE,
+  GET_FOLLOWINGS_REQUEST,
+  GET_FOLLOWINGS_SUCCESS,
+  GET_FOLLOWINGS_FAILURE,
 } from "../constants";
 
 import {
@@ -31,8 +37,8 @@ const initialState = {
   image_url: "",
   recipeUnit: "US",
   restriction: null,
-  num_followers: "",
-  num_followings: "",
+  followers: { isLoading: false, users: [] },
+  followings: { isLoading: false, users: [] },
   categoryFilter: "",
   savesData: { isLoading: false, recipes: [] },
   postsData: { isLoading: false, recipes: [] },
@@ -137,6 +143,30 @@ const userReducer = (state = initialState, action) => {
           recipes: unsaveFromRecipes(state.postsData.recipes, action.payload),
         },
       };
+    case GET_FOLLOWERS_REQUEST:
+      return { ...state, followers: { isLoading: true, users: [] } };
+    case GET_FOLLOWERS_SUCCESS:
+      return {
+        ...state,
+        followers: { isLoading: false, users: action.payload },
+      };
+    case GET_FOLLOWERS_FAILURE:
+      return {
+        ...state,
+        followers: { isLoading: false, users: [] },
+      };
+    case GET_FOLLOWINGS_REQUEST:
+      return { ...state, following: { isLoading: true, users: [] } };
+    case GET_FOLLOWINGS_SUCCESS:
+      return {
+        ...state,
+        followings: { isLoading: false, users: action.payload },
+      };
+    case GET_FOLLOWINGS_FAILURE:
+      return {
+        ...state,
+        followings: { isLoading: false, users: [] },
+      };
     default:
       return state;
   }
@@ -148,8 +178,15 @@ export const selectUsername = (state) =>
   state.user.username && `@${state.user.username}`;
 export const selectFullname = (state) => state.user.fullname;
 export const selectImageUrl = (state) => state.user.image_url;
-export const selectNumFollowers = (state) => state.user.num_followers;
-export const selectNumFollowings = (state) => state.user.num_followings;
+export const selectNumFollowers = (state) => state.user.followers.users.length;
+export const selectNumFollowings = (state) =>
+  state.user.followings.users.length;
+export const selectIsLoadingFollowers = (state) =>
+  state.user.followers.isLoading;
+export const selectFollowers = (state) => state.user.followers.users;
+export const selectIsLoadingFollowings = (state) =>
+  state.user.followings.isLoading;
+export const selectFollowings = (state) => state.user.followings.users;
 export const selectIsLoadingSaves = (state) => state.user.savesData.isLoading;
 export const selectIsLoadingPosts = (state) => state.user.postsData.isLoading;
 export const selectSaves = (state) => state.user.savesData.recipes;

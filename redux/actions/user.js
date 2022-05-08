@@ -10,6 +10,12 @@ import {
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
   PROFILE_CATEGORY_CHANGE,
+  GET_FOLLOWERS_REQUEST,
+  GET_FOLLOWERS_SUCCESS,
+  GET_FOLLOWERS_FAILURE,
+  GET_FOLLOWINGS_REQUEST,
+  GET_FOLLOWINGS_SUCCESS,
+  GET_FOLLOWINGS_FAILURE,
 } from "../constants";
 
 export const getUser = () => async (dispatch) => {
@@ -78,4 +84,24 @@ export const categoryChange = (value) => async (dispatch, getState) => {
   dispatch({ type: PROFILE_CATEGORY_CHANGE, payload: value });
   let { categoryFilter } = getState().user;
   dispatch(getUserRecipes(categoryFilter));
+};
+
+export const getFollowers = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_FOLLOWERS_REQUEST });
+    const { data } = await axios.get("api/users/followers");
+    dispatch({ type: GET_FOLLOWERS_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: GET_FOLLOWERS_FAILURE });
+  }
+};
+
+export const getFollowings = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_FOLLOWINGS_REQUEST });
+    const { data } = await axios.get("api/users/followings");
+    dispatch({ type: GET_FOLLOWINGS_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: GET_FOLLOWINGS_FAILURE });
+  }
 };

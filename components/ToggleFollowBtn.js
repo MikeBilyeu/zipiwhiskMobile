@@ -26,16 +26,23 @@ const ToggleFollowBtn = ({
   };
 
   return (
-    <Pressable style={[styles.btn, BtnStyles]} onPress={handleOnPress}>
-      <View
+    <Pressable
+      style={[
+        styles.btn,
+        isFollowing ? styles.followingBtn : styles.followBtn,
+        BtnStyles,
+      ]}
+      onPress={handleOnPress}
+    >
+      {isFollowing ? <View style={styles.btnIcon} /> : null}
+      <Text
         style={[
-          styles.btnIcon,
-          isFollowing
-            ? { backgroundColor: "#FF2121" }
-            : { backgroundColor: "#01C481" },
+          styles.btnText,
+          isFollowing ? styles.followingText : styles.followText,
         ]}
-      />
-      <Text style={styles.btnText}>{isFollowing ? "Following" : "Follow"}</Text>
+      >
+        {isFollowing ? "Following" : "Follow"}
+      </Text>
     </Pressable>
   );
 };
@@ -46,23 +53,32 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: wp("28%"),
-    height: wp("9%"),
+    height: wp("8.5%"),
     borderRadius: wp("1%"),
-    borderWidth: wp(".25%"),
-    borderColor: "#707070",
+    borderWidth: wp(".275%"),
+  },
+  followingBtn: {
+    borderColor: "#313131",
+    backgroundColor: "#fff",
+  },
+  followBtn: {
+    borderColor: "#01C481",
+    backgroundColor: "#01C481",
   },
   btnText: {
     textAlign: "center",
-    color: "#313131",
+    color: "white",
     fontFamily: "AvenirNextDemiBold",
     fontSize: wp("3.2%"),
   },
+  followingText: { color: "#313131" },
+  followText: {},
   btnIcon: {
-    width: wp("1.3%"),
-    height: wp("1.3%"),
+    width: wp("1%"),
+    height: wp("1%"),
     borderRadius: 100,
     marginRight: wp("3%"),
-    backgroundColor: "#00D088",
+    backgroundColor: "#FF2121",
   },
 });
 

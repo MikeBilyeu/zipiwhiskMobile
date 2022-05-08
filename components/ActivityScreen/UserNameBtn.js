@@ -5,15 +5,17 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
+import defaultUserImage from "../../assets/userImage.png";
 
 const UserNameBtn = ({ id, username, name, image_url }) => {
   const navigation = useNavigation();
+  const userImage = image_url ? { uri: image_url } : defaultUserImage;
   return (
     <TouchableOpacity
       style={styles.userContainer}
       onPress={() => navigation.push("VisitProfile", { id })}
     >
-      <Image style={styles.userImage} source={{ uri: image_url }} />
+      <Image style={styles.userImage} source={userImage} />
       <View>
         <Text style={styles.text}>{name}</Text>
         <Text style={[styles.text, styles.username]}>{`@${username}`}</Text>

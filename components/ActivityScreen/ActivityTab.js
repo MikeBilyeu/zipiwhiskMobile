@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Dimensions, StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -9,10 +9,21 @@ import {
 } from "react-native-responsive-screen";
 import ActivityScroll from "./ActivityScroll";
 import FollowScroll from "./FollowScroll";
+import { getFollowers, getFollowings } from "../../redux/actions/user";
+import {
+  selectFollowers,
+  selectIsLoadingFollowers,
+  selectFollowings,
+  selectIsLoadingFollowings,
+} from "../../redux/reducers/userReducer";
 
 const Tab = createMaterialTopTabNavigator();
 
 const ActivityTab = (props) => {
+  useEffect(() => {
+    props.getFollowers();
+    props.getFollowings();
+  }, []);
   return (
     <Tab.Navigator
       style={styles.wrapper}
@@ -57,7 +68,7 @@ const ActivityTab = (props) => {
       <Tab.Screen
         name="Followers"
         options={{
-          tabBarLabel: `Followers (${0})`,
+          tabBarLabel: `Followers (${props.followers.length})`,
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "people-circle" : "people-circle-outline"}
@@ -66,12 +77,17 @@ const ActivityTab = (props) => {
             />
           ),
         }}
-        children={() => <FollowScroll />}
+        children={() => (
+          <FollowScroll
+            isLoading={props.isLoadingFollowers}
+            users={props.followers}
+          />
+        )}
       />
       <Tab.Screen
         name="Following"
         options={{
-          tabBarLabel: `Following (${0})`,
+          tabBarLabel: `Following (${props.followings.length})`,
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "person-circle" : "person-circle-outline"}
@@ -80,7 +96,12 @@ const ActivityTab = (props) => {
             />
           ),
         }}
-        children={() => <FollowScroll />}
+        children={() => (
+          <FollowScroll
+            isLoading={props.isLoadingFollowings}
+            users={props.followings}
+          />
+        )}
       />
     </Tab.Navigator>
   );
@@ -98,5 +119,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({});
-export default connect(mapStateToProps)(ActivityTab);
+const mapStateToProps = (state) => ({
+  isLoadingFollowers: selectIsLoadingFollowers(state),
+  followers: selectFollowers(state),
+  isLoadingFollowings: selectIsLoadingFollowings(state),
+  followings: selectFollowings(state),
+});
+export default connect(mapStateToProps, { getFollowers, getFollowings })(
+  ActivityTab
+);

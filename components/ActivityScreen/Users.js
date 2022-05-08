@@ -7,10 +7,10 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-const Users = ({ id, username, name, image }) => (
+const Users = ({ id, username, name, image, following }) => (
   <View style={styles.container}>
     <UserNameBtn username={username} image_url={image} name={name} id={id} />
-    <ToggleFollowBtn />
+    <ToggleFollowBtn following={following} />
   </View>
 );
 
