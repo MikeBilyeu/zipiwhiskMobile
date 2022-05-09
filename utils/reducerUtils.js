@@ -20,3 +20,9 @@ export const unlikeFromRecipes = (recipes, id) =>
 
 export const removeFromRecipes = (recipes, id) =>
   recipes.filter((r) => r.id !== id);
+
+export const followFromUsers = (users, id) =>
+  users.map((u) => (u.id === id ? { ...u, isFollowing: true } : u));
+
+export const unfollowFromUsers = (users, id) =>
+  users.map((u) => (u.id === id ? { ...u, isFollowing: false } : u));

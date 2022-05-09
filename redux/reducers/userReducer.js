@@ -19,6 +19,12 @@ import {
   GET_FOLLOWINGS_REQUEST,
   GET_FOLLOWINGS_SUCCESS,
   GET_FOLLOWINGS_FAILURE,
+  FOLLOW_USER_REQUEST,
+  FOLLOW_USER_SUCCESS,
+  FOLLOW_USER_FAILURE,
+  UNFOLLOW_USER_REQUEST,
+  UNFOLLOW_USER_SUCCESS,
+  UNFOLLOW_USER_FAILURE,
 } from "../constants";
 
 import {
@@ -26,6 +32,8 @@ import {
   unsaveFromRecipes,
   likeFromRecipes,
   unlikeFromRecipes,
+  followFromUsers,
+  unfollowFromUsers,
 } from "../../utils/reducerUtils";
 
 const initialState = {
@@ -166,6 +174,30 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         followings: { isLoading: false, users: [] },
+      };
+    case FOLLOW_USER_REQUEST:
+      return {
+        ...state,
+        followers: {
+          ...state.followers,
+          users: followFromUsers(state.followers.users, action.payload),
+        },
+        followings: {
+          ...state.followings,
+          users: followFromUsers(state.followings.users, action.payload),
+        },
+      };
+    case UNFOLLOW_USER_REQUEST:
+      return {
+        ...state,
+        followers: {
+          ...state.followers,
+          users: unfollowFromUsers(state.followers.users, action.payload),
+        },
+        followings: {
+          ...state.followings,
+          users: unfollowFromUsers(state.followings.users, action.payload),
+        },
       };
     default:
       return state;

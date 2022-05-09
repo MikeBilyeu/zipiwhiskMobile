@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   const { following_id } = req.body;
   try {
     pool.query(
-      "INSERT INTO follows (following_id, follower_id) VALUES (?, ?)",
+      "INSERT IGNORE INTO follows (following_id, follower_id) VALUES (?, ?)",
       [following_id, follower_id],
       (err, results, fields) => {
         if (err) throw err;

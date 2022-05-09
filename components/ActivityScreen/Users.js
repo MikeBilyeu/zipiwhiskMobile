@@ -10,7 +10,7 @@ import {
 const Users = ({ id, username, name, image, isFollowing }) => (
   <View style={styles.container}>
     <UserNameBtn username={username} image_url={image} name={name} id={id} />
-    <ToggleFollowBtn isFollowing={isFollowing} />
+    <ToggleFollowBtn id={id} isFollowing={isFollowing} />
   </View>
 );
 
