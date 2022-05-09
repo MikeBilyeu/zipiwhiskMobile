@@ -13,7 +13,7 @@ const renderUsers = ({ item }) => (
     username={item.username}
     name={item.fullname}
     image={item.image_url}
-    following={item.following}
+    isFollowing={item.isFollowing}
     id={item.id}
   />
 );

@@ -9,19 +9,16 @@ import { followUser, unfollowUser } from "../redux/actions/visitProfile";
 
 const ToggleFollowBtn = ({
   id,
-  following,
+  isFollowing,
   BtnStyles,
   followUser,
   unfollowUser,
 }) => {
-  const [isFollowing, setIsFollowing] = useState(following);
   const handleOnPress = () => {
     if (isFollowing) {
       unfollowUser(id);
-      setIsFollowing(0);
     } else {
       followUser(id);
-      setIsFollowing(1);
     }
   };
 

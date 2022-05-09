@@ -38,7 +38,7 @@ const VisitProfileHeader = (props) => {
           <ToggleFollowBtn
             BtnStyles={{ alignSelf: "center" }}
             id={props.id}
-            following={props.isFollowing}
+            isFollowing={props.isFollowing}
           />
         </FollowContainer>
       </View>

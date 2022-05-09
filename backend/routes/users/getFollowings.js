@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
       u.image_url, 
       u.username, 
       u.fullname,
-      1 following,
+      1 isFollowing,
       f.created_at 
       FROM follows f 
       LEFT JOIN users u ON u.id = f.following_id 
