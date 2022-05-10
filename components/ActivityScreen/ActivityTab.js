@@ -9,7 +9,7 @@ import {
 } from "react-native-responsive-screen";
 import ActivityScroll from "./ActivityScroll";
 import FollowScroll from "./FollowScroll";
-import { getFollowers, getFollowings } from "../../redux/actions/user";
+import { getFollowers, getFollowings } from "../../redux/actions/follows";
 import {
   selectFollowers,
   selectIsLoadingFollowers,
@@ -17,7 +17,7 @@ import {
   selectIsLoadingFollowings,
   selectNumFollowers,
   selectNumFollowings,
-} from "../../redux/reducers/userReducer";
+} from "../../redux/reducers/followsReducer";
 
 const Tab = createMaterialTopTabNavigator();
 

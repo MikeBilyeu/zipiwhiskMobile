@@ -10,6 +10,7 @@ import loginReducer from "../reducers/loginReducer";
 import signupReducer from "../reducers/signupReducer";
 import recipeReducer from "../reducers/recipeReducer";
 import feedReducer from "../reducers/feedReducer";
+import followsReducer from "../reducers/followsReducer";
 
 const rootReducer = combineReducers({
   recipeForm: recipeFormReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   visitProfile: visitProfileReducer,
   recipe: recipeReducer,
   feedRecipes: feedReducer,
+  follows: followsReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
