@@ -15,6 +15,8 @@ import {
   selectIsLoadingFollowers,
   selectFollowings,
   selectIsLoadingFollowings,
+  selectNumFollowers,
+  selectNumFollowings,
 } from "../../redux/reducers/userReducer";
 
 const Tab = createMaterialTopTabNavigator();
@@ -68,7 +70,7 @@ const ActivityTab = (props) => {
       <Tab.Screen
         name="Followers"
         options={{
-          tabBarLabel: `Followers (${props.followers.length})`,
+          tabBarLabel: `Followers (${props.numFollowers})`,
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "people-circle" : "people-circle-outline"}
@@ -87,7 +89,7 @@ const ActivityTab = (props) => {
       <Tab.Screen
         name="Following"
         options={{
-          tabBarLabel: `Following (${props.followings.length})`,
+          tabBarLabel: `Following (${props.numFollowings})`,
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "person-circle" : "person-circle-outline"}
@@ -124,6 +126,8 @@ const mapStateToProps = (state) => ({
   followers: selectFollowers(state),
   isLoadingFollowings: selectIsLoadingFollowings(state),
   followings: selectFollowings(state),
+  numFollowers: selectNumFollowers(state),
+  numFollowings: selectNumFollowings(state),
 });
 export default connect(mapStateToProps, { getFollowers, getFollowings })(
   ActivityTab

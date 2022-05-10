@@ -13,6 +13,7 @@ import {
   UNFOLLOW_USER_SUCCESS,
   UNFOLLOW_USER_FAILURE,
 } from "../constants";
+import { getNumFollowings } from "./user";
 
 export const getVisitProfile = (id) => async (dispatch) => {
   try {
@@ -41,6 +42,7 @@ export const followUser = (following_id) => async (dispatch) => {
     dispatch({ type: FOLLOW_USER_REQUEST, payload: following_id });
     await axios.post("api/users/follow", { following_id });
     dispatch({ type: FOLLOW_USER_SUCCESS, payload: following_id });
+    dispatch(getNumFollowings());
   } catch (err) {
     dispatch({ type: FOLLOW_USER_FAILURE });
   }
@@ -51,6 +53,7 @@ export const unfollowUser = (following_id) => async (dispatch) => {
     dispatch({ type: UNFOLLOW_USER_REQUEST, payload: following_id });
     await axios.post("api/users/unfollow", { following_id });
     dispatch({ type: UNFOLLOW_USER_SUCCESS, payload: following_id });
+    dispatch(getNumFollowings());
   } catch (err) {
     dispatch({ type: UNFOLLOW_USER_FAILURE });
   }

@@ -16,6 +16,8 @@ import {
   GET_FOLLOWINGS_REQUEST,
   GET_FOLLOWINGS_SUCCESS,
   GET_FOLLOWINGS_FAILURE,
+  GET_NUM_FOLLOWERS,
+  GET_NUM_FOLLOWINGS,
 } from "../constants";
 
 export const getUser = () => async (dispatch) => {
@@ -91,6 +93,7 @@ export const getFollowers = () => async (dispatch) => {
     dispatch({ type: GET_FOLLOWERS_REQUEST });
     const { data } = await axios.get("api/users/followers");
     dispatch({ type: GET_FOLLOWERS_SUCCESS, payload: data });
+    dispatch(getNumFollowers());
   } catch (err) {
     dispatch({ type: GET_FOLLOWERS_FAILURE });
   }
@@ -101,7 +104,23 @@ export const getFollowings = () => async (dispatch) => {
     dispatch({ type: GET_FOLLOWINGS_REQUEST });
     const { data } = await axios.get("api/users/followings");
     dispatch({ type: GET_FOLLOWINGS_SUCCESS, payload: data });
+    dispatch(getNumFollowings());
   } catch (err) {
     dispatch({ type: GET_FOLLOWINGS_FAILURE });
   }
+};
+
+export const getNumFollowers = () => async (dispatch) => {
+  console.log("GET Num Followers");
+  try {
+    const { data } = await axios.get("api/users/numfollowers");
+    dispatch({ type: GET_NUM_FOLLOWERS, payload: data });
+  } catch (err) {}
+};
+
+export const getNumFollowings = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get("api/users/numfollowings");
+    dispatch({ type: GET_NUM_FOLLOWINGS, payload: data });
+  } catch (err) {}
 };

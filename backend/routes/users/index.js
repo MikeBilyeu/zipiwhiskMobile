@@ -37,6 +37,17 @@ router.get(
 );
 
 router.get(
+  "/numfollowers",
+  passport.authenticate("jwt", { session: false }),
+  require("./getNumFollowers")
+);
+router.get(
+  "/numfollowings",
+  passport.authenticate("jwt", { session: false }),
+  require("./getNumFollowings")
+);
+
+router.get(
   "/followings",
   passport.authenticate("jwt", { session: false }),
   require("./getFollowings")
