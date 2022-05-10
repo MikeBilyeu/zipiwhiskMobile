@@ -111,7 +111,6 @@ export const getFollowings = () => async (dispatch) => {
 };
 
 export const getNumFollowers = () => async (dispatch) => {
-  console.log("GET Num Followers");
   try {
     const { data } = await axios.get("api/users/numfollowers");
     dispatch({ type: GET_NUM_FOLLOWERS, payload: data });

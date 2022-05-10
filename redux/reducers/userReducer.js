@@ -169,7 +169,7 @@ const userReducer = (state = initialState, action) => {
         followers: initialState.followers,
       };
     case GET_FOLLOWINGS_REQUEST:
-      return { ...state, following: { ...state.followers, isLoading: true } };
+      return { ...state, followings: { ...state.followings, isLoading: true } };
     case GET_FOLLOWINGS_SUCCESS:
       return {
         ...state,

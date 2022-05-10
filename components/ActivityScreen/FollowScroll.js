@@ -1,3 +1,4 @@
+import { isLoaded } from "expo-font";
 import React from "react";
 import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
 
@@ -28,6 +29,8 @@ const FollowScreen = (props) => {
       data={props.users}
       renderItem={renderUsers}
       keyExtractor={(item) => item.id.toString()}
+      onRefresh={props.onRefresh}
+      refreshing={false}
     />
   );
 };

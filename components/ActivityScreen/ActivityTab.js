@@ -83,6 +83,7 @@ const ActivityTab = (props) => {
           <FollowScroll
             isLoading={props.isLoadingFollowers}
             users={props.followers}
+            onRefresh={props.getFollowers}
           />
         )}
       />
@@ -102,6 +103,7 @@ const ActivityTab = (props) => {
           <FollowScroll
             isLoading={props.isLoadingFollowings}
             users={props.followings}
+            onRefresh={props.getFollowings}
           />
         )}
       />
