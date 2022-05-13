@@ -50,7 +50,10 @@ const ActivityScroll = (props) => {
   ) : (
     <FlatList
       style={styles.listContainer}
-      contentContainerStyle={{ paddingHorizontal: wp("2%") }}
+      contentContainerStyle={{
+        paddingHorizontal: wp("2%"),
+        paddingBottom: wp("5%"),
+      }}
       data={props.data}
       numColumns={1}
       renderItem={renderItem}
