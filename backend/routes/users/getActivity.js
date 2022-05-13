@@ -64,9 +64,9 @@ module.exports = async (req, res) => {
                   [id, id],
                   async (err, results) => {
                     if (err) throw err;
-                    activity = [...activity, ...results].sort((a, b) => {
-                      return new Date(b.created_at) - new Date(a.created_at);
-                    });
+                    activity = [...activity, ...results].sort(
+                      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+                    );
 
                     return res.status(200).json(activity);
                   }
