@@ -48,6 +48,12 @@ router.get(
 );
 
 router.get(
+  "/activity",
+  passport.authenticate("jwt", { session: false }),
+  require("./getActivity")
+);
+
+router.get(
   "/followings",
   passport.authenticate("jwt", { session: false }),
   require("./getFollowings")

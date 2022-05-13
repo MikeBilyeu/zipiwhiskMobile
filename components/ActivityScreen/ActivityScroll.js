@@ -1,6 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -10,14 +9,12 @@ import Notification from "./Notification";
 import ToggleFollowBtn from "../ToggleFollowBtn";
 import RecipeThumbnailBtn from "./RecipeThumbnailBtn";
 
-import { data } from "./data";
-
 const renderItem = ({ item }) => {
   switch (item.type) {
     case "follow":
       return (
         <Notification data={item} text="Followed you.">
-          <ToggleFollowBtn id={item.user.id} following={item.user.following} />
+          <ToggleFollowBtn id={item.id} following={item.isFollowing} />
         </Notification>
       );
     case "like":
@@ -39,7 +36,7 @@ const renderItem = ({ item }) => {
           text={`Mentioned you in a comment: ${item.comment}`}
           textStyles={{ textAlign: "left" }}
         >
-          <RecipeThumbnailBtn media_url={item.recipe.media_url} />
+          <RecipeThumbnailBtn media_url={item.media_url} />
         </Notification>
       );
     default:
@@ -47,20 +44,25 @@ const renderItem = ({ item }) => {
   }
 };
 
-const ActivityScroll = () => (
-  <FlatList
-    style={styles.listContainer}
-    contentContainerStyle={{ paddingHorizontal: wp("2%") }}
-    data={data}
-    numColumns={1}
-    renderItem={renderItem}
-    keyExtractor={(item) => item.id.toString()}
-  />
-);
+const ActivityScroll = (props) => {
+  return props.isLoading ? (
+    <ActivityIndicator style={{ top: wp("20%") }} />
+  ) : (
+    <FlatList
+      style={styles.listContainer}
+      contentContainerStyle={{ paddingHorizontal: wp("2%") }}
+      data={props.data}
+      numColumns={1}
+      renderItem={renderItem}
+      keyExtractor={(item, i) => i.toString()}
+      onRefresh={props.onRefresh}
+      refreshing={false}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   listContainer: { backgroundColor: "#fff" },
 });
 
-const mapStateToProps = (state) => ({});
-export default connect(mapStateToProps)(ActivityScroll);
+export default ActivityScroll;

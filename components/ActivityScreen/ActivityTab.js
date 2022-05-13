@@ -10,6 +10,7 @@ import {
 import ActivityScroll from "./ActivityScroll";
 import FollowScroll from "./FollowScroll";
 import { getFollowers, getFollowings } from "../../redux/actions/follows";
+import { getActivity } from "../../redux/actions/user";
 import {
   selectFollowers,
   selectIsLoadingFollowers,
@@ -18,6 +19,10 @@ import {
   selectNumFollowers,
   selectNumFollowings,
 } from "../../redux/reducers/followsReducer";
+import {
+  selectActivity,
+  selectIsLoadingActivity,
+} from "../../redux/reducers/activityReducer";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -25,6 +30,7 @@ const ActivityTab = (props) => {
   useEffect(() => {
     props.getFollowers();
     props.getFollowings();
+    props.getActivity();
   }, []);
   return (
     <Tab.Navigator
@@ -65,7 +71,13 @@ const ActivityTab = (props) => {
             />
           ),
         }}
-        component={ActivityScroll}
+        children={() => (
+          <ActivityScroll
+            isLoading={props.isLoadingActivity}
+            data={props.activity}
+            onRefresh={props.getActivity}
+          />
+        )}
       />
       <Tab.Screen
         name="Followers"
@@ -130,7 +142,11 @@ const mapStateToProps = (state) => ({
   followings: selectFollowings(state),
   numFollowers: selectNumFollowers(state),
   numFollowings: selectNumFollowings(state),
+  activity: selectActivity(state),
+  isLoadingActivity: selectIsLoadingActivity(state),
 });
-export default connect(mapStateToProps, { getFollowers, getFollowings })(
-  ActivityTab
-);
+export default connect(mapStateToProps, {
+  getFollowers,
+  getFollowings,
+  getActivity,
+})(ActivityTab);

@@ -10,6 +10,9 @@ import {
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
   PROFILE_CATEGORY_CHANGE,
+  GET_ACTIVITY_REQUEST,
+  GET_ACTIVITY_SUCCESS,
+  GET_ACTIVITY_FAILURE,
 } from "../constants";
 
 export const getUser = () => async (dispatch) => {
@@ -71,6 +74,16 @@ export const getPosts = (category) => async (dispatch) => {
     dispatch({ type: GET_POSTS_SUCCESS, payload: data });
   } catch (err) {
     dispatch({ type: GET_POSTS_FAILURE });
+  }
+};
+
+export const getActivity = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_ACTIVITY_REQUEST });
+    const { data } = await axios.get("api/users/activity");
+    dispatch({ type: GET_ACTIVITY_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: GET_ACTIVITY_FAILURE });
   }
 };
 

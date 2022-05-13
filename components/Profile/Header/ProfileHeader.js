@@ -7,10 +7,12 @@ import {
   selectUsername,
   selectFullname,
   selectImageUrl,
-  selectNumFollowers,
-  selectNumFollowings,
   selectCategory,
 } from "../../../redux/reducers/userReducer";
+import {
+  selectNumFollowers,
+  selectNumFollowings,
+} from "../../../redux/reducers/followsReducer";
 
 import UserInfo from "./UserInfo";
 import CreateRecipeBtn from "./CreateRecipeBtn";

@@ -216,6 +216,21 @@ CREATE TABLE comments_likes (
     PRIMARY KEY(user_id, comment_id)
 );
 
+CREATE TABLE comments_mentions (
+    user_id INT NOT NULL,
+    comment_id INT NOT NULL,
+    mentions_user_id INT NOT NULL,
+    FOREIGN KEY (user_id) 
+        REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (mentions_user_id) 
+        REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (comment_id) 
+        REFERENCES comments(id) ON DELETE CASCADE,
+    PRIMARY KEY(user_id, comment_id, mentions_user_id)
+);
+
+
+
 
         SELECT 
         id, 

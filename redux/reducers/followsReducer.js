@@ -94,12 +94,12 @@ const followsReducer = (state = initialState, action) => {
   }
 };
 
-export const selectNumFollowers = (state) => state.user.followers.totalNum;
-export const selectNumFollowings = (state) => state.user.followings.totalNum;
+export const selectNumFollowers = (state) => state.follows.followers.totalNum;
+export const selectNumFollowings = (state) => state.follows.followings.totalNum;
 export const selectIsLoadingFollowers = (state) =>
-  state.user.followers.isLoading;
-export const selectFollowers = (state) => state.user.followers.users;
+  state.follows.followers.isLoading;
+export const selectFollowers = (state) => state.follows.followers.users;
 export const selectIsLoadingFollowings = (state) =>
-  state.user.followings.isLoading;
-export const selectFollowings = (state) => state.user.followings.users;
+  state.follows.followings.isLoading;
+export const selectFollowings = (state) => state.follows.followings.users;
 export default followsReducer;

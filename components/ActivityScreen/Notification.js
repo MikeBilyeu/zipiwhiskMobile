@@ -13,15 +13,15 @@ const Notification = (props) => {
     <>
       <View style={styles.wrapper}>
         <UserNameBtn
-          username={props.data.user.username}
-          image_url={props.data.user.image_url}
-          name={props.data.user.name}
-          id={props.data.user.id}
+          username={props.data.username}
+          image_url={props.data.image_url}
+          name={props.data.fullname}
+          id={props.data.id}
         />
         <Text style={[styles.text, props.textStyles]}>{props.text}</Text>
         {props.children}
       </View>
-      <Time time={props.data.timestamp} />
+      <Time time={props.data.created_at} />
     </>
   );
 };

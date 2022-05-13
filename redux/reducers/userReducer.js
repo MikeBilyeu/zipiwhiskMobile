@@ -13,16 +13,6 @@ import {
   UNLIKE_RECIPE_REQUEST,
   SAVE_RECIPE_REQUEST,
   UNSAVE_RECIPE_REQUEST,
-  GET_FOLLOWERS_REQUEST,
-  GET_FOLLOWERS_SUCCESS,
-  GET_FOLLOWERS_FAILURE,
-  GET_FOLLOWINGS_REQUEST,
-  GET_FOLLOWINGS_SUCCESS,
-  GET_FOLLOWINGS_FAILURE,
-  FOLLOW_USER_REQUEST,
-  UNFOLLOW_USER_REQUEST,
-  GET_NUM_FOLLOWERS,
-  GET_NUM_FOLLOWINGS,
 } from "../constants";
 
 import {
@@ -30,8 +20,6 @@ import {
   unsaveFromRecipes,
   likeFromRecipes,
   unlikeFromRecipes,
-  followFromUsers,
-  unfollowFromUsers,
 } from "../../utils/reducerUtils";
 
 const initialState = {
@@ -43,8 +31,6 @@ const initialState = {
   image_url: "",
   recipeUnit: "US",
   restriction: null,
-  followers: { isLoading: false, users: [], totalNum: 0 },
-  followings: { isLoading: false, users: [], totalNum: 0 },
   categoryFilter: "",
   savesData: { isLoading: false, recipes: [] },
   postsData: { isLoading: false, recipes: [] },
@@ -149,75 +135,7 @@ const userReducer = (state = initialState, action) => {
           recipes: unsaveFromRecipes(state.postsData.recipes, action.payload),
         },
       };
-    case GET_FOLLOWERS_REQUEST:
-      return {
-        ...state,
-        followers: { ...state.followers, isLoading: true },
-      };
-    case GET_FOLLOWERS_SUCCESS:
-      return {
-        ...state,
-        followers: {
-          ...state.followers,
-          isLoading: false,
-          users: action.payload,
-        },
-      };
-    case GET_FOLLOWERS_FAILURE:
-      return {
-        ...state,
-        followers: initialState.followers,
-      };
-    case GET_FOLLOWINGS_REQUEST:
-      return { ...state, followings: { ...state.followings, isLoading: true } };
-    case GET_FOLLOWINGS_SUCCESS:
-      return {
-        ...state,
-        followings: {
-          ...state.followings,
-          isLoading: false,
-          users: action.payload,
-        },
-      };
-    case GET_FOLLOWINGS_FAILURE:
-      return {
-        ...state,
-        followings: initialState.followings,
-      };
-    case FOLLOW_USER_REQUEST:
-      return {
-        ...state,
-        followers: {
-          ...state.followers,
-          users: followFromUsers(state.followers.users, action.payload),
-        },
-        followings: {
-          ...state.followings,
-          users: followFromUsers(state.followings.users, action.payload),
-        },
-      };
-    case UNFOLLOW_USER_REQUEST:
-      return {
-        ...state,
-        followers: {
-          ...state.followers,
-          users: unfollowFromUsers(state.followers.users, action.payload),
-        },
-        followings: {
-          ...state.followings,
-          users: unfollowFromUsers(state.followings.users, action.payload),
-        },
-      };
-    case GET_NUM_FOLLOWERS:
-      return {
-        ...state,
-        followers: { ...state.followers, totalNum: action.payload },
-      };
-    case GET_NUM_FOLLOWINGS:
-      return {
-        ...state,
-        followings: { ...state.followings, totalNum: action.payload },
-      };
+
     default:
       return state;
   }
@@ -229,14 +147,6 @@ export const selectUsername = (state) =>
   state.user.username && `@${state.user.username}`;
 export const selectFullname = (state) => state.user.fullname;
 export const selectImageUrl = (state) => state.user.image_url;
-export const selectNumFollowers = (state) => state.user.followers.totalNum;
-export const selectNumFollowings = (state) => state.user.followings.totalNum;
-export const selectIsLoadingFollowers = (state) =>
-  state.user.followers.isLoading;
-export const selectFollowers = (state) => state.user.followers.users;
-export const selectIsLoadingFollowings = (state) =>
-  state.user.followings.isLoading;
-export const selectFollowings = (state) => state.user.followings.users;
 export const selectIsLoadingSaves = (state) => state.user.savesData.isLoading;
 export const selectIsLoadingPosts = (state) => state.user.postsData.isLoading;
 export const selectSaves = (state) => state.user.savesData.recipes;

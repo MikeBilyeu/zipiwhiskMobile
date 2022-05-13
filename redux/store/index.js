@@ -11,6 +11,7 @@ import signupReducer from "../reducers/signupReducer";
 import recipeReducer from "../reducers/recipeReducer";
 import feedReducer from "../reducers/feedReducer";
 import followsReducer from "../reducers/followsReducer";
+import activityReducer from "../reducers/activityReducer";
 
 const rootReducer = combineReducers({
   recipeForm: recipeFormReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   recipe: recipeReducer,
   feedRecipes: feedReducer,
   follows: followsReducer,
+  activity: activityReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
