@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     maxHeight: 70,
   },
   btn: {
-    height: hp("6%"),
+    height: hp("5%"),
     maxHeight: 45,
     justifyContent: "center",
     paddingTop: hp(".25%"),
