@@ -20,7 +20,11 @@ const ImageAndLogout = (props) => {
         <View style={styles.center}>
           <UserImageBtn
             uri={props.imageUrl}
-            styles={{ width: 85, height: 85 }}
+            styles={{
+              width: wp("25%"),
+              height: wp("25%"),
+              borderRadius: wp("1%"),
+            }}
             handleImagePress={() => props.setModalVisible(true)}
           />
           <Text style={styles.imageBtnText}>Change Image</Text>

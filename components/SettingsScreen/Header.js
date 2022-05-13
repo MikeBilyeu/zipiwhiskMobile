@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderBottomWidth: 0.25,
     borderBottomColor: "#E3E3E3",
-    height: hp("12%"),
+    height: hp("8%"),
   },
   headerWrapper: {
     width: "100%",

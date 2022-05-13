@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: wp("28%"),
     height: wp("8.5%"),
-    borderRadius: wp("1%"),
+    borderRadius: wp("2%"),
     borderWidth: wp(".275%"),
   },
   followingBtn: {
