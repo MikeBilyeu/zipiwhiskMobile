@@ -2,7 +2,11 @@ import {
   GET_ACTIVITY_REQUEST,
   GET_ACTIVITY_SUCCESS,
   GET_ACTIVITY_FAILURE,
+  FOLLOW_USER_REQUEST,
+  UNFOLLOW_USER_REQUEST,
 } from "../constants";
+
+import { followFromUsers, unfollowFromUsers } from "../../utils/reducerUtils";
 
 const initialState = {
   isLoading: false,
@@ -19,6 +23,17 @@ const activityReducer = (state = initialState, action) => {
 
     case GET_ACTIVITY_FAILURE:
       return { isLoading: false, data: [] };
+
+    case FOLLOW_USER_REQUEST:
+      return {
+        ...state,
+        data: followFromUsers(state.data, action.payload),
+      };
+    case UNFOLLOW_USER_REQUEST:
+      return {
+        ...state,
+        data: unfollowFromUsers(state.data, action.payload),
+      };
 
     default:
       return state;

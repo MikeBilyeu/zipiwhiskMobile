@@ -18,12 +18,9 @@ module.exports = async (req, res) => {
       async (err, results) => {
         if (err) throw err;
         activity = [...activity, ...results];
-      }
-    );
-
-    //Likes
-    pool.query(
-      `SELECT 'like' type, u.id, u.fullname, 
+        //Likes
+        pool.query(
+          `SELECT 'like' type, u.id, u.fullname, 
       u.username, u.image_url, 
       ur.recipe_id, r.media_url, 
       ul.created_at
@@ -34,16 +31,13 @@ module.exports = async (req, res) => {
       WHERE ur.user_id = ?
       ORDER BY ul.created_at DESC 
       LIMIT 100;`,
-      [id, id],
-      async (err, results) => {
-        if (err) throw err;
-        activity = [...activity, ...results];
-      }
-    );
-
-    //Saves
-    pool.query(
-      `SELECT 'save' type, u.id, u.fullname,
+          [id, id],
+          async (err, results) => {
+            if (err) throw err;
+            activity = [...activity, ...results];
+            //Saves
+            pool.query(
+              `SELECT 'save' type, u.id, u.fullname,
       u.username, u.image_url, ur.recipe_id, r.media_url, us.created_at
       FROM users_recipes ur
       INNER JOIN users_saves us ON us.recipe_id = ur.recipe_id AND us.user_id != ?
@@ -52,32 +46,35 @@ module.exports = async (req, res) => {
       WHERE ur.user_id = ?
       ORDER BY us.created_at DESC 
       LIMIT 100;`,
-      [id, id],
-      async (err, results) => {
-        if (err) throw err;
-        activity = [...activity, ...results];
-      }
-    );
-
-    //Mentions
-    pool.query(
-      `SELECT 'mention' type, u.id, u.fullname, 
+              [id, id],
+              async (err, results) => {
+                if (err) throw err;
+                activity = [...activity, ...results];
+                //Mentions
+                pool.query(
+                  `SELECT 'mention' type, u.id, u.fullname, 
       u.username, u.image_url, c.comment, r.id, r.media_url, c.created_at
       FROM comments_mentions cm
       LEFT JOIN users u ON u.id = cm.user_id
       LEFT JOIN comments c ON c.id = cm.comment_id
       LEFT JOIN recipes r ON r.id = c.recipe_id
-      WHERE cm.mentions_user_id = ?
+      WHERE cm.mentions_user_id = ? AND cm.user_id != ?
       ORDER BY c.created_at DESC 
       LIMIT 100;`,
-      [id],
-      async (err, results) => {
-        if (err) throw err;
-        activity = [...activity, ...results].sort((a, b) => {
-          return new Date(b.created_at) - new Date(a.created_at);
-        });
+                  [id, id],
+                  async (err, results) => {
+                    if (err) throw err;
+                    activity = [...activity, ...results].sort((a, b) => {
+                      return new Date(b.created_at) - new Date(a.created_at);
+                    });
 
-        return res.status(200).json(activity);
+                    return res.status(200).json(activity);
+                  }
+                );
+              }
+            );
+          }
+        );
       }
     );
   } catch (err) {

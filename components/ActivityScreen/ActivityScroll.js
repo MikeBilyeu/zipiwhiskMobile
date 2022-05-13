@@ -14,7 +14,7 @@ const renderItem = ({ item }) => {
     case "follow":
       return (
         <Notification data={item} text="Followed you.">
-          <ToggleFollowBtn id={item.id} following={item.isFollowing} />
+          <ToggleFollowBtn id={item.id} isFollowing={item.isFollowing} />
         </Notification>
       );
     case "like":
