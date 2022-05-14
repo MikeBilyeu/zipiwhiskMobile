@@ -78,8 +78,6 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     shadowOpacity: 0.2,
     shadowRadius: 2,
-    borderWidth: 1,
-    borderColor: "#fff",
   },
   btnText: {
     color: "#707070",
@@ -88,11 +86,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   btnContainerSelected: {
-    borderWidth: 1,
-    borderColor: "#313131",
+    backgroundColor: "#00D088",
+    color: "#313131",
   },
   btnTextSelected: {
-    color: "#313131",
+    color: "#fff",
   },
 });
 
