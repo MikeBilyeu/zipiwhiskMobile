@@ -12,6 +12,7 @@ import recipeReducer from "../reducers/recipeReducer";
 import feedReducer from "../reducers/feedReducer";
 import followsReducer from "../reducers/followsReducer";
 import activityReducer from "../reducers/activityReducer";
+import searchReducer from "../reducers/searchReducer";
 
 const rootReducer = combineReducers({
   recipeForm: recipeFormReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   visitProfile: visitProfileReducer,
   recipe: recipeReducer,
   feedRecipes: feedReducer,
+  search: searchReducer,
   follows: followsReducer,
   activity: activityReducer,
 });

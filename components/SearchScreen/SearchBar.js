@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Animated,
   StyleSheet,
@@ -8,15 +8,19 @@ import {
   TouchableOpacity,
   Keyboard,
 } from "react-native";
+import { connect } from "react-redux";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { selectSearchFilter } from "../../redux/reducers/searchReducer";
+import { searchChange } from "../../redux/actions/search";
 
 const SearchBar = (props) => {
   const navigation = useNavigation();
+  const [isFocused, setIsFocused] = useState(false);
   const handleSubmit = () => {
     // navigation.navigate("Results", { search: props.search });
 
@@ -28,36 +32,36 @@ const SearchBar = (props) => {
         <Ionicons
           name="search"
           size={wp("6%")}
-          color={props.isFocused ? "#313131" : "#B7B7B7"}
+          color={isFocused ? "#313131" : "#B7B7B7"}
           style={styles.searchIcon}
         />
         <TextInput
           style={styles.searchText}
           placeholder="Search"
           returnKeyType="search"
-          onFocus={() => props.setIsFocused(true)}
-          onBlur={() => props.setIsFocused(false)}
-          defaultValue={props.search}
-          onChangeText={(text) => props.setSearch(text)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          value={props.searchFilter}
+          onChangeText={(text) => props.searchChange(text)}
           onSubmitEditing={handleSubmit}
         />
-        {props.isFocused && props.search !== "" && (
+        {isFocused && props.searchFilter !== "" && (
           <Ionicons
             name="close"
             size={wp("5%")}
             color="#707070"
             style={styles.clearTextIcon}
-            onPress={() => props.setSearch("")}
+            onPress={() => props.searchChange("")}
           />
         )}
       </Animated.View>
       <TouchableOpacity
         style={styles.cancelBtn}
         onPress={() => {
-          props.isFocused ? Keyboard.dismiss() : navigation.navigate("Home");
+          isFocused ? Keyboard.dismiss() : navigation.navigate("Home");
         }}
       >
-        {props.isFocused ? (
+        {isFocused ? (
           <Text style={styles.cancelText}>Cancel</Text>
         ) : (
           <Ionicons name="ios-close" size={wp("7.5%")} color="#313131" />
@@ -114,4 +118,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchBar;
+const mapStateToProps = (state) => ({
+  searchFilter: selectSearchFilter(state),
+});
+
+export default connect(mapStateToProps, { searchChange })(SearchBar);

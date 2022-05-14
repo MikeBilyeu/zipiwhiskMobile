@@ -20,8 +20,6 @@ const RecipeScroll = (props) => {
       handlePress={() =>
         navigation.push(props.navigateTo, {
           index,
-          data: props.recipes,
-          subTitle: props.category || null,
         })
       }
     />

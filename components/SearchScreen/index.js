@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { StyleSheet, FlatList } from "react-native";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { StyleSheet, FlatList, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
@@ -11,19 +12,26 @@ import CategorySwipe from "../Profile/Header/CategorySwipe";
 import Users from "../ActivityScreen/Users";
 import RecipeCardSmall from "../RecipeCardSmall";
 import data from "../../data";
+import {
+  selectcategoryFilter,
+  selectRecipes,
+} from "../../redux/reducers/searchReducer";
+import { getSearchRecipes, categoryChange } from "../../redux/actions/search";
 
 const renderUsers = ({ item }) => (
   <Users
     username={item.username}
     image={item.image}
-    Following={item.Following}
+    isFollowing={item.Following}
   />
 );
-const SearchScreen = ({}) => {
+const SearchScreen = (props) => {
   const navigation = useNavigation();
-  const [isFocused, setIsFocused] = useState(false);
-  const [search, setSearch] = useState("");
   const [resultsDisplay, setResultsDisplay] = useState("Recipes");
+
+  useEffect(() => {
+    props.getSearchRecipes();
+  }, []);
 
   const renderRecipes = ({ index, item }) => (
     <RecipeCardSmall
@@ -32,10 +40,8 @@ const SearchScreen = ({}) => {
       media_url={item.media_url}
       media_type={item.media_type}
       handlePress={() =>
-        navigation.push("Recipe", {
+        navigation.push("SearchRecipeScreen", {
           index,
-          title: search || "Search",
-          subTitle: search ? "Search" : null,
         })
       }
     />
@@ -44,23 +50,23 @@ const SearchScreen = ({}) => {
   return (
     <SafeAreaView style={styles.container} forceInset={{ top: "always" }}>
       <FocusAwareStatusBar style="dark" />
-      <Header>
-        <SearchBar
-          isFocused={isFocused}
-          setIsFocused={setIsFocused}
-          search={search}
-          setSearch={setSearch}
-        />
+      <View style={{ backgroundColor: "#fff" }}>
+        <SearchBar />
 
-        {resultsDisplay == "Recipes" && <CategorySwipe />}
-      </Header>
+        {resultsDisplay == "Recipes" && (
+          <CategorySwipe
+            category={props.category}
+            categoryChange={props.categoryChange}
+          />
+        )}
+      </View>
       <FlatList
         key={resultsDisplay}
         keyboardShouldPersistTaps={"always"}
         style={styles.listContainer}
         contentContainerStyle={{ paddingTop: hp("17%") }}
         numColumns={resultsDisplay == "Recipes" ? 3 : 1}
-        data={resultsDisplay === "Recipes" ? data : accounts}
+        data={resultsDisplay === "Recipes" ? props.recipes : accounts}
         renderItem={resultsDisplay === "Recipes" ? renderRecipes : renderUsers}
         keyExtractor={(item) => item.id.toString()}
       />
@@ -80,10 +86,18 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+    zIndex: -1,
   },
 });
 
-export default SearchScreen;
+const mapStateToProps = (state) => ({
+  recipes: selectRecipes(state),
+  category: selectcategoryFilter(state),
+});
+
+export default connect(mapStateToProps, { getSearchRecipes, categoryChange })(
+  SearchScreen
+);
 
 const accounts = [
   {
