@@ -38,6 +38,8 @@ const SearchBar = (props) => {
         <TextInput
           style={styles.searchText}
           placeholder="Search"
+          placeholderTextColor="#B7B7B7"
+          selectionColor="#464646"
           returnKeyType="search"
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -77,6 +79,7 @@ const styles = StyleSheet.create({
     paddingLeft: wp("2%"),
     flexDirection: "row",
     marginVertical: hp("1%"),
+    paddingBottom: wp("1%"),
   },
   searchBar: {
     flex: 1,

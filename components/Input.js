@@ -22,6 +22,7 @@ function Input(props) {
           onChangeText={(text) => props.handleChange(text)}
           value={props.value}
           placeholder={props.placeholder}
+          placeholderTextColor="#B7B7B7"
           textContentType={props.textContentType}
           clearButtonMode="while-editing"
           selectionColor="#464646"
