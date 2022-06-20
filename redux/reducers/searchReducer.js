@@ -48,7 +48,7 @@ const searchReducer = (state = initialState, action) => {
     case GET_SEARCH_RECIPES_SUCCESS:
       return {
         ...state,
-        recipes: [...state.recipes, ...action.payload],
+        recipes: action.payload,
         isLoading: false,
         isRefreshing: false,
         offsetNum: state.offsetNum + 1,

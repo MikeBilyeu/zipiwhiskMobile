@@ -9,13 +9,13 @@ import {
 } from "../constants";
 import axios from "axios";
 
-export const getSearchRecipes = () => async (dispatch, getState) => {
+export const getSearchRecipes = (category) => async (dispatch, getState) => {
   const userId = getState().user.id;
   const offsetNum = getState().search.offsetNum;
   try {
     dispatch({ type: GET_SEARCH_RECIPES_REQUEST });
-    const { data } = await axios.get("api/recipes/feed", {
-      params: { user_id: userId, offsetNum: offsetNum },
+    const { data } = await axios.get("api/recipes/search", {
+      params: { user_id: userId, offsetNum: offsetNum, category: category },
     });
     dispatch({ type: GET_SEARCH_RECIPES_SUCCESS, payload: data });
   } catch (err) {
@@ -41,6 +41,7 @@ export const refreshSearchRecipes = () => async (dispatch, getState) => {
 export const categoryChange = (value) => async (dispatch, getState) => {
   dispatch({ type: SEARCH_CATEGORY_CHANGE, payload: value });
   let { categoryFilter } = getState().search;
+  console.log(categoryFilter);
   dispatch(getSearchRecipes(categoryFilter));
 };
 

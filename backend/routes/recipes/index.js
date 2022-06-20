@@ -15,6 +15,12 @@ router.get(
 );
 
 router.get(
+  "/search",
+  passport.authenticate("jwt", { session: false }),
+  require("./getSearchRecipes")
+);
+
+router.get(
   "/liked",
   passport.authenticate("jwt", { session: false }),
   require("./getLikedRecipes")
