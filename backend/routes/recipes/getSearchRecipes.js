@@ -1,7 +1,7 @@
 const pool = require("../../config/db");
 
 module.exports = async (req, res) => {
-  let { category } = req.query;
+  let { category, searchFilter } = req.query;
   let user_id = req.user.id;
 
   try {

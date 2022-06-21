@@ -9,19 +9,25 @@ import {
 } from "../constants";
 import axios from "axios";
 
-export const getSearchRecipes = (category) => async (dispatch, getState) => {
-  const userId = getState().user.id;
-  const offsetNum = getState().search.offsetNum;
-  try {
-    dispatch({ type: GET_SEARCH_RECIPES_REQUEST });
-    const { data } = await axios.get("api/recipes/search", {
-      params: { user_id: userId, offsetNum: offsetNum, category: category },
-    });
-    dispatch({ type: GET_SEARCH_RECIPES_SUCCESS, payload: data });
-  } catch (err) {
-    dispatch({ type: GET_SEARCH_RECIPES_FAILURE });
-  }
-};
+export const getSearchRecipes =
+  (category, searchFilter) => async (dispatch, getState) => {
+    const userId = getState().user.id;
+    const offsetNum = getState().search.offsetNum;
+    try {
+      dispatch({ type: GET_SEARCH_RECIPES_REQUEST });
+      const { data } = await axios.get("api/recipes/search", {
+        params: {
+          user_id: userId,
+          offsetNum: offsetNum,
+          category: category,
+          searchFilter: searchFilter,
+        },
+      });
+      dispatch({ type: GET_SEARCH_RECIPES_SUCCESS, payload: data });
+    } catch (err) {
+      dispatch({ type: GET_SEARCH_RECIPES_FAILURE });
+    }
+  };
 
 export const refreshSearchRecipes = () => async (dispatch, getState) => {
   const userId = getState().user.id;
@@ -41,8 +47,12 @@ export const refreshSearchRecipes = () => async (dispatch, getState) => {
 export const categoryChange = (value) => async (dispatch, getState) => {
   dispatch({ type: SEARCH_CATEGORY_CHANGE, payload: value });
   let { categoryFilter } = getState().search;
-  console.log(categoryFilter);
-  dispatch(getSearchRecipes(categoryFilter));
+  dispatch(getSearchRecipes(categoryFilter, null));
+};
+
+export const submitSearch = () => async (dispatch, getState) => {
+  let { searchFilter } = getState().search;
+  dispatch(getSearchRecipes(null, searchFilter));
 };
 
 export const searchChange = (value) => ({

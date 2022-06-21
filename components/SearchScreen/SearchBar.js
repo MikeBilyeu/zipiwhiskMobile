@@ -16,16 +16,12 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { selectSearchFilter } from "../../redux/reducers/searchReducer";
-import { searchChange } from "../../redux/actions/search";
+import { searchChange, submitSearch } from "../../redux/actions/search";
 
 const SearchBar = (props) => {
   const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
-  const handleSubmit = () => {
-    // navigation.navigate("Results", { search: props.search });
-
-    return null;
-  };
+  const handleSubmit = () => props.submitSearch();
   return (
     <View style={styles.searchWrapper}>
       <Animated.View style={styles.searchBar}>
@@ -125,4 +121,6 @@ const mapStateToProps = (state) => ({
   searchFilter: selectSearchFilter(state),
 });
 
-export default connect(mapStateToProps, { searchChange })(SearchBar);
+export default connect(mapStateToProps, { searchChange, submitSearch })(
+  SearchBar
+);
