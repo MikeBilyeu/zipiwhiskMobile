@@ -70,7 +70,9 @@ const RecipeScroll = ({
   };
 
   const handleLikeRecipe = () => {
-    likeRecipe(data[recipeIndex].id);
+    if (!data[recipeIndex]?.liked) {
+      likeRecipe(data[recipeIndex].id);
+    }
   };
 
   const handleToggleLike = () => {

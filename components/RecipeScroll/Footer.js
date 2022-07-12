@@ -104,9 +104,9 @@ const Footer = (props) => {
           hitSlop={{ right: 20 }}
         >
           <Ionicons
-            name={!props.saved ? "bookmark-outline" : "bookmark"}
+            name={props.saved ? "bookmark" : "bookmark-outline"}
             size={wp("8%")}
-            color={"#FFF"}
+            color={props.saved ? "#01C481" : "#fff"}
           />
           <Text style={styles.footerBtnText}>{parseNum(props.numSaves)}</Text>
         </Pressable>
