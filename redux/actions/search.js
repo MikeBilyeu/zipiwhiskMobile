@@ -46,11 +46,13 @@ export const refreshSearchRecipes = () => async (dispatch, getState) => {
 
 export const categoryChange = (value) => async (dispatch, getState) => {
   dispatch({ type: SEARCH_CATEGORY_CHANGE, payload: value });
+  dispatch(searchChange(""));
   let { categoryFilter } = getState().search;
   dispatch(getSearchRecipes(categoryFilter, null));
 };
 
 export const submitSearch = () => async (dispatch, getState) => {
+  dispatch({ type: SEARCH_CATEGORY_CHANGE, payload: "" });
   let { searchFilter } = getState().search;
   dispatch(getSearchRecipes(null, searchFilter));
 };

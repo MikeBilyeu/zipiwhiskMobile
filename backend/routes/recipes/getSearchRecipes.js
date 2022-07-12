@@ -32,12 +32,23 @@ module.exports = async (req, res) => {
       CASE WHEN ? != ''
       THEN r.id IN
         (SELECT recipe_id FROM recipes_categories rc WHERE rc.category = ?)
+      WHEN ? != ''
+      THEN r.id IN 
+        (SELECT id FROM recipes WHERE MATCH(recipe_name) AGAINST(?))
         ELSE
         r.id IN (SELECT id FROM recipes)
         END
       ORDER BY numLikes DESC
       LIMIT 18`,
-      [req.user.id, req.user.id, user_id, category, category],
+      [
+        req.user.id,
+        req.user.id,
+        user_id,
+        category,
+        category,
+        searchFilter,
+        searchFilter,
+      ],
       (err, results) => {
         if (err) throw err;
         return res.status(200).json(results);
