@@ -114,18 +114,18 @@ const RenderCamera = (props) => {
               styles={{ right: null, left: null }}
               icon={flashIconName}
             />
-            <CamBtn
+            {/* <CamBtn
               onPress={handleFlipCamPress}
               styles={{ right: 0, top: 0 }}
               icon="sync-outline"
-            />
+            /> */}
             <CamBtn
               onPress={pickImage}
               styles={{ left: 0, bottom: 0 }}
               icon="images-outline"
             />
 
-            {props.recipeForm.video_urls[0] && (
+            {/* {props.recipeForm.video_urls[0] && (
               <Pressable
                 style={({ pressed }) => [
                   styles.editBtn,
@@ -136,9 +136,9 @@ const RenderCamera = (props) => {
               >
                 <Text style={styles.editBtnText}>Edit</Text>
               </Pressable>
-            )}
+            )} */}
 
-            {props.recipeForm.video_urls[0] ? (
+            {/* {props.recipeForm.video_urls[0] ? (
               <Pressable
                 style={({ pressed }) => [
                   styles.previewBtn,
@@ -174,7 +174,7 @@ const RenderCamera = (props) => {
                     props.recipeForm.media_type.substring(1)}
                 </Text>
               </CamBtn>
-            )}
+            )} */}
           </>
         )}
 
