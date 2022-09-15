@@ -12,6 +12,9 @@ import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
+  REFRESH_POSTS_REQUEST,
+  REFRESH_POSTS_SUCCESS,
+  REFRESH_POSTS_FAILURE,
   PROFILE_CATEGORY_CHANGE,
   GET_ACTIVITY_REQUEST,
   GET_ACTIVITY_SUCCESS,
@@ -89,6 +92,18 @@ export const getPosts = (category) => async (dispatch) => {
     dispatch({ type: GET_POSTS_SUCCESS, payload: data });
   } catch (err) {
     dispatch({ type: GET_POSTS_FAILURE });
+  }
+};
+
+export const refreshPosts = (category) => async (dispatch) => {
+  try {
+    dispatch({ type: REFRESH_POSTS_REQUEST });
+    const { data } = await axios.get("api/recipes/posted", {
+      params: { category: category },
+    });
+    dispatch({ type: REFRESH_POSTS_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: REFRESH_POSTS_FAILURE });
   }
 };
 

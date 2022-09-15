@@ -11,12 +11,13 @@ import {
 import {
   selectCategory,
   selectIsRefreshingSaves,
+  selectIsRefreshingPosts,
   selectIsLoadingSaves,
   selectIsLoadingPosts,
   selectSaves,
   selectPosts,
 } from "../../redux/reducers/userReducer";
-import { refreshSaves } from "../../redux/actions/user";
+import { refreshSaves, refreshPosts } from "../../redux/actions/user";
 
 import RecipeScroll from "./RecipeScroll";
 
@@ -65,7 +66,7 @@ const ProfileTab = (props) => {
             recipes={props.saves}
             screenTitle="Saved"
             navigateTo="SavedRecipeScreen"
-            refreshing={false}
+            refreshing={props.isRefreshingSaves}
             handleRefresh={props.refreshSaves}
           />
         )}
@@ -89,6 +90,8 @@ const ProfileTab = (props) => {
             recipes={props.posts}
             screenTitle="Posted"
             navigateTo="PostedRecipeScreen"
+            refreshing={props.isRefreshingPosts}
+            handleRefresh={props.refreshPosts}
           />
         )}
       />
@@ -112,8 +115,11 @@ const mapStateToProps = (state) => ({
   category: selectCategory(state),
   saves: selectSaves(state),
   isRefreshingSaves: selectIsRefreshingSaves(state),
+  isRefreshingPosts: selectIsRefreshingPosts(state),
   posts: selectPosts(state),
   isLoadingSaves: selectIsLoadingSaves(state),
   isLoadingPosts: selectIsLoadingPosts(state),
 });
-export default connect(mapStateToProps, { refreshSaves })(ProfileTab);
+export default connect(mapStateToProps, { refreshSaves, refreshPosts })(
+  ProfileTab
+);

@@ -11,6 +11,9 @@ import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
+  REFRESH_POSTS_REQUEST,
+  REFRESH_POSTS_SUCCESS,
+  REFRESH_POSTS_FAILURE,
   PROFILE_CATEGORY_CHANGE,
   LIKE_RECIPE_REQUEST,
   UNLIKE_RECIPE_REQUEST,
@@ -36,7 +39,7 @@ const initialState = {
   restriction: null,
   categoryFilter: "",
   savesData: { isLoading: false, isRefreshing: false, recipes: [] },
-  postsData: { isLoading: false, recipes: [] },
+  postsData: { isLoading: false, isRefreshing: false, recipes: [] },
 };
 
 const userReducer = (state = initialState, action) => {
@@ -47,7 +50,6 @@ const userReducer = (state = initialState, action) => {
       return { ...state, ...action.payload, isLoading: false };
     case GET_USER_FAILURE:
       return initialState;
-
     case REFRESH_SAVES_REQUEST:
       return {
         ...state,
@@ -57,6 +59,20 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         savesData: {
+          isLoading: false,
+          isRefreshing: false,
+          recipes: action.payload,
+        },
+      };
+    case REFRESH_POSTS_REQUEST:
+      return {
+        ...state,
+        postssData: { ...state.postsData, isRefreshing: true },
+      };
+    case REFRESH_POSTS_SUCCESS:
+      return {
+        ...state,
+        postsData: {
           isLoading: false,
           isRefreshing: false,
           recipes: action.payload,
@@ -93,12 +109,13 @@ const userReducer = (state = initialState, action) => {
         postsData: {
           recipes: action.payload,
           isLoading: false,
+          isRefreshing: false,
         },
       };
     case GET_POSTS_FAILURE:
       return {
         ...state,
-        postsData: { isLoading: false, recipes: [] },
+        postsData: { isLoading: false, isRefreshing: false, recipes: [] },
       };
     case PROFILE_CATEGORY_CHANGE:
       return {
@@ -168,6 +185,8 @@ export const selectFullname = (state) => state.user.fullname;
 export const selectImageUrl = (state) => state.user.image_url;
 export const selectIsRefreshingSaves = (state) =>
   state.user.savesData.isRefreshing;
+export const selectIsRefreshingPosts = (state) =>
+  state.user.postsData.isRefreshing;
 export const selectIsLoadingSaves = (state) => state.user.savesData.isLoading;
 export const selectIsLoadingPosts = (state) => state.user.postsData.isLoading;
 export const selectSaves = (state) => state.user.savesData.recipes;
