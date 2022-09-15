@@ -5,6 +5,9 @@ import {
   GET_SAVES_REQUEST,
   GET_SAVES_SUCCESS,
   GET_SAVES_FAILURE,
+  REFRESH_SAVES_REQUEST,
+  REFRESH_SAVES_SUCCESS,
+  REFRESH_SAVES_FAILURE,
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
@@ -32,7 +35,7 @@ const initialState = {
   recipeUnit: "US",
   restriction: null,
   categoryFilter: "",
-  savesData: { isLoading: false, recipes: [] },
+  savesData: { isLoading: false, isRefreshing: false, recipes: [] },
   postsData: { isLoading: false, recipes: [] },
 };
 
@@ -44,6 +47,21 @@ const userReducer = (state = initialState, action) => {
       return { ...state, ...action.payload, isLoading: false };
     case GET_USER_FAILURE:
       return initialState;
+
+    case REFRESH_SAVES_REQUEST:
+      return {
+        ...state,
+        savesData: { ...state.savesData, isRefreshing: true },
+      };
+    case REFRESH_SAVES_SUCCESS:
+      return {
+        ...state,
+        savesData: {
+          isLoading: false,
+          isRefreshing: false,
+          recipes: action.payload,
+        },
+      };
     case GET_SAVES_REQUEST:
       return {
         ...state,
@@ -55,12 +73,13 @@ const userReducer = (state = initialState, action) => {
         savesData: {
           recipes: action.payload,
           isLoading: false,
+          isRefreshing: false,
         },
       };
     case GET_SAVES_FAILURE:
       return {
         ...state,
-        savesData: { isLoading: false, recipes: [] },
+        savesData: { isLoading: false, isRefreshing: false, recipes: [] },
       };
 
     case GET_POSTS_REQUEST:
@@ -147,6 +166,8 @@ export const selectUsername = (state) =>
   state.user.username && `@${state.user.username}`;
 export const selectFullname = (state) => state.user.fullname;
 export const selectImageUrl = (state) => state.user.image_url;
+export const selectIsRefreshingSaves = (state) =>
+  state.user.savesData.isRefreshing;
 export const selectIsLoadingSaves = (state) => state.user.savesData.isLoading;
 export const selectIsLoadingPosts = (state) => state.user.postsData.isLoading;
 export const selectSaves = (state) => state.user.savesData.recipes;

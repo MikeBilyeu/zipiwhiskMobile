@@ -10,11 +10,13 @@ import {
 
 import {
   selectCategory,
+  selectIsRefreshingSaves,
   selectIsLoadingSaves,
   selectIsLoadingPosts,
   selectSaves,
   selectPosts,
 } from "../../redux/reducers/userReducer";
+import { refreshSaves } from "../../redux/actions/user";
 
 import RecipeScroll from "./RecipeScroll";
 
@@ -63,6 +65,8 @@ const ProfileTab = (props) => {
             recipes={props.saves}
             screenTitle="Saved"
             navigateTo="SavedRecipeScreen"
+            refreshing={false}
+            handleRefresh={props.refreshSaves}
           />
         )}
       />
@@ -107,8 +111,9 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   category: selectCategory(state),
   saves: selectSaves(state),
+  isRefreshingSaves: selectIsRefreshingSaves(state),
   posts: selectPosts(state),
   isLoadingSaves: selectIsLoadingSaves(state),
   isLoadingPosts: selectIsLoadingPosts(state),
 });
-export default connect(mapStateToProps)(ProfileTab);
+export default connect(mapStateToProps, { refreshSaves })(ProfileTab);

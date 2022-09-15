@@ -6,6 +6,9 @@ import {
   GET_SAVES_REQUEST,
   GET_SAVES_SUCCESS,
   GET_SAVES_FAILURE,
+  REFRESH_SAVES_REQUEST,
+  REFRESH_SAVES_SUCCESS,
+  REFRESH_SAVES_FAILURE,
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
   GET_POSTS_FAILURE,
@@ -62,6 +65,18 @@ export const getSaves = (category) => async (dispatch) => {
     dispatch({ type: GET_SAVES_SUCCESS, payload: data });
   } catch (err) {
     dispatch({ type: GET_SAVES_FAILURE });
+  }
+};
+
+export const refreshSaves = (category) => async (dispatch) => {
+  try {
+    dispatch({ type: REFRESH_SAVES_REQUEST });
+    const { data } = await axios.get("api/recipes/saved", {
+      params: { category: category },
+    });
+    dispatch({ type: REFRESH_SAVES_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: REFRESH_SAVES_FAILURE });
   }
 };
 

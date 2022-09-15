@@ -44,6 +44,8 @@ const RecipeScroll = (props) => {
       renderItem={renderItem}
       keyExtractor={(item) => item.id.toString()}
       ListEmptyComponent={renderText}
+      refreshing={props.refreshing}
+      onRefresh={props.handleRefresh}
     />
   );
 };
