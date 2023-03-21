@@ -1,6 +1,5 @@
 const pool = require("../../config/db");
 const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
 const emailVerification = require("./emailVerification");
 const { v4: uuidv4 } = require("uuid");
 //const validateRegisterInput = require("../../validation/register");
@@ -16,7 +15,7 @@ module.exports = async ({ body: { username, email, password } }, res) => {
   //     res.status(400).send(errors);
   //   }
 
-  pool.query("SELECT * FROM users WHERE email = ?", email, (error, results) => {
+  pool.query("SELECT * FROM users WHERE email = ?", email, (err, results) => {
     try {
       if (results[0]) {
         throw {
@@ -60,7 +59,7 @@ module.exports = async ({ body: { username, email, password } }, res) => {
     password_encrypted,
   };
 
-  pool.query("INSERT INTO users SET ?", user, (error, results) => {
+  pool.query("INSERT INTO users SET ?", user, (err, results) => {
     try {
       if (err) throw err;
       const user_id = results.insertId;
@@ -83,6 +82,7 @@ module.exports = async ({ body: { username, email, password } }, res) => {
         }
       );
     } catch (err) {
+      console.log(err);
       return res.status(400).json(err);
     }
   });
