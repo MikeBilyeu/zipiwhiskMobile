@@ -90,12 +90,15 @@ CREATE TABLE recipes (
     yield int NOT NULL,
     total_time_min INT NOT NULL,
     caption TEXT,
+    ingredients TEXT NOT NULL,
     instructions TEXT NOT NULL,
     latitude FLOAT,
     longitude FLOAT,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP
 );
+
+ALTER TABLE recipes ADD FULLTEXT (recipe_name);
 
 CREATE TABLE users_recipes (
     user_id INT NOT NULL,
@@ -252,4 +255,6 @@ CREATE TABLE comments_mentions (
         LEFT JOIN users_restrictions ur
         ON u.id = ur.user_id
         WHERE u.id = 2;
+
+        
 

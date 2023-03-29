@@ -27,7 +27,7 @@ const Signup = (props) => {
     <AuthScreenWrapper headerText="Signup">
       <Input
         value={props.signup.email}
-        handleChange={props.signupEmailChange}
+        handleChange={(props.signupEmailChange)}
         placeholder="Email"
         textContentType="emailAddress"
         keyboardType="email-address"

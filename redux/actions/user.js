@@ -71,11 +71,12 @@ export const getSaves = (category) => async (dispatch) => {
   }
 };
 
-export const refreshSaves = (category) => async (dispatch) => {
+export const refreshSaves = () => async (dispatch, getState) => {
   try {
+    let { categoryFilter } = getState().user;
     dispatch({ type: REFRESH_SAVES_REQUEST });
     const { data } = await axios.get("api/recipes/saved", {
-      params: { category: category },
+      params: { category: categoryFilter },
     });
     dispatch({ type: REFRESH_SAVES_SUCCESS, payload: data });
   } catch (err) {
@@ -95,11 +96,12 @@ export const getPosts = (category) => async (dispatch) => {
   }
 };
 
-export const refreshPosts = (category) => async (dispatch) => {
+export const refreshPosts = () => async (dispatch) => {
   try {
+    let { categoryFilter } = getState().user;
     dispatch({ type: REFRESH_POSTS_REQUEST });
     const { data } = await axios.get("api/recipes/posted", {
-      params: { category: category },
+      params: { category: categoryFilter },
     });
     dispatch({ type: REFRESH_POSTS_SUCCESS, payload: data });
   } catch (err) {
